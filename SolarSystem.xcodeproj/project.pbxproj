@@ -328,6 +328,7 @@
 				5FBAF9801EE8B78400FAA54B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

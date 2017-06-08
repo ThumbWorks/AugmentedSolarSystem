@@ -14,6 +14,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     var done = false
+    let earthScene = SCNScene(named: "art.scnassets/Earth.scn")!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,11 +107,10 @@ extension ViewController: ARSessionDelegate {
                 self.done = true
                 let pos = self.positionFromTransform(anchor.transform)
                 print("NEW SURFACE DETECTED AT \(pos.friendlyString())")
-//                let box = self.house.geometry?.boundingBox
                 print("The box of the plane is before scaling is \(planeAnchor.extent)")
                 
                 let fadedYellow = UIColor.yellow.withAlphaComponent(0.5)
-                let sunGeometry = self.planetoidGeometry(radius: 0.4, color: fadedYellow)
+                let sunGeometry = self.planetoidGeometry(radius: 0.04, color: fadedYellow)
                 let sunNode = SCNNode(geometry: sunGeometry)
                 node.addChildNode(sunNode)
                 
@@ -126,22 +126,20 @@ extension ViewController: ARSessionDelegate {
                 let averageY = (max.y + min.y) / 2
                 let averageZ = (max.z + min.z) / 2
                 lightNode.position = SCNVector3Make(averageX, averageY, averageZ)
-                let lightGeo = self.planetoidGeometry(radius: 0.2, color: .red)
+                let lightGeo = self.planetoidGeometry(radius: 0.02, color: .red)
                 lightNode.geometry = lightGeo
                 lightNode.light = light
                 node.addChildNode(lightNode)
                 
-                let mercury = self.planetNode(orbitRadius: 1.0,
-                                            planetRadius: 0.05,
+                let mercury = self.planetGroup(orbitRadius: 0.1,
+                                            planetRadius: 0.005,
                                             planetColor: .red)
                 
-                let venus = self.planetNode(orbitRadius: 3.0,
-                                                        planetRadius: 0.1,
+                let venus = self.planetGroup(orbitRadius: 0.3,
+                                                        planetRadius: 0.01,
                                                         planetColor: .yellow)
                 // earth
-                let earth = self.planetNode(orbitRadius: 6.0,
-                                                        planetRadius: 0.2,
-                                                        planetColor: .blue)
+                let earth = self.earthNode()
                 
                 node.addChildNode(earth)
                 node.addChildNode(venus)
@@ -154,8 +152,24 @@ extension ViewController: ARSessionDelegate {
         }
     }
     
+    func earthNode() -> SCNNode {
+        let rotationSphere = self.planetoidGeometry(radius: 6.0, color: .clear)
+        let rotationNode = SCNNode(geometry: rotationSphere)
+        
+        if let node = earthScene.rootNode.childNodes.first {
+            let geometry = node.geometry
+            
+            let planet = SCNNode(geometry: geometry)
+            planet.position = SCNVector3Make(Float(0.6), 0, 0)
+            planet.scale = SCNVector3Make(0.05, 0.05, 0.05)
+            rotationNode.addChildNode(planet)
+            rotate(node: planet, duration: 1)
+        }
+        return rotationNode
+    }
+    
     // Creates a planet that has the ability to orbit around a central point
-    func planetNode(orbitRadius: CGFloat, planetRadius: CGFloat, planetColor: UIColor) -> SCNNode {
+    func planetGroup(orbitRadius: CGFloat, planetRadius: CGFloat, planetColor: UIColor) -> SCNNode {
         let rotationSphere = self.planetoidGeometry(radius: orbitRadius, color: .clear)
         let rotationNode = SCNNode(geometry: rotationSphere)
         
@@ -172,19 +186,8 @@ extension ViewController: ARSessionDelegate {
         let moveSequence = SCNAction.sequence([rotate])
         let moveLoop = SCNAction.repeatForever(moveSequence)
         node.runAction(moveLoop)
-        
-        
-        
-//        SCNTransaction.begin()
-//        SCNTransaction.animationDuration = duration
-//        SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-//        node.eulerAngles.y = Float.pi * 2
-//        SCNTransaction.completionBlock = {
-//            print("rotation is done")
-//            self.rotate(node: node, duration: duration)
-//        }
-//        SCNTransaction.commit()
     }
+    
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
         print("did add anchor")
     }
