@@ -13,7 +13,6 @@ extension SCNGeometry {
     class func planetoid(radius: CGFloat, color: UIColor) -> SCNGeometry {
         let theColor = SCNMaterial()
         theColor.diffuse.contents = color
-        theColor.lightingModel = .physicallyBased
         
         // Now create the geometry and set the colors
         let geometry = SCNSphere(radius: radius)
