@@ -96,6 +96,37 @@ extension ViewController: ARSessionDelegate {
         print("that is the end of the updates")
     }
     
+    func omniLightNode(_ vector: SCNVector3) -> SCNNode {
+        let omniLight = SCNLight()
+        omniLight.type = .omni
+        omniLight.color = UIColor.white
+        omniLight.categoryBitMask = 2
+        let omniNode = SCNNode()
+        omniNode.position = vector
+        omniNode.light = omniLight
+        return omniNode
+    }
+    
+    func sunLightNode(geometry: SCNGeometry) -> SCNNode {
+        let sunLight = SCNLight()
+        sunLight.type = .omni
+        sunLight.color = UIColor.white
+        sunLight.shadowColor = UIColor.black
+        sunLight.categoryBitMask = 1
+        
+        let lightNode = SCNNode()
+        let max = geometry.boundingBox.max
+        let min = geometry.boundingBox.min
+        let averageX = (max.x + min.x) / 2
+        let averageY = (max.y + min.y) / 2
+        let averageZ = (max.z + min.z) / 2
+        lightNode.position = SCNVector3Make(averageX, averageY, averageZ)
+        //                let lightGeo = self.planetoidGeometry(radius: 0.02, color: .red)
+        //                lightNode.geometry = lightGeo
+        lightNode.light = sunLight
+        return lightNode
+    }
+    
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         DispatchQueue.main.async {
             print("did add node, pushed to main queue")
@@ -109,27 +140,17 @@ extension ViewController: ARSessionDelegate {
                 print("NEW SURFACE DETECTED AT \(pos.friendlyString())")
                 print("The box of the plane is before scaling is \(planeAnchor.extent)")
                 
-                let fadedYellow = UIColor.yellow.withAlphaComponent(0.5)
+                let fadedYellow = UIColor.yellow//.withAlphaComponent(0.5)
                 let sunGeometry = self.planetoidGeometry(radius: 0.04, color: fadedYellow)
                 let sunNode = SCNNode(geometry: sunGeometry)
                 node.addChildNode(sunNode)
+                sunNode.categoryBitMask = 2
                 
-                let light = SCNLight()
-                light.type = .omni
-                light.color = UIColor.white
-                light.shadowColor = UIColor.black
+                // Add some omni lights to light up the sun
+                node.addChildNode(self.omniLightNode(SCNVector3Make(1, 1, 1)))
+                node.addChildNode(self.omniLightNode(SCNVector3Make(-1, -1, -1)))
                 
-                let lightNode = SCNNode()
-                let max = sunGeometry.boundingBox.max
-                let min = sunGeometry.boundingBox.min
-                let averageX = (max.x + min.x) / 2
-                let averageY = (max.y + min.y) / 2
-                let averageZ = (max.z + min.z) / 2
-                lightNode.position = SCNVector3Make(averageX, averageY, averageZ)
-                let lightGeo = self.planetoidGeometry(radius: 0.02, color: .red)
-                lightNode.geometry = lightGeo
-                lightNode.light = light
-                node.addChildNode(lightNode)
+                node.addChildNode(self.sunLightNode(geometry: sunGeometry))
                 
                 let mercury = self.planetGroup(orbitRadius: 0.1,
                                             planetRadius: 0.005,
@@ -138,31 +159,66 @@ extension ViewController: ARSessionDelegate {
                 let venus = self.planetGroup(orbitRadius: 0.3,
                                                         planetRadius: 0.01,
                                                         planetColor: .yellow)
-                // earth
-                let earth = self.earthNode()
                 
+                let earth = self.earthGroup(orbitRadius: 0.6)
+                
+                let mars = self.planetGroup(orbitRadius: 1,
+                                             planetRadius: 0.01,
+                                             planetColor: .red)
+                
+                let jupiter = self.planetGroup(orbitRadius: 3,
+                                            planetRadius: 0.1,
+                                            planetColor: .red)
+                
+                let saturn = self.planetGroup(orbitRadius: 6,
+                                               planetRadius: 0.12,
+                                               planetColor: .orange)
+                
+                let uranus = self.planetGroup(orbitRadius: 11,
+                                              planetRadius: 0.12,
+                                              planetColor: .blue)
+                
+                let neptune = self.planetGroup(orbitRadius: 18,
+                                              planetRadius: 0.12,
+                                              planetColor: .purple)
                 node.addChildNode(earth)
                 node.addChildNode(venus)
                 node.addChildNode(mercury)
+                node.addChildNode(mars)
+                node.addChildNode(jupiter)
+                node.addChildNode(saturn)
+                node.addChildNode(uranus)
+                node.addChildNode(neptune)
                 
                 self.rotate(node: mercury, duration: 5)
                 self.rotate(node: venus, duration: 10)
                 self.rotate(node: earth, duration: 15)
+                self.rotate(node: mars, duration: 30)
+                self.rotate(node: jupiter, duration: 45)
+                self.rotate(node: saturn, duration: 60)
+                self.rotate(node: uranus, duration: 100)
+                self.rotate(node: neptune, duration: 140)
             }
         }
     }
     
-    func earthNode() -> SCNNode {
-        let rotationSphere = self.planetoidGeometry(radius: 6.0, color: .clear)
+    func earthGroup(orbitRadius: CGFloat) -> SCNNode {
+        let rotationSphere = self.planetoidGeometry(radius: orbitRadius, color: .clear)
         let rotationNode = SCNNode(geometry: rotationSphere)
         
         if let node = earthScene.rootNode.childNodes.first {
             let geometry = node.geometry
-            
             let planet = SCNNode(geometry: geometry)
-            planet.position = SCNVector3Make(Float(0.6), 0, 0)
+            planet.position = SCNVector3Make(Float(orbitRadius), 0, 0)
             planet.scale = SCNVector3Make(0.05, 0.05, 0.05)
+            planet.categoryBitMask = 1
             rotationNode.addChildNode(planet)
+//            let moon = self.planetGroup(orbitRadius: orbitRadius * 1.1,
+//                                        planetRadius: 0.01,
+//                                        planetColor: .gray)
+//            planet.addChildNode(moon)
+//            rotate(node: moon, duration: 1)
+            
             rotate(node: planet, duration: 1)
         }
         return rotationNode
@@ -175,6 +231,7 @@ extension ViewController: ARSessionDelegate {
         
         let geometry  = self.planetoidGeometry(radius: planetRadius, color: planetColor)
         let planet = SCNNode(geometry: geometry)
+        planet.categoryBitMask = 1
         planet.position = SCNVector3Make(Float(orbitRadius), 0, 0)
         rotationNode.addChildNode(planet)
         return rotationNode
