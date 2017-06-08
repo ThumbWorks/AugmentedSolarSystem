@@ -13,12 +13,11 @@
 		5FBAF9751EE8B78400FAA54B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FBAF9731EE8B78400FAA54B /* Main.storyboard */; };
 		5FBAF9771EE8B78400FAA54B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBAF9761EE8B78400FAA54B /* Assets.xcassets */; };
 		5FBAF97A1EE8B78400FAA54B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FBAF9781EE8B78400FAA54B /* LaunchScreen.storyboard */; };
-		5FBAF9821EE8B84400FAA54B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBAF9811EE8B84300FAA54B /* Utilities.swift */; };
-		5FBAF9841EE8C59000FAA54B /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FBAF9831EE8C59000FAA54B /* icon.png */; };
 		5FBAF9861EE8DAAF00FAA54B /* Earth.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FBAF9851EE8DAAF00FAA54B /* Earth.scn */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F39596D1EE934B200EDEBEE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		5FBAF96A1EE8B78400FAA54B /* SolarSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolarSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBAF96D1EE8B78400FAA54B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FBAF96F1EE8B78400FAA54B /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -27,8 +26,6 @@
 		5FBAF9761EE8B78400FAA54B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5FBAF9791EE8B78400FAA54B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FBAF97B1EE8B78400FAA54B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5FBAF9811EE8B84300FAA54B /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = ../../ARHome2/ARHome2/ARHome2/Utilities.swift; sourceTree = "<group>"; };
-		5FBAF9831EE8C59000FAA54B /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../../Desktop/SamIcon/icon.png; sourceTree = "<group>"; };
 		5FBAF9851EE8DAAF00FAA54B /* Earth.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Earth.scn; path = SolarSystem/art.scnassets/Earth.scn; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,12 +61,11 @@
 			isa = PBXGroup;
 			children = (
 				5FBAF96D1EE8B78400FAA54B /* AppDelegate.swift */,
-				5FBAF9811EE8B84300FAA54B /* Utilities.swift */,
+				5F39596D1EE934B200EDEBEE /* Utilities.swift */,
 				5FBAF96F1EE8B78400FAA54B /* art.scnassets */,
 				5FBAF9711EE8B78400FAA54B /* ViewController.swift */,
 				5FBAF9731EE8B78400FAA54B /* Main.storyboard */,
 				5FBAF9761EE8B78400FAA54B /* Assets.xcassets */,
-				5FBAF9831EE8C59000FAA54B /* icon.png */,
 				5FBAF9781EE8B78400FAA54B /* LaunchScreen.storyboard */,
 				5FBAF97B1EE8B78400FAA54B /* Info.plist */,
 			);
@@ -136,7 +132,6 @@
 			files = (
 				5FBAF9701EE8B78400FAA54B /* art.scnassets in Resources */,
 				5FBAF97A1EE8B78400FAA54B /* LaunchScreen.storyboard in Resources */,
-				5FBAF9841EE8C59000FAA54B /* icon.png in Resources */,
 				5FBAF9861EE8DAAF00FAA54B /* Earth.scn in Resources */,
 				5FBAF9771EE8B78400FAA54B /* Assets.xcassets in Resources */,
 				5FBAF9751EE8B78400FAA54B /* Main.storyboard in Resources */,
@@ -150,7 +145,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FBAF9821EE8B84400FAA54B /* Utilities.swift in Sources */,
 				5FBAF9721EE8B78400FAA54B /* ViewController.swift in Sources */,
 				5FBAF96E1EE8B78400FAA54B /* AppDelegate.swift in Sources */,
 			);
