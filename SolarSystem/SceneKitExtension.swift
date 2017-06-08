@@ -12,7 +12,8 @@ import SceneKit
 extension SCNGeometry {
     class func planetoid(radius: CGFloat, color: UIColor) -> SCNGeometry {
         let theColor = SCNMaterial()
-        theColor.diffuse.contents = color// UIImage.init(named: "icon.png")
+        theColor.diffuse.contents = color
+        theColor.lightingModel = .physicallyBased
         
         // Now create the geometry and set the colors
         let geometry = SCNSphere(radius: radius)
@@ -21,23 +22,55 @@ extension SCNGeometry {
     }
 }
 
+class PlanetoidGroupNode: SCNNode {
+    let orbitRadius: CGFloat
+    let planetRadius: CGFloat
+    let planetColor: UIColor
+    var planetName: String?
+    init(orbit: CGFloat, radius: CGFloat, color: UIColor) {
+        orbitRadius = orbit
+        planetRadius = radius
+        planetColor = color
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 extension SCNNode {
     
     // Creates a planet that has the ability to orbit around a central point
-    class func planetGroup(orbitRadius: CGFloat, planetRadius: CGFloat, planetColor: UIColor) -> SCNNode {
+    class func planetGroup(orbitRadius: CGFloat, planetRadius: CGFloat, planetColor: UIColor, planetName: String? = nil) -> SCNNode {
         let rotationSphere = SCNGeometry.planetoid(radius: orbitRadius, color: .clear)
         let rotationNode = SCNNode(geometry: rotationSphere)
-        
         let geometry  = SCNGeometry.planetoid(radius: planetRadius, color: planetColor)
+        
         let planet = SCNNode(geometry: geometry)
         planet.categoryBitMask = 1
         planet.position = SCNVector3Make(Float(orbitRadius), 0, 0)
         rotationNode.addChildNode(planet)
+        
+        if let string = planetName {
+            let text = SCNText(string: string, extrusionDepth: 0.1)
+            let textNode = SCNNode(geometry: text)
+            text.font = UIFont(name: "Helvetica", size: 1)
+            
+            let mat = SCNMaterial()
+            mat.diffuse.contents = planetColor
+            text.materials = [mat]
+            
+            textNode.scale = SCNVector3Make(0.05, 0.05, 0.05)
+            textNode.position = SCNVector3Make(Float(orbitRadius), 0.01, 0)
+            rotationNode.addChildNode(textNode)
+        }
         return rotationNode
     }
     
-    func rotate(duration: CFTimeInterval) {
-        let rotate = SCNAction.rotateBy(x: 0, y: CGFloat.pi, z: 0, duration: duration)
+    func rotate(duration: CFTimeInterval, clockwise: Bool = true) {
+        let rotationValue = clockwise ? CGFloat.pi : -CGFloat.pi
+        let rotate = SCNAction.rotateBy(x: 0, y: rotationValue, z: 0, duration: duration)
         let moveSequence = SCNAction.sequence([rotate])
         let moveLoop = SCNAction.repeatForever(moveSequence)
         self.runAction(moveLoop)
@@ -52,15 +85,13 @@ extension SCNNode {
             let geometry = node.geometry
             let planet = SCNNode(geometry: geometry)
             planet.position = SCNVector3Make(Float(orbitRadius), 0, 0)
-            planet.scale = SCNVector3Make(0.05, 0.05, 0.05)
             planet.categoryBitMask = 1
             rotationNode.addChildNode(planet)
-            //            let moon = self.planetGroup(orbitRadius: orbitRadius * 1.1,
-            //                                        planetRadius: 0.01,
-            //                                        planetColor: .gray)
-            //            planet.addChildNode(moon)
-            //            rotate(node: moon, duration: 1)
-            
+            let moon = self.planetGroup(orbitRadius: 0.1,
+                                        planetRadius: 0.008,
+                                        planetColor: .gray)
+            planet.addChildNode(moon)
+            moon.rotate(duration: 3, clockwise: false)
             planet.rotate(duration: 1)
         }
         return rotationNode

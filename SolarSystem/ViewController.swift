@@ -11,9 +11,11 @@ import SceneKit
 import ARKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet var status: UILabel!
     @IBOutlet var sceneView: ARSCNView!
     var done = false
+    var sessionConfig = ARWorldTrackingSessionConfiguration()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,15 +30,22 @@ class ViewController: UIViewController {
         sceneView.scene = SCNScene()
     }
     
+    func restartPlaneDetection() {
+        // configure session
+        sessionConfig.planeDetection = .horizontal
+        sceneView.session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        restartPlaneDetection()
+        
         // Create a session configuration
-        let configuration = ARWorldTrackingSessionConfiguration()
-        configuration.planeDetection = .horizontal
+        sessionConfig.planeDetection = .horizontal
 
         // Run the view's session
-        sceneView.session.run(configuration)
+        sceneView.session.run(sessionConfig)
         sceneView.session.delegate = self
         
     }
@@ -60,7 +69,15 @@ extension ViewController: ARSessionObserver {
      @param camera The camera that changed tracking states.
      */
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
-        print("camera did change tracking state \(camera.trackingState)")
+        
+        switch camera.trackingState {
+        case .normal:
+            status.text = "Tracking Normal"
+        case .notAvailable:
+            status.text = "Tracking unavailable"
+        case .limited(let reason):
+            status.text = "Tracking Limited: \(reason)"
+        }
     }
     
     /**
@@ -75,6 +92,7 @@ extension ViewController: ARSessionObserver {
      */
     func sessionWasInterrupted(_ session: ARSession) {
         print("session interupted")
+        session.pause()
     }
     
     /**
@@ -87,6 +105,9 @@ extension ViewController: ARSessionObserver {
      */
     func sessionInterruptionEnded(_ session: ARSession) {
         print("Session interruption ended")
+        session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
+        restartPlaneDetection()
+        status.text = "Resetting Session"
     }
     
 }
@@ -112,7 +133,30 @@ extension ViewController: ARSCNViewDelegate {
         print("NEW SURFACE DETECTED AT \(pos.friendlyString())")
         print("The box of the plane is before scaling is \(planeAnchor.extent)")
         
-        let sunGeometry = SCNGeometry.planetoid(radius: 0.04, color: .yellow)
+        // Data on sizes of planets http://www.freemars.org/jeff/planets/planets5.htm
+        let sunRadius: CGFloat = 0.04
+        
+        let actualMercuryRadius: CGFloat = 14878.0 / 2.0 // .005 / 14878*12104
+        let mercuryARRadius: CGFloat = 0.005
+        let venusRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (12104 / 2)
+        let earthRadius: CGFloat = 0.01
+        let marsRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (6787 / 2)
+        let jupiterRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (142800 / 2)
+        let saturnRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (120000 / 2)
+        let uranusRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (51200 / 2)
+        let neptuneRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (48600 / 2)
+        
+        let mercuryOrbitalRadius: CGFloat = 0.1
+        let venusOrbitalRadius: CGFloat = 0.2
+        let earthOrbialRadius: CGFloat = 0.3
+        let beltOrbitalRadius: CGFloat = 0.35
+        let marsOrbitalRadius: CGFloat = 0.4
+        let jupiterOribialRadius: CGFloat = 0.6
+        let saturnOrbitalRadius: CGFloat = 0.8
+        let uranusOrbitalRadius: CGFloat = 1
+        let neptuneOrbitalRadius: CGFloat = 1.2
+        
+        let sunGeometry = SCNGeometry.planetoid(radius: sunRadius, color: .yellow)
         let sunNode = SCNNode(geometry: sunGeometry)
         node.addChildNode(sunNode)
         sunNode.categoryBitMask = 2
@@ -123,35 +167,17 @@ extension ViewController: ARSCNViewDelegate {
         
         node.addChildNode(SCNNode.sunLight(geometry: sunGeometry))
         
-        let mercury = SCNNode.planetGroup(orbitRadius: 0.1,
-                                          planetRadius: 0.005,
-                                          planetColor: .red)
+        let mercury = SCNNode.planetGroup(orbitRadius: mercuryOrbitalRadius, planetRadius: mercuryARRadius, planetColor: .red)
+        let venus = SCNNode.planetGroup(orbitRadius: venusOrbitalRadius, planetRadius: venusRadius, planetColor: .yellow)
+        let earth = SCNNode.earthGroup(orbitRadius: earthOrbialRadius)
         
-        let venus = SCNNode.planetGroup(orbitRadius: 0.3,
-                                        planetRadius: 0.01,
-                                        planetColor: .yellow)
+        // TODO set up the belt
         
-        let earth = SCNNode.earthGroup(orbitRadius: 0.6)
-        
-        let mars = SCNNode.planetGroup(orbitRadius: 1,
-                                       planetRadius: 0.01,
-                                       planetColor: .red)
-        
-        let jupiter = SCNNode.planetGroup(orbitRadius: 3,
-                                          planetRadius: 0.1,
-                                          planetColor: .red)
-        
-        let saturn = SCNNode.planetGroup(orbitRadius: 6,
-                                         planetRadius: 0.12,
-                                         planetColor: .orange)
-        
-        let uranus = SCNNode.planetGroup(orbitRadius: 11,
-                                         planetRadius: 0.12,
-                                         planetColor: .blue)
-        
-        let neptune = SCNNode.planetGroup(orbitRadius: 18,
-                                          planetRadius: 0.12,
-                                          planetColor: .purple)
+        let mars = SCNNode.planetGroup(orbitRadius: marsOrbitalRadius, planetRadius: marsRadius, planetColor: .red)
+        let jupiter = SCNNode.planetGroup(orbitRadius: jupiterOribialRadius, planetRadius: jupiterRadius, planetColor: .red)
+        let saturn = SCNNode.planetGroup(orbitRadius: saturnOrbitalRadius, planetRadius: saturnRadius, planetColor: .orange)
+        let uranus = SCNNode.planetGroup(orbitRadius: uranusOrbitalRadius, planetRadius: uranusRadius, planetColor: .blue)
+        let neptune = SCNNode.planetGroup(orbitRadius: neptuneOrbitalRadius, planetRadius: neptuneRadius, planetColor: .purple)
         node.addChildNode(earth)
         node.addChildNode(venus)
         node.addChildNode(mercury)
