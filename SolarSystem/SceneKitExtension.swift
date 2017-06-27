@@ -22,15 +22,23 @@ extension SCNGeometry {
 }
 
 class PlanetoidGroupNode: SCNNode {
-    let orbitRadius: CGFloat
-    let planetRadius: CGFloat
-    let planetColor: UIColor
-    var planetName: String?
+    
+    // These are the things you want to access
+    var planet: SCNNode
+    var rotationNode: SCNNode
+    
     init(orbit: CGFloat, radius: CGFloat, color: UIColor) {
-        orbitRadius = orbit
-        planetRadius = radius
-        planetColor = color
+        let yellow = UIColor.yellow.withAlphaComponent(0.5)
+        let rotationSphere = SCNGeometry.planetoid(radius: orbit, color: yellow)
+        rotationNode = SCNNode(geometry: rotationSphere)
+        
+        let geometry  = SCNGeometry.planetoid(radius: radius, color: color)
+        planet = SCNNode(geometry: geometry)
+        planet.categoryBitMask = 1
+        rotationNode.addChildNode(planet)
+        
         super.init()
+        self.addChildNode(rotationNode)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,29 +49,19 @@ class PlanetoidGroupNode: SCNNode {
 extension SCNNode {
     
     // Creates a planet that has the ability to orbit around a central point
-    class func planetGroup(orbitRadius: CGFloat, planetRadius: CGFloat, planetColor: UIColor, planetName: String? = nil) -> SCNNode {
+    class func planetGroup(orbitRadius: CGFloat, planetRadius: CGFloat, planetColor: UIColor, position: SCNVector3? = nil) -> SCNNode {
         let rotationSphere = SCNGeometry.planetoid(radius: orbitRadius, color: .clear)
         let rotationNode = SCNNode(geometry: rotationSphere)
         let geometry  = SCNGeometry.planetoid(radius: planetRadius, color: planetColor)
         
         let planet = SCNNode(geometry: geometry)
         planet.categoryBitMask = 1
-        planet.position = SCNVector3Make(Float(orbitRadius), 0, 0)
-        rotationNode.addChildNode(planet)
-        
-        if let string = planetName {
-            let text = SCNText(string: string, extrusionDepth: 0.1)
-            let textNode = SCNNode(geometry: text)
-            text.font = UIFont(name: "Helvetica", size: 1)
-            
-            let mat = SCNMaterial()
-            mat.diffuse.contents = planetColor
-            text.materials = [mat]
-            
-            textNode.scale = SCNVector3Make(0.05, 0.05, 0.05)
-            textNode.position = SCNVector3Make(Float(orbitRadius), 0.01, 0)
-            rotationNode.addChildNode(textNode)
+        if let position = position {
+            planet.position = position
+        } else {
+            planet.position = SCNVector3Make(Float(orbitRadius), 0, 0)
         }
+        rotationNode.addChildNode(planet)
         return rotationNode
     }
     
@@ -73,6 +71,39 @@ extension SCNNode {
         let moveSequence = SCNAction.sequence([rotate])
         let moveLoop = SCNAction.repeatForever(moveSequence)
         self.runAction(moveLoop)
+    }
+    
+    class func sun() -> SCNNode {
+        let sunScene = SCNScene(named: "art.scnassets/Sun.scn")!
+        
+        if let node = sunScene.rootNode.childNodes.first {
+            let geometry = node.geometry
+            node.scale = SCNVector3Make(0.01, 0.01, 0.01)
+            let planet = SCNNode(geometry: geometry)
+            // TODO think about the bit mask for the sun
+            planet.categoryBitMask = 1
+            planet.rotate(duration: 9)
+            return planet
+        }
+        let sunGeometry = SCNGeometry.planetoid(radius: 5, color: .yellow)
+        let alternateSunNode = SCNNode(geometry: sunGeometry)
+        return alternateSunNode
+    }
+    
+    class func mercuryGroup(orbitRadius: CGFloat) -> SCNNode {
+        let rotationSphere = SCNGeometry.planetoid(radius: orbitRadius, color: .clear)
+        let rotationNode = SCNNode(geometry: rotationSphere)
+        let earthScene = SCNScene(named: "art.scnassets/Mercury.scn")!
+        
+        if let node = earthScene.rootNode.childNodes.first {
+            let geometry = node.geometry
+            let planet = SCNNode(geometry: geometry)
+            planet.position = SCNVector3Make(Float(orbitRadius), 0, 0)
+            planet.categoryBitMask = 1
+            rotationNode.addChildNode(planet)
+            planet.rotate(duration: 4)
+        }
+        return rotationNode
     }
     
     class func earthGroup(orbitRadius: CGFloat) -> SCNNode {
@@ -90,8 +121,8 @@ extension SCNNode {
                                         planetRadius: 0.008,
                                         planetColor: .gray)
             planet.addChildNode(moon)
-            moon.rotate(duration: 3, clockwise: false)
-            planet.rotate(duration: 1)
+            moon.rotate(duration: 6, clockwise: false)
+            planet.rotate(duration: 3)
         }
         return rotationNode
     }

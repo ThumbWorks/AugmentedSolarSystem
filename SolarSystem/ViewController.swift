@@ -109,23 +109,20 @@ extension ViewController: ARSessionObserver {
         restartPlaneDetection()
         status.text = "Resetting Session"
     }
-    
 }
 
 extension ViewController: ARSCNViewDelegate {
-    /**
-     Implement this to provide a custom node for the given anchor.
-     
-     @discussion This node will automatically be added to the scene graph.
-     If this method is not implemented, a node will be automatically created.
-     If nil is returned the anchor will be ignored.
-     @param renderer The renderer that will render the scene.
-     @param anchor The added anchor.
-     @return Node that will be mapped to the anchor or nil.
-     */
-//    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-//
-//    }
+    
+    func setUpAsteroidBelt(centerNode: SCNNode, orbitalRadius: CGFloat) {
+        // TODO set up the belt. Let's try the hard way
+        let count = 360
+        for i in 0...count {
+            let position = SCNVector3Make(Float(orbitalRadius), Float(360 / count * i), 0)
+            let asteroid = SCNNode.planetGroup(orbitRadius: orbitalRadius, planetRadius: 0.1, planetColor: .brown, position: position)
+            asteroid.rotate(duration:30)
+            centerNode.addChildNode(asteroid)
+        }
+    }
     
     fileprivate func buildSolarSystem(_ planeAnchor: ARPlaneAnchor, node: SCNNode) {
         self.done = true
@@ -134,50 +131,44 @@ extension ViewController: ARSCNViewDelegate {
         print("The box of the plane is before scaling is \(planeAnchor.extent)")
         
         // Data on sizes of planets http://www.freemars.org/jeff/planets/planets5.htm
-        let sunRadius: CGFloat = 0.04
-        
         let actualMercuryRadius: CGFloat = 14878.0 / 2.0 // .005 / 14878*12104
         let mercuryARRadius: CGFloat = 0.005
         let venusRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (12104 / 2)
-        let earthRadius: CGFloat = 0.01
         let marsRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (6787 / 2)
         let jupiterRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (142800 / 2)
         let saturnRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (120000 / 2)
         let uranusRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (51200 / 2)
         let neptuneRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (48600 / 2)
         
-        let mercuryOrbitalRadius: CGFloat = 0.1
-        let venusOrbitalRadius: CGFloat = 0.2
-        let earthOrbialRadius: CGFloat = 0.3
-        let beltOrbitalRadius: CGFloat = 0.35
-        let marsOrbitalRadius: CGFloat = 0.4
-        let jupiterOribialRadius: CGFloat = 0.6
-        let saturnOrbitalRadius: CGFloat = 0.8
-        let uranusOrbitalRadius: CGFloat = 1
-        let neptuneOrbitalRadius: CGFloat = 1.2
+        let mercuryOrbitalRadius: CGFloat = 0.2
+        let venusOrbitalRadius: CGFloat = 0.3
+        let earthOrbialRadius: CGFloat = 0.4
+//        let beltOrbitalRadius: CGFloat = 0.35
+        let marsOrbitalRadius: CGFloat = 0.5
+        let jupiterOribialRadius: CGFloat = 0.8
+        let saturnOrbitalRadius: CGFloat = 1.0
+        let uranusOrbitalRadius: CGFloat = 1.5
+        let neptuneOrbitalRadius: CGFloat = 1.7
         
-        let sunGeometry = SCNGeometry.planetoid(radius: sunRadius, color: .yellow)
-        let sunNode = SCNNode(geometry: sunGeometry)
+        let sunNode = SCNNode.sun()
         node.addChildNode(sunNode)
         sunNode.categoryBitMask = 2
         
-        // Add some omni lights to light up the sun
-        node.addChildNode(SCNNode.omniLight(SCNVector3Make(1, 1, 1)))
-        node.addChildNode(SCNNode.omniLight(SCNVector3Make(-1, -1, -1)))
-        
-        node.addChildNode(SCNNode.sunLight(geometry: sunGeometry))
-        
-        let mercury = SCNNode.planetGroup(orbitRadius: mercuryOrbitalRadius, planetRadius: mercuryARRadius, planetColor: .red)
+        // Add the light from the sun
+        node.addChildNode(SCNNode.sunLight(geometry: sunNode.geometry!))
+        let mercury = SCNNode.mercuryGroup(orbitRadius: mercuryOrbitalRadius)
         let venus = SCNNode.planetGroup(orbitRadius: venusOrbitalRadius, planetRadius: venusRadius, planetColor: .yellow)
         let earth = SCNNode.earthGroup(orbitRadius: earthOrbialRadius)
-        
-        // TODO set up the belt
-        
         let mars = SCNNode.planetGroup(orbitRadius: marsOrbitalRadius, planetRadius: marsRadius, planetColor: .red)
+        
+        let distance = (marsOrbitalRadius + jupiterOribialRadius) / 2
+//        setUpAsteroidBelt(centerNode: node, orbitalRadius: distance)
+        
         let jupiter = SCNNode.planetGroup(orbitRadius: jupiterOribialRadius, planetRadius: jupiterRadius, planetColor: .red)
         let saturn = SCNNode.planetGroup(orbitRadius: saturnOrbitalRadius, planetRadius: saturnRadius, planetColor: .orange)
         let uranus = SCNNode.planetGroup(orbitRadius: uranusOrbitalRadius, planetRadius: uranusRadius, planetColor: .blue)
         let neptune = SCNNode.planetGroup(orbitRadius: neptuneOrbitalRadius, planetRadius: neptuneRadius, planetColor: .purple)
+        
         node.addChildNode(earth)
         node.addChildNode(venus)
         node.addChildNode(mercury)

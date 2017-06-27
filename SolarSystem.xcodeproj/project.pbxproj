@@ -15,6 +15,8 @@
 		5FBAF9771EE8B78400FAA54B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBAF9761EE8B78400FAA54B /* Assets.xcassets */; };
 		5FBAF97A1EE8B78400FAA54B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FBAF9781EE8B78400FAA54B /* LaunchScreen.storyboard */; };
 		5FBAF9861EE8DAAF00FAA54B /* Earth.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FBAF9851EE8DAAF00FAA54B /* Earth.scn */; };
+		5FC65CD81F01C93600D8C9CB /* Sun.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FC65CD71F01C93600D8C9CB /* Sun.scn */; };
+		5FC65CDA1F01C98800D8C9CB /* Mercury.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FC65CD91F01C98800D8C9CB /* Mercury.scn */; };
 		5FF9CEF11EE9C00D00A84513 /* SceneKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF9CEF01EE9C00D00A84513 /* SceneKitExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +31,8 @@
 		5FBAF9791EE8B78400FAA54B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FBAF97B1EE8B78400FAA54B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5FBAF9851EE8DAAF00FAA54B /* Earth.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Earth.scn; path = SolarSystem/art.scnassets/Earth.scn; sourceTree = "<group>"; };
+		5FC65CD71F01C93600D8C9CB /* Sun.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Sun.scn; path = art.scnassets/Sun.scn; sourceTree = "<group>"; };
+		5FC65CD91F01C98800D8C9CB /* Mercury.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Mercury.scn; path = art.scnassets/Mercury.scn; sourceTree = "<group>"; };
 		5FF9CEF01EE9C00D00A84513 /* SceneKitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKitExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +76,8 @@
 				5FBAF9781EE8B78400FAA54B /* LaunchScreen.storyboard */,
 				5FBAF97B1EE8B78400FAA54B /* Info.plist */,
 				5FF9CEF01EE9C00D00A84513 /* SceneKitExtension.swift */,
+				5FC65CD71F01C93600D8C9CB /* Sun.scn */,
+				5FC65CD91F01C98800D8C9CB /* Mercury.scn */,
 			);
 			path = SolarSystem;
 			sourceTree = "<group>";
@@ -135,8 +141,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FBAF9701EE8B78400FAA54B /* art.scnassets in Resources */,
+				5FC65CDA1F01C98800D8C9CB /* Mercury.scn in Resources */,
 				5FBAF97A1EE8B78400FAA54B /* LaunchScreen.storyboard in Resources */,
 				5FBAF9861EE8DAAF00FAA54B /* Earth.scn in Resources */,
+				5FC65CD81F01C93600D8C9CB /* Sun.scn in Resources */,
 				5FBAF9771EE8B78400FAA54B /* Assets.xcassets in Resources */,
 				5FBAF9751EE8B78400FAA54B /* Main.storyboard in Resources */,
 			);
