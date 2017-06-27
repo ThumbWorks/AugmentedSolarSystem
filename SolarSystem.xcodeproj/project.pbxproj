@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5F39596E1EE9898200EDEBEE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F39596D1EE934B200EDEBEE /* Utilities.swift */; };
+		5FA91A731F02C5DC00D8AFC1 /* Saturn.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FA91A721F02C5DC00D8AFC1 /* Saturn.scn */; };
+		5FA91A751F02C76C00D8AFC1 /* Uranus.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FA91A741F02C76C00D8AFC1 /* Uranus.scn */; };
 		5FBAF96E1EE8B78400FAA54B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBAF96D1EE8B78400FAA54B /* AppDelegate.swift */; };
 		5FBAF9701EE8B78400FAA54B /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBAF96F1EE8B78400FAA54B /* art.scnassets */; };
 		5FBAF9721EE8B78400FAA54B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBAF9711EE8B78400FAA54B /* ViewController.swift */; };
@@ -23,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		5F39596D1EE934B200EDEBEE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		5FA91A721F02C5DC00D8AFC1 /* Saturn.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Saturn.scn; path = art.scnassets/Saturn.scn; sourceTree = "<group>"; };
+		5FA91A741F02C76C00D8AFC1 /* Uranus.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Uranus.scn; path = art.scnassets/Uranus.scn; sourceTree = "<group>"; };
 		5FBAF96A1EE8B78400FAA54B /* SolarSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolarSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBAF96D1EE8B78400FAA54B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FBAF96F1EE8B78400FAA54B /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -31,7 +35,7 @@
 		5FBAF9761EE8B78400FAA54B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5FBAF9791EE8B78400FAA54B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FBAF97B1EE8B78400FAA54B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5FBAF9851EE8DAAF00FAA54B /* Earth.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Earth.scn; path = SolarSystem/art.scnassets/Earth.scn; sourceTree = "<group>"; };
+		5FBAF9851EE8DAAF00FAA54B /* Earth.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Earth.scn; sourceTree = "<group>"; };
 		5FC65CD71F01C93600D8C9CB /* Sun.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Sun.scn; path = art.scnassets/Sun.scn; sourceTree = "<group>"; };
 		5FC65CD91F01C98800D8C9CB /* Mercury.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Mercury.scn; path = art.scnassets/Mercury.scn; sourceTree = "<group>"; };
 		5FC65CDC1F02315000D8C9CB /* Jupiter.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Jupiter.scn; path = art.scnassets/Jupiter.scn; sourceTree = "<group>"; };
@@ -52,7 +56,6 @@
 		5FBAF9611EE8B78400FAA54B = {
 			isa = PBXGroup;
 			children = (
-				5FBAF9851EE8DAAF00FAA54B /* Earth.scn */,
 				5FBAF96C1EE8B78400FAA54B /* SolarSystem */,
 				5FBAF96B1EE8B78400FAA54B /* Products */,
 			);
@@ -79,8 +82,11 @@
 				5FBAF97B1EE8B78400FAA54B /* Info.plist */,
 				5FF9CEF01EE9C00D00A84513 /* SceneKitExtension.swift */,
 				5FC65CD71F01C93600D8C9CB /* Sun.scn */,
+				5FBAF9851EE8DAAF00FAA54B /* Earth.scn */,
 				5FC65CD91F01C98800D8C9CB /* Mercury.scn */,
 				5FC65CDC1F02315000D8C9CB /* Jupiter.scn */,
+				5FA91A721F02C5DC00D8AFC1 /* Saturn.scn */,
+				5FA91A741F02C76C00D8AFC1 /* Uranus.scn */,
 			);
 			path = SolarSystem;
 			sourceTree = "<group>";
@@ -143,6 +149,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FA91A751F02C76C00D8AFC1 /* Uranus.scn in Resources */,
 				5FBAF9701EE8B78400FAA54B /* art.scnassets in Resources */,
 				5FC65CDA1F01C98800D8C9CB /* Mercury.scn in Resources */,
 				5FBAF97A1EE8B78400FAA54B /* LaunchScreen.storyboard in Resources */,
@@ -151,6 +158,7 @@
 				5FC65CD81F01C93600D8C9CB /* Sun.scn in Resources */,
 				5FBAF9771EE8B78400FAA54B /* Assets.xcassets in Resources */,
 				5FBAF9751EE8B78400FAA54B /* Main.storyboard in Resources */,
+				5FA91A731F02C5DC00D8AFC1 /* Saturn.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

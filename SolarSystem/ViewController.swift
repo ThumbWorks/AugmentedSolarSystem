@@ -135,20 +135,20 @@ extension ViewController: ARSCNViewDelegate {
         let mercuryARRadius: CGFloat = 0.005
         let venusRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (12104 / 2)
         let marsRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (6787 / 2)
-        let jupiterRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (142800 / 2)
-        let saturnRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (120000 / 2)
-        let uranusRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (51200 / 2)
-        let neptuneRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (48600 / 2)
+//        let jupiterRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (142800 / 2)
+//        let saturnRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (120000 / 2)
+//        let uranusRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (51200 / 2)
+//        let neptuneRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (48600 / 2)
         
         let mercuryOrbitalRadius: CGFloat = 0.2
         let venusOrbitalRadius: CGFloat = 0.3
         let earthOrbialRadius: CGFloat = 0.4
-//        let beltOrbitalRadius: CGFloat = 0.35
         let marsOrbitalRadius: CGFloat = 0.5
         let jupiterOribialRadius: CGFloat = 0.8
         let saturnOrbitalRadius: CGFloat = 1.0
         let uranusOrbitalRadius: CGFloat = 1.5
         let neptuneOrbitalRadius: CGFloat = 1.7
+        let plutoOrbitalRadius: CGFloat = 2.0
         
         let sunNode = SCNNode.sun()
         node.addChildNode(sunNode)
@@ -161,12 +161,11 @@ extension ViewController: ARSCNViewDelegate {
         let jupiter = SCNNode.genericPlanetGroup(orbitRadius: jupiterOribialRadius, sceneName: "art.scnassets/Jupiter.scn", rotationDuration: 9)
         let earth = SCNNode.earthGroup(orbitRadius: earthOrbialRadius)
         let mars = SCNNode.planetGroup(orbitRadius: marsOrbitalRadius, planetRadius: marsRadius, planetColor: .red)
-        let distance = (marsOrbitalRadius + jupiterOribialRadius) / 2
-//        setUpAsteroidBelt(centerNode: node, orbitalRadius: distance)
         
-        let saturn = SCNNode.planetGroup(orbitRadius: saturnOrbitalRadius, planetRadius: saturnRadius, planetColor: .orange)
-        let uranus = SCNNode.planetGroup(orbitRadius: uranusOrbitalRadius, planetRadius: uranusRadius, planetColor: .blue)
-        let neptune = SCNNode.genericPlanetGroup(orbitRadius: neptuneOrbitalRadius, sceneName: "art.scnassets/Neptune.scn", rotationDuration: 12)
+        let saturn = SCNNode.genericPlanetGroup(orbitRadius: saturnOrbitalRadius, sceneName: "art.scnassets/Neptune.scn", rotationDuration: 13)
+        let uranus = SCNNode.genericPlanetGroup(orbitRadius: uranusOrbitalRadius, sceneName: "art.scnassets/Uranus.scn", rotationDuration: 13)
+        let neptune = SCNNode.genericPlanetGroup(orbitRadius: neptuneOrbitalRadius, sceneName: "art.scnassets/Neptune.scn", rotationDuration: 8)
+        let pluto = SCNNode.genericPlanetGroup(orbitRadius: plutoOrbitalRadius, sceneName: "art.scnassets/Pluto.scn", rotationDuration: 4)
         
         node.addChildNode(earth)
         node.addChildNode(venus)
