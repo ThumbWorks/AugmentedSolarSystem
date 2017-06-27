@@ -156,18 +156,17 @@ extension ViewController: ARSCNViewDelegate {
         
         // Add the light from the sun
         node.addChildNode(SCNNode.sunLight(geometry: sunNode.geometry!))
-        let mercury = SCNNode.mercuryGroup(orbitRadius: mercuryOrbitalRadius)
+        let mercury = SCNNode.genericPlanetGroup(orbitRadius: mercuryOrbitalRadius, sceneName: "art.scnassets/Mercury.scn", rotationDuration: 2)
         let venus = SCNNode.planetGroup(orbitRadius: venusOrbitalRadius, planetRadius: venusRadius, planetColor: .yellow)
+        let jupiter = SCNNode.genericPlanetGroup(orbitRadius: jupiterOribialRadius, sceneName: "art.scnassets/Jupiter.scn", rotationDuration: 9)
         let earth = SCNNode.earthGroup(orbitRadius: earthOrbialRadius)
         let mars = SCNNode.planetGroup(orbitRadius: marsOrbitalRadius, planetRadius: marsRadius, planetColor: .red)
-        
         let distance = (marsOrbitalRadius + jupiterOribialRadius) / 2
 //        setUpAsteroidBelt(centerNode: node, orbitalRadius: distance)
         
-        let jupiter = SCNNode.planetGroup(orbitRadius: jupiterOribialRadius, planetRadius: jupiterRadius, planetColor: .red)
         let saturn = SCNNode.planetGroup(orbitRadius: saturnOrbitalRadius, planetRadius: saturnRadius, planetColor: .orange)
         let uranus = SCNNode.planetGroup(orbitRadius: uranusOrbitalRadius, planetRadius: uranusRadius, planetColor: .blue)
-        let neptune = SCNNode.planetGroup(orbitRadius: neptuneOrbitalRadius, planetRadius: neptuneRadius, planetColor: .purple)
+        let neptune = SCNNode.genericPlanetGroup(orbitRadius: neptuneOrbitalRadius, sceneName: "art.scnassets/Neptune.scn", rotationDuration: 12)
         
         node.addChildNode(earth)
         node.addChildNode(venus)

@@ -82,7 +82,7 @@ extension SCNNode {
             let planet = SCNNode(geometry: geometry)
             // TODO think about the bit mask for the sun
             planet.categoryBitMask = 1
-            planet.rotate(duration: 9)
+            planet.rotate(duration: 20)
             return planet
         }
         let sunGeometry = SCNGeometry.planetoid(radius: 5, color: .yellow)
@@ -102,6 +102,22 @@ extension SCNNode {
             planet.categoryBitMask = 1
             rotationNode.addChildNode(planet)
             planet.rotate(duration: 4)
+        }
+        return rotationNode
+    }
+    
+    class func genericPlanetGroup(orbitRadius: CGFloat, sceneName: String, rotationDuration: Double) -> SCNNode {
+        let rotationSphere = SCNGeometry.planetoid(radius: orbitRadius, color: .clear)
+        let rotationNode = SCNNode(geometry: rotationSphere)
+        let planetScene = SCNScene(named: sceneName)!
+        
+        if let node = planetScene.rootNode.childNodes.first {
+            let geometry = node.geometry
+            let planet = SCNNode(geometry: geometry)
+            planet.position = SCNVector3Make(Float(orbitRadius), 0, 0)
+            planet.categoryBitMask = 1
+            rotationNode.addChildNode(planet)
+            planet.rotate(duration: rotationDuration)
         }
         return rotationNode
     }
