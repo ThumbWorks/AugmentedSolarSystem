@@ -111,6 +111,14 @@ extension ViewController: ARSessionObserver {
     }
 }
 
+struct Planet {
+    let sceneString: String
+    let orbitalRadius: CGFloat
+    let radius: CGFloat
+    let rotationDuration: Double
+    
+}
+
 extension ViewController: ARSCNViewDelegate {
     
     func setUpAsteroidBelt(centerNode: SCNNode, orbitalRadius: CGFloat) {
@@ -130,25 +138,17 @@ extension ViewController: ARSCNViewDelegate {
         print("NEW SURFACE DETECTED AT \(pos.friendlyString())")
         print("The box of the plane is before scaling is \(planeAnchor.extent)")
         
-        // Data on sizes of planets http://www.freemars.org/jeff/planets/planets5.htm
-        let actualMercuryRadius: CGFloat = 14878.0 / 2.0 // .005 / 14878*12104
-        let mercuryARRadius: CGFloat = 0.005
-        let venusRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (12104 / 2)
-        let marsRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (6787 / 2)
-//        let jupiterRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (142800 / 2)
-//        let saturnRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (120000 / 2)
-//        let uranusRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (51200 / 2)
-//        let neptuneRadius: CGFloat = mercuryARRadius / actualMercuryRadius * (48600 / 2)
+        let mercury = Planet(sceneString: "art.scnassets/Mercury.scn", orbitalRadius: 0.2, radius: 0.005, rotationDuration: 3)
+        let venus = Planet(sceneString: "art.scnassets/Venus.scn", orbitalRadius: 0.3, radius: 0.005, rotationDuration: 6)
+        let earth = Planet(sceneString: "art.scnassets/Earth.scn", orbitalRadius: 0.4, radius: 0.005, rotationDuration: 8)
+        let mars = Planet(sceneString: "art.scnassets/Mars.scn", orbitalRadius: 0.5, radius: 0.005, rotationDuration: 9)
+        let jupiter = Planet(sceneString: "art.scnassets/Jupiter.scn", orbitalRadius: 0.8, radius: 0.005, rotationDuration: 10)
+        let saturn = Planet(sceneString: "art.scnassets/Saturn.scn", orbitalRadius: 1.0, radius: 0.005, rotationDuration: 50)
+        let uranus = Planet(sceneString: "art.scnassets/Uranus.scn", orbitalRadius: 1.5, radius: 0.005, rotationDuration: 60)
+        let neptune = Planet(sceneString: "art.scnassets/Neptune.scn", orbitalRadius: 1.7, radius: 0.005, rotationDuration: 80)
+        let pluto = Planet(sceneString: "art.scnassets/Pluto.scn", orbitalRadius: 2.0, radius: 0.005, rotationDuration: 90)
         
-        let mercuryOrbitalRadius: CGFloat = 0.2
-        let venusOrbitalRadius: CGFloat = 0.3
-        let earthOrbialRadius: CGFloat = 0.4
-        let marsOrbitalRadius: CGFloat = 0.5
-        let jupiterOribialRadius: CGFloat = 0.8
-        let saturnOrbitalRadius: CGFloat = 1.0
-        let uranusOrbitalRadius: CGFloat = 1.5
-        let neptuneOrbitalRadius: CGFloat = 1.7
-        let plutoOrbitalRadius: CGFloat = 2.0
+        // Data on sizes of planets http://www.freemars.org/jeff/planets/planets5.htm
         
         let sunNode = SCNNode.sun()
         node.addChildNode(sunNode)
@@ -156,34 +156,26 @@ extension ViewController: ARSCNViewDelegate {
         
         // Add the light from the sun
         node.addChildNode(SCNNode.sunLight(geometry: sunNode.geometry!))
-        let mercury = SCNNode.genericPlanetGroup(orbitRadius: mercuryOrbitalRadius, sceneName: "art.scnassets/Mercury.scn", rotationDuration: 2)
-        let venus = SCNNode.planetGroup(orbitRadius: venusOrbitalRadius, planetRadius: venusRadius, planetColor: .yellow)
-        let jupiter = SCNNode.genericPlanetGroup(orbitRadius: jupiterOribialRadius, sceneName: "art.scnassets/Jupiter.scn", rotationDuration: 9)
-        let earth = SCNNode.earthGroup(orbitRadius: earthOrbialRadius)
-        let mars = SCNNode.planetGroup(orbitRadius: marsOrbitalRadius, planetRadius: marsRadius, planetColor: .red)
+//        let mars = SCNNode.planetGroup(orbitRadius: marsOrbitalRadius, planetRadius: marsRadius, planetColor: .red)
         
-        let saturn = SCNNode.genericPlanetGroup(orbitRadius: saturnOrbitalRadius, sceneName: "art.scnassets/Neptune.scn", rotationDuration: 13)
-        let uranus = SCNNode.genericPlanetGroup(orbitRadius: uranusOrbitalRadius, sceneName: "art.scnassets/Uranus.scn", rotationDuration: 13)
-        let neptune = SCNNode.genericPlanetGroup(orbitRadius: neptuneOrbitalRadius, sceneName: "art.scnassets/Neptune.scn", rotationDuration: 8)
-        let pluto = SCNNode.genericPlanetGroup(orbitRadius: plutoOrbitalRadius, sceneName: "art.scnassets/Pluto.scn", rotationDuration: 4)
+        node.addChildNode(SCNNode.planet(mercury))
+        node.addChildNode(SCNNode.planet(venus))
         
-        node.addChildNode(earth)
-        node.addChildNode(venus)
-        node.addChildNode(mercury)
-        node.addChildNode(mars)
-        node.addChildNode(jupiter)
-        node.addChildNode(saturn)
-        node.addChildNode(uranus)
-        node.addChildNode(neptune)
+        // TODO add a moon
+        let earthNode = SCNNode.planet(earth)
+        node.addChildNode(earthNode)
+//        let moon = SCNNode.planetGroup(orbitRadius: 0.3,
+//                                       planetRadius: 0.04,
+//                                       planetColor: .gray)
+//        earthNode.addChildNode(moon)
+//        moon.rotate(duration: 3, clockwise: false)
         
-        mercury.rotate(duration: 5)
-        venus.rotate(duration: 10)
-        earth.rotate(duration: 15)
-        mars.rotate(duration: 30)
-        jupiter.rotate(duration: 45)
-        saturn.rotate(duration: 60)
-        uranus.rotate(duration: 100)
-        neptune.rotate(duration: 140)
+        node.addChildNode(SCNNode.planet(mars))
+        node.addChildNode(SCNNode.planet(jupiter))
+        node.addChildNode(SCNNode.planet(saturn))
+        node.addChildNode(SCNNode.planet(uranus))
+        node.addChildNode(SCNNode.planet(neptune))
+        node.addChildNode(SCNNode.planet(pluto))
     }
     
     /**

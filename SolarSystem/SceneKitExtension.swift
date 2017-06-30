@@ -78,11 +78,12 @@ extension SCNNode {
         
         if let node = sunScene.rootNode.childNodes.first {
             let geometry = node.geometry
-            node.scale = SCNVector3Make(0.01, 0.01, 0.01)
+//            node.scale = SCNVector3Make(0.01, 0.01, 0.01)
             let planet = SCNNode(geometry: geometry)
             // TODO think about the bit mask for the sun
             planet.categoryBitMask = 1
             planet.rotate(duration: 20)
+            planet.scale = SCNVector3Make(0.05, 0.05, 0.05)
             return planet
         }
         let sunGeometry = SCNGeometry.planetoid(radius: 5, color: .yellow)
@@ -106,39 +107,51 @@ extension SCNNode {
         return rotationNode
     }
     
-    class func genericPlanetGroup(orbitRadius: CGFloat, sceneName: String, rotationDuration: Double) -> SCNNode {
-        let rotationSphere = SCNGeometry.planetoid(radius: orbitRadius, color: .clear)
+    class func planet(_ planet: Planet) -> SCNNode {
+        let rotationSphere = SCNGeometry.planetoid(radius: planet.orbitalRadius, color: .clear)
         let rotationNode = SCNNode(geometry: rotationSphere)
-        let planetScene = SCNScene(named: sceneName)!
+        let planetScene = SCNScene(named: planet.sceneString)!
+        let path = SCNTorus(ringRadius: planet.orbitalRadius, pipeRadius: 0.001)
+        path.pipeSegmentCount = 3600
+        rotationNode.addChildNode(SCNNode(geometry: path))
         
         if let node = planetScene.rootNode.childNodes.first {
             let geometry = node.geometry
-            let planet = SCNNode(geometry: geometry)
-            planet.position = SCNVector3Make(Float(orbitRadius), 0, 0)
-            planet.categoryBitMask = 1
-            rotationNode.addChildNode(planet)
-            planet.rotate(duration: rotationDuration)
+            let planetNode = SCNNode(geometry: geometry)
+            planetNode.scale = SCNVector3Make(0.05, 0.05, 0.05)
+            planetNode.position = SCNVector3Make(Float(planet.orbitalRadius), 0, 0)
+            planetNode.categoryBitMask = 1
+            rotationNode.addChildNode(planetNode)
+            planetNode.rotate(duration: planet.rotationDuration)
         }
+        rotationNode.rotate(duration: planet.rotationDuration)
         return rotationNode
     }
     
-    class func earthGroup(orbitRadius: CGFloat) -> SCNNode {
-        let rotationSphere = SCNGeometry.planetoid(radius: orbitRadius, color: .clear)
+    class func earthGroup() -> SCNNode {
+        // TODO this can be cleaned up a bit more
+        let earth = Planet(sceneString: "art.scnassets/Earth.scn", orbitalRadius: 0.4, radius: 0.005, rotationDuration: 7)
+        let rotationSphere = SCNGeometry.planetoid(radius: earth.orbitalRadius, color: .clear)
         let rotationNode = SCNNode(geometry: rotationSphere)
-        let earthScene = SCNScene(named: "art.scnassets/Earth.scn")!
+        guard let earthScene = SCNScene(named: earth.sceneString) else {
+            print("no earth scene")
+            return rotationNode
+        }
+        rotationNode.rotate(duration: earth.rotationDuration)
         
         if let node = earthScene.rootNode.childNodes.first {
             let geometry = node.geometry
             let planet = SCNNode(geometry: geometry)
-            planet.position = SCNVector3Make(Float(orbitRadius), 0, 0)
+            planet.scale = SCNVector3Make(0.05, 0.05, 0.05)
+            planet.position = SCNVector3Make(Float(earth.orbitalRadius), 0, 0)
             planet.categoryBitMask = 1
             rotationNode.addChildNode(planet)
             let moon = self.planetGroup(orbitRadius: 0.1,
-                                        planetRadius: 0.008,
+                                        planetRadius: 0.08,
                                         planetColor: .gray)
             planet.addChildNode(moon)
-            moon.rotate(duration: 6, clockwise: false)
-            planet.rotate(duration: 3)
+            moon.rotate(duration: 12, clockwise: false)
+//            planet.rotate(duration: earth.rotationDuration)
         }
         return rotationNode
     }
