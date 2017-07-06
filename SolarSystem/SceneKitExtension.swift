@@ -21,28 +21,46 @@ extension SCNGeometry {
     }
 }
 
-class PlanetoidGroupNode: SCNNode {
+class PlanetoidNode: SCNNode {
+    let path: SCNTorus
+    var planetNode: SCNNode?
     
-    // These are the things you want to access
-    var planet: SCNNode
-    var rotationNode: SCNNode
-    
-    init(orbit: CGFloat, radius: CGFloat, color: UIColor) {
-        let yellow = UIColor.yellow.withAlphaComponent(0.5)
-        let rotationSphere = SCNGeometry.planetoid(radius: orbit, color: yellow)
-        rotationNode = SCNNode(geometry: rotationSphere)
+    required init(scene: SCNScene, orbitalRadius: CGFloat, rotationDuration: CFTimeInterval) {
         
-        let geometry  = SCNGeometry.planetoid(radius: radius, color: color)
-        planet = SCNNode(geometry: geometry)
-        planet.categoryBitMask = 1
-        rotationNode.addChildNode(planet)
-        
+        path = SCNTorus(ringRadius: orbitalRadius, pipeRadius: 0.001)
         super.init()
-        self.addChildNode(rotationNode)
+        
+        if let node = scene.rootNode.childNodes.first {
+            let geometry = node.geometry
+            
+            // TODO look into if I can just use the node that we know we have for this
+            let aPlanetNode = SCNNode(geometry: geometry)
+            aPlanetNode.scale = SCNVector3Make(0.05, 0.05, 0.05)
+            aPlanetNode.position = SCNVector3Make(Float(orbitalRadius), 0, 0)
+            aPlanetNode.categoryBitMask = 1
+            self.addChildNode(aPlanetNode)
+            aPlanetNode.rotate(duration: rotationDuration)
+            self.planetNode = aPlanetNode
+        }
+        
+        self.addChildNode(SCNNode(geometry: path))
+        self.rotate(duration: rotationDuration)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addRings() {
+        guard let planet = planetNode else {
+            print("there is no planet")
+            return
+        }
+        let torus = SCNTorus(ringRadius: 0.1, pipeRadius: 0.01)
+        //        torus.materials.first?.diffuse = UIColor.red
+        let torusNode = SCNNode(geometry: torus)
+        torusNode.scale = SCNVector3Make(1, 0.1, 1)
+        planet.addChildNode(torusNode)
     }
 }
 
@@ -91,41 +109,12 @@ extension SCNNode {
         return alternateSunNode
     }
     
-    class func mercuryGroup(orbitRadius: CGFloat) -> SCNNode {
-        let rotationSphere = SCNGeometry.planetoid(radius: orbitRadius, color: .clear)
-        let rotationNode = SCNNode(geometry: rotationSphere)
-        let earthScene = SCNScene(named: "art.scnassets/Mercury.scn")!
-        
-        if let node = earthScene.rootNode.childNodes.first {
-            let geometry = node.geometry
-            let planet = SCNNode(geometry: geometry)
-            planet.position = SCNVector3Make(Float(orbitRadius), 0, 0)
-            planet.categoryBitMask = 1
-            rotationNode.addChildNode(planet)
-            planet.rotate(duration: 4)
-        }
-        return rotationNode
-    }
-    
-    class func planet(_ planet: Planet) -> SCNNode {
-        let rotationSphere = SCNGeometry.planetoid(radius: planet.orbitalRadius, color: .clear)
-        let rotationNode = SCNNode(geometry: rotationSphere)
+    class func planet(_ planet: Planet) -> PlanetoidNode {
         let planetScene = SCNScene(named: planet.sceneString)!
-        let path = SCNTorus(ringRadius: planet.orbitalRadius, pipeRadius: 0.001)
-        path.pipeSegmentCount = 3600
-        rotationNode.addChildNode(SCNNode(geometry: path))
-        
-        if let node = planetScene.rootNode.childNodes.first {
-            let geometry = node.geometry
-            let planetNode = SCNNode(geometry: geometry)
-            planetNode.scale = SCNVector3Make(0.05, 0.05, 0.05)
-            planetNode.position = SCNVector3Make(Float(planet.orbitalRadius), 0, 0)
-            planetNode.categoryBitMask = 1
-            rotationNode.addChildNode(planetNode)
-            planetNode.rotate(duration: planet.rotationDuration)
-        }
-        rotationNode.rotate(duration: planet.rotationDuration)
-        return rotationNode
+        let planetoidNode = PlanetoidNode(scene: planetScene,
+                                          orbitalRadius: planet.orbitalRadius,
+                                          rotationDuration: planet.rotationDuration)
+        return planetoidNode
     }
     
     class func earthGroup() -> SCNNode {

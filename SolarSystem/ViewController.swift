@@ -116,7 +116,6 @@ struct Planet {
     let orbitalRadius: CGFloat
     let radius: CGFloat
     let rotationDuration: Double
-    
 }
 
 extension ViewController: ARSCNViewDelegate {
@@ -172,7 +171,10 @@ extension ViewController: ARSCNViewDelegate {
         
         node.addChildNode(SCNNode.planet(mars))
         node.addChildNode(SCNNode.planet(jupiter))
-        node.addChildNode(SCNNode.planet(saturn))
+        
+        let saturnNode = SCNNode.planet(saturn)
+        saturnNode.addRings()
+        node.addChildNode(saturnNode)
         node.addChildNode(SCNNode.planet(uranus))
         node.addChildNode(SCNNode.planet(neptune))
         node.addChildNode(SCNNode.planet(pluto))
