@@ -21,6 +21,13 @@ extension SCNGeometry {
     }
 }
 
+struct Planet {
+    let sceneString: String
+    let orbitalRadius: CGFloat
+    let radius: CGFloat
+    let rotationDuration: Double
+}
+
 class PlanetoidNode: SCNNode {
     let path: SCNTorus
     var planetNode: SCNNode?
@@ -56,8 +63,7 @@ class PlanetoidNode: SCNNode {
             print("there is no planet")
             return
         }
-        let torus = SCNTorus(ringRadius: 0.1, pipeRadius: 0.01)
-        //        torus.materials.first?.diffuse = UIColor.red
+        let torus = SCNTorus(ringRadius: 2.0, pipeRadius: 0.3)
         let torusNode = SCNNode(geometry: torus)
         torusNode.scale = SCNVector3Make(1, 0.1, 1)
         planet.addChildNode(torusNode)
@@ -65,6 +71,51 @@ class PlanetoidNode: SCNNode {
 }
 
 extension SCNNode {
+    
+    func buildSolarSystem() {
+        
+        let mercury = Planet(sceneString: "art.scnassets/Mercury.scn", orbitalRadius: 0.2, radius: 0.005, rotationDuration: 3)
+        let venus = Planet(sceneString: "art.scnassets/Venus.scn", orbitalRadius: 0.3, radius: 0.005, rotationDuration: 6)
+        let earth = Planet(sceneString: "art.scnassets/Earth.scn", orbitalRadius: 0.4, radius: 0.005, rotationDuration: 8)
+        let mars = Planet(sceneString: "art.scnassets/Mars.scn", orbitalRadius: 0.5, radius: 0.005, rotationDuration: 9)
+        let jupiter = Planet(sceneString: "art.scnassets/Jupiter.scn", orbitalRadius: 0.8, radius: 0.005, rotationDuration: 10)
+        let saturn = Planet(sceneString: "art.scnassets/Saturn.scn", orbitalRadius: 1.0, radius: 0.005, rotationDuration: 50)
+        let uranus = Planet(sceneString: "art.scnassets/Uranus.scn", orbitalRadius: 1.5, radius: 0.005, rotationDuration: 60)
+        let neptune = Planet(sceneString: "art.scnassets/Neptune.scn", orbitalRadius: 1.7, radius: 0.005, rotationDuration: 80)
+        let pluto = Planet(sceneString: "art.scnassets/Pluto.scn", orbitalRadius: 2.0, radius: 0.005, rotationDuration: 90)
+        
+        // Data on sizes of planets http://www.freemars.org/jeff/planets/planets5.htm
+        
+        let sunNode = SCNNode.sun()
+        self.addChildNode(sunNode)
+        sunNode.categoryBitMask = 2
+        
+        // Add the light from the sun
+        self.addChildNode(SCNNode.sunLight(geometry: sunNode.geometry!))
+        //        let mars = SCNNode.planetGroup(orbitRadius: marsOrbitalRadius, planetRadius: marsRadius, planetColor: .red)
+        
+        self.addChildNode(SCNNode.planet(mercury))
+        self.addChildNode(SCNNode.planet(venus))
+        
+        // TODO add a moon
+        let earthNode = SCNNode.planet(earth)
+        self.addChildNode(earthNode)
+        //        let moon = SCNNode.planetGroup(orbitRadius: 0.3,
+        //                                       planetRadius: 0.04,
+        //                                       planetColor: .gray)
+        //        earthNode.addChildNode(moon)
+        //        moon.rotate(duration: 3, clockwise: false)
+        
+        self.addChildNode(SCNNode.planet(mars))
+        self.addChildNode(SCNNode.planet(jupiter))
+        
+        let saturnNode = SCNNode.planet(saturn)
+        saturnNode.addRings()
+        self.addChildNode(saturnNode)
+        self.addChildNode(SCNNode.planet(uranus))
+        self.addChildNode(SCNNode.planet(neptune))
+        self.addChildNode(SCNNode.planet(pluto))
+    }
     
     // Creates a planet that has the ability to orbit around a central point
     class func planetGroup(orbitRadius: CGFloat, planetRadius: CGFloat, planetColor: UIColor, position: SCNVector3? = nil) -> SCNNode {
