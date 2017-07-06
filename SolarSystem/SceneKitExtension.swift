@@ -58,6 +58,15 @@ class PlanetoidNode: SCNNode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func addMoon(_ moon: SCNNode) {
+        guard let planet = planetNode else {
+            print("there is no planet")
+            return
+        }
+        planet.addChildNode(moon)
+        moon.rotate(duration: 2, clockwise: false)
+    }
+    
     func addRings() {
         guard let planet = planetNode else {
             print("there is no planet")
@@ -91,27 +100,31 @@ extension SCNNode {
         sunNode.categoryBitMask = 2
         
         // Add the light from the sun
-        self.addChildNode(SCNNode.sunLight(geometry: sunNode.geometry!))
-        //        let mars = SCNNode.planetGroup(orbitRadius: marsOrbitalRadius, planetRadius: marsRadius, planetColor: .red)
-        
+        self.addChildNode(SCNNode.sunLight(geometry: sunNode.geometry!))        
         self.addChildNode(SCNNode.planet(mercury))
         self.addChildNode(SCNNode.planet(venus))
         
         // TODO add a moon
         let earthNode = SCNNode.planet(earth)
+        let moon = SCNNode.planetGroup(orbitRadius: 2,
+                                       planetRadius: 0.09,
+                                       planetColor: .gray)
+        earthNode.addMoon(moon)
         self.addChildNode(earthNode)
-        //        let moon = SCNNode.planetGroup(orbitRadius: 0.3,
-        //                                       planetRadius: 0.04,
-        //                                       planetColor: .gray)
-        //        earthNode.addChildNode(moon)
-        //        moon.rotate(duration: 3, clockwise: false)
         
         self.addChildNode(SCNNode.planet(mars))
-        self.addChildNode(SCNNode.planet(jupiter))
+        
+        let jupiterNode = SCNNode.planet(jupiter)
+        let jupiterMoon = SCNNode.planetGroup(orbitRadius: 3,
+                                       planetRadius: 0.2,
+                                       planetColor: .gray)
+        jupiterNode.addMoon(jupiterMoon)
+        self.addChildNode(jupiterNode)
         
         let saturnNode = SCNNode.planet(saturn)
         saturnNode.addRings()
         self.addChildNode(saturnNode)
+        
         self.addChildNode(SCNNode.planet(uranus))
         self.addChildNode(SCNNode.planet(neptune))
         self.addChildNode(SCNNode.planet(pluto))
