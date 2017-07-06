@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet var sceneView: ARSCNView!
     var done = false
     var sessionConfig = ARWorldTrackingSessionConfiguration()
+    var planetoids = [SCNNode]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +58,16 @@ class ViewController: UIViewController {
         sceneView.session.pause()
     }
 }
+
+extension ViewController {
+    @IBAction func toggleTrails() {
+        for case let planetoidNode as PlanetoidGroupNode in planetoids {
+            // do something with button
+            planetoidNode.path.isHidden = !planetoidNode.path.isHidden
+        }
+    }
+}
+
 extension ViewController: ARSessionObserver {
     func session(_ session: ARSession, didFailWithError error: Error) {
         print("error \(error.localizedDescription)")
@@ -113,17 +124,6 @@ extension ViewController: ARSessionObserver {
 
 extension ViewController: ARSCNViewDelegate {
     
-    func setUpAsteroidBelt(centerNode: SCNNode, orbitalRadius: CGFloat) {
-        // TODO set up the belt. Let's try the hard way
-        let count = 360
-        for i in 0...count {
-            let position = SCNVector3Make(Float(orbitalRadius), Float(360 / count * i), 0)
-            let asteroid = SCNNode.planetGroup(orbitRadius: orbitalRadius, planetRadius: 0.1, planetColor: .brown, position: position)
-            asteroid.rotate(duration:30)
-            centerNode.addChildNode(asteroid)
-        }
-    }
-    
     /**
      Called when a new node has been mapped to the given anchor.
      
@@ -140,7 +140,10 @@ extension ViewController: ARSCNViewDelegate {
             
             if let planeAnchor = anchor as? ARPlaneAnchor {
                 self.done = true
-                node.buildSolarSystem()
+                self.planetoids = node.buildSolarSystem()
+                for planetNode in self.planetoids {
+                    node.addChildNode(planetNode)
+                }
                 let pos = SCNVector3.positionFromTransform(planeAnchor.transform)
                 print("NEW SURFACE DETECTED AT \(pos.friendlyString())")
                 print("The box of the plane is before scaling is \(planeAnchor.extent)")

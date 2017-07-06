@@ -22,19 +22,24 @@ extension SCNGeometry {
 }
 
 struct Planet {
-    let sceneString: String
+    let name: String
     let orbitalRadius: CGFloat
     let radius: CGFloat
     let rotationDuration: Double
 }
 
-class PlanetoidNode: SCNNode {
-    let path: SCNTorus
+class PlanetoidGroupNode: SCNNode {
+    let path: SCNNode
     var planetNode: SCNNode?
     
-    required init(scene: SCNScene, orbitalRadius: CGFloat, rotationDuration: CFTimeInterval) {
+    required init(sceneName: String, orbitalRadius: CGFloat, rotationDuration: CFTimeInterval) {
         
-        path = SCNTorus(ringRadius: orbitalRadius, pipeRadius: 0.001)
+        let sceneString = "art.scnassets/\(sceneName).scn"
+        let scene = SCNScene(named: sceneString)!
+        
+        let torus = SCNTorus(ringRadius: orbitalRadius, pipeRadius: 0.001)
+        path = SCNNode(geometry: torus)
+        
         super.init()
         
         if let node = scene.rootNode.childNodes.first {
@@ -45,12 +50,13 @@ class PlanetoidNode: SCNNode {
             aPlanetNode.scale = SCNVector3Make(0.05, 0.05, 0.05)
             aPlanetNode.position = SCNVector3Make(Float(orbitalRadius), 0, 0)
             aPlanetNode.categoryBitMask = 1
+            aPlanetNode.name = sceneName
+            
             self.addChildNode(aPlanetNode)
             aPlanetNode.rotate(duration: rotationDuration)
             self.planetNode = aPlanetNode
         }
-        
-        self.addChildNode(SCNNode(geometry: path))
+        self.addChildNode(path)
         self.rotate(duration: rotationDuration)
     }
     
@@ -81,53 +87,62 @@ class PlanetoidNode: SCNNode {
 
 extension SCNNode {
     
-    func buildSolarSystem() {
-        
-        let mercury = Planet(sceneString: "art.scnassets/Mercury.scn", orbitalRadius: 0.2, radius: 0.005, rotationDuration: 3)
-        let venus = Planet(sceneString: "art.scnassets/Venus.scn", orbitalRadius: 0.3, radius: 0.005, rotationDuration: 6)
-        let earth = Planet(sceneString: "art.scnassets/Earth.scn", orbitalRadius: 0.4, radius: 0.005, rotationDuration: 8)
-        let mars = Planet(sceneString: "art.scnassets/Mars.scn", orbitalRadius: 0.5, radius: 0.005, rotationDuration: 9)
-        let jupiter = Planet(sceneString: "art.scnassets/Jupiter.scn", orbitalRadius: 0.8, radius: 0.005, rotationDuration: 10)
-        let saturn = Planet(sceneString: "art.scnassets/Saturn.scn", orbitalRadius: 1.0, radius: 0.005, rotationDuration: 50)
-        let uranus = Planet(sceneString: "art.scnassets/Uranus.scn", orbitalRadius: 1.5, radius: 0.005, rotationDuration: 60)
-        let neptune = Planet(sceneString: "art.scnassets/Neptune.scn", orbitalRadius: 1.7, radius: 0.005, rotationDuration: 80)
-        let pluto = Planet(sceneString: "art.scnassets/Pluto.scn", orbitalRadius: 2.0, radius: 0.005, rotationDuration: 90)
+    class func planetoidGroupNodeFor(planet: Planet) -> PlanetoidGroupNode {
+        let planetoidNode = PlanetoidGroupNode(sceneName: planet.name,
+                                               orbitalRadius: planet.orbitalRadius,
+                                               rotationDuration: planet.rotationDuration)
+        return planetoidNode
+    }
+    
+    func buildSolarSystem() -> ([SCNNode]) {
+        var nodes = [SCNNode]()
+        let mercury = Planet(name: "Mercury", orbitalRadius: 0.2, radius: 0.005, rotationDuration: 3)
+        let venus = Planet(name: "Venus", orbitalRadius: 0.3, radius: 0.005, rotationDuration: 6)
+        let earth = Planet(name: "Earth", orbitalRadius: 0.4, radius: 0.005, rotationDuration: 8)
+        let mars = Planet(name: "Mars", orbitalRadius: 0.5, radius: 0.005, rotationDuration: 9)
+        let jupiter = Planet(name: "Jupiter", orbitalRadius: 0.8, radius: 0.005, rotationDuration: 10)
+        let saturn = Planet(name: "Saturn", orbitalRadius: 1.0, radius: 0.005, rotationDuration: 50)
+        let uranus = Planet(name: "Uranus", orbitalRadius: 1.5, radius: 0.005, rotationDuration: 60)
+        let neptune = Planet(name: "Neptune", orbitalRadius: 1.7, radius: 0.005, rotationDuration: 80)
+        let pluto = Planet(name: "Pluto", orbitalRadius: 2.0, radius: 0.005, rotationDuration: 90)
         
         // Data on sizes of planets http://www.freemars.org/jeff/planets/planets5.htm
         
         let sunNode = SCNNode.sun()
-        self.addChildNode(sunNode)
+        nodes.append(sunNode)
+        
         sunNode.categoryBitMask = 2
         
         // Add the light from the sun
-        self.addChildNode(SCNNode.sunLight(geometry: sunNode.geometry!))        
-        self.addChildNode(SCNNode.planet(mercury))
-        self.addChildNode(SCNNode.planet(venus))
+        nodes.append(SCNNode.sunLight(geometry: sunNode.geometry!))
+        nodes.append(SCNNode.planetoidGroupNodeFor(planet: mercury))
+        nodes.append(SCNNode.planetoidGroupNodeFor(planet: venus))
         
         // TODO add a moon
-        let earthNode = SCNNode.planet(earth)
+        let earthNode = SCNNode.planetoidGroupNodeFor(planet: earth)
         let moon = SCNNode.planetGroup(orbitRadius: 2,
                                        planetRadius: 0.09,
                                        planetColor: .gray)
         earthNode.addMoon(moon)
-        self.addChildNode(earthNode)
+        nodes.append(earthNode)
         
-        self.addChildNode(SCNNode.planet(mars))
+        nodes.append(SCNNode.planetoidGroupNodeFor(planet: mars))
         
-        let jupiterNode = SCNNode.planet(jupiter)
+        let jupiterNode = SCNNode.planetoidGroupNodeFor(planet: jupiter)
         let jupiterMoon = SCNNode.planetGroup(orbitRadius: 3,
                                        planetRadius: 0.2,
                                        planetColor: .gray)
         jupiterNode.addMoon(jupiterMoon)
-        self.addChildNode(jupiterNode)
+        nodes.append(jupiterNode)
         
-        let saturnNode = SCNNode.planet(saturn)
+        let saturnNode = SCNNode.planetoidGroupNodeFor(planet: saturn)
         saturnNode.addRings()
-        self.addChildNode(saturnNode)
+        nodes.append(saturnNode)
         
-        self.addChildNode(SCNNode.planet(uranus))
-        self.addChildNode(SCNNode.planet(neptune))
-        self.addChildNode(SCNNode.planet(pluto))
+        nodes.append(SCNNode.planetoidGroupNodeFor(planet: uranus))
+        nodes.append(SCNNode.planetoidGroupNodeFor(planet: neptune))
+        nodes.append(SCNNode.planetoidGroupNodeFor(planet: pluto))
+        return nodes
     }
     
     // Creates a planet that has the ability to orbit around a central point
@@ -173,20 +188,13 @@ extension SCNNode {
         return alternateSunNode
     }
     
-    class func planet(_ planet: Planet) -> PlanetoidNode {
-        let planetScene = SCNScene(named: planet.sceneString)!
-        let planetoidNode = PlanetoidNode(scene: planetScene,
-                                          orbitalRadius: planet.orbitalRadius,
-                                          rotationDuration: planet.rotationDuration)
-        return planetoidNode
-    }
-    
     class func earthGroup() -> SCNNode {
         // TODO this can be cleaned up a bit more
-        let earth = Planet(sceneString: "art.scnassets/Earth.scn", orbitalRadius: 0.4, radius: 0.005, rotationDuration: 7)
+        let earth = Planet(name: "Earth", orbitalRadius: 0.4, radius: 0.005, rotationDuration: 7)
         let rotationSphere = SCNGeometry.planetoid(radius: earth.orbitalRadius, color: .clear)
         let rotationNode = SCNNode(geometry: rotationSphere)
-        guard let earthScene = SCNScene(named: earth.sceneString) else {
+        let sceneString = "art.scnassets/\(earth.name).scn"
+        guard let earthScene = SCNScene(named: sceneString) else {
             print("no earth scene")
             return rotationNode
         }
@@ -203,6 +211,7 @@ extension SCNNode {
                                         planetRadius: 0.08,
                                         planetColor: .gray)
             planet.addChildNode(moon)
+            planet.name = earth.name
             moon.rotate(duration: 12, clockwise: false)
 //            planet.rotate(duration: earth.rotationDuration)
         }

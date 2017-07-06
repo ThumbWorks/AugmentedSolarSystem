@@ -40,11 +40,10 @@ class GameViewController: UIViewController {
         ambientLightNode.light!.color = UIColor.darkGray
         scene.rootNode.addChildNode(ambientLightNode)
         
-        
-        
-        // retrieve the ship node
-//        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
-        scene.rootNode.buildSolarSystem()
+        let nodes = scene.rootNode.buildSolarSystem()
+        for node in nodes {
+            scene.rootNode.addChildNode(node)
+        }
         
         // animate the 3d object
 //        ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 1)))
