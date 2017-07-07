@@ -22,17 +22,32 @@ extension SCNGeometry {
 }
 
 struct Planet {
+    
     let name: String
+    
+    // Distance from the sun
     let orbitalRadius: CGFloat
+    
     let radius: CGFloat
+    
+    // In hours: eg. Earth 23.93, Mercury 1407.6
+    // Source: https://en.m.wikipedia.org/wiki/Axial_tilt#Solar_System_bodies
     let rotationDuration: Double
+    
+    // Tilt on the poles in degrees: eg. Earth 23.44
+    // Source: https://en.m.wikipedia.org/wiki/Axial_tilt#Solar_System_bodies
+    let axialTilt: Float
+    
+    // Duration to circle the sun in earth years
+    // Source: https://en.wikipedia.org/wiki/Orbital_period#Examples_of_sidereal_and_synodic_periods
+    let orbitPeriod: Double
 }
 
 class PlanetoidGroupNode: SCNNode {
     let path: SCNNode
     var planetNode: SCNNode?
     
-    required init(sceneName: String, orbitalRadius: CGFloat, rotationDuration: CFTimeInterval) {
+    required init(sceneName: String, orbitalRadius: CGFloat, rotationDuration: CFTimeInterval, orbitPeriod: CFTimeInterval, axialTilt: Float) {
         
         let sceneString = "art.scnassets/\(sceneName).scn"
         let scene = SCNScene(named: sceneString)!
@@ -51,13 +66,19 @@ class PlanetoidGroupNode: SCNNode {
             aPlanetNode.position = SCNVector3Make(Float(orbitalRadius), 0, 0)
             aPlanetNode.categoryBitMask = 1
             aPlanetNode.name = sceneName
-            
             self.addChildNode(aPlanetNode)
-            aPlanetNode.rotate(duration: rotationDuration)
+            let radianTilt = axialTilt / 360 * 2*Float.pi
+            aPlanetNode.rotation = SCNVector4Make(0, 0, 1, radianTilt)
+            
+            // Normalize to Earth's rotation (earth is now 1 second)
+            let normalizedRotationDuration = rotationDuration / 23.93
+            aPlanetNode.rotate(duration: normalizedRotationDuration)
             self.planetNode = aPlanetNode
         }
         self.addChildNode(path)
-        self.rotate(duration: rotationDuration)
+        
+        // Normalize to Earth's rotation. Once year is 10 seconds
+        self.rotate(duration: orbitPeriod * 10)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -90,21 +111,23 @@ extension SCNNode {
     class func planetoidGroupNodeFor(planet: Planet) -> PlanetoidGroupNode {
         let planetoidNode = PlanetoidGroupNode(sceneName: planet.name,
                                                orbitalRadius: planet.orbitalRadius,
-                                               rotationDuration: planet.rotationDuration)
+                                               rotationDuration: planet.rotationDuration,
+                                               orbitPeriod: planet.orbitPeriod,
+                                               axialTilt: planet.axialTilt)
         return planetoidNode
     }
     
     func buildSolarSystem() -> ([SCNNode]) {
         var nodes = [SCNNode]()
-        let mercury = Planet(name: "Mercury", orbitalRadius: 0.2, radius: 0.005, rotationDuration: 3)
-        let venus = Planet(name: "Venus", orbitalRadius: 0.3, radius: 0.005, rotationDuration: 6)
-        let earth = Planet(name: "Earth", orbitalRadius: 0.4, radius: 0.005, rotationDuration: 8)
-        let mars = Planet(name: "Mars", orbitalRadius: 0.5, radius: 0.005, rotationDuration: 9)
-        let jupiter = Planet(name: "Jupiter", orbitalRadius: 0.8, radius: 0.005, rotationDuration: 10)
-        let saturn = Planet(name: "Saturn", orbitalRadius: 1.0, radius: 0.005, rotationDuration: 50)
-        let uranus = Planet(name: "Uranus", orbitalRadius: 1.5, radius: 0.005, rotationDuration: 60)
-        let neptune = Planet(name: "Neptune", orbitalRadius: 1.7, radius: 0.005, rotationDuration: 80)
-        let pluto = Planet(name: "Pluto", orbitalRadius: 2.0, radius: 0.005, rotationDuration: 90)
+        let mercury = Planet(name: "Mercury", orbitalRadius: 0.2, radius: 0.005, rotationDuration: 1407.6, axialTilt: 0.03, orbitPeriod: 0.240846)
+        let venus = Planet(name: "Venus", orbitalRadius: 0.3, radius: 0.005, rotationDuration: 5832.6, axialTilt: 2.64, orbitPeriod: 0.615)
+        let earth = Planet(name: "Earth", orbitalRadius: 0.4, radius: 0.005, rotationDuration: 23.93, axialTilt: 23.44, orbitPeriod: 1)
+        let mars = Planet(name: "Mars", orbitalRadius: 0.5, radius: 0.005, rotationDuration: 24.62, axialTilt: 25.19, orbitPeriod: 1.881)
+        let jupiter = Planet(name: "Jupiter", orbitalRadius: 0.8, radius: 0.005, rotationDuration: 9.93, axialTilt: 3.13, orbitPeriod: 11.86)
+        let saturn = Planet(name: "Saturn", orbitalRadius: 1.0, radius: 0.005, rotationDuration: 10.66, axialTilt: 26.73, orbitPeriod: 29.46)
+        let uranus = Planet(name: "Uranus", orbitalRadius: 1.5, radius: 0.005, rotationDuration: 17.24, axialTilt: 82.23, orbitPeriod: 84.01)
+        let neptune = Planet(name: "Neptune", orbitalRadius: 1.7, radius: 0.005, rotationDuration: 16.11, axialTilt: 28.32, orbitPeriod: 164.8)
+        let pluto = Planet(name: "Pluto", orbitalRadius: 2.0, radius: 0.005, rotationDuration: 153.29, axialTilt: 57.47, orbitPeriod: 248.1)
         
         // Data on sizes of planets http://www.freemars.org/jeff/planets/planets5.htm
         
@@ -186,36 +209,6 @@ extension SCNNode {
         let sunGeometry = SCNGeometry.planetoid(radius: 5, color: .yellow)
         let alternateSunNode = SCNNode(geometry: sunGeometry)
         return alternateSunNode
-    }
-    
-    class func earthGroup() -> SCNNode {
-        // TODO this can be cleaned up a bit more
-        let earth = Planet(name: "Earth", orbitalRadius: 0.4, radius: 0.005, rotationDuration: 7)
-        let rotationSphere = SCNGeometry.planetoid(radius: earth.orbitalRadius, color: .clear)
-        let rotationNode = SCNNode(geometry: rotationSphere)
-        let sceneString = "art.scnassets/\(earth.name).scn"
-        guard let earthScene = SCNScene(named: sceneString) else {
-            print("no earth scene")
-            return rotationNode
-        }
-        rotationNode.rotate(duration: earth.rotationDuration)
-        
-        if let node = earthScene.rootNode.childNodes.first {
-            let geometry = node.geometry
-            let planet = SCNNode(geometry: geometry)
-            planet.scale = SCNVector3Make(0.05, 0.05, 0.05)
-            planet.position = SCNVector3Make(Float(earth.orbitalRadius), 0, 0)
-            planet.categoryBitMask = 1
-            rotationNode.addChildNode(planet)
-            let moon = self.planetGroup(orbitRadius: 0.1,
-                                        planetRadius: 0.08,
-                                        planetColor: .gray)
-            planet.addChildNode(moon)
-            planet.name = earth.name
-            moon.rotate(duration: 12, clockwise: false)
-//            planet.rotate(duration: earth.rotationDuration)
-        }
-        return rotationNode
     }
     
     class func omniLight(_ vector: SCNVector3) -> SCNNode {
