@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		5F27FD181F061C5200498524 /* Mars.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5F27FD171F061C5200498524 /* Mars.scn */; };
+		5F30D4DC1F16CD68006A45B1 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F30D4DB1F16CD68006A45B1 /* Planet.swift */; };
+		5F30D4DD1F16CD7D006A45B1 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F30D4DB1F16CD68006A45B1 /* Planet.swift */; };
+		5F30D4DF1F16CDB7006A45B1 /* PlanetoidGroupNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F30D4DE1F16CDB7006A45B1 /* PlanetoidGroupNode.swift */; };
+		5F30D4E01F16CDBD006A45B1 /* PlanetoidGroupNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F30D4DE1F16CDB7006A45B1 /* PlanetoidGroupNode.swift */; };
 		5F39596E1EE9898200EDEBEE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F39596D1EE934B200EDEBEE /* Utilities.swift */; };
 		5FA91A731F02C5DC00D8AFC1 /* Saturn.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FA91A721F02C5DC00D8AFC1 /* Saturn.scn */; };
 		5FA91A751F02C76C00D8AFC1 /* Uranus.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FA91A741F02C76C00D8AFC1 /* Uranus.scn */; };
@@ -41,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		5F27FD171F061C5200498524 /* Mars.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Mars.scn; path = art.scnassets/Mars.scn; sourceTree = "<group>"; };
+		5F30D4DB1F16CD68006A45B1 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
+		5F30D4DE1F16CDB7006A45B1 /* PlanetoidGroupNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetoidGroupNode.swift; sourceTree = "<group>"; };
 		5F39596D1EE934B200EDEBEE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		5FA91A721F02C5DC00D8AFC1 /* Saturn.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Saturn.scn; path = art.scnassets/Saturn.scn; sourceTree = "<group>"; };
 		5FA91A741F02C76C00D8AFC1 /* Uranus.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Uranus.scn; path = art.scnassets/Uranus.scn; sourceTree = "<group>"; };
@@ -106,6 +112,7 @@
 		5FBAF96C1EE8B78400FAA54B /* SolarSystem */ = {
 			isa = PBXGroup;
 			children = (
+				5F30D4DE1F16CDB7006A45B1 /* PlanetoidGroupNode.swift */,
 				5FBAF96D1EE8B78400FAA54B /* AppDelegate.swift */,
 				5F39596D1EE934B200EDEBEE /* Utilities.swift */,
 				5FBAF96F1EE8B78400FAA54B /* art.scnassets */,
@@ -122,6 +129,7 @@
 				5FA91A741F02C76C00D8AFC1 /* Uranus.scn */,
 				5FB0E6761F05D26E00B3000B /* Venus.scn */,
 				5F27FD171F061C5200498524 /* Mars.scn */,
+				5F30D4DB1F16CD68006A45B1 /* Planet.swift */,
 			);
 			path = SolarSystem;
 			sourceTree = "<group>";
@@ -261,8 +269,10 @@
 			files = (
 				5F39596E1EE9898200EDEBEE /* Utilities.swift in Sources */,
 				5FF9CEF11EE9C00D00A84513 /* SceneKitExtension.swift in Sources */,
+				5F30D4DF1F16CDB7006A45B1 /* PlanetoidGroupNode.swift in Sources */,
 				5FBAF9721EE8B78400FAA54B /* ViewController.swift in Sources */,
 				5FBAF96E1EE8B78400FAA54B /* AppDelegate.swift in Sources */,
+				5F30D4DC1F16CD68006A45B1 /* Planet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +283,8 @@
 				5FDD81D21F0DBB8C00F0B92D /* GameViewController.swift in Sources */,
 				5FDD81DF1F0DBC9300F0B92D /* SceneKitExtension.swift in Sources */,
 				5FDD81CE1F0DBB8C00F0B92D /* AppDelegate.swift in Sources */,
+				5F30D4DD1F16CD7D006A45B1 /* Planet.swift in Sources */,
+				5F30D4E01F16CDBD006A45B1 /* PlanetoidGroupNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
