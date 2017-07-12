@@ -1,22 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A278a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <sceneKitView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx">
+                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="SolarSystemScene" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides/>
+                    <view key="view" contentMode="scaleToFill" id="skI-Vt-LXs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </sceneKitView>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xkr-aa-hH1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </sceneKitView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P6V-Gb-ADU">
+                                <rect key="frame" x="140.5" y="637" width="93" height="30"/>
+                                <state key="normal" title="change Scale"/>
+                                <connections>
+                                    <action selector="changeScaleTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="eBw-MV-Shb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="P6V-Gb-ADU" firstAttribute="centerX" secondItem="eQQ-Qe-w6g" secondAttribute="centerX" id="2No-hP-xIr"/>
+                            <constraint firstItem="xkr-aa-hH1" firstAttribute="leading" secondItem="eQQ-Qe-w6g" secondAttribute="leading" id="6fi-gu-KHK"/>
+                            <constraint firstItem="eQQ-Qe-w6g" firstAttribute="trailing" secondItem="xkr-aa-hH1" secondAttribute="trailing" id="8UW-rA-MaY"/>
+                            <constraint firstItem="eQQ-Qe-w6g" firstAttribute="bottom" secondItem="P6V-Gb-ADU" secondAttribute="bottom" id="KYW-FQ-YfR"/>
+                            <constraint firstItem="eQQ-Qe-w6g" firstAttribute="bottom" secondItem="xkr-aa-hH1" secondAttribute="bottom" id="QwR-84-Dgu"/>
+                            <constraint firstItem="eQQ-Qe-w6g" firstAttribute="top" secondItem="xkr-aa-hH1" secondAttribute="top" constant="20" id="YTq-PU-a3e"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eQQ-Qe-w6g"/>
+                    </view>
+                    <connections>
+                        <outlet property="scnView" destination="xkr-aa-hH1" id="7EM-9D-vek"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="125.59999999999999" y="37.331334332833585"/>
         </scene>
     </scenes>
 </document>
