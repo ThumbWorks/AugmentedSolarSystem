@@ -60,6 +60,18 @@ struct Planet: Equatable {
     // Duration to circle the sun in earth years
     // Source: https://en.wikipedia.org/wiki/Orbital_period#Examples_of_sidereal_and_synodic_periods
     let orbitPeriod: Double
+    
+    // TODO the sun is now Jupiter sized, need to look this up
+    static let sun = Planet(name: "Sun", orbitalRadius: 0, displayOrbitalRadius: 0, radius: 69911, rotationDuration: 1, axialTilt: 1, orbitPeriod: 1)
+    static let mercury = Planet(name: "Mercury", orbitalRadius: 57.9, displayOrbitalRadius: 0.2, radius: 2439.7, rotationDuration: 1407.6, axialTilt: 0.03, orbitPeriod: 0.240846)
+    static let venus = Planet(name: "Venus", orbitalRadius: 108.2, displayOrbitalRadius: 0.3, radius: 6051.8, rotationDuration: 5832.6, axialTilt: 2.64, orbitPeriod: 0.615)
+    static let earth = Planet(name: "Earth", orbitalRadius: 149.6, displayOrbitalRadius: 0.4, radius: 6371, rotationDuration: 23.93, axialTilt: 23.44, orbitPeriod: 1)
+    static let mars = Planet(name: "Mars", orbitalRadius: 227.9, displayOrbitalRadius: 0.5, radius: 3389.5, rotationDuration: 24.62, axialTilt: 25.19, orbitPeriod: 1.881)
+    static let jupiter = Planet(name: "Jupiter", orbitalRadius: 778.3, displayOrbitalRadius: 0.8, radius: 69911, rotationDuration: 9.93, axialTilt: 3.13, orbitPeriod: 11.86)
+    static let saturn = Planet(name: "Saturn", orbitalRadius: 1427, displayOrbitalRadius: 1.0, radius: 58232, rotationDuration: 10.66, axialTilt: 26.73, orbitPeriod: 29.46)
+    static let uranus = Planet(name: "Uranus", orbitalRadius: 2871, displayOrbitalRadius: 1.5, radius: 25362, rotationDuration: 17.24, axialTilt: 82.23, orbitPeriod: 84.01)
+    static let neptune = Planet(name: "Neptune", orbitalRadius: 4497, displayOrbitalRadius: 1.7, radius: 24622, rotationDuration: 16.11, axialTilt: 28.32, orbitPeriod: 164.8)
+    static let pluto = Planet(name: "Pluto", orbitalRadius: 5913, displayOrbitalRadius: 2.0, radius: 1186, rotationDuration: 153.29, axialTilt: 57.47, orbitPeriod: 248.1)
 }
 
 class PlanetoidGroupNode: SCNNode {
@@ -135,53 +147,43 @@ extension SCNNode {
     
     func buildSolarSystem() -> ([Planet:PlanetoidGroupNode], SCNNode) {
         var nodes = [Planet:PlanetoidGroupNode]()
-        // TODO the sun is now Jupiter sized, need to look this up
-        let sun = Planet(name: "Sun", orbitalRadius: 0, displayOrbitalRadius: 0, radius: 69911, rotationDuration: 1, axialTilt: 1, orbitPeriod: 1)
-        let mercury = Planet(name: "Mercury", orbitalRadius: 57.9, displayOrbitalRadius: 0.2, radius: 2439.7, rotationDuration: 1407.6, axialTilt: 0.03, orbitPeriod: 0.240846)
-        let venus = Planet(name: "Venus", orbitalRadius: 108.2, displayOrbitalRadius: 0.3, radius: 6051.8, rotationDuration: 5832.6, axialTilt: 2.64, orbitPeriod: 0.615)
-        let earth = Planet(name: "Earth", orbitalRadius: 149.6, displayOrbitalRadius: 0.4, radius: 6371, rotationDuration: 23.93, axialTilt: 23.44, orbitPeriod: 1)
-        let mars = Planet(name: "Mars", orbitalRadius: 227.9, displayOrbitalRadius: 0.5, radius: 3389.5, rotationDuration: 24.62, axialTilt: 25.19, orbitPeriod: 1.881)
-        let jupiter = Planet(name: "Jupiter", orbitalRadius: 778.3, displayOrbitalRadius: 0.8, radius: 69911, rotationDuration: 9.93, axialTilt: 3.13, orbitPeriod: 11.86)
-        let saturn = Planet(name: "Saturn", orbitalRadius: 1427, displayOrbitalRadius: 1.0, radius: 58232, rotationDuration: 10.66, axialTilt: 26.73, orbitPeriod: 29.46)
-        let uranus = Planet(name: "Uranus", orbitalRadius: 2871, displayOrbitalRadius: 1.5, radius: 25362, rotationDuration: 17.24, axialTilt: 82.23, orbitPeriod: 84.01)
-        let neptune = Planet(name: "Neptune", orbitalRadius: 4497, displayOrbitalRadius: 1.7, radius: 24622, rotationDuration: 16.11, axialTilt: 28.32, orbitPeriod: 164.8)
-        let pluto = Planet(name: "Pluto", orbitalRadius: 5913, displayOrbitalRadius: 2.0, radius: 1186, rotationDuration: 153.29, axialTilt: 57.47, orbitPeriod: 248.1)
+       
         
         // Data on sizes of planets http://www.freemars.org/jeff/planets/planets5.htm
         
-        let sunNode = PlanetoidGroupNode(planet:sun)
+        let sunNode = PlanetoidGroupNode(planet: Planet.sun)
         sunNode.planetNode?.categoryBitMask = 2
-        nodes[sun] = sunNode
+        nodes[Planet.sun] = sunNode
         
         // Add the light from the sun
-        nodes[mercury] = PlanetoidGroupNode(planet: mercury)
-        nodes[venus] = PlanetoidGroupNode(planet: venus)
+        nodes[Planet.mercury] = PlanetoidGroupNode(planet: Planet.mercury)
+        nodes[Planet.venus] = PlanetoidGroupNode(planet: Planet.venus)
         
-        let earthNode = PlanetoidGroupNode(planet: earth)
+        let earthNode = PlanetoidGroupNode(planet: Planet.earth)
         let moon = SCNNode.planetGroup(orbitRadius: 2,
                                        planetRadius: 0.09,
                                        planetColor: .gray)
         earthNode.addMoon(moon)
-        nodes[earth] = earthNode
+        nodes[Planet.earth] = earthNode
         
-        nodes[mars] = PlanetoidGroupNode(planet: mars)
+        nodes[Planet.mars] = PlanetoidGroupNode(planet: Planet.mars)
         
         // Jupiter has a moon
-        let jupiterNode = PlanetoidGroupNode(planet: jupiter)
+        let jupiterNode = PlanetoidGroupNode(planet: Planet.jupiter)
         let jupiterMoon = SCNNode.planetGroup(orbitRadius: 3,
                                        planetRadius: 0.2,
                                        planetColor: .gray)
         jupiterNode.addMoon(jupiterMoon)
-        nodes[jupiter] = jupiterNode
+        nodes[Planet.jupiter] = jupiterNode
         
         // Saturn has rings
-        let saturnNode = PlanetoidGroupNode(planet: saturn)
+        let saturnNode = PlanetoidGroupNode(planet: Planet.saturn)
         saturnNode.addRings()
-        nodes[saturn] = saturnNode
+        nodes[Planet.saturn] = saturnNode
         
-        nodes[uranus] = PlanetoidGroupNode(planet: uranus)
-        nodes[neptune] = PlanetoidGroupNode(planet: neptune)
-        nodes[pluto] = PlanetoidGroupNode(planet: pluto)
+        nodes[Planet.uranus] = PlanetoidGroupNode(planet: Planet.uranus)
+        nodes[Planet.neptune] = PlanetoidGroupNode(planet: Planet.neptune)
+        nodes[Planet.pluto] = PlanetoidGroupNode(planet: Planet.pluto)
         
         let light = SCNNode.sunLight(geometry: sunNode.planetNode!.geometry!)
 
