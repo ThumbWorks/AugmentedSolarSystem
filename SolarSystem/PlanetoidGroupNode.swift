@@ -10,7 +10,12 @@ import Foundation
 import SceneKit
 
 class PlanetoidGroupNode: SCNNode {
+    // The node that shows the orbital path which is used for hiding
     let path: SCNNode?
+    
+    // The geometry representing the orbital path which is used for scaling
+    let torus: SCNTorus?
+    
     var planetNode: SCNNode?
     required init(planet: Planet) {
         
@@ -18,11 +23,11 @@ class PlanetoidGroupNode: SCNNode {
         let scene = SCNScene(named: sceneString)!
         
         if planet.orbitalRadius > 0 {
-            let torus = SCNTorus(ringRadius: planet.displayOrbitalRadius, pipeRadius: 0.001)
+            torus = SCNTorus(ringRadius: planet.displayOrbitalRadius, pipeRadius: 0.001)
             path = SCNNode(geometry: torus)
         } else {
             path = nil
-            
+            torus = nil
         }
         
         super.init()
@@ -42,14 +47,14 @@ class PlanetoidGroupNode: SCNNode {
             aPlanetNode.rotation = SCNVector4Make(0, 0, 1, radianTilt)
             
             // Normalize to Earth's rotation (earth is now 1 second)
-            let normalizedRotationDuration = planet.rotationDuration / 23.93
+            let normalizedRotationDuration = planet.rotationDuration / Planet.earth.rotationDuration
             aPlanetNode.rotate(duration: normalizedRotationDuration)
             self.planetNode = aPlanetNode
         }
         if let path = path {
             self.addChildNode(path)
-            // Normalize to Earth's rotation. Once year is 10 seconds
-            self.rotate(duration: planet.orbitPeriod * 10)
+            // Normalize to Earth's rotation. Once earth year is 365 seconds
+            self.rotate(duration: planet.orbitPeriod * 365)
         }
     }
     

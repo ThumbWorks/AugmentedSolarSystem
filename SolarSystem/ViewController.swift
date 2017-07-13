@@ -15,9 +15,12 @@ class ViewController: UIViewController {
     @IBOutlet var status: UILabel!
     @IBOutlet var sceneView: ARSCNView!
     var done = false
-    var sessionConfig = ARWorldTrackingSessionConfiguration()
-    var planetoids = [SCNNode]()
+    var scalingOrbit = false
+    var scalingSize = false
     
+    var sessionConfig = ARWorldTrackingSessionConfiguration()
+    let planetoids = Planet.buildSolarSystem()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,10 +64,67 @@ class ViewController: UIViewController {
 
 extension ViewController {
     @IBAction func toggleTrails() {
-        for case let planetoidNode as PlanetoidGroupNode in planetoids {
+        for (_, planetoidNode) in planetoids.0 {
             // do something with button
-            planetoidNode.path.isHidden = !planetoidNode.path.isHidden
+            planetoidNode.path?.isHidden = !(planetoidNode.path?.isHidden)!
         }
+    }
+    
+    @IBAction func changeOrbitScaleTapped(_ sender: Any) {
+        print("changing orbit scale")
+        // toggle the state
+        scalingOrbit = !scalingOrbit
+        
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 5
+        for (planet,node) in planetoids.0 {
+           
+            guard let planetNode = node.planetNode else {
+                print("we have no planet node")
+                return
+            }
+            
+            // We really only want to change the radius of the planet's orbit, so the torus and
+            // the x position of the planet are the only 2 things that need to change. They will
+            // both be the same value
+            var radius: CGFloat = 0
+            if scalingOrbit {
+                radius = planet.orbitalRadius
+            } else {
+                radius = planet.displayOrbitalRadius
+            }
+            var position = planetNode.position
+            position.x = Float(radius)
+            node.torus?.ringRadius = radius
+            planetNode.position = position
+
+        }
+        SCNTransaction.commit()
+    }
+    
+    @IBAction func changeSizeScaleTapped(_ sender: Any) {
+        print("changing scale")
+
+        // toggle the state
+        scalingSize = !scalingSize
+        
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 5
+        for (planet,node) in planetoids.0 {
+            // update the scale here
+            guard let planetNode = node.planetNode else {
+                print("we have no planet node")
+                return
+            }
+            var scale: Float = 0
+            if scalingSize {
+                scale = planet.radius / Planet.earth.radius / 20
+            } else {
+                scale = 0.05
+            }
+            planetNode.scale = SCNVector3Make(scale, scale, scale)
+        }
+        SCNTransaction.commit()
     }
 }
 
@@ -140,9 +200,8 @@ extension ViewController: ARSCNViewDelegate {
             
             if let planeAnchor = anchor as? ARPlaneAnchor {
                 self.done = true
-                self.planetoids = node.buildSolarSystem()
-                for planetNode in self.planetoids {
-                    node.addChildNode(planetNode)
+                for planetNode in self.planetoids.0 {
+                    node.addChildNode(planetNode.value)
                 }
                 let pos = SCNVector3.positionFromTransform(planeAnchor.transform)
                 print("NEW SURFACE DETECTED AT \(pos.friendlyString())")

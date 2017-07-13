@@ -44,7 +44,7 @@ class GameViewController: UIViewController {
         ambientLightNode.light!.color = UIColor.darkGray
         scene.rootNode.addChildNode(ambientLightNode)
         
-        let createdPlanetNodes = scene.rootNode.buildSolarSystem()
+        let createdPlanetNodes = Planet.buildSolarSystem()
         planetNodes = createdPlanetNodes.0
         scene.rootNode.addChildNode(createdPlanetNodes.1)
         for nodeMap in createdPlanetNodes.0 {
@@ -76,22 +76,24 @@ class GameViewController: UIViewController {
             return
         }
         
-        let earthArray = nodes.filter { (planet, _) -> Bool in
-            return planet.name == "Earth"
-        }
-        guard let earthPlanet = earthArray.first else {
-            print("did not find earth. bail")
-            return
-        }
+        
         
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 5
         for (planet,node) in nodes {
             // update the scale here
-            let radius = planet.radius / earthPlanet.0.radius
-            print("path scale is \(node.path?.scale). \n planet scale \(node.planetNode?.scale) \n radius compared to earth should be \(radius)")
-            node.planetNode?.scale = SCNVector3Make(radius, radius, radius)
-            node.path?.scale = SCNVector3Make(5, 5, 5)
+            let radius = planet.radius / Planet.earth.radius / 20
+            guard let planetNode = node.planetNode else {
+                print("we have no planet node")
+                return
+            }
+            print("path scale is \(node.path?.scale). \n planet scale \(planetNode.scale) \n radius compared to earth should be \(radius)")
+            print("planet: \(planet.name) location = \(planetNode.position.x)")
+            let orbitScale: Float = 40
+            let position = planetNode.position
+            planetNode.position = SCNVector3Make(position.x * orbitScale, position.y, position.z)
+            planetNode.scale = SCNVector3Make(radius, radius, radius)
+            node.path?.scale = SCNVector3Make(orbitScale, orbitScale, orbitScale)
             print(planet.name)
         }
         // on completion - unhighlight

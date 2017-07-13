@@ -8,37 +8,6 @@ Utility functions and type extensions used throughout the projects.
 import Foundation
 import ARKit
 
-// - MARK: UIImage extensions
-
-extension UIImage {
-	func inverted() -> UIImage? {
-        guard let ciImage = CIImage(image: self) else {
-            return nil
-        }
-        return UIImage(ciImage: ciImage.applyingFilter("CIColorInvert", withInputParameters: nil))
-    }
-	
-	static func composeButtonImage(from thumbImage: UIImage, alpha: CGFloat = 1.0) -> UIImage {
-		let maskImage = #imageLiteral(resourceName: "buttonring")
-		var thumbnailImage = thumbImage
-		if let invertedImage = thumbImage.inverted() {
-			thumbnailImage = invertedImage
-		}
-		
-		// Compose a button image based on a white background and the inverted thumbnail image.
-		UIGraphicsBeginImageContextWithOptions(maskImage.size, false, 0.0)
-		let maskDrawRect = CGRect(origin: CGPoint.zero,
-		                          size: maskImage.size)
-		let thumbDrawRect = CGRect(origin: CGPoint((maskImage.size - thumbImage.size) / 2),
-		                           size: thumbImage.size)
-		maskImage.draw(in: maskDrawRect, blendMode: .normal, alpha: alpha)
-		thumbnailImage.draw(in: thumbDrawRect, blendMode: .normal, alpha: alpha)
-		let composedImage = UIGraphicsGetImageFromCurrentImageContext()
-		UIGraphicsEndImageContext()
-		return composedImage!
-	}
-}
-
 // MARK: - Collection extensions
 extension Array where Iterator.Element == CGFloat {
 	var average: CGFloat? {
