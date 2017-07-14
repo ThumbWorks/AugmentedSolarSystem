@@ -14,7 +14,9 @@ class GameViewController: UIViewController {
     @IBOutlet var scnView: SCNView!
     
     var planetNodes: [Planet:PlanetoidGroupNode]?
-    
+    var scaleSizeUp = false
+    var scaleOrbitUp = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,9 +47,9 @@ class GameViewController: UIViewController {
         scene.rootNode.addChildNode(ambientLightNode)
         
         let createdPlanetNodes = Planet.buildSolarSystem()
-        planetNodes = createdPlanetNodes.0
-        scene.rootNode.addChildNode(createdPlanetNodes.1)
-        for nodeMap in createdPlanetNodes.0 {
+        planetNodes = createdPlanetNodes.planetoids
+        scene.rootNode.addChildNode(createdPlanetNodes.lightNodes[0])
+        for nodeMap in createdPlanetNodes.planetoids {
             scene.rootNode.addChildNode(nodeMap.value)
         }
         
@@ -68,39 +70,39 @@ class GameViewController: UIViewController {
         scnView.addGestureRecognizer(tapGesture)
     }
     
-    @IBAction func changeScaleTapped(_ sender: Any) {
+    @IBAction func changeScaleTapped(_ sender: UIButton) {
         print("changing scale")
         
         guard let nodes = planetNodes else {
             print("We don't have any planets")
             return
         }
+        // toggle the state
+        scaleSizeUp = !scaleSizeUp
+
+        PlanetoidGroupNode.scaleNodes(nodes: nodes, scaleUp: scaleSizeUp)
+    }
+    
+    @IBAction func toggleTrails() {
         
-        
-        
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 5
-        for (planet,node) in nodes {
-            // update the scale here
-            let radius = planet.radius / Planet.earth.radius / 20
-            guard let planetNode = node.planetNode else {
-                print("we have no planet node")
-                return
-            }
-            print("path scale is \(node.path?.scale). \n planet scale \(planetNode.scale) \n radius compared to earth should be \(radius)")
-            print("planet: \(planet.name) location = \(planetNode.position.x)")
-            let orbitScale: Float = 40
-            let position = planetNode.position
-            planetNode.position = SCNVector3Make(position.x * orbitScale, position.y, position.z)
-            planetNode.scale = SCNVector3Make(radius, radius, radius)
-            node.path?.scale = SCNVector3Make(orbitScale, orbitScale, orbitScale)
-            print(planet.name)
+        guard let nodes = planetNodes else {
+            print("We don't have any planets")
+            return
         }
-        // on completion - unhighlight
-        SCNTransaction.completionBlock = {
-            print("scale of planets done")
+        for (_, planetoidNode) in nodes {
+            // do something with button
+            planetoidNode.path?.isHidden = !(planetoidNode.path?.isHidden)!
         }
-        SCNTransaction.commit()
+    }
+    
+    @IBAction func changeOrbitScaleTapped(_ sender: UIButton) {
+        guard let nodes = planetNodes else {
+            print("We don't have any planets")
+            return
+        }
+        // toggle the state
+        scaleOrbitUp = !scaleOrbitUp
+        PlanetoidGroupNode.scaleOrbit(planetoids: nodes, scalingUp: scaleOrbitUp)
     }
     
     @objc

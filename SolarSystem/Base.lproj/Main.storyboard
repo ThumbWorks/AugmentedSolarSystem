@@ -22,6 +22,7 @@
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8e-tj-9vj">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <gestureRecognizers/>
                             </arscnView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KlY-l3-zEO">
                                 <rect key="frame" x="166" y="20" width="42" height="21"/>
@@ -37,14 +38,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="omW-cd-Viv">
-                                <rect key="frame" x="0.0" y="68" width="72" height="30"/>
+                                <rect key="frame" x="0.0" y="60" width="72" height="30"/>
                                 <state key="normal" title="scale orbit"/>
                                 <connections>
                                     <action selector="changeOrbitScaleTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Lvv-5D-ecu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yOl-4w-DAM">
-                                <rect key="frame" x="0.0" y="106" width="67" height="30"/>
+                                <rect key="frame" x="0.0" y="90" width="67" height="30"/>
                                 <state key="normal" title="scale size"/>
                                 <connections>
                                     <action selector="changeSizeScaleTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="0TY-Lm-fRB"/>
@@ -60,9 +61,9 @@
                             <constraint firstItem="3Do-Nz-vPN" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="Ptz-h0-1lJ"/>
                             <constraint firstAttribute="trailing" secondItem="Y8e-tj-9vj" secondAttribute="trailing" id="Rb7-i7-hlA"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="top" secondItem="KlY-l3-zEO" secondAttribute="bottom" constant="-41" id="YPM-B6-M3f"/>
-                            <constraint firstItem="omW-cd-Viv" firstAttribute="top" secondItem="3Do-Nz-vPN" secondAttribute="bottom" constant="8" id="amZ-Ig-BdL"/>
+                            <constraint firstItem="omW-cd-Viv" firstAttribute="top" secondItem="3Do-Nz-vPN" secondAttribute="bottom" id="amZ-Ig-BdL"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="l9v-9V-kOQ"/>
-                            <constraint firstItem="yOl-4w-DAM" firstAttribute="top" secondItem="omW-cd-Viv" secondAttribute="bottom" constant="8" id="nJ3-4N-YW3"/>
+                            <constraint firstItem="yOl-4w-DAM" firstAttribute="top" secondItem="omW-cd-Viv" secondAttribute="bottom" id="nJ3-4N-YW3"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="omW-cd-Viv" secondAttribute="trailing" constant="20" symbolic="YES" id="o5Q-YV-lMG"/>
                             <constraint firstItem="3Do-Nz-vPN" firstAttribute="top" secondItem="7fE-TC-662" secondAttribute="bottom" constant="10" id="qf6-rg-di0"/>
                             <constraint firstItem="yOl-4w-DAM" firstAttribute="leading" secondItem="omW-cd-Viv" secondAttribute="leading" id="t3u-H2-aK5"/>

@@ -9,13 +9,18 @@
 import Foundation
 import SceneKit
 
+struct SolarSystemNodes {
+    let lightNodes: [SCNNode]
+    let planetoids: [Planet:PlanetoidGroupNode]
+}
+
 class PlanetoidGroupNode: SCNNode {
     // The node that shows the orbital path which is used for hiding
     let path: SCNNode?
     
     // The geometry representing the orbital path which is used for scaling
     let torus: SCNTorus?
-    
+    let label: SCNText
     var planetNode: SCNNode?
     required init(planet: Planet) {
         
@@ -30,6 +35,7 @@ class PlanetoidGroupNode: SCNNode {
             torus = nil
         }
         
+        label = SCNText(string: planet.name, extrusionDepth: 1)
         super.init()
         
         if let node = scene.rootNode.childNodes.first {
@@ -50,6 +56,9 @@ class PlanetoidGroupNode: SCNNode {
             let normalizedRotationDuration = planet.rotationDuration / Planet.earth.rotationDuration
             aPlanetNode.rotate(duration: normalizedRotationDuration)
             self.planetNode = aPlanetNode
+            let textNode = SCNNode(geometry: label)
+            textNode.constraints = [SCNBillboardConstraint()]
+            aPlanetNode.addChildNode(textNode)
         }
         if let path = path {
             self.addChildNode(path)
@@ -81,4 +90,52 @@ class PlanetoidGroupNode: SCNNode {
         torusNode.scale = SCNVector3Make(1, 0.1, 1)
         planet.addChildNode(torusNode)
     }
+    
+    class func scaleOrbit(planetoids: [Planet:PlanetoidGroupNode], scalingUp: Bool) {
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 5
+        for (planet,node) in planetoids {
+            
+            guard let planetNode = node.planetNode else {
+                print("we have no planet node")
+                return
+            }
+            
+            // We really only want to change the radius of the planet's orbit, so the torus and
+            // the x position of the planet are the only 2 things that need to change. They will
+            // both be the same value
+            var radius: CGFloat = 0
+            if scalingUp {
+                radius = planet.orbitalRadius
+            } else {
+                radius = planet.displayOrbitalRadius
+            }
+            var position = planetNode.position
+            position.x = Float(radius)
+            node.torus?.ringRadius = radius
+            planetNode.position = position
+        }
+        SCNTransaction.commit()
+    }
+    
+    class func scaleNodes(nodes: [Planet:PlanetoidGroupNode], scaleUp: Bool) {
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 5
+        for (planet,node) in nodes {
+            // update the scale here
+            guard let planetNode = node.planetNode else {
+                print("we have no planet node")
+                return
+            }
+            var scale: Float = 0
+            if scaleUp {
+                scale = planet.radius / Planet.earth.radius / 20
+            } else {
+                scale = 0.05
+            }
+            planetNode.scale = SCNVector3Make(scale, scale, scale)
+        }
+        SCNTransaction.commit()
+    }
+    
 }

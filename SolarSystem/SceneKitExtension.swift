@@ -78,7 +78,7 @@ extension SCNNode {
 
 extension Planet {
     
-    static func buildSolarSystem() -> ([Planet:PlanetoidGroupNode], SCNNode) {
+    static func buildSolarSystem() -> SolarSystemNodes {
         var nodes = [Planet:PlanetoidGroupNode]()
        
         // Data on sizes of planets http://www.freemars.org/jeff/planets/planets5.htm
@@ -119,6 +119,6 @@ extension Planet {
         
         let light = SCNNode.sunLight(geometry: sunNode.planetNode!.geometry!)
 
-        return (nodes, light)
+        return SolarSystemNodes(lightNodes: [light], planetoids: nodes)
     }
 }
