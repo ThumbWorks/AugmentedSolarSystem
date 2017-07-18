@@ -64,4 +64,6 @@ struct Planet: Equatable {
     static let uranus = Planet(name: "Uranus", orbitalRadius: 2871, radius: 25362, rotationDuration: 17.24, axialTilt: 82.23, orbitPeriod: 84.01)
     static let neptune = Planet(name: "Neptune", orbitalRadius: 4497, radius: 24622, rotationDuration: 16.11, axialTilt: 28.32, orbitPeriod: 164.8)
     static let pluto = Planet(name: "Pluto", orbitalRadius: 5913, radius: 1186, rotationDuration: 153.29, axialTilt: 57.47, orbitPeriod: 248.1)
+    
+    static let allPlanets = [sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, pluto]
 }

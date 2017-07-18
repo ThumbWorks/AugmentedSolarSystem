@@ -60,6 +60,23 @@ class ViewController: UIViewController {
         // Pause the view's session
         sceneView.session.pause()
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? PlanetCollectionViewController {
+          print("set the thing")
+            dest.planetSelectionChanged = { (newlySelectedPlanet) in
+                print("planet \(newlySelectedPlanet)")
+                
+                for (planet, node) in self.solarSystemNodes.planetoids {
+                    if newlySelectedPlanet == planet {
+                        print("set this label")
+                        node.textNode.isHidden = false
+                    } else {
+                        node.textNode.isHidden = true
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension SCNVector3 {
@@ -156,7 +173,7 @@ extension ViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         if !done {
-            print("Wait until we find an anchor for the sun")
+//            print("Wait until we find an anchor for the sun")
             return
         }
         guard let cameraNode = sceneView.pointOfView else {
@@ -170,7 +187,7 @@ extension ViewController: ARSCNViewDelegate {
                 return
             }
             let distance = cameraNode.position.distance(receiver: planetPosition)
-            print("planet \(planet.name) is this far away: \(distance)")
+//            print("planet \(planet.name) is this far away: \(distance)")
         }
     }
     /**
