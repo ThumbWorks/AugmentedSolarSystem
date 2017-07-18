@@ -62,9 +62,14 @@ class PlanetDataSource: NSObject, UICollectionViewDataSource {
         
         let sceneString = "art.scnassets/\(planet.name).scn"
         let scene = SCNScene(named: sceneString)!
-//        if let node = scene.rootNode.childNodes.first {
-           cell.sceneView.scene = scene
-//        }
+        cell.sceneView.scene = scene
+        
+        let aPlanetNode = scene.rootNode
+        let radianTilt = planet.axialTilt / 360 * 2*Float.pi
+        aPlanetNode.rotation = SCNVector4Make(0, 0, 1, radianTilt)
+        
+        let rotationDuration = 16.0 // seems like a good rotation
+        aPlanetNode.rotate(duration: rotationDuration)
         return cell
     }
 }
