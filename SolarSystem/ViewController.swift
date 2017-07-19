@@ -21,6 +21,9 @@ class ViewController: UIViewController {
     var sessionConfig = ARWorldTrackingSessionConfiguration()
     let solarSystemNodes = Planet.buildSolarSystem()
 
+    @IBOutlet weak var collectionViewVerticalOffsetConstraint: NSLayoutConstraint!
+    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -91,6 +94,21 @@ extension SCNVector3 {
 
 extension ViewController {
    
+    @IBAction func tappedScreen(_ sender: UITapGestureRecognizer) {
+        print("constraint is \(collectionViewVerticalOffsetConstraint)")
+        print("constant is \(collectionViewVerticalOffsetConstraint.constant)")
+        if collectionViewVerticalOffsetConstraint.constant == -collectionViewHeightConstraint.constant {
+            collectionViewVerticalOffsetConstraint.constant = 0
+        } else {
+            collectionViewVerticalOffsetConstraint.constant = -collectionViewHeightConstraint.constant
+        }
+        
+        UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        })
+    
+    }
+    
     @IBAction func toggleTrails() {
         for (_, planetoidNode) in solarSystemNodes.planetoids {
             // do something with button

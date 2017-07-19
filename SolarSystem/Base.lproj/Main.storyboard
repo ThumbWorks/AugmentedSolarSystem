@@ -71,6 +71,7 @@
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yOl-4w-DAM" secondAttribute="trailing" constant="20" symbolic="YES" id="2vb-OU-kFN"/>
                             <constraint firstItem="zEO-LC-Gb3" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="Be4-3y-LDa"/>
@@ -91,13 +92,23 @@
                             <constraint firstItem="omW-cd-Viv" firstAttribute="leading" secondItem="3Do-Nz-vPN" secondAttribute="leading" id="vnc-SI-0ud"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3Do-Nz-vPN" secondAttribute="trailing" constant="20" symbolic="YES" id="wXr-DO-cTd"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="wBF-bN-l1W" appends="YES" id="Mfk-Ro-hQJ"/>
+                        </connections>
                     </view>
                     <connections>
+                        <outlet property="collectionViewHeightConstraint" destination="vRk-96-Kbf" id="9Es-s2-m6k"/>
+                        <outlet property="collectionViewVerticalOffsetConstraint" destination="agn-eF-OC7" id="6SR-MH-bNy"/>
                         <outlet property="sceneView" destination="Y8e-tj-9vj" id="zCK-fe-vs0"/>
                         <outlet property="status" destination="KlY-l3-zEO" id="F55-OO-f9p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="wBF-bN-l1W">
+                    <connections>
+                        <action selector="tappedScreen:" destination="BV1-FR-VrT" id="hlb-Ta-Q8j"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="144.80000000000001" y="129.98500749625188"/>
         </scene>
