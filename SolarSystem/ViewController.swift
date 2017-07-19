@@ -57,6 +57,16 @@ class ViewController: UIViewController {
         
     }
     
+    func addArrow() {
+        let arrow = SCNScene(named: "art.scnassets/Arrow.scn")
+        if let cameraNode = sceneView.pointOfView, let arrowNode = arrow?.rootNode.childNodes.first {
+            cameraNode.addChildNode(arrowNode)
+            arrowNode.position = SCNVector3Make(0, 0, 1)
+        } else {
+            print("no camera, something is weird, we either don't have a camera or we don't have an arrow")
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -95,8 +105,6 @@ extension SCNVector3 {
 extension ViewController {
    
     @IBAction func tappedScreen(_ sender: UITapGestureRecognizer) {
-        print("constraint is \(collectionViewVerticalOffsetConstraint)")
-        print("constant is \(collectionViewVerticalOffsetConstraint.constant)")
         if collectionViewVerticalOffsetConstraint.constant == -collectionViewHeightConstraint.constant {
             collectionViewVerticalOffsetConstraint.constant = 0
         } else {
@@ -107,6 +115,7 @@ extension ViewController {
             self.view.layoutIfNeeded()
         })
     
+        addArrow()
     }
     
     @IBAction func toggleTrails() {
