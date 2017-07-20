@@ -24,6 +24,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var collectionViewVerticalOffsetConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
+    #if DEBUG
+    // For debug purposes, count and color the discovered planes
+    var planeCount = 0
+    let colors: [UIColor] = [.red, .orange, .yellow, .green, .blue, .purple, .white, .black]
+    #endif
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -217,6 +223,7 @@ extension ViewController: ARSCNViewDelegate {
 //            print("planet \(planet.name) is this far away: \(distance)")
         }
     }
+    
     /**
      Called when a new node has been mapped to the given anchor.
      
@@ -227,18 +234,32 @@ extension ViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         DispatchQueue.main.async {
             print("did add node, pushed to main queue")
-            if self.done {
-                return
-            }
-            
+           
             if let planeAnchor = anchor as? ARPlaneAnchor {
+                #if DEBUG
+                    // DEBUG: Display all of the ARPlaneAnchors that we see
+                    let pos = SCNVector3.positionFromTransform(planeAnchor.transform)
+                    print("NEW SURFACE DETECTED AT \(pos.friendlyString())")
+                    print("The box of the plane is before scaling is \(planeAnchor.extent)")
+                    
+                    // We get a plane, this should roughly match a tabletop or a floor
+                    let plane = ViewController.planeFor(planeAnchor, materials: [self.nextMaterial()])
+                    
+                    // create a new node, for some reason this is easier than using the original. The
+                    // original is oddly rotated on it's side.
+                    let newNode = SCNNode(geometry: plane)
+                    newNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2.0, 1, 0, 0)
+                    node.addChildNode(newNode)
+                    ////////////////////////////////////////////////////
+                #endif
+                
+                if self.done {
+                    return
+                }
                 self.done = true
                 for planetNode in self.solarSystemNodes.planetoids {
                     node.addChildNode(planetNode.value)
                 }
-                let pos = SCNVector3.positionFromTransform(planeAnchor.transform)
-                print("NEW SURFACE DETECTED AT \(pos.friendlyString())")
-                print("The box of the plane is before scaling is \(planeAnchor.extent)")
             }
         }
     }
@@ -251,18 +272,16 @@ extension ViewController: ARSCNViewDelegate {
      @param anchor The anchor that was updated.
      */
     func renderer(_ renderer: SCNSceneRenderer, willUpdate node: SCNNode, for anchor: ARAnchor) {
-        print("will update node \(node) for anchor \(anchor)")
-    }
-    
-    /**
-     Called when a node has been updated with data from the given anchor.
-     
-     @param renderer The renderer that will render the scene.
-     @param node The node that was updated.
-     @param anchor The anchor that was updated.
-     */
-    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        print("did update node \(node) for anchor \(anchor)")
+        print("will update node \(String(describing: node.name)) for anchor \(anchor.identifier)")
+        
+        // Since we added our SCNPlane to the node as a child, we must find the first child
+        // The anchor, of course, must be an ARPlaneAnchor
+        // Update the SCNPlane geometry of this SCNNode to resemble our new understanding
+        if let thePlaneNode = node.childNodes.first, let planeAnchor = anchor as? ARPlaneAnchor {
+            let materials = (thePlaneNode.geometry?.materials)!
+            let plane = ViewController.planeFor(planeAnchor, materials: materials)
+            thePlaneNode.geometry = plane
+        }
     }
     
     /**
@@ -275,7 +294,25 @@ extension ViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
         print("didRemove. node \(node) for anchor \(anchor)")
     }
+    
+    // Helper methods for plane and anchor updates
+    class func planeFor(_ planeAnchor: ARPlaneAnchor, materials: [SCNMaterial]) -> SCNPlane {
+        let width = planeAnchor.extent.x
+        let height = planeAnchor.extent.z
+        let plane = SCNPlane(width: CGFloat(width), height: CGFloat(height))
+        plane.materials = materials
+        return plane
+    }
+    
+    func nextMaterial() -> SCNMaterial {
+        let material = SCNMaterial()
+        let color = self.colors[self.planeCount % self.colors.count]
+        material.diffuse.contents = color.withAlphaComponent(0.3)
+        self.planeCount = self.planeCount + 1
+        return material
+    }
 }
+
 extension ViewController: ARSessionDelegate {
     
     /**
@@ -295,11 +332,13 @@ extension ViewController: ARSessionDelegate {
      @param anchors An array of updated anchors.
      */
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
-        print("These are updated")
-        for anchor in anchors {
-            print("updated anchors \(anchor)")
-        }
-        print("that is the end of the updates")
+        return
+        
+//        print("These are updated")
+//        for anchor in anchors {
+//            print("updated anchors \(anchor)")
+//        }
+//        print("that is the end of the updates")
     }
     
     // This is much to noisy to actually do anything with it every time for now
