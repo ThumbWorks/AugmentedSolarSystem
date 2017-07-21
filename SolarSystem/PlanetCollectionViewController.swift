@@ -18,8 +18,28 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var axialTilt: UILabel!
     @IBOutlet weak var rotationDuration: UILabel!
     @IBOutlet weak var radius: UILabel!
+    @IBOutlet weak var distance: UILabel!
     
     var planetSelectionChanged: ((Planet) -> ())?
+    
+    func updateDistance(distances: [Planet:Float]) {
+        if let planet = currentPlanet(), let meters = distances[planet] {
+            distance.text =  "\(meters.format(f: ".1")) real meters away"
+        }
+    }
+    
+    func currentPlanet() -> Planet? {
+        let collectionViewSize = collectionView.frame.size
+        let centerXFrame = collectionView.contentOffset.x + collectionViewSize.width/2
+        let point = CGPoint(x: centerXFrame, y: collectionViewSize.height / 2)
+        
+        guard let indexPath = collectionView.indexPathForItem(at: point) else {
+            print("no index path at center")
+            return nil
+        }
+        let currentPlanet = dataSource.planets[indexPath.row]
+        return currentPlanet
+    }
     func changePlanetSelection() {
         
         // find the center of the frame wrt the content offset. 10 is
@@ -50,6 +70,12 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         changePlanetSelection()
+    }
+}
+
+extension Float {
+    func format(f: String) -> String {
+        return String(format: "%\(f)f", self)
     }
 }
 

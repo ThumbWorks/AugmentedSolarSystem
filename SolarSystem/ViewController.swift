@@ -69,6 +69,8 @@ class ViewController: UIViewController {
         // Pause the view's session
         sceneView.session.pause()
     }
+    var collectionViewController: PlanetCollectionViewController?
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? PlanetCollectionViewController {
           print("set the thing")
@@ -90,6 +92,7 @@ class ViewController: UIViewController {
                     }
                 }
             }
+            collectionViewController = dest
         }
     }
 }
@@ -210,13 +213,19 @@ extension ViewController: ARSCNViewDelegate {
             return
         }
 
+        var distances = [Planet:Float]()
         for (planet, node) in solarSystemNodes.planetoids {
+            
             guard let planetPosition = node.planetNode?.position else {
                 print("\(planet.name ) doesn't have a position, bail")
                 return
             }
+            
             let distance = cameraNode.position.distance(receiver: planetPosition)
-//            print("planet \(planet.name) is this far away: \(distance)")
+            distances[planet] = distance
+        }
+        DispatchQueue.main.async {
+            self.collectionViewController?.updateDistance(distances: distances)
         }
     }
     
