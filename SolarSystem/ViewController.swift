@@ -20,7 +20,8 @@ class ViewController: UIViewController {
     
     var sessionConfig = ARWorldTrackingSessionConfiguration()
     let solarSystemNodes = Planet.buildSolarSystem()
-
+    var arrowNode = SCNNode.arrow()
+    
     @IBOutlet weak var collectionViewVerticalOffsetConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
@@ -60,17 +61,6 @@ class ViewController: UIViewController {
         // Run the view's session
         sceneView.session.run(sessionConfig)
         sceneView.session.delegate = self
-        
-    }
-    
-    func addArrow() {
-        let arrow = SCNScene(named: "art.scnassets/Arrow.scn")
-        if let cameraNode = sceneView.pointOfView, let arrowNode = arrow?.rootNode.childNodes.first {
-            cameraNode.addChildNode(arrowNode)
-            arrowNode.position = SCNVector3Make(0, 0, 1)
-        } else {
-            print("no camera, something is weird, we either don't have a camera or we don't have an arrow")
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -89,6 +79,12 @@ class ViewController: UIViewController {
                     if newlySelectedPlanet == planet {
                         print("set this label")
                         node.textNode.isHidden = false
+                        SCNTransaction.begin()
+                        SCNTransaction.animationDuration = 0.5
+                        let lookat = SCNLookAtConstraint(target: node.planetNode)
+                        self.arrowNode.constraints = [lookat]
+                        SCNTransaction.commit()
+
                     } else {
                         node.textNode.isHidden = true
                     }
@@ -113,15 +109,15 @@ extension ViewController {
     @IBAction func tappedScreen(_ sender: UITapGestureRecognizer) {
         if collectionViewVerticalOffsetConstraint.constant == -collectionViewHeightConstraint.constant {
             collectionViewVerticalOffsetConstraint.constant = 0
+            arrowNode.isHidden = false
         } else {
             collectionViewVerticalOffsetConstraint.constant = -collectionViewHeightConstraint.constant
+            arrowNode.isHidden = true
         }
         
         UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
         })
-    
-        addArrow()
     }
     
     @IBAction func toggleTrails() {
@@ -256,9 +252,17 @@ extension ViewController: ARSCNViewDelegate {
                 if self.done {
                     return
                 }
+                
+                if let cameraNode = self.sceneView.pointOfView {
+                    cameraNode.addChildNode(self.arrowNode)
+                }
+                
                 self.done = true
                 for planetNode in self.solarSystemNodes.planetoids {
                     node.addChildNode(planetNode.value)
+                }
+                for light in self.solarSystemNodes.lightNodes {
+                    node.addChildNode(light)
                 }
             }
         }
