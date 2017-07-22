@@ -26,6 +26,10 @@ extension SCNNode {
         let arrow = arrowScene.rootNode.childNodes.first!
         arrow.position = SCNVector3Make(0, 0, -1)
         arrow.scale = SCNVector3Make(0.001, 0.001, 0.001)
+        arrow.categoryBitMask = 4
+        for light in arrow.childNodes {
+            light.light?.categoryBitMask = 4
+        }
         arrow.name = "Arrow"
         return arrow
     }
