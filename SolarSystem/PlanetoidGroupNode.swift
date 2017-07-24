@@ -21,7 +21,7 @@ class PlanetoidGroupNode: SCNNode {
     // The geometry representing the orbital path which is used for scaling
     let torus: SCNTorus?
 //    let label: SCNText
-    let textNode: SCNNode
+//    let textNode: SCNNode
     var planetNode: SCNNode?
     required init(planet: Planet) {
         
@@ -36,8 +36,8 @@ class PlanetoidGroupNode: SCNNode {
             torus = nil
         }
         
-        let label = SCNText(string: planet.name, extrusionDepth: 1)
-        textNode = SCNNode(geometry: label)
+//        let label = SCNText(string: planet.name, extrusionDepth: 1)
+//        textNode = SCNNode(geometry: label)
 
         super.init()
         
@@ -59,9 +59,9 @@ class PlanetoidGroupNode: SCNNode {
             let normalizedRotationDuration = planet.rotationDuration / Planet.earth.rotationDuration
             aPlanetNode.rotate(duration: normalizedRotationDuration)
             self.planetNode = aPlanetNode
-            textNode.constraints = [SCNBillboardConstraint()]
-            aPlanetNode.addChildNode(textNode)
-            textNode.isHidden = true
+//            textNode.constraints = [SCNBillboardConstraint()]
+//            aPlanetNode.addChildNode(textNode)
+//            textNode.isHidden = true
         }
         if let path = path {
             self.addChildNode(path)

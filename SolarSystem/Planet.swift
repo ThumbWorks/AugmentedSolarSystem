@@ -53,7 +53,6 @@ struct Planet: Equatable {
     // Source: https://en.wikipedia.org/wiki/Orbital_period#Examples_of_sidereal_and_synodic_periods
     let orbitPeriod: Double
     
-    // TODO the sun is now Jupiter sized, need to look this up
     static let sun = Planet(name: "Sun", orbitalRadius: 0, radius: 695700, rotationDuration: 1000, axialTilt: 1, orbitPeriod: 1)
     static let mercury = Planet(name: "Mercury", orbitalRadius: 57.9, radius: 2439.7, rotationDuration: 1407.6, axialTilt: 0.03, orbitPeriod: 0.240846)
     static let venus = Planet(name: "Venus", orbitalRadius: 108.2, radius: 6051.8, rotationDuration: 5832.6, axialTilt: 2.64, orbitPeriod: 0.615)

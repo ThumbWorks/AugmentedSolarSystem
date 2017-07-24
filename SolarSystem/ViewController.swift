@@ -25,10 +25,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var collectionViewVerticalOffsetConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
+    // TODO make this lazy
+    var blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
+
     #if DEBUG
     // For debug purposes, count and color the discovered planes
     var planeCount = 0
-    let colors: [UIColor] = [.red, .orange, .yellow, .green, .blue, .purple, .white, .black]
+    let colors: [UIColor] = [.red, .orange, .yellow, .green, .blue, .purple]
     #endif
 
     override func viewDidLoad() {
@@ -53,6 +56,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        print("view will appear. restart plane detection")
         restartPlaneDetection()
         
         // Create a session configuration
@@ -80,7 +84,7 @@ class ViewController: UIViewController {
                 for (planet, node) in self.solarSystemNodes.planetoids {
                     if newlySelectedPlanet == planet {
                         print("set this label")
-                        node.textNode.isHidden = false
+//                        node.textNode.isHidden = false
                         SCNTransaction.begin()
                         SCNTransaction.animationDuration = 0.5
                         let lookat = SCNLookAtConstraint(target: node.planetNode)
@@ -88,7 +92,7 @@ class ViewController: UIViewController {
                         SCNTransaction.commit()
 
                     } else {
-                        node.textNode.isHidden = true
+//                        node.textNode.isHidden = true
                     }
                 }
             }
@@ -110,7 +114,7 @@ extension SCNVector3 {
 extension ViewController {
    
     @IBAction func tappedScreen(_ sender: UITapGestureRecognizer) {
-        if collectionViewVerticalOffsetConstraint.constant == -collectionViewHeightConstraint.constant {
+        if (collectionViewVerticalOffsetConstraint.constant == -collectionViewHeightConstraint.constant) && done {
             collectionViewVerticalOffsetConstraint.constant = 0
             arrowNode.isHidden = false
         } else {
@@ -144,6 +148,16 @@ extension ViewController {
         scaleSizeUp = !scaleSizeUp
         
         PlanetoidGroupNode.scaleNodes(nodes: solarSystemNodes.planetoids, scaleUp: scaleSizeUp)
+    }
+    
+    func blurBackground() {
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurView)
+    }
+    
+    func unblurBackground() {
+        blurView.removeFromSuperview()
     }
 }
 
@@ -183,6 +197,7 @@ extension ViewController: ARSessionObserver {
     func sessionWasInterrupted(_ session: ARSession) {
         print("session interupted")
         session.pause()
+        blurBackground()
     }
     
     /**
@@ -198,6 +213,7 @@ extension ViewController: ARSessionObserver {
         session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
         restartPlaneDetection()
         status.text = "Resetting Session"
+        unblurBackground()
     }
 }
 
@@ -248,14 +264,23 @@ extension ViewController: ARSCNViewDelegate {
                     print("The box of the plane is before scaling is \(planeAnchor.extent)")
                     
                     // We get a plane, this should roughly match a tabletop or a floor
-                    let plane = ViewController.planeFor(planeAnchor, materials: [self.nextMaterial()])
+//                    let plane = ViewController.planeFor(planeAnchor, materials: [self.nextMaterial()])
                     
+                    let plane = BorderedPlane(width: planeAnchor.extent.x, height: planeAnchor.extent.z, color: .blue)
+                    node.addChildNode(plane)
+                    
+                    let borderMaterial = SCNMaterial()
+                    borderMaterial.diffuse.contents = UIColor.blue
+                    plane.addBorder(materials: [borderMaterial])
                     // create a new node, for some reason this is easier than using the original. The
                     // original is oddly rotated on it's side.
-                    let newNode = SCNNode(geometry: plane)
-                    newNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2.0, 1, 0, 0)
-                    node.addChildNode(newNode)
-                    ////////////////////////////////////////////////////
+//                    let planeNode = SCNNode(geometry: plane)
+//                    planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2.0, 1, 0, 0)
+//                    planeNode.categoryBitMask = 2
+//                    planeNode.addCorners()
+        
+//                    node.addChildNode(planeNode)
+
                 #endif
                 
                 if self.done {
@@ -263,7 +288,20 @@ extension ViewController: ARSCNViewDelegate {
                 }
                 
                 if let cameraNode = self.sceneView.pointOfView {
+                    self.arrowNode.categoryBitMask = 4
                     cameraNode.addChildNode(self.arrowNode)
+                    
+                    // Make the bottom HUD show
+                    self.collectionViewVerticalOffsetConstraint.constant = 0
+                    UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
+                        self.view.layoutIfNeeded()
+                    })
+                    
+                    
+                    var lightVector = node.position
+                    lightVector.y = 10
+                    let light = SCNNode.omniLight(lightVector)
+                    node.addChildNode(light)
                 }
                 
                 self.done = true
@@ -273,6 +311,7 @@ extension ViewController: ARSCNViewDelegate {
                 for light in self.solarSystemNodes.lightNodes {
                     node.addChildNode(light)
                 }
+                
             }
         }
     }
@@ -291,9 +330,21 @@ extension ViewController: ARSCNViewDelegate {
         // The anchor, of course, must be an ARPlaneAnchor
         // Update the SCNPlane geometry of this SCNNode to resemble our new understanding
         if let thePlaneNode = node.childNodes.first, let planeAnchor = anchor as? ARPlaneAnchor {
-            let materials = (thePlaneNode.geometry?.materials)!
-            let plane = ViewController.planeFor(planeAnchor, materials: materials)
-            thePlaneNode.geometry = plane
+            for line in thePlaneNode.childNodes {
+                print("the line is a \(line)")
+                line.removeFromParentNode()
+            }
+//            let materials = (thePlaneNode.geometry?.materials)!
+            
+            let plane = BorderedPlane(width: planeAnchor.extent.x, height: planeAnchor.extent.y, color: .red)
+            thePlaneNode.addChildNode(plane)
+            let borderMaterial = SCNMaterial()
+            borderMaterial.diffuse.contents = UIColor.red
+            plane.addBorder(materials: [borderMaterial])
+
+//            let plane = ViewController.planeFor(planeAnchor, materials: materials)
+//            thePlaneNode.geometry = plane
+//            thePlaneNode.addCorners()
         }
     }
     
@@ -317,13 +368,16 @@ extension ViewController: ARSCNViewDelegate {
         return plane
     }
     
+    #if DEBUG
     func nextMaterial() -> SCNMaterial {
         let material = SCNMaterial()
-        let color = self.colors[self.planeCount % self.colors.count]
-        material.diffuse.contents = color.withAlphaComponent(0.3)
+        let color = UIColor.blue// self.colors[self.planeCount % self.colors.count]
+        print("The color is \(color)")
+        material.diffuse.contents = color.withAlphaComponent(0.6)
         self.planeCount = self.planeCount + 1
         return material
     }
+#endif
 }
 
 extension ViewController: ARSessionDelegate {

@@ -10,6 +10,15 @@ import Foundation
 import SceneKit
 
 extension SCNGeometry {
+    class func lineFrom(vector vector1: SCNVector3, toVector vector2: SCNVector3) -> SCNGeometry {
+        let indices: [Int32] = [0, 1]
+        
+        let source = SCNGeometrySource(vertices: [vector1, vector2])
+        let element = SCNGeometryElement(indices: indices, primitiveType: .line)
+        
+        return SCNGeometry(sources: [source], elements: [element])
+    }
+    
     class func planetoid(radius: CGFloat, color: UIColor) -> SCNGeometry {
         let theColor = SCNMaterial()
         theColor.diffuse.contents = color
@@ -20,7 +29,46 @@ extension SCNGeometry {
         return geometry
     }
 }
+
+
+class BorderedPlane: SCNNode {
+    init(width: Float, height: Float, color: UIColor) {
+        super.init()
+        let plane = SCNPlane(width: CGFloat(width), height: CGFloat(height))
+        categoryBitMask = 2
+        let material = SCNMaterial()
+        material.diffuse.contents = color.withAlphaComponent(0.4)
+        plane.materials = [material]
+        geometry = plane
+        transform = SCNMatrix4MakeRotation(-Float.pi / 2.0, 1, 0, 0)
+
+        
+//        addBorder(materials: [borderMaterial])
+    }
+    
+    func addBorder(materials: [SCNMaterial]) {
+        let box = self.boundingBox
+        let corner1 = box.min
+        let corner2 = SCNVector3Make(box.max.x, box.min.y, box.min.z)
+        let corner3 = box.max
+        let corner4 = SCNVector3Make(box.min.x, box.max.y, box.max.z)
+        print("The corners are \(corner1) \(corner2) \(corner3) \(corner4) ")
+        for geometry in [SCNGeometry.lineFrom(vector: corner1, toVector: corner2),
+                         SCNGeometry.lineFrom(vector: corner2, toVector: corner3),
+                         SCNGeometry.lineFrom(vector: corner3, toVector: corner4),
+                         SCNGeometry.lineFrom(vector: corner4, toVector: corner1)] {
+                            geometry.materials = materials
+                            self.addChildNode(SCNNode(geometry: geometry))
+        }
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
 extension SCNNode {
+    
     class func arrow() -> SCNNode {
         let arrowScene = SCNScene(named: "art.scnassets/arrow.dae")!
         let arrow = arrowScene.rootNode.childNodes.first!
@@ -92,17 +140,19 @@ extension Planet {
     
     static func buildSolarSystem() -> SolarSystemNodes {
         var nodes = [Planet:PlanetoidGroupNode]()
-       
+
         // Data on sizes of planets http://www.freemars.org/jeff/planets/planets5.htm
         
         let sunNode = PlanetoidGroupNode(planet: Planet.sun)
         sunNode.planetNode?.categoryBitMask = 2
         nodes[Planet.sun] = sunNode
-        
+        let light = SCNNode.sunLight(geometry: sunNode.planetNode!.geometry!)
+
         // Add the light from the sun
         nodes[Planet.mercury] = PlanetoidGroupNode(planet: Planet.mercury)
         nodes[Planet.venus] = PlanetoidGroupNode(planet: Planet.venus)
-        
+//        return SolarSystemNodes(lightNodes: [light], planetoids: nodes)
+
         let earthNode = PlanetoidGroupNode(planet: Planet.earth)
         let moon = SCNNode.planetGroup(orbitRadius: 2,
                                        planetRadius: 0.09,
@@ -129,7 +179,6 @@ extension Planet {
         nodes[Planet.neptune] = PlanetoidGroupNode(planet: Planet.neptune)
         nodes[Planet.pluto] = PlanetoidGroupNode(planet: Planet.pluto)
         
-        let light = SCNNode.sunLight(geometry: sunNode.planetNode!.geometry!)
 
         return SolarSystemNodes(lightNodes: [light], planetoids: nodes)
     }
