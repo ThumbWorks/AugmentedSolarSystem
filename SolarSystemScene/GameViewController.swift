@@ -53,6 +53,8 @@ class GameViewController: UIViewController {
             scene.rootNode.addChildNode(nodeMap.value)
         }
         
+        PlanetoidGroupNode.scale(nodes: createdPlanetNodes.planetoids, plutoTableRadius: 1)
+        
         // set the scene to the view
         scnView.scene = scene
         

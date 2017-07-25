@@ -286,7 +286,7 @@ extension ViewController: ARSCNViewDelegate {
                 if self.done {
                     return
                 }
-                
+
                 if let cameraNode = self.sceneView.pointOfView {
                     self.arrowNode.categoryBitMask = 4
                     cameraNode.addChildNode(self.arrowNode)
@@ -296,7 +296,6 @@ extension ViewController: ARSCNViewDelegate {
                     UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                         self.view.layoutIfNeeded()
                     })
-                    
                     
                     var lightVector = node.position
                     lightVector.y = 10
@@ -312,6 +311,19 @@ extension ViewController: ARSCNViewDelegate {
                     node.addChildNode(light)
                 }
                 
+                // determine scale based on the size of the plane
+                let width = planeAnchor.extent.x
+                let length = planeAnchor.extent.y
+                let depth = planeAnchor.extent.z
+                print("The plane w: \(width) l: \(length) d: \(depth)")
+                
+                var radius: Float
+                if depth < width {
+                    radius = depth
+                } else {
+                    radius = width
+                }
+                PlanetoidGroupNode.scale(nodes: self.solarSystemNodes.planetoids, plutoTableRadius: radius)
             }
         }
     }
@@ -324,7 +336,7 @@ extension ViewController: ARSCNViewDelegate {
      @param anchor The anchor that was updated.
      */
     func renderer(_ renderer: SCNSceneRenderer, willUpdate node: SCNNode, for anchor: ARAnchor) {
-        print("will update node \(String(describing: node.name)) for anchor \(anchor.identifier)")
+        print("will update node \(node) for anchor \(anchor.identifier)")
         
         // Since we added our SCNPlane to the node as a child, we must find the first child
         // The anchor, of course, must be an ARPlaneAnchor

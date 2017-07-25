@@ -121,6 +121,22 @@ class PlanetoidGroupNode: SCNNode {
         SCNTransaction.commit()
     }
     
+    class func scale(nodes: [Planet:PlanetoidGroupNode], plutoTableRadius: Float) {
+        let orbitalDelta = plutoTableRadius / 8
+        var currentRadius: Float = 0
+        let planetSize = orbitalDelta / 4 /*A fraction of the delta gives us some space (har)*/
+        for planet in [Planet.sun, Planet.mercury, Planet.venus, Planet.earth, Planet.mars, Planet.jupiter, Planet.saturn, Planet.uranus, Planet.neptune, Planet.pluto] {
+            print("scale \(planet.name)")
+            guard let groupNode = nodes[planet] else {
+                continue
+            }
+            groupNode.planetNode?.scale = SCNVector3Make(planetSize, planetSize, planetSize)
+            groupNode.torus?.ringRadius = CGFloat(currentRadius)
+            groupNode.planetNode?.position = SCNVector3Make(currentRadius, 0, 0)
+            currentRadius = currentRadius + orbitalDelta
+        }
+    }
+    
     class func scaleNodes(nodes: [Planet:PlanetoidGroupNode], scaleUp: Bool) {
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 5
