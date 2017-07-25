@@ -36,7 +36,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Set the view's delegate
         sceneView.delegate = self
         
@@ -291,10 +291,12 @@ extension ViewController: ARSCNViewDelegate {
                     self.arrowNode.categoryBitMask = 4
                     cameraNode.addChildNode(self.arrowNode)
                     
-                    // Make the bottom HUD show
+                    // Make the bottom HUD show, hint that it is scrollable
                     self.collectionViewVerticalOffsetConstraint.constant = 0
                     UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                         self.view.layoutIfNeeded()
+                    }, completion: { (completed) in
+                        self.collectionViewController?.hintScrollable()
                     })
                     
                     var lightVector = node.position
