@@ -18,11 +18,12 @@ class ViewController: UIViewController {
     var scalingOrbitUp = false
     var scaleSizeUp = false
     
+    var anchorWidth: Float?
+    
     var sessionConfig = ARWorldTrackingSessionConfiguration()
     let solarSystemNodes = Planet.buildSolarSystem()
     var arrowNode = SCNNode.arrow()
     
-    @IBOutlet weak var collectionViewVerticalOffsetConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
     // TODO make this lazy
@@ -114,17 +115,35 @@ extension SCNVector3 {
 extension ViewController {
    
     @IBAction func tappedScreen(_ sender: UITapGestureRecognizer) {
-        if (collectionViewVerticalOffsetConstraint.constant == -collectionViewHeightConstraint.constant) && done {
-            collectionViewVerticalOffsetConstraint.constant = 0
-            arrowNode.isHidden = false
-        } else {
-            collectionViewVerticalOffsetConstraint.constant = -collectionViewHeightConstraint.constant
-            arrowNode.isHidden = true
+        
+        // determine if we've tapped a planet
+        if (sender.state == .ended) {
+            let location = sender.location(in: view)
+            let hittestResults = sceneView.hitTest(location, options: nil)
+            for result in hittestResults {
+                let node = result.node
+                
+                if self.solarSystemNodes.planetoids.contains(where: { (planets) -> Bool in
+                    return node == planets.value.planetNode
+                }) {
+                    if let name = result.node.name {
+                        print("tapped \(name))")
+                        // now scroll to this node. We've got a name
+                        self.collectionViewController?.changeToPlanet(name: name)
+                        return
+                    }
+                }
+                
+            }
         }
         
-        UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-            self.view.layoutIfNeeded()
-        })
+        arrowNode.isHidden = !arrowNode.isHidden
+    }
+    
+    @IBAction func scaleToARPlane() {
+        if let anchorWidth = anchorWidth {
+            PlanetoidGroupNode.scale(nodes: solarSystemNodes.planetoids, plutoTableRadius: anchorWidth)
+        }
     }
     
     @IBAction func toggleTrails() {
@@ -292,7 +311,6 @@ extension ViewController: ARSCNViewDelegate {
                     cameraNode.addChildNode(self.arrowNode)
                     
                     // Make the bottom HUD show, hint that it is scrollable
-                    self.collectionViewVerticalOffsetConstraint.constant = 0
                     UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                         self.view.layoutIfNeeded()
                     }, completion: { (completed) in
@@ -325,7 +343,9 @@ extension ViewController: ARSCNViewDelegate {
                 } else {
                     radius = width
                 }
+                
                 PlanetoidGroupNode.scale(nodes: self.solarSystemNodes.planetoids, plutoTableRadius: radius)
+                self.anchorWidth = radius
             }
         }
     }

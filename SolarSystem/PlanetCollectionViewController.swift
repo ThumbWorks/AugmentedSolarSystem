@@ -21,25 +21,19 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var distance: UILabel!
     
     var planetSelectionChanged: ((Planet) -> ())?
-    
+    var currentPlanet: Planet?
     func updateDistance(distances: [Planet:Float]) {
-        if let planet = currentPlanet(), let meters = distances[planet] {
+        if let planet = currentPlanet, let meters = distances[planet] {
             distance.text =  "\(meters.format(f: ".1")) real meters away"
         }
     }
     
-    func currentPlanet() -> Planet? {
-        let collectionViewSize = collectionView.frame.size
-        let centerXFrame = collectionView.contentOffset.x + collectionViewSize.width/2
-        let point = CGPoint(x: centerXFrame, y: collectionViewSize.height / 2)
-        
-        guard let indexPath = collectionView.indexPathForItem(at: point) else {
-            print("no index path at center")
-            return nil
+    func changeToPlanet(name: String) {
+        if let indexPath = dataSource.pathForPlanet(with: name) {
+            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
-        let currentPlanet = dataSource.planets[indexPath.row]
-        return currentPlanet
     }
+    
     func changePlanetSelection() {
         
         // find the center of the frame wrt the content offset. 10 is
@@ -51,8 +45,12 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
             print("no index path at center")
             return
         }
-        let currentPlanet = dataSource.planets[indexPath.row]
+        currentPlanet = dataSource.planets[indexPath.row]
         
+        guard let currentPlanet = currentPlanet else {
+            print("unknown state here, what is our current planet derived from the index path?")
+            return
+        }
         if let closure = planetSelectionChanged {
             closure(currentPlanet)
         }
@@ -63,11 +61,15 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
         radius.text = "\(currentPlanet.radius) km radius"
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         print("\n\nend scrolling, change labels \(collectionView.contentOffset)")
         changePlanetSelection()
     }
     
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print("\n\nend scrolling, change labels \(collectionView.contentOffset)")
+        changePlanetSelection()
+    }
     override func viewDidAppear(_ animated: Bool) {
         changePlanetSelection()
     }
@@ -91,6 +93,15 @@ extension Float {
 
 class PlanetDataSource: NSObject, UICollectionViewDataSource {
     let planets = Planet.allPlanets
+    
+    func pathForPlanet(with name: String) -> IndexPath? {
+        if let index = planets.index(where: { (planet) -> Bool in
+            return planet.name == name
+        }) {
+            return IndexPath(row: index, section: 0)
+        }
+        return nil
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return planets.count
