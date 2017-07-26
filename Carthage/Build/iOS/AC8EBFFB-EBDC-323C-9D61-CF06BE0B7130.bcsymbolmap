@@ -1,0 +1,2142 @@
+BCSymbolMap Version: 2.0
+-[UIView(MPHelpers) mp_fingerprintVersion]
+-[UIView(MPHelpers) mp_snapshotImage]
+-[UIView(MPHelpers) mp_snapshotForBlur]
+-[UIView(MPHelpers) mp_targetActions]
+-[UIView(MPHelpers) setMixpanelViewId:]
+-[UIView(MPHelpers) mp_viewId]
+-[UIView(MPHelpers) mp_controllerVariable]
+-[UIView(MPHelpers) mp_imageFingerprint]
+-[UIView(MPHelpers) mp_text]
+-[UIView(MPHelpers) mp_varA]
+_mp_encryptHelper
+-[UIView(MPHelpers) mp_varB]
+-[UIView(MPHelpers) mp_varC]
+-[UIView(MPHelpers) mp_varSetD]
+-[UIView(MPHelpers) mp_varE]
+___llvm_profile_runtime_user
+___llvm_coverage_mapping
+Apple LLVM version 9.0.0 (clang-900.0.31)
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/UIView+MPHelpers.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone
+mp_encryptHelper
+CGRectMake
+/Users/roderic/Downloads/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CGGeometry.h
+MPLogError
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPLogger.h
++[_MPTweakInlineLoader load]
+__MPTweakCreateWithEntry
+_load._tweaksLoaded
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPTweakInline.m
+_MPTweakCreateWithEntry
+-[MPObjectSerializerConfig initWithDictionary:]
+-[MPObjectSerializerConfig classDescriptions]
+-[MPObjectSerializerConfig enumWithName:]
+-[MPObjectSerializerConfig classWithName:]
+-[MPObjectSerializerConfig typeWithName:]
+-[MPObjectSerializerConfig enumDescriptions]
+-[MPObjectSerializerConfig .cxx_destruct]
+_OBJC_IVAR_$_MPObjectSerializerConfig._classes
+_OBJC_IVAR_$_MPObjectSerializerConfig._enums
+_OBJC_IVAR_$_MPObjectSerializerConfig._enumDescriptions
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPObjectSerializerConfig.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPObjectSerializerConfig.h
+-[MPABTestDesignerConnection initWithURL:keepTrying:connectCallback:disconnectCallback:]
+-[MPABTestDesignerConnection initWithURL:]
+-[MPABTestDesignerConnection open:maxInterval:maxRetries:]
+___58-[MPABTestDesignerConnection open:maxInterval:maxRetries:]_block_invoke
+___copy_helper_block_
+___destroy_helper_block_
+-[MPABTestDesignerConnection close]
+-[MPABTestDesignerConnection dealloc]
+-[MPABTestDesignerConnection setSessionObject:forKey:]
+-[MPABTestDesignerConnection sessionObjectForKey:]
+-[MPABTestDesignerConnection sendMessage:]
+-[MPABTestDesignerConnection designerMessageForMessage:]
+-[MPABTestDesignerConnection webSocket:didReceiveMessage:]
+-[MPABTestDesignerConnection webSocketDidOpen:]
+-[MPABTestDesignerConnection webSocket:didFailWithError:]
+-[MPABTestDesignerConnection webSocket:didCloseWithCode:reason:wasClean:]
+-[MPABTestDesignerConnection showConnectedViewWithLoading:]
+___59-[MPABTestDesignerConnection showConnectedViewWithLoading:]_block_invoke
+___copy_helper_block_.194
+___destroy_helper_block_.195
+-[MPABTestDesignerConnection animateConnecting:]
+-[MPABTestDesignerConnection hideConnectedView]
+-[MPABTestDesignerConnection connected]
+-[MPABTestDesignerConnection sessionEnded]
+-[MPABTestDesignerConnection setSessionEnded:]
+-[MPABTestDesignerConnection connectivityIndicatorWindow]
+-[MPABTestDesignerConnection setConnectivityIndicatorWindow:]
+-[MPABTestDesignerConnection .cxx_destruct]
+_OBJC_IVAR_$_MPABTestDesignerConnection._typeToMessageClassMap
+_OBJC_IVAR_$_MPABTestDesignerConnection._open
+_OBJC_IVAR_$_MPABTestDesignerConnection._connected
+_OBJC_IVAR_$_MPABTestDesignerConnection._sessionEnded
+_OBJC_IVAR_$_MPABTestDesignerConnection._session
+_OBJC_IVAR_$_MPABTestDesignerConnection._url
+_OBJC_IVAR_$_MPABTestDesignerConnection._connectCallback
+_OBJC_IVAR_$_MPABTestDesignerConnection._disconnectCallback
+_OBJC_IVAR_$_MPABTestDesignerConnection._commandQueue
+_open:maxInterval:maxRetries:.retries
+_OBJC_IVAR_$_MPABTestDesignerConnection._webSocket
+___block_descriptor_tmp
+l_OBJC_PROTOCOL_$_NSObject
+l_OBJC_LABEL_PROTOCOL_$_NSObject
+l_OBJC_PROTOCOL_$_MPDesignerSessionCollection
+l_OBJC_LABEL_PROTOCOL_$_MPDesignerSessionCollection
+l_OBJC_PROTOCOL_REFERENCE_$_MPDesignerSessionCollection
+_OBJC_IVAR_$_MPABTestDesignerConnection._recordingView
+_OBJC_IVAR_$_MPABTestDesignerConnection._indeterminateLayer
+___block_descriptor_tmp.196
+_OBJC_IVAR_$_MPABTestDesignerConnection._connectivityIndicatorWindow
+l_OBJC_PROTOCOL_$_MPWebSocketDelegate
+l_OBJC_LABEL_PROTOCOL_$_MPWebSocketDelegate
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPABTestDesignerConnection.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPABTestDesignerConnection.h
+__destroy_helper_block_
+__copy_helper_block_
+__59-[MPABTestDesignerConnection showConnectedViewWithLoading:]_block_invoke
+MPLogDebug
+MPLogInfo
+MPLogWarning
+__58-[MPABTestDesignerConnection open:maxInterval:maxRetries:]_block_invoke
+-[NSInvocation(MPHelpers) mp_setArgument:atIndex:]
+_MPAllocBufferForObjCType
+-[NSInvocation(MPHelpers) mp_setArgumentsFromArray:]
+-[NSInvocation(MPHelpers) mp_returnValue]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/NSInvocation+MPHelpers.m
+MPFree
+MPAllocBufferForObjCType
++[MPNSNumberToCGFloatValueTransformer transformedValueClass]
++[MPNSNumberToCGFloatValueTransformer allowsReverseTransformation]
+-[MPNSNumberToCGFloatValueTransformer transformedValue:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPNSNumberToCGFloatValueTransformer.m
+-[AutomaticEvents init]
+-[AutomaticEvents initializeEvents:]
+-[AutomaticEvents appWillResignActive:]
+-[AutomaticEvents appDidBecomeActive:]
+-[AutomaticEvents paymentQueue:updatedTransactions:]
+-[AutomaticEvents productsRequest:didReceiveResponse:]
+-[AutomaticEvents roundOneDigit:]
+-[AutomaticEvents isExistingUser]
+-[AutomaticEvents delegate]
+-[AutomaticEvents setDelegate:]
+-[AutomaticEvents minimumSessionDuration]
+-[AutomaticEvents setMinimumSessionDuration:]
+-[AutomaticEvents maximumSessionDuration]
+-[AutomaticEvents setMaximumSessionDuration:]
+-[AutomaticEvents .cxx_destruct]
+_OBJC_IVAR_$_AutomaticEvents.awaitingTransactions
+_OBJC_IVAR_$_AutomaticEvents.defaults
+_OBJC_IVAR_$_AutomaticEvents.sessionLength
+_OBJC_IVAR_$_AutomaticEvents.sessionStartTime
+_OBJC_IVAR_$_AutomaticEvents.people
+_OBJC_IVAR_$_AutomaticEvents._delegate
+_OBJC_IVAR_$_AutomaticEvents._minimumSessionDuration
+_OBJC_IVAR_$_AutomaticEvents._maximumSessionDuration
+l_OBJC_PROTOCOL_$_SKPaymentTransactionObserver
+l_OBJC_LABEL_PROTOCOL_$_SKPaymentTransactionObserver
+l_OBJC_PROTOCOL_$_SKRequestDelegate
+l_OBJC_LABEL_PROTOCOL_$_SKRequestDelegate
+l_OBJC_PROTOCOL_$_SKProductsRequestDelegate
+l_OBJC_LABEL_PROTOCOL_$_SKProductsRequestDelegate
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/AutomaticEvents.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/AutomaticEvents.h
+-[MPTakeoverNotification initWithJSONObject:]
+-[MPTakeoverNotification type]
+-[MPTakeoverNotification title]
+-[MPTakeoverNotification setTitle:]
+-[MPTakeoverNotification titleColor]
+-[MPTakeoverNotification setTitleColor:]
+-[MPTakeoverNotification closeButtonColor]
+-[MPTakeoverNotification setCloseButtonColor:]
+-[MPTakeoverNotification shouldFadeImage]
+-[MPTakeoverNotification setShouldFadeImage:]
+-[MPTakeoverNotification buttons]
+-[MPTakeoverNotification setButtons:]
+-[MPTakeoverNotification .cxx_destruct]
+_OBJC_IVAR_$_MPTakeoverNotification._title
+_OBJC_IVAR_$_MPTakeoverNotification._titleColor
+_OBJC_IVAR_$_MPTakeoverNotification._closeButtonColor
+_OBJC_IVAR_$_MPTakeoverNotification._shouldFadeImage
+_OBJC_IVAR_$_MPTakeoverNotification._buttons
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPTakeoverNotification.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPTakeoverNotification.h
++[MPPassThroughValueTransformer transformedValueClass]
++[MPPassThroughValueTransformer allowsReverseTransformation]
+-[MPPassThroughValueTransformer transformedValue:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPPassThroughValueTransformer.m
++[UIColor(MPColor) mp_applicationPrimaryColor]
++[UIColor(MPColor) mp_lightEffectColor]
++[UIColor(MPColor) mp_extraLightEffectColor]
++[UIColor(MPColor) mp_darkEffectColor]
++[UIColor(MPColor) mp_colorFromRGB:]
+-[UIColor(MPColor) mp_colorAddColor:]
+-[UIColor(MPColor) colorWithSaturationComponent:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/UIColor+MPColor.m
++[MPABTestDesignerClearRequestMessage message]
+-[MPABTestDesignerClearRequestMessage responseCommandWithConnection:]
+___69-[MPABTestDesignerClearRequestMessage responseCommandWithConnection:]_block_invoke
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPABTestDesignerClearRequestMessage.m
+__69-[MPABTestDesignerClearRequestMessage responseCommandWithConnection:]_block_invoke
+-[NSNotificationCenter(AutomaticTracks) mp_postNotification:]
+-[NSNotificationCenter(AutomaticTracks) mp_postNotificationName:object:userInfo:]
++[NSNotificationCenter(AutomaticTracks) shouldTrackNotificationNamed:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/NSNotificationCenter+AutomaticTracks.m
+-[MPNotificationViewController show]
+-[MPNotificationViewController hide:completion:]
+-[MPNotificationViewController delegate]
+-[MPNotificationViewController setDelegate:]
+-[MPNotificationViewController notification]
+-[MPNotificationViewController setNotification:]
+-[MPNotificationViewController .cxx_destruct]
+-[MPTakeoverNotificationViewController init]
+-[MPTakeoverNotificationViewController viewDidLoad]
+-[MPTakeoverNotificationViewController setUpButtonView:withData:forIndex:]
+-[MPTakeoverNotificationViewController buttonTapped:]
+-[MPTakeoverNotificationViewController show]
+___44-[MPTakeoverNotificationViewController show]_block_invoke
+-[MPTakeoverNotificationViewController hide:completion:]
+___56-[MPTakeoverNotificationViewController hide:completion:]_block_invoke
+___copy_helper_block_.176
+___destroy_helper_block_.177
+___56-[MPTakeoverNotificationViewController hide:completion:]_block_invoke.179
+___copy_helper_block_.182
+___destroy_helper_block_.183
+-[MPTakeoverNotificationViewController shouldAutorotate]
+-[MPTakeoverNotificationViewController preferredStatusBarStyle]
+-[MPTakeoverNotificationViewController preferredStatusBarUpdateAnimation]
+-[MPTakeoverNotificationViewController supportedInterfaceOrientations]
+-[MPTakeoverNotificationViewController tappedClose:]
+-[MPTakeoverNotificationViewController backgroundImageView]
+-[MPTakeoverNotificationViewController setBackgroundImageView:]
+-[MPTakeoverNotificationViewController imageView]
+-[MPTakeoverNotificationViewController setImageView:]
+-[MPTakeoverNotificationViewController bottomImageSpacing]
+-[MPTakeoverNotificationViewController setBottomImageSpacing:]
+-[MPTakeoverNotificationViewController fadingView]
+-[MPTakeoverNotificationViewController setFadingView:]
+-[MPTakeoverNotificationViewController titleLabel]
+-[MPTakeoverNotificationViewController setTitleLabel:]
+-[MPTakeoverNotificationViewController bodyLabel]
+-[MPTakeoverNotificationViewController setBodyLabel:]
+-[MPTakeoverNotificationViewController firstButton]
+-[MPTakeoverNotificationViewController setFirstButton:]
+-[MPTakeoverNotificationViewController secondButton]
+-[MPTakeoverNotificationViewController setSecondButton:]
+-[MPTakeoverNotificationViewController secondButtonContainer]
+-[MPTakeoverNotificationViewController setSecondButtonContainer:]
+-[MPTakeoverNotificationViewController viewMask]
+-[MPTakeoverNotificationViewController setViewMask:]
+-[MPTakeoverNotificationViewController closeButton]
+-[MPTakeoverNotificationViewController setCloseButton:]
+-[MPTakeoverNotificationViewController window]
+-[MPTakeoverNotificationViewController setWindow:]
+-[MPTakeoverNotificationViewController .cxx_destruct]
+-[MPMiniNotificationViewController viewDidLoad]
+-[MPMiniNotificationViewController viewWillLayoutSubviews]
+-[MPMiniNotificationViewController getTopView]
+-[MPMiniNotificationViewController angleForInterfaceOrientation:]
+-[MPMiniNotificationViewController show]
+___40-[MPMiniNotificationViewController show]_block_invoke
+___copy_helper_block_.329
+___destroy_helper_block_.330
+___40-[MPMiniNotificationViewController show]_block_invoke.332
+___copy_helper_block_.337
+___destroy_helper_block_.338
+-[MPMiniNotificationViewController animateImage]
+-[MPMiniNotificationViewController hide:completion:]
+___52-[MPMiniNotificationViewController hide:completion:]_block_invoke
+___copy_helper_block_.351
+___destroy_helper_block_.352
+___52-[MPMiniNotificationViewController hide:completion:]_block_invoke.354
+___copy_helper_block_.355
+___destroy_helper_block_.356
+-[MPMiniNotificationViewController didTap:]
+-[MPMiniNotificationViewController didPan:]
+___43-[MPMiniNotificationViewController didPan:]_block_invoke
+___copy_helper_block_.366
+___destroy_helper_block_.367
+-[MPMiniNotificationViewController imageView]
+-[MPMiniNotificationViewController setImageView:]
+-[MPMiniNotificationViewController circleLayer]
+-[MPMiniNotificationViewController setCircleLayer:]
+-[MPMiniNotificationViewController bodyLabel]
+-[MPMiniNotificationViewController setBodyLabel:]
+-[MPMiniNotificationViewController .cxx_destruct]
+-[MPAlphaMaskView initWithCoder:]
+-[MPAlphaMaskView layoutSubviews]
+-[MPAlphaMaskView .cxx_destruct]
+-[MPActionButton setHighlighted:]
+-[MPActionButton origColor]
+-[MPActionButton setOrigColor:]
+-[MPActionButton highlightedWasCalled]
+-[MPActionButton setHighlightedWasCalled:]
+-[MPActionButton .cxx_destruct]
++[CircleLayer layer]
+-[CircleLayer drawInContext:]
+-[CircleLayer circlePadding]
+-[CircleLayer setCirclePadding:]
+-[GradientMaskLayer drawInContext:]
+-[ElasticEaseOutAnimation initWithStartValue:endValue:andDuration:]
+-[ElasticEaseOutAnimation generateValuesFrom:to:]
+_UI_USER_INTERFACE_IDIOM
+_OBJC_IVAR_$_MPNotificationViewController._delegate
+_OBJC_IVAR_$_MPNotificationViewController._notification
+___block_descriptor_tmp.178
+___block_descriptor_tmp.185
+_OBJC_IVAR_$_MPTakeoverNotificationViewController._backgroundImageView
+_OBJC_IVAR_$_MPTakeoverNotificationViewController._imageView
+_OBJC_IVAR_$_MPTakeoverNotificationViewController._bottomImageSpacing
+_OBJC_IVAR_$_MPTakeoverNotificationViewController._fadingView
+_OBJC_IVAR_$_MPTakeoverNotificationViewController._titleLabel
+_OBJC_IVAR_$_MPTakeoverNotificationViewController._bodyLabel
+_OBJC_IVAR_$_MPTakeoverNotificationViewController._firstButton
+_OBJC_IVAR_$_MPTakeoverNotificationViewController._secondButton
+_OBJC_IVAR_$_MPTakeoverNotificationViewController._secondButtonContainer
+_OBJC_IVAR_$_MPTakeoverNotificationViewController._viewMask
+_OBJC_IVAR_$_MPTakeoverNotificationViewController._closeButton
+_OBJC_IVAR_$_MPTakeoverNotificationViewController._window
+_OBJC_IVAR_$_MPMiniNotificationViewController._canPan
+_OBJC_IVAR_$_MPMiniNotificationViewController._isBeingDismissed
+_OBJC_IVAR_$_MPMiniNotificationViewController._position
+___block_descriptor_tmp.331
+___block_descriptor_tmp.339
+_OBJC_IVAR_$_MPMiniNotificationViewController._circleLayer
+_OBJC_IVAR_$_MPMiniNotificationViewController._imageView
+___block_descriptor_tmp.353
+___block_descriptor_tmp.357
+_OBJC_IVAR_$_MPMiniNotificationViewController._panStartPoint
+___block_descriptor_tmp.368
+_OBJC_IVAR_$_MPMiniNotificationViewController._bodyLabel
+_OBJC_IVAR_$_MPActionButton._origColor
+_OBJC_IVAR_$_MPActionButton._highlightedWasCalled
+_OBJC_IVAR_$_CircleLayer._circlePadding
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPNotificationViewController.m
+UI_USER_INTERFACE_IDIOM
+/Users/roderic/Downloads/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIDevice.h
+CGPointMake
+__43-[MPMiniNotificationViewController didPan:]_block_invoke
+__52-[MPMiniNotificationViewController hide:completion:]_block_invoke.354
+__52-[MPMiniNotificationViewController hide:completion:]_block_invoke
+CGSizeMake
+__40-[MPMiniNotificationViewController show]_block_invoke.332
+__40-[MPMiniNotificationViewController show]_block_invoke
+UIInterfaceOrientationIsPortrait
+/Users/roderic/Downloads/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIApplication.h
+__56-[MPTakeoverNotificationViewController hide:completion:]_block_invoke.179
+__56-[MPTakeoverNotificationViewController hide:completion:]_block_invoke
+__44-[MPTakeoverNotificationViewController show]_block_invoke
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPNotificationViewController.h
+-[UIViewController(AutomaticTracks) mp_viewDidAppear:]
+-[UIViewController(AutomaticTracks) shouldTrackClass:]
+___54-[UIViewController(AutomaticTracks) shouldTrackClass:]_block_invoke
+_shouldTrackClass:.blacklistedClasses
+_shouldTrackClass:.onceToken
+___block_literal_global
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/UIViewController+AutomaticTracks.m
+__54-[UIViewController(AutomaticTracks) shouldTrackClass:]_block_invoke
+_dispatch_once
+/Users/roderic/Downloads/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/usr/include/dispatch/once.h
+-[_MPTweakBindObserver initWithTweak:block:]
+-[_MPTweakBindObserver tweakDidChange:]
+-[_MPTweakBindObserver attachToObject:]
+-[_MPTweakBindObserver .cxx_destruct]
+_OBJC_IVAR_$__MPTweakBindObserver._tweak
+_OBJC_IVAR_$__MPTweakBindObserver._block
+_OBJC_IVAR_$__MPTweakBindObserver._object
+l_OBJC_PROTOCOL_$_MPTweakObserver
+l_OBJC_LABEL_PROTOCOL_$_MPTweakObserver
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/_MPTweakBindObserver.m
++[MPUIImageToNSDictionaryValueTransformer load]
++[MPUIImageToNSDictionaryValueTransformer transformedValueClass]
++[MPUIImageToNSDictionaryValueTransformer allowsReverseTransformation]
+-[MPUIImageToNSDictionaryValueTransformer transformedValue:]
+-[MPUIImageToNSDictionaryValueTransformer reverseTransformedValue:]
+_imageCache
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPUIImageToNSDictionaryValueTransformer.m
+UIEdgeInsetsEqualToEdgeInsets
+/Users/roderic/Downloads/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIGeometry.h
++[MPDesignerTrackMessage message]
++[MPDesignerTrackMessage messageWithPayload:]
+-[MPDesignerTrackMessage initWithType:]
+-[MPDesignerTrackMessage initWithType:andPayload:]
+-[MPDesignerTrackMessage JSONData]
+-[MPDesignerTrackMessage .cxx_destruct]
+_OBJC_IVAR_$_MPDesignerTrackMessage._payload
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPDesignerTrackMessage.m
+-[MPPropertySelectorParameterDescription initWithDictionary:]
+-[MPPropertySelectorParameterDescription name]
+-[MPPropertySelectorParameterDescription type]
+-[MPPropertySelectorParameterDescription .cxx_destruct]
+-[MPPropertySelectorDescription initWithDictionary:]
+-[MPPropertySelectorDescription selectorName]
+-[MPPropertySelectorDescription returnType]
+-[MPPropertySelectorDescription parameters]
+-[MPPropertySelectorDescription .cxx_destruct]
++[MPPropertyDescription valueTransformerForType:]
+-[MPPropertyDescription initWithDictionary:]
+-[MPPropertyDescription type]
+-[MPPropertyDescription valueTransformer]
+-[MPPropertyDescription debugDescription]
+-[MPPropertyDescription shouldReadPropertyValueForObject:]
+-[MPPropertyDescription readonly]
+-[MPPropertyDescription nofollow]
+-[MPPropertyDescription useKeyValueCoding]
+-[MPPropertyDescription useInstanceVariableAccess]
+-[MPPropertyDescription name]
+-[MPPropertyDescription getSelectorDescription]
+-[MPPropertyDescription setSelectorDescription]
+-[MPPropertyDescription predicate]
+-[MPPropertyDescription .cxx_destruct]
+_OBJC_IVAR_$_MPPropertySelectorParameterDescription._name
+_OBJC_IVAR_$_MPPropertySelectorParameterDescription._type
+_OBJC_IVAR_$_MPPropertySelectorDescription._selectorName
+_OBJC_IVAR_$_MPPropertySelectorDescription._parameters
+_OBJC_IVAR_$_MPPropertySelectorDescription._returnType
+_OBJC_IVAR_$_MPPropertyDescription._name
+_OBJC_IVAR_$_MPPropertyDescription._useInstanceVariableAccess
+_OBJC_IVAR_$_MPPropertyDescription._readonly
+_OBJC_IVAR_$_MPPropertyDescription._nofollow
+_OBJC_IVAR_$_MPPropertyDescription._predicate
+_OBJC_IVAR_$_MPPropertyDescription._getSelectorDescription
+_OBJC_IVAR_$_MPPropertyDescription._setSelectorDescription
+_OBJC_IVAR_$_MPPropertyDescription._useKeyValueCoding
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPPropertyDescription.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPPropertyDescription.h
++[MPDesignerEventBindingResponseMessage message]
+-[MPDesignerEventBindingResponseMessage setStatus:]
+-[MPDesignerEventBindingResponseMessage status]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPDesignerEventBindingResponseMesssage.m
++[MPNSAttributedStringToNSDictionaryValueTransformer transformedValueClass]
++[MPNSAttributedStringToNSDictionaryValueTransformer allowsReverseTransformation]
+-[MPNSAttributedStringToNSDictionaryValueTransformer transformedValue:]
+___71-[MPNSAttributedStringToNSDictionaryValueTransformer transformedValue:]_block_invoke
+-[MPNSAttributedStringToNSDictionaryValueTransformer reverseTransformedValue:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPNSAttributedStringToNSDictionaryValueTransformer.m
+__71-[MPNSAttributedStringToNSDictionaryValueTransformer transformedValue:]_block_invoke
+NSMakeRange
+/Users/roderic/Downloads/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSRange.h
++[MPABTestDesignerClearResponseMessage message]
+-[MPABTestDesignerClearResponseMessage setStatus:]
+-[MPABTestDesignerClearResponseMessage status]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPABTestDesignerClearResponseMessage.m
++[MPCGRectToNSDictionaryValueTransformer transformedValueClass]
++[MPCGRectToNSDictionaryValueTransformer allowsReverseTransformation]
+-[MPCGRectToNSDictionaryValueTransformer transformedValue:]
+-[MPCGRectToNSDictionaryValueTransformer reverseTransformedValue:]
+___profc___inline_isnormalf
+___profd___inline_isnormalf
+___profc___inline_isnormald
+___profd___inline_isnormald
+___profc___inline_isnormall
+___profd___inline_isnormall
+___profc___inline_isfinitef
+___profd___inline_isfinitef
+___profc___inline_isfinited
+___profd___inline_isfinited
+___profc___inline_isfinitel
+___profd___inline_isfinitel
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPCGRectToNSDictionaryValueTransformer.m
+CFBridgingRelease
+/Users/roderic/Downloads/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObject.h
+__inline_isnormald
+/Users/roderic/Downloads/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/usr/include/math.h
+__inline_isfinited
++[MPABTestDesignerDeviceInfoRequestMessage message]
+-[MPABTestDesignerDeviceInfoRequestMessage responseCommandWithConnection:]
+___74-[MPABTestDesignerDeviceInfoRequestMessage responseCommandWithConnection:]_block_invoke
+___74-[MPABTestDesignerDeviceInfoRequestMessage responseCommandWithConnection:]_block_invoke_2
+___copy_helper_block_.62
+___destroy_helper_block_.63
+-[MPABTestDesignerDeviceInfoRequestMessage availableFontFamilies]
+-[MPABTestDesignerDeviceInfoRequestMessage fontDictionaryForFontFamilyName:fontNames:]
+-[MPABTestDesignerDeviceInfoRequestMessage getTweaks]
+___block_descriptor_tmp.64
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPABTestDesignerDeviceInfoRequestMessage.m
+__74-[MPABTestDesignerDeviceInfoRequestMessage responseCommandWithConnection:]_block_invoke_2
+__74-[MPABTestDesignerDeviceInfoRequestMessage responseCommandWithConnection:]_block_invoke
++[MPTweakStore sharedInstance]
+___30+[MPTweakStore sharedInstance]_block_invoke
+-[MPTweakStore init]
+-[MPTweakStore tweaks]
+-[MPTweakStore tweakWithName:]
+-[MPTweakStore addTweak:]
+-[MPTweakStore removeTweak:]
+-[MPTweakStore reset]
+-[MPTweakStore .cxx_destruct]
+_sharedInstance.sharedInstance
+_sharedInstance.onceToken
+_OBJC_IVAR_$_MPTweakStore._orderedTweaks
+_OBJC_IVAR_$_MPTweakStore._namedTweaks
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPTweakStore.m
+__30+[MPTweakStore sharedInstance]_block_invoke
+-[MPApplicationStateSerializer initWithApplication:configuration:objectIdentityProvider:]
+-[MPApplicationStateSerializer screenshotImageForWindowAtIndex:]
+-[MPApplicationStateSerializer windowAtIndex:]
+-[MPApplicationStateSerializer objectHierarchyForWindowAtIndex:]
+-[MPApplicationStateSerializer .cxx_destruct]
+_OBJC_IVAR_$_MPApplicationStateSerializer._application
+_OBJC_IVAR_$_MPApplicationStateSerializer._serializer
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPApplicationStateSerializer.m
++[Mixpanel sharedInstanceWithToken:launchOptions:]
++[Mixpanel sharedInstanceWithToken:]
++[Mixpanel sharedInstance]
+_MPLogWarning
+-[Mixpanel init:]
+___17-[Mixpanel init:]_block_invoke
+-[Mixpanel initWithToken:launchOptions:andFlushInterval:]
+-[Mixpanel initWithToken:andFlushInterval:]
+-[Mixpanel dealloc]
+_MPLogError
+-[Mixpanel setValidationEnabled:]
+-[Mixpanel shouldManageNetworkActivityIndicator]
+-[Mixpanel setShouldManageNetworkActivityIndicator:]
+-[Mixpanel useIPAddressForGeoLocation]
+-[Mixpanel setUseIPAddressForGeoLocation:]
+-[Mixpanel minimumSessionDuration]
+-[Mixpanel setMinimumSessionDuration:]
+-[Mixpanel maximumSessionDuration]
+-[Mixpanel setMaximumSessionDuration:]
++[Mixpanel assertPropertyTypes:]
++[Mixpanel assertPropertyType:depth:]
++[Mixpanel assertPropertyTypesInDictionary:depth:]
++[Mixpanel assertPropertyTypesInArray:depth:]
+-[Mixpanel defaultDistinctId]
+_MPLogInfo
+-[Mixpanel identify:]
+___21-[Mixpanel identify:]_block_invoke
+___copy_helper_block_.224
+___destroy_helper_block_.225
+-[Mixpanel createAlias:forDistinctID:]
+___38-[Mixpanel createAlias:forDistinctID:]_block_invoke
+___copy_helper_block_.231
+___destroy_helper_block_.232
+-[Mixpanel track:]
+-[Mixpanel track:properties:]
+___29-[Mixpanel track:properties:]_block_invoke
+___copy_helper_block_.317
+___destroy_helper_block_.318
+-[Mixpanel setupAutomaticPushTracking]
+___38-[Mixpanel setupAutomaticPushTracking]_block_invoke
+___copy_helper_block_.334
+___destroy_helper_block_.335
+-[Mixpanel trackPushNotification:event:]
+-[Mixpanel trackPushNotification:]
+-[Mixpanel registerSuperProperties:]
+___36-[Mixpanel registerSuperProperties:]_block_invoke
+-[Mixpanel registerSuperPropertiesOnce:]
+-[Mixpanel registerSuperPropertiesOnce:defaultValue:]
+___53-[Mixpanel registerSuperPropertiesOnce:defaultValue:]_block_invoke
+___copy_helper_block_.373
+___destroy_helper_block_.374
+-[Mixpanel unregisterSuperProperty:]
+___36-[Mixpanel unregisterSuperProperty:]_block_invoke
+___copy_helper_block_.376
+___destroy_helper_block_.377
+-[Mixpanel clearSuperProperties]
+___32-[Mixpanel clearSuperProperties]_block_invoke
+___copy_helper_block_.379
+___destroy_helper_block_.380
+-[Mixpanel currentSuperProperties]
+-[Mixpanel timeEvent:]
+___22-[Mixpanel timeEvent:]_block_invoke
+___copy_helper_block_.384
+___destroy_helper_block_.385
+-[Mixpanel eventElapsedTime:]
+-[Mixpanel clearTimedEvents]
+___28-[Mixpanel clearTimedEvents]_block_invoke
+___copy_helper_block_.387
+___destroy_helper_block_.388
+-[Mixpanel reset]
+___17-[Mixpanel reset]_block_invoke
+___17-[Mixpanel reset]_block_invoke_2
+___copy_helper_block_.409
+___destroy_helper_block_.410
+-[Mixpanel dispatchOnNetworkQueue:]
+___35-[Mixpanel dispatchOnNetworkQueue:]_block_invoke
+___copy_helper_block_.412
+___destroy_helper_block_.413
+-[Mixpanel setServerURL:]
+-[Mixpanel flushInterval]
+-[Mixpanel setFlushInterval:]
+-[Mixpanel startFlushTimer]
+___27-[Mixpanel startFlushTimer]_block_invoke
+___copy_helper_block_.430
+___destroy_helper_block_.431
+-[Mixpanel stopFlushTimer]
+___26-[Mixpanel stopFlushTimer]_block_invoke
+___copy_helper_block_.437
+___destroy_helper_block_.438
+-[Mixpanel flush]
+-[Mixpanel flushWithCompletion:]
+___32-[Mixpanel flushWithCompletion:]_block_invoke
+___copy_helper_block_.456
+___destroy_helper_block_.457
+-[Mixpanel filePathFor:]
+-[Mixpanel eventsFilePath]
+-[Mixpanel peopleFilePath]
+-[Mixpanel propertiesFilePath]
+-[Mixpanel variantsFilePath]
+-[Mixpanel eventBindingsFilePath]
+-[Mixpanel archive]
+-[Mixpanel archiveEvents]
+-[Mixpanel archivePeople]
+-[Mixpanel archiveProperties]
+-[Mixpanel archiveVariants]
+-[Mixpanel archiveEventBindings]
+-[Mixpanel archiveObject:withFilePath:]
+-[Mixpanel addSkipBackupAttributeToItemAtPath:]
+-[Mixpanel unarchive]
++[Mixpanel unarchiveOrDefaultFromFile:asClass:]
++[Mixpanel unarchiveFromFile:asClass:]
+-[Mixpanel unarchiveEvents]
+-[Mixpanel unarchivePeople]
+-[Mixpanel unarchiveProperties]
+-[Mixpanel unarchiveVariants]
+-[Mixpanel unarchiveEventBindings]
+-[Mixpanel description]
+-[Mixpanel deviceModel]
+-[Mixpanel watchModel]
+-[Mixpanel IFA]
+-[Mixpanel setCurrentRadio]
+___27-[Mixpanel setCurrentRadio]_block_invoke
+___copy_helper_block_.634
+___destroy_helper_block_.635
+-[Mixpanel currentRadio]
+-[Mixpanel libVersion]
++[Mixpanel libVersion]
+-[Mixpanel collectDeviceProperties]
+-[Mixpanel collectAutomaticProperties]
+-[Mixpanel setUpListeners]
+_MixpanelReachabilityCallback
+-[Mixpanel initializeGestureRecognizer]
+___39-[Mixpanel initializeGestureRecognizer]_block_invoke
+___copy_helper_block_.762
+___destroy_helper_block_.763
+-[Mixpanel reachabilityChanged:]
+-[Mixpanel applicationDidBecomeActive:]
+___39-[Mixpanel applicationDidBecomeActive:]_block_invoke
+___copy_helper_block_.785
+___destroy_helper_block_.786
+-[Mixpanel applicationWillResignActive:]
+-[Mixpanel applicationWillTerminate:]
+-[Mixpanel applicationDidEnterBackground:]
+___42-[Mixpanel applicationDidEnterBackground:]_block_invoke
+___copy_helper_block_.801
+___destroy_helper_block_.802
+___42-[Mixpanel applicationDidEnterBackground:]_block_invoke.832
+___copy_helper_block_.835
+___destroy_helper_block_.836
+___42-[Mixpanel applicationDidEnterBackground:]_block_invoke.845
+___copy_helper_block_.846
+___destroy_helper_block_.847
+___42-[Mixpanel applicationDidEnterBackground:]_block_invoke.849
+___copy_helper_block_.852
+___destroy_helper_block_.853
+-[Mixpanel applicationWillEnterForeground:]
+___43-[Mixpanel applicationWillEnterForeground:]_block_invoke
+___copy_helper_block_.859
+___destroy_helper_block_.860
+-[Mixpanel appLinksNotificationRaised:]
+-[Mixpanel setEnableLogging:]
+-[Mixpanel enableLogging]
++[Mixpanel topPresentedViewController]
++[Mixpanel canPresentFromViewController:]
+-[Mixpanel checkForDecideResponseWithCompletion:]
+-[Mixpanel checkForDecideResponseWithCompletion:useCache:]
+___58-[Mixpanel checkForDecideResponseWithCompletion:useCache:]_block_invoke
+___58-[Mixpanel checkForDecideResponseWithCompletion:useCache:]_block_invoke_2
+___58-[Mixpanel checkForDecideResponseWithCompletion:useCache:]_block_invoke_3
+___58-[Mixpanel checkForDecideResponseWithCompletion:useCache:]_block_invoke_4
+_MPLogDebug
+___copy_helper_block_.981
+___destroy_helper_block_.982
+___58-[Mixpanel checkForDecideResponseWithCompletion:useCache:]_block_invoke.988
+___copy_helper_block_.993
+___destroy_helper_block_.994
+___copy_helper_block_.1007
+___destroy_helper_block_.1008
+-[Mixpanel checkForNotificationsWithCompletion:]
+___48-[Mixpanel checkForNotificationsWithCompletion:]_block_invoke
+___copy_helper_block_.1010
+___destroy_helper_block_.1011
+-[Mixpanel checkForVariantsWithCompletion:]
+___43-[Mixpanel checkForVariantsWithCompletion:]_block_invoke
+___copy_helper_block_.1013
+___destroy_helper_block_.1014
+-[Mixpanel showNotification]
+___28-[Mixpanel showNotification]_block_invoke
+___copy_helper_block_.1016
+___destroy_helper_block_.1017
+-[Mixpanel showNotificationWithType:]
+___37-[Mixpanel showNotificationWithType:]_block_invoke
+___copy_helper_block_.1024
+___destroy_helper_block_.1025
+-[Mixpanel showNotificationWithID:]
+___35-[Mixpanel showNotificationWithID:]_block_invoke
+___copy_helper_block_.1027
+___destroy_helper_block_.1028
+-[Mixpanel showNotificationWithObject:]
+___39-[Mixpanel showNotificationWithObject:]_block_invoke
+___copy_helper_block_.1046
+___destroy_helper_block_.1047
+-[Mixpanel showTakeoverNotificationWithObject:]
+-[Mixpanel showMiniNotificationWithObject:]
+___43-[Mixpanel showMiniNotificationWithObject:]_block_invoke
+___copy_helper_block_.1065
+___destroy_helper_block_.1066
+-[Mixpanel notificationController:wasDismissedWithCtaUrl:]
+___58-[Mixpanel notificationController:wasDismissedWithCtaUrl:]_block_invoke
+___copy_helper_block_.1070
+___destroy_helper_block_.1071
+___58-[Mixpanel notificationController:wasDismissedWithCtaUrl:]_block_invoke.1073
+___copy_helper_block_.1084
+___destroy_helper_block_.1085
+-[Mixpanel trackNotification:event:]
+-[Mixpanel markNotificationShown:]
+___34-[Mixpanel markNotificationShown:]_block_invoke
+___copy_helper_block_.1097
+___destroy_helper_block_.1098
+-[Mixpanel setEnableVisualABTestAndCodeless:]
+-[Mixpanel enableVisualABTestAndCodeless]
+-[Mixpanel connectGestureRecognized:]
+-[Mixpanel connectToABTestDesigner]
+-[Mixpanel connectToABTestDesigner:]
+___36-[Mixpanel connectToABTestDesigner:]_block_invoke
+___36-[Mixpanel connectToABTestDesigner:]_block_invoke_2
+___copy_helper_block_.1141
+___destroy_helper_block_.1142
+___copy_helper_block_.1147
+___destroy_helper_block_.1148
+___36-[Mixpanel connectToABTestDesigner:]_block_invoke.1150
+___copy_helper_block_.1153
+___destroy_helper_block_.1154
+-[Mixpanel executeCachedVariants]
+-[Mixpanel markVariantRun:]
+___27-[Mixpanel markVariantRun:]_block_invoke
+___27-[Mixpanel markVariantRun:]_block_invoke_2
+___copy_helper_block_.1170
+___destroy_helper_block_.1171
+___copy_helper_block_.1173
+___destroy_helper_block_.1174
+-[Mixpanel joinExperimentsWithCallback:]
+___40-[Mixpanel joinExperimentsWithCallback:]_block_invoke
+___40-[Mixpanel joinExperimentsWithCallback:]_block_invoke_2
+___copy_helper_block_.1182
+___destroy_helper_block_.1183
+___copy_helper_block_.1185
+___destroy_helper_block_.1186
+-[Mixpanel joinExperiments]
+-[Mixpanel executeCachedEventBindings]
+-[Mixpanel people]
+-[Mixpanel setPeople:]
+-[Mixpanel distinctId]
+-[Mixpanel setDistinctId:]
+-[Mixpanel alias]
+-[Mixpanel setAlias:]
+-[Mixpanel serverURL]
+-[Mixpanel flushOnBackground]
+-[Mixpanel setFlushOnBackground:]
+-[Mixpanel checkForNotificationsOnActive]
+-[Mixpanel setCheckForNotificationsOnActive:]
+-[Mixpanel checkForVariantsOnActive]
+-[Mixpanel setCheckForVariantsOnActive:]
+-[Mixpanel showNotificationOnActive]
+-[Mixpanel setShowNotificationOnActive:]
+-[Mixpanel miniNotificationPresentationTime]
+-[Mixpanel setMiniNotificationPresentationTime:]
+-[Mixpanel delegate]
+-[Mixpanel setDelegate:]
+-[Mixpanel nameTag]
+-[Mixpanel setNameTag:]
+-[Mixpanel reachability]
+-[Mixpanel setReachability:]
+-[Mixpanel telephonyInfo]
+-[Mixpanel setTelephonyInfo:]
+-[Mixpanel testDesignerGestureRecognizer]
+-[Mixpanel setTestDesignerGestureRecognizer:]
+-[Mixpanel abtestDesignerConnection]
+-[Mixpanel setAbtestDesignerConnection:]
+-[Mixpanel validationMode]
+-[Mixpanel setValidationMode:]
+-[Mixpanel validationEventCount]
+-[Mixpanel setValidationEventCount:]
+-[Mixpanel isValidationEnabled]
+-[Mixpanel automaticEvents]
+-[Mixpanel setAutomaticEvents:]
+-[Mixpanel taskId]
+-[Mixpanel setTaskId:]
+-[Mixpanel notificationViewController]
+-[Mixpanel setNotificationViewController:]
+-[Mixpanel network]
+-[Mixpanel setNetwork:]
+-[Mixpanel apiToken]
+-[Mixpanel setApiToken:]
+-[Mixpanel superProperties]
+-[Mixpanel setSuperProperties:]
+-[Mixpanel automaticProperties]
+-[Mixpanel setAutomaticProperties:]
+-[Mixpanel timer]
+-[Mixpanel setTimer:]
+-[Mixpanel eventsQueue]
+-[Mixpanel setEventsQueue:]
+-[Mixpanel peopleQueue]
+-[Mixpanel setPeopleQueue:]
+-[Mixpanel serialQueue]
+-[Mixpanel setSerialQueue:]
+-[Mixpanel networkQueue]
+-[Mixpanel setNetworkQueue:]
+-[Mixpanel timedEvents]
+-[Mixpanel setTimedEvents:]
+-[Mixpanel decideResponseCached]
+-[Mixpanel setDecideResponseCached:]
+-[Mixpanel automaticEventsEnabled]
+-[Mixpanel setAutomaticEventsEnabled:]
+-[Mixpanel notifications]
+-[Mixpanel setNotifications:]
+-[Mixpanel currentlyShowingNotification]
+-[Mixpanel setCurrentlyShowingNotification:]
+-[Mixpanel shownNotifications]
+-[Mixpanel setShownNotifications:]
+-[Mixpanel variants]
+-[Mixpanel setVariants:]
+-[Mixpanel eventBindings]
+-[Mixpanel setEventBindings:]
+-[Mixpanel switchboardURL]
+-[Mixpanel setSwitchboardURL:]
+-[Mixpanel .cxx_destruct]
+_instances
+_defaultProjectToken
+_init:.onceToken
+_loggingLockObject
+_OBJC_IVAR_$_Mixpanel._flushInterval
+_OBJC_IVAR_$_Mixpanel._reachability
+_OBJC_IVAR_$_Mixpanel._validationEnabled
+___block_descriptor_tmp.226
+___block_descriptor_tmp.233
+___block_descriptor_tmp.319
+___block_descriptor_tmp.337
+___block_descriptor_tmp.375
+___block_descriptor_tmp.378
+___block_descriptor_tmp.381
+___block_descriptor_tmp.386
+___block_descriptor_tmp.389
+___block_descriptor_tmp.392
+___block_descriptor_tmp.411
+___block_descriptor_tmp.414
+_OBJC_IVAR_$_Mixpanel._serverURL
+___block_descriptor_tmp.432
+___block_descriptor_tmp.439
+___block_descriptor_tmp.458
+___block_descriptor_tmp.636
+_OBJC_IVAR_$_Mixpanel._telephonyInfo
+___block_descriptor_tmp.764
+___block_descriptor_tmp.788
+___block_descriptor_tmp.803
+___block_descriptor_tmp.838
+___block_descriptor_tmp.848
+___block_descriptor_tmp.854
+___block_descriptor_tmp.861
+_gLoggingEnabled
+___block_descriptor_tmp.948
+___block_literal_global.949
+___block_descriptor_tmp.956
+___block_literal_global.957
+___block_descriptor_tmp.983
+___block_descriptor_tmp.996
+___block_descriptor_tmp.1009
+___block_descriptor_tmp.1012
+___block_descriptor_tmp.1015
+___block_descriptor_tmp.1019
+___block_descriptor_tmp.1026
+___block_descriptor_tmp.1029
+_OBJC_IVAR_$_Mixpanel._notifications
+___block_descriptor_tmp.1048
+___block_descriptor_tmp.1067
+___block_descriptor_tmp.1072
+___block_descriptor_tmp.1086
+___block_descriptor_tmp.1099
+_OBJC_IVAR_$_Mixpanel._enableVisualABTestAndCodeless
+_connectToABTestDesigner:.oldInterval
+___block_descriptor_tmp.1144
+___block_descriptor_tmp.1149
+___block_descriptor_tmp.1155
+___block_descriptor_tmp.1172
+___block_descriptor_tmp.1175
+___block_descriptor_tmp.1184
+___block_descriptor_tmp.1188
+_OBJC_IVAR_$_Mixpanel._people
+_OBJC_IVAR_$_Mixpanel._distinctId
+_OBJC_IVAR_$_Mixpanel._alias
+_OBJC_IVAR_$_Mixpanel._flushOnBackground
+_OBJC_IVAR_$_Mixpanel._checkForNotificationsOnActive
+_OBJC_IVAR_$_Mixpanel._checkForVariantsOnActive
+_OBJC_IVAR_$_Mixpanel._showNotificationOnActive
+_OBJC_IVAR_$_Mixpanel._miniNotificationPresentationTime
+_OBJC_IVAR_$_Mixpanel._delegate
+_OBJC_IVAR_$_Mixpanel._nameTag
+_OBJC_IVAR_$_Mixpanel._testDesignerGestureRecognizer
+_OBJC_IVAR_$_Mixpanel._abtestDesignerConnection
+_OBJC_IVAR_$_Mixpanel._validationMode
+_OBJC_IVAR_$_Mixpanel._validationEventCount
+_OBJC_IVAR_$_Mixpanel._automaticEvents
+_OBJC_IVAR_$_Mixpanel._taskId
+_OBJC_IVAR_$_Mixpanel._notificationViewController
+_OBJC_IVAR_$_Mixpanel._network
+_OBJC_IVAR_$_Mixpanel._apiToken
+_OBJC_IVAR_$_Mixpanel._superProperties
+_OBJC_IVAR_$_Mixpanel._automaticProperties
+_OBJC_IVAR_$_Mixpanel._timer
+_OBJC_IVAR_$_Mixpanel._eventsQueue
+_OBJC_IVAR_$_Mixpanel._peopleQueue
+_OBJC_IVAR_$_Mixpanel._serialQueue
+_OBJC_IVAR_$_Mixpanel._networkQueue
+_OBJC_IVAR_$_Mixpanel._timedEvents
+_OBJC_IVAR_$_Mixpanel._decideResponseCached
+_OBJC_IVAR_$_Mixpanel._automaticEventsEnabled
+_OBJC_IVAR_$_Mixpanel._currentlyShowingNotification
+_OBJC_IVAR_$_Mixpanel._shownNotifications
+_OBJC_IVAR_$_Mixpanel._variants
+_OBJC_IVAR_$_Mixpanel._eventBindings
+_OBJC_IVAR_$_Mixpanel._switchboardURL
+l_OBJC_PROTOCOL_$_MPNotificationViewControllerDelegate
+l_OBJC_LABEL_PROTOCOL_$_MPNotificationViewControllerDelegate
+l_OBJC_PROTOCOL_$_TrackDelegate
+l_OBJC_LABEL_PROTOCOL_$_TrackDelegate
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/Mixpanel.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MixpanelPrivate.h
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/Mixpanel.h
+__40-[Mixpanel joinExperimentsWithCallback:]_block_invoke_2
+__40-[Mixpanel joinExperimentsWithCallback:]_block_invoke
+__27-[Mixpanel markVariantRun:]_block_invoke_2
+__27-[Mixpanel markVariantRun:]_block_invoke
+__36-[Mixpanel connectToABTestDesigner:]_block_invoke.1150
+__36-[Mixpanel connectToABTestDesigner:]_block_invoke_2
+__36-[Mixpanel connectToABTestDesigner:]_block_invoke
+__34-[Mixpanel markNotificationShown:]_block_invoke
+__58-[Mixpanel notificationController:wasDismissedWithCtaUrl:]_block_invoke.1073
+__58-[Mixpanel notificationController:wasDismissedWithCtaUrl:]_block_invoke
+__43-[Mixpanel showMiniNotificationWithObject:]_block_invoke
+__39-[Mixpanel showNotificationWithObject:]_block_invoke
+__35-[Mixpanel showNotificationWithID:]_block_invoke
+__37-[Mixpanel showNotificationWithType:]_block_invoke
+__28-[Mixpanel showNotification]_block_invoke
+__43-[Mixpanel checkForVariantsWithCompletion:]_block_invoke
+__48-[Mixpanel checkForNotificationsWithCompletion:]_block_invoke
+__58-[Mixpanel checkForDecideResponseWithCompletion:useCache:]_block_invoke.988
+__58-[Mixpanel checkForDecideResponseWithCompletion:useCache:]_block_invoke_4
+__58-[Mixpanel checkForDecideResponseWithCompletion:useCache:]_block_invoke_3
+__58-[Mixpanel checkForDecideResponseWithCompletion:useCache:]_block_invoke_2
+__58-[Mixpanel checkForDecideResponseWithCompletion:useCache:]_block_invoke
+__43-[Mixpanel applicationWillEnterForeground:]_block_invoke
+__42-[Mixpanel applicationDidEnterBackground:]_block_invoke.849
+__42-[Mixpanel applicationDidEnterBackground:]_block_invoke.845
+__42-[Mixpanel applicationDidEnterBackground:]_block_invoke.832
+__42-[Mixpanel applicationDidEnterBackground:]_block_invoke
+__39-[Mixpanel applicationDidBecomeActive:]_block_invoke
+__39-[Mixpanel initializeGestureRecognizer]_block_invoke
+MixpanelReachabilityCallback
+__27-[Mixpanel setCurrentRadio]_block_invoke
+__32-[Mixpanel flushWithCompletion:]_block_invoke
+__26-[Mixpanel stopFlushTimer]_block_invoke
+__27-[Mixpanel startFlushTimer]_block_invoke
+__35-[Mixpanel dispatchOnNetworkQueue:]_block_invoke
+__17-[Mixpanel reset]_block_invoke_2
+__17-[Mixpanel reset]_block_invoke
+__28-[Mixpanel clearTimedEvents]_block_invoke
+__22-[Mixpanel timeEvent:]_block_invoke
+__32-[Mixpanel clearSuperProperties]_block_invoke
+__36-[Mixpanel unregisterSuperProperty:]_block_invoke
+__53-[Mixpanel registerSuperPropertiesOnce:defaultValue:]_block_invoke
+__36-[Mixpanel registerSuperProperties:]_block_invoke
+__38-[Mixpanel setupAutomaticPushTracking]_block_invoke
+__29-[Mixpanel track:properties:]_block_invoke
+__38-[Mixpanel createAlias:forDistinctID:]_block_invoke
+__21-[Mixpanel identify:]_block_invoke
+__17-[Mixpanel init:]_block_invoke
+-[UIImage(MPAverageColor) mp_averageColor]
+-[UIImage(MPAverageColor) mp_importantColor]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/UIImage+MPAverageColor.m
++[MPABTestDesignerTweakResponseMessage message]
+-[MPABTestDesignerTweakResponseMessage setStatus:]
+-[MPABTestDesignerTweakResponseMessage status]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPABTestDesignerTweakResponseMessage.m
++[MPABTestDesignerSnapshotResponseMessage message]
+-[MPABTestDesignerSnapshotResponseMessage setScreenshot:]
+-[MPABTestDesignerSnapshotResponseMessage screenshot]
+-[MPABTestDesignerSnapshotResponseMessage setSerializedObjects:]
+-[MPABTestDesignerSnapshotResponseMessage serializedObjects]
+-[MPABTestDesignerSnapshotResponseMessage getImageHash:]
+-[MPABTestDesignerSnapshotResponseMessage imageHash]
+-[MPABTestDesignerSnapshotResponseMessage .cxx_destruct]
+_OBJC_IVAR_$_MPABTestDesignerSnapshotResponseMessage._imageHash
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPABTestDesignerSnapshotResponseMessage.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPABTestDesignerSnapshotResponseMessage.h
+-[MPEnumDescription initWithDictionary:]
+-[MPEnumDescription allValues]
+-[MPEnumDescription isFlagsSet]
+-[MPEnumDescription baseType]
+-[MPEnumDescription .cxx_destruct]
+_OBJC_IVAR_$_MPEnumDescription._flagSet
+_OBJC_IVAR_$_MPEnumDescription._baseType
+_OBJC_IVAR_$_MPEnumDescription._values
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPEnumDescription.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPEnumDescription.h
+-[MPObjectIdentityProvider init]
+-[MPObjectIdentityProvider identifierForObject:]
+-[MPObjectIdentityProvider .cxx_destruct]
+_OBJC_IVAR_$_MPObjectIdentityProvider._objectToIdentifierMap
+_OBJC_IVAR_$_MPObjectIdentityProvider._sequenceGenerator
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPObjectIdentityProvider.m
+-[MixpanelPeople initWithMixpanel:]
+-[MixpanelPeople description]
+-[MixpanelPeople deviceSystemVersion]
+-[MixpanelPeople collectAutomaticPeopleProperties]
+-[MixpanelPeople addPeopleRecordToQueueWithAction:andProperties:]
+___65-[MixpanelPeople addPeopleRecordToQueueWithAction:andProperties:]_block_invoke
++[MixpanelPeople pushDeviceTokenToString:]
+-[MixpanelPeople addPushDeviceToken:]
+-[MixpanelPeople removeAllPushDeviceTokens]
+-[MixpanelPeople removePushDeviceToken:]
+-[MixpanelPeople set:]
+-[MixpanelPeople set:to:]
+-[MixpanelPeople setOnce:]
+-[MixpanelPeople unset:]
+-[MixpanelPeople increment:]
+-[MixpanelPeople increment:by:]
+-[MixpanelPeople append:]
+-[MixpanelPeople union:]
+-[MixpanelPeople remove:]
+-[MixpanelPeople merge:]
+-[MixpanelPeople trackCharge:]
+-[MixpanelPeople trackCharge:withProperties:]
+-[MixpanelPeople clearCharges]
+-[MixpanelPeople deleteUser]
+-[MixpanelPeople ignoreTime]
+-[MixpanelPeople setIgnoreTime:]
+-[MixpanelPeople mixpanel]
+-[MixpanelPeople setMixpanel:]
+-[MixpanelPeople unidentifiedQueue]
+-[MixpanelPeople setUnidentifiedQueue:]
+-[MixpanelPeople distinctId]
+-[MixpanelPeople setDistinctId:]
+-[MixpanelPeople automaticPeopleProperties]
+-[MixpanelPeople setAutomaticPeopleProperties:]
+-[MixpanelPeople .cxx_destruct]
+_OBJC_IVAR_$_MixpanelPeople._ignoreTime
+_OBJC_IVAR_$_MixpanelPeople._mixpanel
+_OBJC_IVAR_$_MixpanelPeople._unidentifiedQueue
+_OBJC_IVAR_$_MixpanelPeople._distinctId
+_OBJC_IVAR_$_MixpanelPeople._automaticPeopleProperties
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MixpanelPeople.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MixpanelPeoplePrivate.h
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MixpanelPeople.h
+__65-[MixpanelPeople addPeopleRecordToQueueWithAction:andProperties:]_block_invoke
++[MPResources storyboardWithName:]
++[MPResources frameworkBundle]
++[MPResources notificationXibName]
++[MPResources imageNamed:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPResources.m
+UIInterfaceOrientationIsLandscape
++[MPABTestDesignerTweakRequestMessage message]
+-[MPABTestDesignerTweakRequestMessage responseCommandWithConnection:]
+___69-[MPABTestDesignerTweakRequestMessage responseCommandWithConnection:]_block_invoke
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPABTestDesignerTweakRequestMessage.m
+__69-[MPABTestDesignerTweakRequestMessage responseCommandWithConnection:]_block_invoke
++[MPSwizzler load]
++[MPSwizzler printSwizzles]
++[MPSwizzler swizzleForMethod:]
++[MPSwizzler removeSwizzleForMethod:]
++[MPSwizzler setSwizzle:forMethod:]
++[MPSwizzler isLocallyDefinedMethod:onClass:]
++[MPSwizzler swizzleSelector:onClass:withBlock:named:]
++[MPSwizzler unswizzleSelector:onClass:]
++[MPSwizzler unswizzleSelector:onClass:named:]
+-[MPSwizzle init]
+-[MPSwizzle initWithBlock:named:forClass:selector:originalMethod:withNumArgs:]
+-[MPSwizzle description]
+-[MPSwizzle class]
+-[MPSwizzle setClass:]
+-[MPSwizzle selector]
+-[MPSwizzle setSelector:]
+-[MPSwizzle originalMethod]
+-[MPSwizzle setOriginalMethod:]
+-[MPSwizzle numArgs]
+-[MPSwizzle setNumArgs:]
+-[MPSwizzle blocks]
+-[MPSwizzle setBlocks:]
+-[MPSwizzle .cxx_destruct]
+_mp_swizzledMethod_2
+_mp_swizzledMethod_3
+_mp_swizzledMethod_4
+_mp_swizzledMethod_5
+_swizzles
+_mp_swizzledMethods
+_OBJC_IVAR_$_MPSwizzle._class
+_OBJC_IVAR_$_MPSwizzle._selector
+_OBJC_IVAR_$_MPSwizzle._originalMethod
+_OBJC_IVAR_$_MPSwizzle._numArgs
+_OBJC_IVAR_$_MPSwizzle._blocks
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPSwizzler.m
+mp_swizzledMethod_5
+mp_swizzledMethod_4
+mp_swizzledMethod_3
+mp_swizzledMethod_2
++[MixpanelExceptionHandler sharedHandler]
+___41+[MixpanelExceptionHandler sharedHandler]_block_invoke
++[MixpanelExceptionHandler backtrace]
+-[MixpanelExceptionHandler init]
+-[MixpanelExceptionHandler setupHandlers]
+-[MixpanelExceptionHandler addMixpanelInstance:]
++[MixpanelExceptionHandler mp_handleUncaughtException:]
+___55+[MixpanelExceptionHandler mp_handleUncaughtException:]_block_invoke
+-[MixpanelExceptionHandler defaultExceptionHandler]
+-[MixpanelExceptionHandler setDefaultExceptionHandler:]
+-[MixpanelExceptionHandler mixpanelInstances]
+-[MixpanelExceptionHandler setMixpanelInstances:]
+-[MixpanelExceptionHandler .cxx_destruct]
+_sharedHandler.gSharedHandler
+_sharedHandler.onceToken
+_OBJC_IVAR_$_MixpanelExceptionHandler._mixpanelInstances
+_OBJC_IVAR_$_MixpanelExceptionHandler._defaultExceptionHandler
+___block_descriptor_tmp.78
+___block_literal_global.79
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MixpanelExceptionHandler.m
+__55+[MixpanelExceptionHandler mp_handleUncaughtException:]_block_invoke
+MPSignalHandler
+MPHandleException
+__41+[MixpanelExceptionHandler sharedHandler]_block_invoke
++[MPCATransform3DToNSDictionaryValueTransformer transformedValueClass]
++[MPCATransform3DToNSDictionaryValueTransformer allowsReverseTransformation]
+-[MPCATransform3DToNSDictionaryValueTransformer transformedValue:]
+-[MPCATransform3DToNSDictionaryValueTransformer reverseTransformedValue:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPCATransform3DToNSDictionaryValueTransformer.m
+MPCATransform3DMakeWithDictionaryRepresentation
+MPCATransform3DCreateDictionaryRepresentation
++[MPABTestDesignerSnapshotRequestMessage message]
+-[MPABTestDesignerSnapshotRequestMessage configuration]
+-[MPABTestDesignerSnapshotRequestMessage responseCommandWithConnection:]
+___Block_byref_object_copy_
+___Block_byref_object_dispose_
+___72-[MPABTestDesignerSnapshotRequestMessage responseCommandWithConnection:]_block_invoke
+___72-[MPABTestDesignerSnapshotRequestMessage responseCommandWithConnection:]_block_invoke_2
+___72-[MPABTestDesignerSnapshotRequestMessage responseCommandWithConnection:]_block_invoke.45
+___copy_helper_block_.48
+___destroy_helper_block_.49
+___copy_helper_block_.55
+___destroy_helper_block_.56
+___block_descriptor_tmp.50
+___block_descriptor_tmp.57
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPABTestDesignerSnapshotRequestMessage.m
+__72-[MPABTestDesignerSnapshotRequestMessage responseCommandWithConnection:]_block_invoke.45
+__72-[MPABTestDesignerSnapshotRequestMessage responseCommandWithConnection:]_block_invoke_2
+__72-[MPABTestDesignerSnapshotRequestMessage responseCommandWithConnection:]_block_invoke
+__Block_byref_object_dispose_
+__Block_byref_object_copy_
++[MPCGSizeToNSDictionaryValueTransformer transformedValueClass]
++[MPCGSizeToNSDictionaryValueTransformer allowsReverseTransformation]
+-[MPCGSizeToNSDictionaryValueTransformer transformedValue:]
+-[MPCGSizeToNSDictionaryValueTransformer reverseTransformedValue:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPCGSizeToNSDictionaryValueTransformer.m
++[MPVariant variantWithJSONObject:]
+-[MPVariant init]
+-[MPVariant initWithID:experimentID:actions:tweaks:]
+-[MPVariant initWithCoder:]
+-[MPVariant encodeWithCoder:]
+-[MPVariant addActionsFromJSONObject:andExecute:]
+-[MPVariant addActionFromJSONObject:andExecute:]
+-[MPVariant removeActionWithName:]
+-[MPVariant addTweaksFromJSONObject:andExecute:]
+-[MPVariant addTweakFromJSONObject:andExecute:]
+-[MPVariant execute]
+-[MPVariant stop]
+-[MPVariant finish]
+-[MPVariant restart]
+-[MPVariant isEqualToVariant:]
+-[MPVariant isEqual:]
+-[MPVariant hash]
+-[MPVariant ID]
+-[MPVariant setID:]
+-[MPVariant experimentID]
+-[MPVariant setExperimentID:]
+-[MPVariant running]
+-[MPVariant finished]
+-[MPVariant actions]
+-[MPVariant setActions:]
+-[MPVariant tweaks]
+-[MPVariant setTweaks:]
+-[MPVariant .cxx_destruct]
++[MPVariantAction load]
++[MPVariantAction actionWithJSONObject:]
+-[MPVariantAction init]
+-[MPVariantAction initWithName:path:selector:args:cacheOriginal:original:swizzle:swizzleClass:swizzleSelector:]
+-[MPVariantAction initWithCoder:]
+-[MPVariantAction encodeWithCoder:]
+-[MPVariantAction execute]
+___26-[MPVariantAction execute]_block_invoke
+___26-[MPVariantAction execute]_block_invoke_2
+___copy_helper_block_.278
+___destroy_helper_block_.279
+-[MPVariantAction stop]
+___23-[MPVariantAction stop]_block_invoke
+___copy_helper_block_.301
+___destroy_helper_block_.302
+-[MPVariantAction cacheOriginalImage:]
+-[MPVariantAction restoreCachedImage]
+-[MPVariantAction description]
++[MPVariantAction executeSelector:withArgs:onPath:fromRoot:toLeaf:]
++[MPVariantAction executeSelector:withArgs:onObjects:]
+-[MPVariantAction isEqualToAction:]
+-[MPVariantAction isEqual:]
+-[MPVariantAction hash]
+-[MPVariantAction name]
+-[MPVariantAction setName:]
+-[MPVariantAction path]
+-[MPVariantAction setPath:]
+-[MPVariantAction selector]
+-[MPVariantAction setSelector:]
+-[MPVariantAction args]
+-[MPVariantAction setArgs:]
+-[MPVariantAction original]
+-[MPVariantAction setOriginal:]
+-[MPVariantAction cacheOriginal]
+-[MPVariantAction setCacheOriginal:]
+-[MPVariantAction swizzle]
+-[MPVariantAction setSwizzle:]
+-[MPVariantAction swizzleClass]
+-[MPVariantAction setSwizzleClass:]
+-[MPVariantAction swizzleSelector]
+-[MPVariantAction setSwizzleSelector:]
+-[MPVariantAction appliedTo]
+-[MPVariantAction setAppliedTo:]
+-[MPVariantAction .cxx_destruct]
++[MPVariantTweak tweakWithJSONObject:]
+-[MPVariantTweak init]
+-[MPVariantTweak initWithName:encoding:value:]
+-[MPVariantTweak initWithCoder:]
+-[MPVariantTweak encodeWithCoder:]
+-[MPVariantTweak execute]
+-[MPVariantTweak stop]
+-[MPVariantTweak description]
+-[MPVariantTweak isEqualToTweak:]
+-[MPVariantTweak isEqual:]
+-[MPVariantTweak hash]
+-[MPVariantTweak name]
+-[MPVariantTweak setName:]
+-[MPVariantTweak encoding]
+-[MPVariantTweak setEncoding:]
+-[MPVariantTweak value]
+-[MPVariantTweak setValue:]
+-[MPVariantTweak .cxx_destruct]
+_OBJC_IVAR_$_MPVariant._finished
+_OBJC_IVAR_$_MPVariant._running
+_OBJC_IVAR_$_MPVariant._ID
+_OBJC_IVAR_$_MPVariant._experimentID
+_OBJC_IVAR_$_MPVariant._actions
+_OBJC_IVAR_$_MPVariant._tweaks
+l_OBJC_PROTOCOL_$_NSCoding
+l_OBJC_LABEL_PROTOCOL_$_NSCoding
+_gettersForSetters
+_originalCache
+_OBJC_IVAR_$_MPVariantAction._name
+_OBJC_IVAR_$_MPVariantAction._path
+_OBJC_IVAR_$_MPVariantAction._selector
+_OBJC_IVAR_$_MPVariantAction._args
+_OBJC_IVAR_$_MPVariantAction._original
+_OBJC_IVAR_$_MPVariantAction._swizzle
+_OBJC_IVAR_$_MPVariantAction._swizzleClass
+_OBJC_IVAR_$_MPVariantAction._swizzleSelector
+___block_descriptor_tmp.281
+___block_descriptor_tmp.303
+_OBJC_IVAR_$_MPVariantAction._cacheOriginal
+_OBJC_IVAR_$_MPVariantAction._appliedTo
+_OBJC_IVAR_$_MPVariantTweak._name
+_OBJC_IVAR_$_MPVariantTweak._encoding
+_OBJC_IVAR_$_MPVariantTweak._value
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPVariant.m
+transformValue
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPValueTransformers.h
+__23-[MPVariantAction stop]_block_invoke
+__26-[MPVariantAction execute]_block_invoke_2
+__26-[MPVariantAction execute]_block_invoke
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPVariant.h
++[MPUIColorToNSStringValueTransformer transformedValueClass]
++[MPUIColorToNSStringValueTransformer allowsReverseTransformation]
+-[MPUIColorToNSStringValueTransformer transformedValue:]
+-[MPUIColorToNSStringValueTransformer reverseTransformedValue:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPUIColorToNSStringValueTransformer.m
+-[MPNotificationButton initWithJSONObject:]
+-[MPNotificationButton jsonDescription]
+-[MPNotificationButton setJsonDescription:]
+-[MPNotificationButton text]
+-[MPNotificationButton setText:]
+-[MPNotificationButton textColor]
+-[MPNotificationButton setTextColor:]
+-[MPNotificationButton backgroundColor]
+-[MPNotificationButton setBackgroundColor:]
+-[MPNotificationButton borderColor]
+-[MPNotificationButton setBorderColor:]
+-[MPNotificationButton ctaUrl]
+-[MPNotificationButton setCtaUrl:]
+-[MPNotificationButton .cxx_destruct]
+_OBJC_IVAR_$_MPNotificationButton._jsonDescription
+_OBJC_IVAR_$_MPNotificationButton._text
+_OBJC_IVAR_$_MPNotificationButton._textColor
+_OBJC_IVAR_$_MPNotificationButton._backgroundColor
+_OBJC_IVAR_$_MPNotificationButton._borderColor
+_OBJC_IVAR_$_MPNotificationButton._ctaUrl
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPNotificationButton.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPNotificationButton.h
+-[MPObjectSerializer initWithConfiguration:objectIdentityProvider:]
+-[MPObjectSerializer serializedObjectsWithRootObject:]
+-[MPObjectSerializer visitObject:withContext:]
+-[MPObjectSerializer classHierarchyArrayForObject:]
+-[MPObjectSerializer allValuesForType:]
+-[MPObjectSerializer parameterVariationsForPropertySelector:]
+-[MPObjectSerializer instanceVariableValueForObject:propertyDescription:]
+-[MPObjectSerializer invocationForObject:withSelectorDescription:]
+-[MPObjectSerializer propertyValue:propertyDescription:context:]
+-[MPObjectSerializer propertyValueForObject:withPropertyDescription:context:]
+-[MPObjectSerializer isNestedObjectType:]
+-[MPObjectSerializer classDescriptionForObject:]
+-[MPObjectSerializer .cxx_destruct]
+_OBJC_IVAR_$_MPObjectSerializer._configuration
+_OBJC_IVAR_$_MPObjectSerializer._objectIdentityProvider
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPObjectSerializer.m
++[NSThread(MPHelpers) mp_safelyRunOnMainThreadSync:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/NSThread+MPHelpers.m
+-[MPDelegateInfo initWithDictionary:]
+-[MPDelegateInfo selectorName]
+-[MPDelegateInfo .cxx_destruct]
+-[MPClassDescription initWithSuperclassDescription:dictionary:]
+-[MPClassDescription propertyDescriptions]
+-[MPClassDescription isDescriptionForKindOfClass:]
+-[MPClassDescription debugDescription]
+-[MPClassDescription superclassDescription]
+-[MPClassDescription delegateInfos]
+-[MPClassDescription .cxx_destruct]
+_OBJC_IVAR_$_MPDelegateInfo._selectorName
+_OBJC_IVAR_$_MPClassDescription._superclassDescription
+_OBJC_IVAR_$_MPClassDescription._propertyDescriptions
+_OBJC_IVAR_$_MPClassDescription._delegateInfos
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPClassDescription.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPClassDescription.h
++[MPUITableViewBinding typeName]
++[MPUITableViewBinding bindingWithJSONObject:]
++[MPUITableViewBinding bindngWithJSONObject:]
+-[MPUITableViewBinding initWithEventName:onPath:]
+-[MPUITableViewBinding initWithEventName:onPath:withDelegate:]
+-[MPUITableViewBinding description]
+-[MPUITableViewBinding execute]
+___31-[MPUITableViewBinding execute]_block_invoke
+___31-[MPUITableViewBinding execute]_block_invoke_2
+___copy_helper_block_.80
+___destroy_helper_block_.81
+-[MPUITableViewBinding stop]
+-[MPUITableViewBinding parentTableView:]
+___block_descriptor_tmp.83
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPUITableViewBinding.m
+__31-[MPUITableViewBinding execute]_block_invoke_2
+__31-[MPUITableViewBinding execute]_block_invoke
++[MPABTestDesignerChangeResponseMessage message]
+-[MPABTestDesignerChangeResponseMessage setStatus:]
+-[MPABTestDesignerChangeResponseMessage status]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPABTestDesignerChangeResponseMessage.m
+-[MPNotification initWithJSONObject:]
+-[MPNotification type]
+-[MPNotification image]
++[MPNotification logNotificationError:withValue:]
+-[MPNotification jsonDescription]
+-[MPNotification extrasDescription]
+-[MPNotification ID]
+-[MPNotification messageID]
+-[MPNotification imageURL]
+-[MPNotification setImageURL:]
+-[MPNotification setImage:]
+-[MPNotification body]
+-[MPNotification bodyColor]
+-[MPNotification backgroundColor]
+-[MPNotification .cxx_destruct]
+_OBJC_IVAR_$_MPNotification._jsonDescription
+_OBJC_IVAR_$_MPNotification._extrasDescription
+_OBJC_IVAR_$_MPNotification._ID
+_OBJC_IVAR_$_MPNotification._messageID
+_OBJC_IVAR_$_MPNotification._body
+_OBJC_IVAR_$_MPNotification._bodyColor
+_OBJC_IVAR_$_MPNotification._backgroundColor
+_OBJC_IVAR_$_MPNotification._imageURL
+_OBJC_IVAR_$_MPNotification._image
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPNotification.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPNotification.h
++[MPEventBinding bindingWithJSONObject:]
++[MPEventBinding bindngWithJSONObject:]
++[MPEventBinding subclassFromString:]
++[MPEventBinding track:properties:]
+-[MPEventBinding initWithEventName:onPath:]
+-[MPEventBinding description]
++[MPEventBinding typeName]
+-[MPEventBinding execute]
+-[MPEventBinding stop]
+-[MPEventBinding initWithCoder:]
+-[MPEventBinding encodeWithCoder:]
+-[MPEventBinding isEqual:]
+-[MPEventBinding hash]
+-[MPEventBinding ID]
+-[MPEventBinding setID:]
+-[MPEventBinding name]
+-[MPEventBinding setName:]
+-[MPEventBinding path]
+-[MPEventBinding setPath:]
+-[MPEventBinding eventName]
+-[MPEventBinding setEventName:]
+-[MPEventBinding swizzleClass]
+-[MPEventBinding setSwizzleClass:]
+-[MPEventBinding running]
+-[MPEventBinding setRunning:]
+-[MPEventBinding .cxx_destruct]
+_OBJC_IVAR_$_MPEventBinding._ID
+_OBJC_IVAR_$_MPEventBinding._name
+_OBJC_IVAR_$_MPEventBinding._path
+_OBJC_IVAR_$_MPEventBinding._eventName
+_OBJC_IVAR_$_MPEventBinding._swizzleClass
+_OBJC_IVAR_$_MPEventBinding._running
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPEventBinding.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPEventBinding.h
++[MPBOOLToNSNumberValueTransformer transformedValueClass]
++[MPBOOLToNSNumberValueTransformer allowsReverseTransformation]
+-[MPBOOLToNSNumberValueTransformer transformedValue:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPBOOLToNSNumberValueTransformer.m
++[MPABTestDesignerDeviceInfoResponseMessage message]
+-[MPABTestDesignerDeviceInfoResponseMessage systemName]
+-[MPABTestDesignerDeviceInfoResponseMessage setSystemName:]
+-[MPABTestDesignerDeviceInfoResponseMessage systemVersion]
+-[MPABTestDesignerDeviceInfoResponseMessage setSystemVersion:]
+-[MPABTestDesignerDeviceInfoResponseMessage appVersion]
+-[MPABTestDesignerDeviceInfoResponseMessage setAppVersion:]
+-[MPABTestDesignerDeviceInfoResponseMessage appRelease]
+-[MPABTestDesignerDeviceInfoResponseMessage setAppRelease:]
+-[MPABTestDesignerDeviceInfoResponseMessage deviceName]
+-[MPABTestDesignerDeviceInfoResponseMessage setDeviceName:]
+-[MPABTestDesignerDeviceInfoResponseMessage libVersion]
+-[MPABTestDesignerDeviceInfoResponseMessage setLibVersion:]
+-[MPABTestDesignerDeviceInfoResponseMessage deviceModel]
+-[MPABTestDesignerDeviceInfoResponseMessage setDeviceModel:]
+-[MPABTestDesignerDeviceInfoResponseMessage availableFontFamilies]
+-[MPABTestDesignerDeviceInfoResponseMessage setAvailableFontFamilies:]
+-[MPABTestDesignerDeviceInfoResponseMessage mainBundleIdentifier]
+-[MPABTestDesignerDeviceInfoResponseMessage setMainBundleIdentifier:]
+-[MPABTestDesignerDeviceInfoResponseMessage setTweaks:]
+-[MPABTestDesignerDeviceInfoResponseMessage tweaks]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPABTestDesignerDeviceInfoResponseMessage.m
+-[MPSequenceGenerator init]
+-[MPSequenceGenerator initWithInitialValue:]
+-[MPSequenceGenerator nextValue]
+_OBJC_IVAR_$_MPSequenceGenerator._value
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPSequenceGenerator.m
++[MPNetwork sharedURLSession]
+-[MPNetwork initWithServerURL:mixpanel:]
+-[MPNetwork flushEventQueue:]
+-[MPNetwork orderAutomaticEvents:]
+-[MPNetwork flushPeopleQueue:]
+-[MPNetwork flushQueue:endpoint:]
+___33-[MPNetwork flushQueue:endpoint:]_block_invoke
+-[MPNetwork handleNetworkResponse:withError:]
++[MPNetwork buildDecideQueryForProperties:withDistinctID:andToken:]
++[MPNetwork pathForEndpoint:]
+___29+[MPNetwork pathForEndpoint:]_block_invoke
+-[MPNetwork buildGetRequestForEndpoint:withQueryItems:]
+-[MPNetwork buildPostRequestForEndpoint:andBody:]
+-[MPNetwork buildRequestForEndpoint:byHTTPMethod:withQueryItems:andBody:]
++[MPNetwork encodeArrayForAPI:]
++[MPNetwork encodeArrayAsJSONData:]
++[MPNetwork encodeJSONDataAsBase64:]
++[MPNetwork convertFoundationTypesToJSON:]
++[MPNetwork dateFormatter]
+___26+[MPNetwork dateFormatter]_block_invoke
++[MPNetwork calculateBackOffTimeFromFailures:]
++[MPNetwork parseRetryAfterTime:]
++[MPNetwork parseHTTPFailure:withError:]
+-[MPNetwork updateNetworkActivityIndicator:]
+___44-[MPNetwork updateNetworkActivityIndicator:]_block_invoke
+-[MPNetwork shouldManageNetworkActivityIndicator]
+-[MPNetwork setShouldManageNetworkActivityIndicator:]
+-[MPNetwork useIPAddressForGeoLocation]
+-[MPNetwork setUseIPAddressForGeoLocation:]
+-[MPNetwork mixpanel]
+-[MPNetwork setMixpanel:]
+-[MPNetwork serverURL]
+-[MPNetwork setServerURL:]
+-[MPNetwork requestsDisabledUntilTime]
+-[MPNetwork setRequestsDisabledUntilTime:]
+-[MPNetwork consecutiveFailures]
+-[MPNetwork setConsecutiveFailures:]
+-[MPNetwork .cxx_destruct]
+_sharedURLSession.sharedSession
+_pathForEndpoint:.endPointToPath
+_pathForEndpoint:.onceToken
+___block_descriptor_tmp.163
+_dateFormatter.formatter
+_dateFormatter.onceToken
+___block_descriptor_tmp.270
+___block_literal_global.271
+___block_descriptor_tmp.285
+_OBJC_IVAR_$_MPNetwork._shouldManageNetworkActivityIndicator
+_OBJC_IVAR_$_MPNetwork._useIPAddressForGeoLocation
+_OBJC_IVAR_$_MPNetwork._mixpanel
+_OBJC_IVAR_$_MPNetwork._serverURL
+_OBJC_IVAR_$_MPNetwork._requestsDisabledUntilTime
+_OBJC_IVAR_$_MPNetwork._consecutiveFailures
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPNetwork.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPNetworkPrivate.h
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPNetwork.h
+__44-[MPNetwork updateNetworkActivityIndicator:]_block_invoke
+__26+[MPNetwork dateFormatter]_block_invoke
+__29+[MPNetwork pathForEndpoint:]_block_invoke
+__33-[MPNetwork flushQueue:endpoint:]_block_invoke
++[MPUIFontToNSDictionaryValueTransformer transformedValueClass]
++[MPUIFontToNSDictionaryValueTransformer allowsReverseTransformation]
+-[MPUIFontToNSDictionaryValueTransformer transformedValue:]
+-[MPUIFontToNSDictionaryValueTransformer reverseTransformedValue:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPUIFontToNSDictionaryValueTransformer.m
++[MPABTestDesignerChangeRequestMessage message]
+-[MPABTestDesignerChangeRequestMessage responseCommandWithConnection:]
+___70-[MPABTestDesignerChangeRequestMessage responseCommandWithConnection:]_block_invoke
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPABTestDesignerChangeRequestMessage.m
+__70-[MPABTestDesignerChangeRequestMessage responseCommandWithConnection:]_block_invoke
++[MPAbstractABTestDesignerMessage messageWithType:payload:]
+-[MPAbstractABTestDesignerMessage initWithType:]
+-[MPAbstractABTestDesignerMessage initWithType:payload:]
+-[MPAbstractABTestDesignerMessage setPayloadObject:forKey:]
+-[MPAbstractABTestDesignerMessage payloadObjectForKey:]
+-[MPAbstractABTestDesignerMessage payload]
+-[MPAbstractABTestDesignerMessage JSONData]
+-[MPAbstractABTestDesignerMessage responseCommandWithConnection:]
+-[MPAbstractABTestDesignerMessage debugDescription]
+-[MPAbstractABTestDesignerMessage type]
+-[MPAbstractABTestDesignerMessage setType:]
+-[MPAbstractABTestDesignerMessage .cxx_destruct]
+_OBJC_IVAR_$_MPAbstractABTestDesignerMessage._type
+_OBJC_IVAR_$_MPAbstractABTestDesignerMessage._payload
+l_OBJC_PROTOCOL_$_MPABTestDesignerMessage
+l_OBJC_LABEL_PROTOCOL_$_MPABTestDesignerMessage
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPAbstractABTestDesignerMessage.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPAbstractABTestDesignerMessage.h
++[NSObject(MPSwizzle) mp_swizzleMethod:withMethod:error:]
++[NSObject(MPSwizzle) mp_swizzleClassMethod:withClassMethod:error:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPSwizzle.m
++[MPObjectSelector objectSelectorWithString:]
+-[MPObjectSelector initWithString:]
+-[MPObjectSelector selectFromRoot:]
+-[MPObjectSelector fuzzySelectFromRoot:]
+-[MPObjectSelector selectFromRoot:evaluatingFinalPredicate:]
+-[MPObjectSelector isLeafSelected:fromRoot:]
+-[MPObjectSelector fuzzyIsLeafSelected:fromRoot:]
+-[MPObjectSelector isLeafSelected:fromRoot:evaluatingFinalPredicate:]
+-[MPObjectSelector nextFilter]
+___30-[MPObjectSelector nextFilter]_block_invoke
+-[MPObjectSelector selectedClass]
+-[MPObjectSelector pathContainsObjectOfClass:]
+-[MPObjectSelector description]
+-[MPObjectSelector isEqual:]
+-[MPObjectSelector hash]
+-[MPObjectSelector string]
+-[MPObjectSelector scanner]
+-[MPObjectSelector setScanner:]
+-[MPObjectSelector filters]
+-[MPObjectSelector setFilters:]
+-[MPObjectSelector .cxx_destruct]
+-[MPObjectFilter init]
+-[MPObjectFilter apply:]
+-[MPObjectFilter applyReverse:]
+-[MPObjectFilter appliesTo:]
+-[MPObjectFilter appliesToAny:]
+-[MPObjectFilter isView:siblingNumber:]
+-[MPObjectFilter isView:oneOfNSiblings:]
+-[MPObjectFilter isView:siblingNumber:of:]
+-[MPObjectFilter getParentsOfObject:]
+-[MPObjectFilter getChildrenOfObject:ofType:]
+___45-[MPObjectFilter getChildrenOfObject:ofType:]_block_invoke
+-[MPObjectFilter description]
+-[MPObjectFilter name]
+-[MPObjectFilter setName:]
+-[MPObjectFilter predicate]
+-[MPObjectFilter setPredicate:]
+-[MPObjectFilter index]
+-[MPObjectFilter setIndex:]
+-[MPObjectFilter unique]
+-[MPObjectFilter setUnique:]
+-[MPObjectFilter nameOnly]
+-[MPObjectFilter setNameOnly:]
+-[MPObjectFilter .cxx_destruct]
+_OBJC_IVAR_$_MPObjectSelector._string
+_OBJC_IVAR_$_MPObjectSelector._scanner
+_OBJC_IVAR_$_MPObjectSelector._separatorChars
+_OBJC_IVAR_$_MPObjectSelector._predicateStartChar
+_OBJC_IVAR_$_MPObjectSelector._predicateEndChar
+_OBJC_IVAR_$_MPObjectSelector._classAndPropertyChars
+_OBJC_IVAR_$_MPObjectSelector._flagStartChar
+_OBJC_IVAR_$_MPObjectSelector._flagEndChar
+_OBJC_IVAR_$_MPObjectSelector._filters
+_OBJC_IVAR_$_MPObjectFilter._name
+_OBJC_IVAR_$_MPObjectFilter._index
+_OBJC_IVAR_$_MPObjectFilter._predicate
+___block_descriptor_tmp.215
+_OBJC_IVAR_$_MPObjectFilter._unique
+_OBJC_IVAR_$_MPObjectFilter._nameOnly
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPObjectSelector.m
+__45-[MPObjectFilter getChildrenOfObject:ofType:]_block_invoke
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPObjectSelector.h
+__30-[MPObjectSelector nextFilter]_block_invoke
+-[MPEventBindingCollection updateBindings:]
+-[MPEventBindingCollection cleanup]
+-[MPEventBindingCollection bindings]
+-[MPEventBindingCollection setBindings:]
+-[MPEventBindingCollection .cxx_destruct]
++[MPDesignerEventBindingRequestMessage message]
+-[MPDesignerEventBindingRequestMessage responseCommandWithConnection:]
+___70-[MPDesignerEventBindingRequestMessage responseCommandWithConnection:]_block_invoke
+___70-[MPDesignerEventBindingRequestMessage responseCommandWithConnection:]_block_invoke_2
+___copy_helper_block_.100
+___destroy_helper_block_.101
+_OBJC_IVAR_$_MPEventBindingCollection._bindings
+___block_descriptor_tmp.102
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPDesignerEventBindingRequestMesssage.m
+__70-[MPDesignerEventBindingRequestMessage responseCommandWithConnection:]_block_invoke_2
+__70-[MPDesignerEventBindingRequestMessage responseCommandWithConnection:]_block_invoke
+-[MPTypeDescription initWithDictionary:]
+-[MPTypeDescription name]
+-[MPTypeDescription .cxx_destruct]
+_OBJC_IVAR_$_MPTypeDescription._name
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPTypeDescription.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPTypeDescription.h
++[MPCGColorRefToNSStringValueTransformer transformedValueClass]
+-[MPCGColorRefToNSStringValueTransformer transformedValue:]
+-[MPCGColorRefToNSStringValueTransformer reverseTransformedValue:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPCGColorRefToNSStringValueTransformer.m
++[Mixpanel(AutomaticTracks) sharedAutomatedInstance]
++[Mixpanel(AutomaticTracks) setSharedAutomatedInstance:]
++[Mixpanel(AutomaticTracks) addSwizzles]
+___40+[Mixpanel(AutomaticTracks) addSwizzles]_block_invoke
+_gSharedAutomatedInstance
+_addSwizzles.onceToken
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/Mixpanel+AutomaticTracks.m
+__40+[Mixpanel(AutomaticTracks) addSwizzles]_block_invoke
++[MPUIEdgeInsetsToNSDictionaryValueTransformer transformedValueClass]
++[MPUIEdgeInsetsToNSDictionaryValueTransformer allowsReverseTransformation]
+-[MPUIEdgeInsetsToNSDictionaryValueTransformer transformedValue:]
+-[MPUIEdgeInsetsToNSDictionaryValueTransformer reverseTransformedValue:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPUIEdgeInsetsToNSDictionaryValueTransformer.m
+UIEdgeInsetsMake
++[MPUIControlBinding typeName]
++[MPUIControlBinding bindingWithJSONObject:]
++[MPUIControlBinding bindngWithJSONObject:]
+-[MPUIControlBinding initWithEventName:onPath:withControlEvent:andVerifyEvent:]
+-[MPUIControlBinding description]
+-[MPUIControlBinding resetAppliedTo]
+-[MPUIControlBinding execute]
+___29-[MPUIControlBinding execute]_block_invoke
+___29-[MPUIControlBinding execute]_block_invoke_2
+___copy_helper_block_.94
+___destroy_helper_block_.95
+-[MPUIControlBinding stop]
+-[MPUIControlBinding stopOnView:]
+-[MPUIControlBinding verifyControlMatchesPath:]
+-[MPUIControlBinding preVerify:forEvent:]
+-[MPUIControlBinding execute:forEvent:]
+-[MPUIControlBinding encodeWithCoder:]
+-[MPUIControlBinding initWithCoder:]
+-[MPUIControlBinding isEqual:]
+-[MPUIControlBinding hash]
+-[MPUIControlBinding controlEvent]
+-[MPUIControlBinding verifyEvent]
+-[MPUIControlBinding appliedTo]
+-[MPUIControlBinding setAppliedTo:]
+-[MPUIControlBinding verified]
+-[MPUIControlBinding setVerified:]
+-[MPUIControlBinding .cxx_destruct]
+_OBJC_IVAR_$_MPUIControlBinding._controlEvent
+_OBJC_IVAR_$_MPUIControlBinding._verifyEvent
+___block_descriptor_tmp.97
+_OBJC_IVAR_$_MPUIControlBinding._appliedTo
+_OBJC_IVAR_$_MPUIControlBinding._verified
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPUIControlBinding.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPUIControlBinding.h
+__29-[MPUIControlBinding execute]_block_invoke_2
+__29-[MPUIControlBinding execute]_block_invoke
+-[UIImage(MPImageEffects) mp_applyLightEffect]
+-[UIImage(MPImageEffects) mp_applyExtraLightEffect]
+-[UIImage(MPImageEffects) mp_applyDarkEffect]
+-[UIImage(MPImageEffects) mp_applyTintEffectWithColor:]
+-[UIImage(MPImageEffects) mp_applyBlurWithRadius:tintColor:saturationDeltaFactor:maskImage:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/UIImage+MPImageEffects.m
+-[NSData(MPWebSocket) stringBySHA1ThenBase64Encoding]
+-[NSString(MPWebSocket) stringBySHA1ThenBase64Encoding]
++[MPWebSocket initialize]
+-[MPWebSocket initWithURLRequest:protocols:]
+-[MPWebSocket initWithURLRequest:]
+-[MPWebSocket initWithURL:]
+-[MPWebSocket initWithURL:protocols:]
+-[MPWebSocket _MP_commonInit]
+-[MPWebSocket assertOnWorkQueue]
+-[MPWebSocket dealloc]
+-[MPWebSocket setReadyState:]
+-[MPWebSocket open]
+-[MPWebSocket _performDelegateBlock:]
+-[MPWebSocket setDelegateDispatchQueue:]
+-[MPWebSocket _checkHandshake:]
+-[MPWebSocket _HTTPHeadersDidFinish]
+___36-[MPWebSocket _HTTPHeadersDidFinish]_block_invoke
+-[MPWebSocket _readHTTPHeader]
+___30-[MPWebSocket _readHTTPHeader]_block_invoke
+-[MPWebSocket didConnect]
+___25-[MPWebSocket didConnect]_block_invoke
+-[MPWebSocket _initializeStreams]
+-[MPWebSocket _connect]
+-[MPWebSocket scheduleInRunLoop:forMode:]
+-[MPWebSocket unscheduleFromRunLoop:forMode:]
+-[MPWebSocket close]
+-[MPWebSocket closeWithCode:reason:]
+___36-[MPWebSocket closeWithCode:reason:]_block_invoke
+___copy_helper_block_.229
+___destroy_helper_block_.230
+-[MPWebSocket _closeWithProtocolError:]
+___39-[MPWebSocket _closeWithProtocolError:]_block_invoke
+___39-[MPWebSocket _closeWithProtocolError:]_block_invoke_2
+___copy_helper_block_.232
+___destroy_helper_block_.233
+___copy_helper_block_.235
+___destroy_helper_block_.236
+-[MPWebSocket _failWithError:]
+___30-[MPWebSocket _failWithError:]_block_invoke
+___30-[MPWebSocket _failWithError:]_block_invoke_2
+___copy_helper_block_.240
+___destroy_helper_block_.241
+___copy_helper_block_.249
+___destroy_helper_block_.250
+-[MPWebSocket _writeData:]
+-[MPWebSocket send:]
+___20-[MPWebSocket send:]_block_invoke
+___copy_helper_block_.265
+___destroy_helper_block_.266
+-[MPWebSocket handlePing:]
+___26-[MPWebSocket handlePing:]_block_invoke
+___26-[MPWebSocket handlePing:]_block_invoke_2
+___copy_helper_block_.268
+___destroy_helper_block_.269
+___copy_helper_block_.271
+___destroy_helper_block_.272
+-[MPWebSocket handlePong]
+-[MPWebSocket _handleMessage:]
+___30-[MPWebSocket _handleMessage:]_block_invoke
+-[MPWebSocket handleCloseWithData:]
+___35-[MPWebSocket handleCloseWithData:]_block_invoke
+___copy_helper_block_.295
+___destroy_helper_block_.296
+-[MPWebSocket _disconnect]
+-[MPWebSocket _handleFrameWithData:opCode:]
+___43-[MPWebSocket _handleFrameWithData:opCode:]_block_invoke
+___copy_helper_block_.302
+___destroy_helper_block_.303
+___43-[MPWebSocket _handleFrameWithData:opCode:]_block_invoke.307
+___copy_helper_block_.308
+___destroy_helper_block_.309
+-[MPWebSocket _handleFrameHeader:curData:]
+___42-[MPWebSocket _handleFrameHeader:curData:]_block_invoke
+-[MPWebSocket _readFrameContinue]
+___33-[MPWebSocket _readFrameContinue]_block_invoke
+___33-[MPWebSocket _readFrameContinue]_block_invoke_2
+___copy_helper_block_.348
+___destroy_helper_block_.349
+-[MPWebSocket _readFrameNew]
+___28-[MPWebSocket _readFrameNew]_block_invoke
+-[MPWebSocket _pumpWriting]
+___27-[MPWebSocket _pumpWriting]_block_invoke
+___copy_helper_block_.374
+___destroy_helper_block_.375
+-[MPWebSocket _addConsumerWithScanner:callback:]
+-[MPWebSocket _addConsumerWithDataLength:callback:readToCurrentFrame:unmaskBytes:]
+-[MPWebSocket _addConsumerWithScanner:callback:dataLength:]
+-[MPWebSocket _scheduleCleanup]
+-[MPWebSocket _cleanupSelfReference]
+___36-[MPWebSocket _cleanupSelfReference]_block_invoke
+___copy_helper_block_.391
+___destroy_helper_block_.392
+-[MPWebSocket _readUntilHeaderCompleteWithCallback:]
+-[MPWebSocket _readUntilBytes:length:callback:]
+___47-[MPWebSocket _readUntilBytes:length:callback:]_block_invoke
+-[MPWebSocket _innerPumpScanner]
+___32-[MPWebSocket _innerPumpScanner]_block_invoke
+___copy_helper_block_.414
+___destroy_helper_block_.415
+-[MPWebSocket _pumpScanner]
+-[MPWebSocket _sendFrameWithOpcode:data:]
+-[MPWebSocket stream:handleEvent:]
+___34-[MPWebSocket stream:handleEvent:]_block_invoke
+___copy_helper_block_.440
+___destroy_helper_block_.441
+___34-[MPWebSocket stream:handleEvent:]_block_invoke.443
+___34-[MPWebSocket stream:handleEvent:]_block_invoke_2
+___copy_helper_block_.457
+___destroy_helper_block_.458
+___copy_helper_block_.472
+___destroy_helper_block_.473
+-[MPWebSocket delegate]
+-[MPWebSocket setDelegate:]
+-[MPWebSocket url]
+-[MPWebSocket readyState]
+-[MPWebSocket protocol]
+-[MPWebSocket delegateOperationQueue]
+-[MPWebSocket setDelegateOperationQueue:]
+-[MPWebSocket delegateDispatchQueue]
+-[MPWebSocket .cxx_destruct]
+-[MPIOConsumer setupWithScanner:handler:bytesNeeded:readToCurrentFrame:unmaskBytes:]
+-[MPIOConsumer bytesNeeded]
+-[MPIOConsumer setBytesNeeded:]
+-[MPIOConsumer consumer]
+-[MPIOConsumer handler]
+-[MPIOConsumer readToCurrentFrame]
+-[MPIOConsumer unmaskBytes]
+-[MPIOConsumer .cxx_destruct]
+-[MPIOConsumerPool initWithBufferCapacity:]
+-[MPIOConsumerPool init]
+-[MPIOConsumerPool consumerWithScanner:handler:bytesNeeded:readToCurrentFrame:unmaskBytes:]
+-[MPIOConsumerPool returnConsumer:]
+-[MPIOConsumerPool .cxx_destruct]
+-[NSURLRequest(MPCertificateAdditions) mp_SSLPinnedCertificates]
+-[NSMutableURLRequest(MPCertificateAdditions) mp_SSLPinnedCertificates]
+-[NSMutableURLRequest(MPCertificateAdditions) setMp_SSLPinnedCertificates:]
+-[NSURL(MPWebSocket) mp_origin]
++[NSRunLoop(MPWebSocket) mp_networkRunLoop]
+___43+[NSRunLoop(MPWebSocket) mp_networkRunLoop]_block_invoke
+-[_MPRunLoopThread dealloc]
+-[_MPRunLoopThread init]
+-[_MPRunLoopThread main]
+-[_MPRunLoopThread runLoop]
+-[_MPRunLoopThread .cxx_destruct]
+_CRLFCRLF
+_OBJC_IVAR_$_MPWebSocket._url
+_OBJC_IVAR_$_MPWebSocket._urlRequest
+_OBJC_IVAR_$_MPWebSocket._requestedProtocols
+_OBJC_IVAR_$_MPWebSocket._secure
+_OBJC_IVAR_$_MPWebSocket._readyState
+_OBJC_IVAR_$_MPWebSocket._consumerStopped
+_OBJC_IVAR_$_MPWebSocket._webSocketVersion
+_OBJC_IVAR_$_MPWebSocket._workQueue
+_OBJC_IVAR_$_MPWebSocket._delegateDispatchQueue
+_OBJC_IVAR_$_MPWebSocket._readBuffer
+_OBJC_IVAR_$_MPWebSocket._outputBuffer
+_OBJC_IVAR_$_MPWebSocket._currentFrameData
+_OBJC_IVAR_$_MPWebSocket._consumers
+_OBJC_IVAR_$_MPWebSocket._consumerPool
+_OBJC_IVAR_$_MPWebSocket._scheduledRunloops
+_OBJC_IVAR_$_MPWebSocket._inputStream
+_OBJC_IVAR_$_MPWebSocket._outputStream
+_OBJC_IVAR_$_MPWebSocket._receivedHTTPHeaders
+_OBJC_IVAR_$_MPWebSocket._selfRetain
+_OBJC_IVAR_$_MPWebSocket._delegateOperationQueue
+_OBJC_IVAR_$_MPWebSocket._secKey
+_OBJC_IVAR_$_MPWebSocket._protocol
+_OBJC_IVAR_$_MPWebSocket._didFail
+___block_descriptor_tmp.127
+___block_descriptor_tmp.173
+___block_descriptor_tmp.231
+___block_descriptor_tmp.234
+___block_descriptor_tmp.237
+_OBJC_IVAR_$_MPWebSocket._failed
+___block_descriptor_tmp.242
+___block_descriptor_tmp.251
+_OBJC_IVAR_$_MPWebSocket._closeWhenFinishedWriting
+___block_descriptor_tmp.267
+___block_descriptor_tmp.273
+___block_descriptor_tmp.280
+_OBJC_IVAR_$_MPWebSocket._closeCode
+_OBJC_IVAR_$_MPWebSocket._closeReason
+___block_descriptor_tmp.297
+___block_descriptor_tmp.304
+___block_descriptor_tmp.310
+_OBJC_IVAR_$_MPWebSocket._currentFrameOpcode
+_OBJC_IVAR_$_MPWebSocket._currentFrameCount
+___block_descriptor_tmp.328
+_OBJC_IVAR_$_MPWebSocket._currentReadMaskKey
+___block_descriptor_tmp.350
+___block_descriptor_tmp.351
+___block_literal_global.352
+_OBJC_IVAR_$_MPWebSocket._readOpCount
+_OBJC_IVAR_$_MPWebSocket._currentStringScanPosition
+_OBJC_IVAR_$_MPWebSocket._outputBufferOffset
+_OBJC_IVAR_$_MPWebSocket._sentClose
+___block_descriptor_tmp.376
+_OBJC_IVAR_$_MPWebSocket._cleanupScheduled
+___block_descriptor_tmp.393
+_CRLFCRLFBytes
+___block_descriptor_tmp.398
+_OBJC_IVAR_$_MPWebSocket._readBufferOffset
+_OBJC_IVAR_$_MPWebSocket._currentReadMaskOffset
+___block_descriptor_tmp.416
+_OBJC_IVAR_$_MPWebSocket._isPumping
+_OBJC_IVAR_$_MPWebSocket._pinnedCertFound
+___block_descriptor_tmp.442
+___block_descriptor_tmp.459
+___block_descriptor_tmp.474
+_OBJC_IVAR_$_MPWebSocket._delegate
+l_OBJC_PROTOCOL_$_NSStreamDelegate
+l_OBJC_LABEL_PROTOCOL_$_NSStreamDelegate
+_OBJC_IVAR_$_MPIOConsumerPool._poolSize
+_OBJC_IVAR_$_MPIOConsumerPool._bufferedConsumers
+_networkThread
+_networkRunLoop
+_mp_networkRunLoop.onceToken
+___block_descriptor_tmp.683
+___block_literal_global.684
+_OBJC_IVAR_$__MPRunLoopThread._waitGroup
+_OBJC_IVAR_$__MPRunLoopThread._runLoop
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPWebSocket.m
+__43+[NSRunLoop(MPWebSocket) mp_networkRunLoop]_block_invoke
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPWebSocket.h
+__34-[MPWebSocket stream:handleEvent:]_block_invoke_2
+__34-[MPWebSocket stream:handleEvent:]_block_invoke.443
+__34-[MPWebSocket stream:handleEvent:]_block_invoke
+_OSSwapInt64
+/Users/roderic/Downloads/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/usr/include/libkern/arm/OSByteOrder.h
+_OSSwapInt16
+__32-[MPWebSocket _innerPumpScanner]_block_invoke
+validate_dispatch_data_partial_string
+__47-[MPWebSocket _readUntilBytes:length:callback:]_block_invoke
+__36-[MPWebSocket _cleanupSelfReference]_block_invoke
+__27-[MPWebSocket _pumpWriting]_block_invoke
+__28-[MPWebSocket _readFrameNew]_block_invoke
+__33-[MPWebSocket _readFrameContinue]_block_invoke_2
+__33-[MPWebSocket _readFrameContinue]_block_invoke
+__42-[MPWebSocket _handleFrameHeader:curData:]_block_invoke
+__43-[MPWebSocket _handleFrameWithData:opCode:]_block_invoke.307
+__43-[MPWebSocket _handleFrameWithData:opCode:]_block_invoke
+__35-[MPWebSocket handleCloseWithData:]_block_invoke
+closeCodeIsValid
+__30-[MPWebSocket _handleMessage:]_block_invoke
+__26-[MPWebSocket handlePing:]_block_invoke_2
+__26-[MPWebSocket handlePing:]_block_invoke
+__20-[MPWebSocket send:]_block_invoke
+__30-[MPWebSocket _failWithError:]_block_invoke_2
+__30-[MPWebSocket _failWithError:]_block_invoke
+__39-[MPWebSocket _closeWithProtocolError:]_block_invoke_2
+__39-[MPWebSocket _closeWithProtocolError:]_block_invoke
+__36-[MPWebSocket closeWithCode:reason:]_block_invoke
+__25-[MPWebSocket didConnect]_block_invoke
+__30-[MPWebSocket _readHTTPHeader]_block_invoke
+__36-[MPWebSocket _HTTPHeadersDidFinish]_block_invoke
+newSHA1
+-[MPTweak initWithName:andEncoding:]
+-[MPTweak setCurrentValue:]
+-[MPTweak addObserver:]
+-[MPTweak removeObserver:]
+-[MPTweak name]
+-[MPTweak encoding]
+-[MPTweak defaultValue]
+-[MPTweak setDefaultValue:]
+-[MPTweak currentValue]
+-[MPTweak minimumValue]
+-[MPTweak setMinimumValue:]
+-[MPTweak maximumValue]
+-[MPTweak setMaximumValue:]
+-[MPTweak .cxx_destruct]
+_OBJC_IVAR_$_MPTweak._name
+_OBJC_IVAR_$_MPTweak._encoding
+_OBJC_IVAR_$_MPTweak._minimumValue
+_OBJC_IVAR_$_MPTweak._maximumValue
+_OBJC_IVAR_$_MPTweak._currentValue
+_OBJC_IVAR_$_MPTweak._observers
+_OBJC_IVAR_$_MPTweak._defaultValue
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPTweak.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPTweak.h
+-[MPMiniNotification initWithJSONObject:]
+-[MPMiniNotification type]
+-[MPMiniNotification ctaUrl]
+-[MPMiniNotification setCtaUrl:]
+-[MPMiniNotification imageTintColor]
+-[MPMiniNotification setImageTintColor:]
+-[MPMiniNotification borderColor]
+-[MPMiniNotification setBorderColor:]
+-[MPMiniNotification .cxx_destruct]
+_OBJC_IVAR_$_MPMiniNotification._ctaUrl
+_OBJC_IVAR_$_MPMiniNotification._imageTintColor
+_OBJC_IVAR_$_MPMiniNotification._borderColor
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPMiniNotification.m
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPMiniNotification.h
++[MPCGAffineTransformToNSDictionaryValueTransformer transformedValueClass]
++[MPCGAffineTransformToNSDictionaryValueTransformer allowsReverseTransformation]
+-[MPCGAffineTransformToNSDictionaryValueTransformer transformedValue:]
+-[MPCGAffineTransformToNSDictionaryValueTransformer reverseTransformedValue:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPCGAffineTransformToNSDictionaryValueTransformer.m
+MPCGAffineTransformMakeWithDictionaryRepresentation
+MPCGAffineTransformCreateDictionaryRepresentation
+-[MPObjectSerializerContext initWithRootObject:]
+-[MPObjectSerializerContext hasUnvisitedObjects]
+-[MPObjectSerializerContext enqueueUnvisitedObject:]
+-[MPObjectSerializerContext dequeueUnvisitedObject]
+-[MPObjectSerializerContext addVisitedObject:]
+-[MPObjectSerializerContext isVisitedObject:]
+-[MPObjectSerializerContext addSerializedObject:]
+-[MPObjectSerializerContext allSerializedObjects]
+-[MPObjectSerializerContext .cxx_destruct]
+_OBJC_IVAR_$_MPObjectSerializerContext._visitedObjects
+_OBJC_IVAR_$_MPObjectSerializerContext._unvisitedObjects
+_OBJC_IVAR_$_MPObjectSerializerContext._serializedObjects
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPObjectSerializerContext.m
++[MPABTestDesignerDisconnectMessage message]
+-[MPABTestDesignerDisconnectMessage responseCommandWithConnection:]
+___67-[MPABTestDesignerDisconnectMessage responseCommandWithConnection:]_block_invoke
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPABTestDesignerDisconnectMessage.m
+__67-[MPABTestDesignerDisconnectMessage responseCommandWithConnection:]_block_invoke
++[MPCGPointToNSDictionaryValueTransformer transformedValueClass]
++[MPCGPointToNSDictionaryValueTransformer allowsReverseTransformation]
+-[MPCGPointToNSDictionaryValueTransformer transformedValue:]
+-[MPCGPointToNSDictionaryValueTransformer reverseTransformedValue:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/MPCGPointToNSDictionaryValueTransformer.m
+-[UIApplication(AutomaticTracks) mp_sendAction:to:from:forEvent:]
+/Users/roderic/dev/Thumbworks/SolarSystem/Carthage/Checkouts/mixpanel-iphone/Mixpanel/UIApplication+AutomaticTracks.m
+/Users/roderic/Library/Developer/Xcode/DerivedData/Mixpanel-chjibkcfxjpduxghwstabjjfwflz/Build/Intermediates.noindex/Mixpanel.build/Release-iphoneos/Mixpanel.build/DerivedSources/Mixpanel_vers.c
+__ZL15__ARCLite__loadv
+__ZL58__arclite_NSMutableDictionary__setObject_forKeyedSubscriptP19NSMutableDictionaryP13objc_selectorP11objc_objectS4_
+__ZL22add_image_hook_swiftV1PK11mach_headerl
+__ZL42__arclite_NSUndoManagerProxy_isKindOfClassP11objc_objectP13objc_selectorP10objc_class
+__ZL13replaceMethodP10objc_classP13objc_selectorPFP11objc_objectS4_S2_zEPS6_
+__ZL30__arclite_NSManagedObject_initP11objc_objectP13objc_selector
+__ZL41__arclite_NSManagedObject_allocWithEntityP11objc_objectP13objc_selectorS0_
+__ZL36__arclite_NSManagedObject_allocBatchP11objc_objectP13objc_selectorPS0_S0_j
+__ZL37__arclite_NSKKMS_fastIndexForKnownKeyP11objc_objectP13objc_selectorS0_
+__ZL28__arclite_NSKKMS_indexForKeyP11objc_objectP13objc_selectorS0_
+__ZL29__arclite_NSKKsD_objectForKeyP11objc_objectP13objc_selectorS0_
+__ZL35__arclite_NSKKsD_removeObjectForKeyP11objc_objectP13objc_selectorS0_
+__ZL33__arclite_NSKKsD_setObject_forKeyP11objc_objectP13objc_selectorS0_S0_
+__ZL41__arclite_NSKKsD_addEntriesFromDictionaryP11objc_objectP13objc_selectorP12NSDictionary
+__ZL28__arclite_objc_readClassPairP10objc_classPK15objc_image_info
+__ZL32__arclite_objc_allocateClassPairP10objc_classPKcm
+__ZL32__arclite_object_getIndexedIvarsP11objc_object
+__ZL23__arclite_objc_getClassPKc
+__ZL27__arclite_objc_getMetaClassPKc
+__ZL31__arclite_objc_getRequiredClassPKc
+__ZL26__arclite_objc_lookUpClassPKc
+__ZL26__arclite_objc_getProtocolPKc
+__ZL23__arclite_class_getNameP10objc_class
+__ZL26__arclite_protocol_getNameP8Protocol
+__ZL37__arclite_objc_copyClassNamesForImagePKcPj
+__ZL17transcribeMethodsP10objc_classP15glue_class_ro_t
+__ZL19transcribeProtocolsP10objc_classP15glue_class_ro_t
+__ZL20transcribePropertiesP10objc_classP15glue_class_ro_t
+__ZL14initialize_impP11objc_objectP13objc_selector
+__ZL18allocateMaybeSwiftP18glue_swift_class_tm
+__ZL22copySwiftV1MangledNamePKcb
+__ZL13demangledNamePKcb
+__ZL16scanMangledFieldRPKcS0_S1_Ri
+__ZL30arclite_uninitialized_functionv
+__ZL12cxxConstructP11objc_object
+__ZL20fixStringForCoreDataP11objc_object
+_OBJC_METACLASS_$___ARCLite__
+__ZL24OBJC_CLASS_$___ARCLite__
+__ZL31OBJC_METACLASS_RO_$___ARCLite__
+__non_lazy_classes
+__ZL27OBJC_CLASS_RO_$___ARCLite__
+__ZL11_class_name
+__ZL32OBJC_$_CLASS_METHODS___ARCLite__
+__ZL17_load_method_name
+__ZL17_load_method_type
+l_OBJC_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_LABEL_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_PROTOCOL_REFERENCE_$___ARCLiteKeyedSubscripting__
+__ZL30NSUndoManagerProxy_targetClass
+__ZL29original_NSManagedObject_init
+__ZL40original_NSManagedObject_allocWithEntity
+__ZL35original_NSManagedObject_allocBatch
+__ZL25NSMutableDictionary_class
+__ZL22NSConstantString_class
+__ZL14NSString_class
+__ZL36original_NSKKMS_fastIndexForKnownKey
+__ZL27original_NSKKMS_indexForKey
+__ZL28original_NSKKsD_objectForKey
+__ZL34original_NSKKsD_removeObjectForKey
+__ZL32original_NSKKsD_setObject_forKey
+__ZL40original_NSKKsD_addEntriesFromDictionary
+__ZZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZGVZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZL31original_objc_allocateClassPair
+__ZL31original_object_getIndexedIvars
+__ZL22original_objc_getClass
+__ZL26original_objc_getMetaClass
+__ZL30original_objc_getRequiredClass
+__ZL25original_objc_lookUpClass
+__ZL25original_objc_getProtocol
+__ZL22original_class_getName
+__ZL25original_protocol_getName
+__ZL36original_objc_copyClassNamesForImage
+__ZL12demangleLock
+__ZL9Demangled
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c++ -arch arm64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=c++11 -Wno-trigraphs -fno-exceptions -fno-rtti -fno-sanitize=vptr -mpascal-strings -Os -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-arc-repeated-use-of-weak -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -Wno-c++11-extensions -D NDEBUG=1 -D RC_SEED_BUILD=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.Internal.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -Winvalid-offsetof -miphoneos-version-min=4.3 -g -fno-threadsafe-statics -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -fembed-bitcode=all -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-generated-files.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-own-target-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-all-target-headers.hmap -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-project-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/Symbols/BuiltProducts/include -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources/arm64 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources -F/Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/Symbols/BuiltProducts -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.Internal.sdk/System/Library/PrivateFrameworks -Wall -Wextra -Wno-gcc-compat -Wno-error=incomplete-umbrella -Wno-error=incomplete-umbrella -MMD -MT dependencies -MF /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.d --serialize-diagnostics /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.dia -c /Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-66/source/arclite.mm -o /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.o -mlinker-version=302.2
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-66/source/arclite.mm
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-66
+fixStringForCoreData
+cxxConstruct
+arclite_uninitialized_function
+scanMangledField
+isdigit
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.Internal.sdk/usr/include/ctype.h
+__isctype
+demangledName
+copySwiftV1DemangledName
+copySwiftV1MangledName
+allocateMaybeSwift
+word_align
+isSwift
+initialize_imp
+transcribeProperties
+property_list_nth
+transcribeProtocols
+transcribeMethods
+data
+method_list_nth
+__arclite_objc_copyClassNamesForImage
+__arclite_protocol_getName
+__arclite_class_getName
+__arclite_objc_getProtocol
+__arclite_objc_lookUpClass
+__arclite_objc_getRequiredClass
+__arclite_objc_getMetaClass
+__arclite_objc_getClass
+__arclite_object_getIndexedIvars
+__arclite_objc_allocateClassPair
+metaclass
+__arclite_objc_readClassPair
+transcribeIvars
+ivar_list_nth
+max
+alignment
+ro
+fastFlags
+__arclite_NSKKsD_addEntriesFromDictionary
+__arclite_NSKKsD_setObject_forKey
+__arclite_NSKKsD_removeObjectForKey
+__arclite_NSKKsD_objectForKey
+__arclite_NSKKMS_indexForKey
+__arclite_NSKKMS_fastIndexForKnownKey
+__arclite_NSManagedObject_allocBatch
+__arclite_NSManagedObject_allocWithEntity
+__arclite_NSManagedObject_init
+replaceMethod
+__arclite_NSUndoManagerProxy_isKindOfClass
+add_image_hook_swiftV1
+patch_lazy_pointers
+patch_t<const char **(const char *, unsigned int *)>
+patch_t<const char *(Protocol *)>
+patch_t<const char *(Class)>
+patch_t<Protocol *(const char *)>
+patch_t<Class (const char *)>
+patch_t<void *(id)>
+patch_t<Class (Class, const char *, unsigned long)>
+patch_t<Class (Class, const objc_image_info *)>
+__arclite_NSMutableDictionary__setObject_forKeyedSubscript
+__ARCLite__load
+install_swiftV1
+install_dict_nil_value
+addOrReplaceMethod
+keyedGetter

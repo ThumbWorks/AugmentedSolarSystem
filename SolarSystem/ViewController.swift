@@ -9,6 +9,7 @@
 import UIKit
 import SceneKit
 import ARKit
+import Mixpanel
 
 class ViewController: UIViewController {
     
@@ -38,6 +39,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        Mixpanel.sharedInstance()?.track("view did load")
+        
         // Set the view's delegate
         sceneView.delegate = self
         
@@ -128,6 +131,8 @@ extension ViewController {
                 }) {
                     if let name = result.node.name {
                         print("tapped \(name))")
+                        Mixpanel.sharedInstance()?.track("tracked a planet", properties: ["name" : name])
+
                         // now scroll to this node. We've got a name
                         self.collectionViewController?.changeToPlanet(name: name)
                         return
@@ -141,12 +146,16 @@ extension ViewController {
     }
     
     @IBAction func scaleToARPlane() {
+        Mixpanel.sharedInstance()?.track("tapped scale to plane")
+
         if let anchorWidth = anchorWidth {
             PlanetoidGroupNode.scale(nodes: solarSystemNodes.planetoids, plutoTableRadius: anchorWidth)
         }
     }
     
     @IBAction func toggleTrails() {
+        Mixpanel.sharedInstance()?.track("toggled trails")
+
         for (_, planetoidNode) in solarSystemNodes.planetoids {
             // do something with button
             planetoidNode.path?.isHidden = !(planetoidNode.path?.isHidden)!
@@ -155,6 +164,8 @@ extension ViewController {
     
     @IBAction func changeOrbitScaleTapped(_ sender: Any) {
         print("changing orbit scale")
+        Mixpanel.sharedInstance()?.track("change orbit scale")
+
         // toggle the state
         scalingOrbitUp = !scalingOrbitUp
         PlanetoidGroupNode.scaleOrbit(planetoids: solarSystemNodes.planetoids, scalingUp: scalingOrbitUp)
@@ -162,6 +173,7 @@ extension ViewController {
     
     @IBAction func changeSizeScaleTapped(_ sender: Any) {
         print("changing scale")
+        Mixpanel.sharedInstance()?.track("change size scale")
 
         // toggle the state
         scaleSizeUp = !scaleSizeUp
@@ -305,6 +317,7 @@ extension ViewController: ARSCNViewDelegate {
                 if self.done {
                     return
                 }
+                Mixpanel.sharedInstance()?.track("Discovered an Anchor")
 
                 if let cameraNode = self.sceneView.pointOfView {
                     self.arrowNode.categoryBitMask = 4

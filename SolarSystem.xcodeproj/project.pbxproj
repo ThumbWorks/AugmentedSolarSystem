@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5F0662BB1F1D1F6600D66563 /* PlanetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0662BA1F1D1F6600D66563 /* PlanetCollectionViewController.swift */; };
+		5F0CC2141F2814BD00E25474 /* Mixpanel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0CC2131F2814BD00E25474 /* Mixpanel.framework */; };
 		5F27FD181F061C5200498524 /* Mars.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5F27FD171F061C5200498524 /* Mars.scn */; };
 		5F30D4DC1F16CD68006A45B1 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F30D4DB1F16CD68006A45B1 /* Planet.swift */; };
 		5F30D4DD1F16CD7D006A45B1 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F30D4DB1F16CD68006A45B1 /* Planet.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		5F0662BA1F1D1F6600D66563 /* PlanetCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetCollectionViewController.swift; sourceTree = "<group>"; };
+		5F0CC2131F2814BD00E25474 /* Mixpanel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mixpanel.framework; path = Carthage/Build/iOS/Mixpanel.framework; sourceTree = "<group>"; };
 		5F27FD171F061C5200498524 /* Mars.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Mars.scn; path = art.scnassets/Mars.scn; sourceTree = "<group>"; };
 		5F30D4DB1F16CD68006A45B1 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		5F30D4DE1F16CDB7006A45B1 /* PlanetoidGroupNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetoidGroupNode.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F0CC2141F2814BD00E25474 /* Mixpanel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,12 +96,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F0CC2121F2814BD00E25474 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5F0CC2131F2814BD00E25474 /* Mixpanel.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5FBAF9611EE8B78400FAA54B = {
 			isa = PBXGroup;
 			children = (
 				5FBAF96C1EE8B78400FAA54B /* SolarSystem */,
 				5FDD81CC1F0DBB8C00F0B92D /* SolarSystemScene */,
 				5FBAF96B1EE8B78400FAA54B /* Products */,
+				5F0CC2121F2814BD00E25474 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -161,6 +173,7 @@
 				5FBAF9661EE8B78400FAA54B /* Sources */,
 				5FBAF9671EE8B78400FAA54B /* Frameworks */,
 				5FBAF9681EE8B78400FAA54B /* Resources */,
+				5F0CC2151F2814CF00E25474 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -264,6 +277,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5F0CC2151F2814CF00E25474 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Mixpanel.framework",
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Mixpanel.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5FBAF9661EE8B78400FAA54B /* Sources */ = {
@@ -438,6 +469,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = F4WTN36U2F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = SolarSystem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.thumbworks.AugmentedSolarSystem;
@@ -452,6 +487,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = F4WTN36U2F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = SolarSystem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.thumbworks.AugmentedSolarSystem;
