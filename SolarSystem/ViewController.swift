@@ -20,6 +20,10 @@ class ViewController: UIViewController {
     var scaleSizeUp = false
     
     var anchorWidth: Float?
+    let cameraState: ARCamera.TrackingState = .normal
+
+    // the optional planet that the camera is within the bounding volume of
+    var insidePlanet: Planet?
     
     var sessionConfig = ARWorldTrackingSessionConfiguration()
     let solarSystemNodes = Planet.buildSolarSystem()
@@ -192,6 +196,29 @@ extension ViewController {
     func unblurBackground() {
         blurView.removeFromSuperview()
     }
+    
+    func updateLabel() {
+        
+        switch cameraState {
+        case .normal:
+            if (!done) {
+                status.text = "Searching for a surface"
+            }
+            if let planet = insidePlanet {
+                if planet == Planet.sun {
+                    status.text = "You are inside the \(planet.name)"
+                } else {
+                    status.text = "You are inside \(planet.name)"
+                }
+            } else {
+                status.text = ""
+            }
+        case .notAvailable:
+            status.text = "Tracking unavailable"
+        case .limited(let reason):
+            status.text = "Tracking Limited: \(reason)"
+        }
+    }
 }
 
 extension ViewController: ARSessionObserver {
@@ -206,14 +233,8 @@ extension ViewController: ARSessionObserver {
      @param camera The camera that changed tracking states.
      */
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
-        
-        switch camera.trackingState {
-        case .normal:
-            status.text = "Tracking Normal"
-        case .notAvailable:
-            status.text = "Tracking unavailable"
-        case .limited(let reason):
-            status.text = "Tracking Limited: \(reason)"
+        DispatchQueue.main.async {
+            self.updateLabel()
         }
     }
     
@@ -262,7 +283,13 @@ extension ViewController: ARSCNViewDelegate {
             return
         }
 
+        
+        // we calculate the distances so we can
+        // a) display the distance for each planet in the hud
+        // b) determine if we are inside of a node
         var distances = [Planet:Float]()
+        insidePlanet = nil
+
         for (planet, node) in solarSystemNodes.planetoids {
             
             guard let planetNode = node.planetNode else {
@@ -271,9 +298,18 @@ extension ViewController: ARSCNViewDelegate {
             }
             let distance = cameraNode.position.distance(receiver: planetNode.position)
             distances[planet] = distance
+            
+            if let sphere = planetNode.geometry as? SCNSphere {
+                let radius = sphere.radius * CGFloat(planetNode.scale.x)
+                if CGFloat(distance) < radius {
+                    insidePlanet = planet
+                }
+            }
         }
 
         DispatchQueue.main.async {
+            self.updateLabel()
+
             self.collectionViewController?.updateDistance(distances: distances)
             
             let lookats: [SCNLookAtConstraint] = self.arrowNode.constraints?.filter({ (constraint) -> Bool in
