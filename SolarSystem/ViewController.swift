@@ -122,10 +122,10 @@ extension ViewController {
         // determine if we've tapped a planet
         if (sender.state == .ended) {
             let location = sender.location(in: view)
-            let hittestResults = sceneView.hitTest(location, options: nil)
+            let options: [SCNHitTestOption: Any] = [.searchMode: SCNHitTestSearchMode.all.rawValue]
+            let hittestResults = sceneView.hitTest(location, options: options)
             for result in hittestResults {
                 let node = result.node
-                
                 if self.solarSystemNodes.planetoids.contains(where: { (planets) -> Bool in
                     return node == planets.value.planetNode
                 }) {
