@@ -140,8 +140,6 @@ extension ViewController {
                 }
             }
         }
-        
-        arrowNode.isHidden = !arrowNode.isHidden
     }
     
     @IBAction func scaleToARPlane() {
@@ -267,16 +265,27 @@ extension ViewController: ARSCNViewDelegate {
         var distances = [Planet:Float]()
         for (planet, node) in solarSystemNodes.planetoids {
             
-            guard let planetPosition = node.planetNode?.position else {
-                print("\(planet.name ) doesn't have a position, bail")
+            guard let planetNode = node.planetNode else {
+                print("\(planet.name ) doesn't have a node, bail")
                 return
             }
-            
-            let distance = cameraNode.position.distance(receiver: planetPosition)
+            let distance = cameraNode.position.distance(receiver: planetNode.position)
             distances[planet] = distance
         }
+
         DispatchQueue.main.async {
             self.collectionViewController?.updateDistance(distances: distances)
+            
+            let lookats: [SCNLookAtConstraint] = self.arrowNode.constraints?.filter({ (constraint) -> Bool in
+                if let _ = constraint as? SCNLookAtConstraint {
+                    return true
+                }
+                return false
+            }) as! [SCNLookAtConstraint]
+            
+            if let lookatTarget = lookats.first?.target {
+                self.arrowNode.isHidden = self.sceneView.isNode(lookatTarget, insideFrustumOf: cameraNode)
+            }
         }
     }
     
