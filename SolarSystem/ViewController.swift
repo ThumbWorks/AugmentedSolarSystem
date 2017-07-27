@@ -313,6 +313,16 @@ extension ViewController: ARSCNViewDelegate {
 
                 #endif
                 
+                let width = planeAnchor.extent.x
+                let length = planeAnchor.extent.y
+                let depth = planeAnchor.extent.z
+                print("The plane w: \(width) l: \(length) d: \(depth)")
+                
+                if width < 0.1 && length < 0.1 {
+                    print("We need a minimum sized anchor plane")
+                    return
+                }
+                
                 if self.done {
                     return
                 }
@@ -344,11 +354,6 @@ extension ViewController: ARSCNViewDelegate {
                 }
                 
                 // determine scale based on the size of the plane
-                let width = planeAnchor.extent.x
-                let length = planeAnchor.extent.y
-                let depth = planeAnchor.extent.z
-                print("The plane w: \(width) l: \(length) d: \(depth)")
-                
                 var radius: Float
                 if depth < width {
                     radius = depth
