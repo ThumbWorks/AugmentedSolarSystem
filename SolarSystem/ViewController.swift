@@ -138,7 +138,6 @@ extension ViewController {
                         return
                     }
                 }
-                
             }
         }
         
@@ -357,7 +356,7 @@ extension ViewController: ARSCNViewDelegate {
                     radius = width
                 }
                 
-                PlanetoidGroupNode.scale(nodes: self.solarSystemNodes.planetoids, plutoTableRadius: radius)
+                PlanetoidGroupNode.scale(nodes: self.solarSystemNodes.planetoids, plutoTableRadius: radius / 2)
                 self.anchorWidth = radius
             }
         }
