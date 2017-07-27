@@ -96,7 +96,7 @@ class PlanetoidGroupNode: SCNNode {
     
     class func scaleOrbit(planetoids: [Planet:PlanetoidGroupNode], scalingUp: Bool) {
         SCNTransaction.begin()
-        SCNTransaction.animationDuration = 5
+        SCNTransaction.animationDuration = scalingUp ? 5 : 1
         for (planet,node) in planetoids {
             
             guard let planetNode = node.planetNode else {
@@ -123,7 +123,7 @@ class PlanetoidGroupNode: SCNNode {
     
     class func scale(nodes: [Planet:PlanetoidGroupNode], plutoTableRadius: Float) {
         SCNTransaction.begin()
-        SCNTransaction.animationDuration = 5
+        SCNTransaction.animationDuration = 2
         let orbitalDelta = plutoTableRadius / 8
         var currentRadius: Float = 0
         let planetSize = orbitalDelta / 4 /*A fraction of the delta gives us some space (har)*/
@@ -142,7 +142,7 @@ class PlanetoidGroupNode: SCNNode {
     
     class func scaleNodes(nodes: [Planet:PlanetoidGroupNode], scaleUp: Bool) {
         SCNTransaction.begin()
-        SCNTransaction.animationDuration = 5
+        SCNTransaction.animationDuration = scaleUp ? 5 : 1
         for (planet,node) in nodes {
             // update the scale here
             guard let planetNode = node.planetNode else {
