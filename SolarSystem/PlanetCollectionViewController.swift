@@ -75,7 +75,7 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func hintScrollable() {
-        UIView.animate(withDuration: 2, animations: {
+        UIView.animate(withDuration: 2, delay: 3, options: [], animations: {
             self.collectionView.contentOffset = CGPoint(x: self.collectionView.frame.size.width / 2, y: 0)
         }) { (completed) in
             UIView.animate(withDuration: 2, animations: {

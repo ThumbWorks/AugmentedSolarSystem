@@ -25,7 +25,8 @@ class ViewController: UIViewController {
     let solarSystemNodes = Planet.buildSolarSystem()
     var arrowNode = SCNNode.arrow()
     
-    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var hudHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var hudBottomConstraint: NSLayoutConstraint!
     
     // TODO make this lazy
     var blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
@@ -40,6 +41,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         Mixpanel.sharedInstance()?.track("view did load")
+        
+        // start the hud out of view
+        hudBottomConstraint.constant = -hudHeightConstraint.constant
         
         // Set the view's delegate
         sceneView.delegate = self
@@ -328,16 +332,19 @@ extension ViewController: ARSCNViewDelegate {
                 }
                 Mixpanel.sharedInstance()?.track("Discovered an Anchor")
 
+                // move the HUD so it's visible
+                self.hudBottomConstraint.constant = 0
+                
+                // Make the bottom HUD show, hint that it is scrollable
+                UIView.animate(withDuration: 0.6, delay: 2, options: .curveEaseInOut, animations: {
+                    self.view.layoutIfNeeded()
+                }, completion: { (completed) in
+                    self.collectionViewController?.hintScrollable()
+                })
+                
                 if let cameraNode = self.sceneView.pointOfView {
                     self.arrowNode.categoryBitMask = 4
                     cameraNode.addChildNode(self.arrowNode)
-                    
-                    // Make the bottom HUD show, hint that it is scrollable
-                    UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                        self.view.layoutIfNeeded()
-                    }, completion: { (completed) in
-                        self.collectionViewController?.hintScrollable()
-                    })
                     
                     var lightVector = node.position
                     lightVector.y = 10

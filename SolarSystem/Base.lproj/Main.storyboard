@@ -107,7 +107,8 @@
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="collectionViewHeightConstraint" destination="vRk-96-Kbf" id="9Es-s2-m6k"/>
+                        <outlet property="hudBottomConstraint" destination="agn-eF-OC7" id="upM-v8-Xsm"/>
+                        <outlet property="hudHeightConstraint" destination="vRk-96-Kbf" id="jp1-b7-qIC"/>
                         <outlet property="sceneView" destination="Y8e-tj-9vj" id="zCK-fe-vs0"/>
                         <outlet property="status" destination="KlY-l3-zEO" id="F55-OO-f9p"/>
                     </connections>
