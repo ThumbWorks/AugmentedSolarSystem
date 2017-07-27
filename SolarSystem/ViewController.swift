@@ -91,16 +91,12 @@ class ViewController: UIViewController {
                 
                 for (planet, node) in self.solarSystemNodes.planetoids {
                     if newlySelectedPlanet == planet {
-                        print("set this label")
-//                        node.textNode.isHidden = false
                         SCNTransaction.begin()
                         SCNTransaction.animationDuration = 0.5
                         let lookat = SCNLookAtConstraint(target: node.planetNode)
                         self.arrowNode.constraints = [lookat]
                         SCNTransaction.commit()
 
-                    } else {
-//                        node.textNode.isHidden = true
                     }
                 }
             }
@@ -152,7 +148,7 @@ extension ViewController {
         Mixpanel.sharedInstance()?.track("tapped scale to plane")
 
         if let anchorWidth = anchorWidth {
-            PlanetoidGroupNode.scale(nodes: solarSystemNodes.planetoids, plutoTableRadius: anchorWidth)
+            PlanetoidGroupNode.scale(nodes: solarSystemNodes.planetoids, plutoTableRadius: anchorWidth / 2)
         }
     }
     
@@ -179,7 +175,12 @@ extension ViewController {
         Mixpanel.sharedInstance()?.track("change size scale")
 
         // toggle the state
+        // we must scale the orbit if we are going to scale the nodes. Otherwise we get into a bad state
         scaleSizeUp = !scaleSizeUp
+        if (!scalingOrbitUp) {
+            scalingOrbitUp = !scalingOrbitUp
+            PlanetoidGroupNode.scaleOrbit(planetoids: solarSystemNodes.planetoids, scalingUp: scalingOrbitUp)
+        }
         
         PlanetoidGroupNode.scaleNodes(nodes: solarSystemNodes.planetoids, scaleUp: scaleSizeUp)
     }
@@ -367,7 +368,6 @@ extension ViewController: ARSCNViewDelegate {
                 } else {
                     radius = width
                 }
-                
                 PlanetoidGroupNode.scale(nodes: self.solarSystemNodes.planetoids, plutoTableRadius: radius / 2)
                 self.anchorWidth = radius
             }
