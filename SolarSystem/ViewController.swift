@@ -27,6 +27,9 @@ class ViewController: UIViewController {
     
     var sessionConfig = ARWorldTrackingSessionConfiguration()
     let solarSystemNodes = Planet.buildSolarSystem()
+    
+    var pincher: PinchController?
+    
     var arrowNode = SCNNode.arrow()
     
     @IBOutlet weak var hudHeightConstraint: NSLayoutConstraint!
@@ -43,7 +46,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        pincher = PinchController(with: solarSystemNodes)
         Mixpanel.sharedInstance()?.track("view did load")
         
         // start the hud out of view
@@ -76,7 +79,6 @@ class ViewController: UIViewController {
 
         // Run the view's session
         sceneView.session.run(sessionConfig)
-        sceneView.session.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -120,7 +122,10 @@ extension SCNVector3 {
 }
 
 extension ViewController {
-   
+    @IBAction func pinchedScreen(_ sender: UIPinchGestureRecognizer) {
+        pincher?.pinch(with: sender)
+    }
+    
     @IBAction func tappedScreen(_ sender: UITapGestureRecognizer) {
         
         // determine if we've tapped a planet
@@ -344,22 +349,13 @@ extension ViewController: ARSCNViewDelegate {
                     print("The box of the plane is before scaling is \(planeAnchor.extent)")
                     
                     // We get a plane, this should roughly match a tabletop or a floor
-//                    let plane = ViewController.planeFor(planeAnchor, materials: [self.nextMaterial()])
-                    
                     let plane = BorderedPlane(width: planeAnchor.extent.x, height: planeAnchor.extent.z, color: .blue)
                     node.addChildNode(plane)
                     
                     let borderMaterial = SCNMaterial()
                     borderMaterial.diffuse.contents = UIColor.blue
                     plane.addBorder(materials: [borderMaterial])
-                    // create a new node, for some reason this is easier than using the original. The
-                    // original is oddly rotated on it's side.
-//                    let planeNode = SCNNode(geometry: plane)
-//                    planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2.0, 1, 0, 0)
-//                    planeNode.categoryBitMask = 2
-//                    planeNode.addCorners()
-        
-//                    node.addChildNode(planeNode)
+
 
                 #endif
                 
@@ -437,38 +433,13 @@ extension ViewController: ARSCNViewDelegate {
                 print("the line is a \(line)")
                 line.removeFromParentNode()
             }
-//            let materials = (thePlaneNode.geometry?.materials)!
             
             let plane = BorderedPlane(width: planeAnchor.extent.x, height: planeAnchor.extent.y, color: .red)
             thePlaneNode.addChildNode(plane)
             let borderMaterial = SCNMaterial()
             borderMaterial.diffuse.contents = UIColor.red
             plane.addBorder(materials: [borderMaterial])
-
-//            let plane = ViewController.planeFor(planeAnchor, materials: materials)
-//            thePlaneNode.geometry = plane
-//            thePlaneNode.addCorners()
         }
-    }
-    
-    /**
-     Called when a mapped node has been removed from the scene graph for the given anchor.
-     
-     @param renderer The renderer that will render the scene.
-     @param node The node that was removed.
-     @param anchor The anchor that was removed.
-     */
-    func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
-        print("didRemove. node \(node) for anchor \(anchor)")
-    }
-    
-    // Helper methods for plane and anchor updates
-    class func planeFor(_ planeAnchor: ARPlaneAnchor, materials: [SCNMaterial]) -> SCNPlane {
-        let width = planeAnchor.extent.x
-        let height = planeAnchor.extent.z
-        let plane = SCNPlane(width: CGFloat(width), height: CGFloat(height))
-        plane.materials = materials
-        return plane
     }
     
     #if DEBUG
@@ -480,56 +451,5 @@ extension ViewController: ARSCNViewDelegate {
         self.planeCount = self.planeCount + 1
         return material
     }
-#endif
-}
-
-extension ViewController: ARSessionDelegate {
-    
-    /**
-     This is called when new anchors are added to the session.
-     
-     @param session The session being run.
-     @param anchors An array of added anchors.
-     */
-    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-        print("did add anchor")
-    }
-    
-    /**
-     This is called when anchors are updated.
-     
-     @param session The session being run.
-     @param anchors An array of updated anchors.
-     */
-    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
-        return
-        
-//        print("These are updated")
-//        for anchor in anchors {
-//            print("updated anchors \(anchor)")
-//        }
-//        print("that is the end of the updates")
-    }
-    
-    // This is much to noisy to actually do anything with it every time for now
-    /**
-     This is called when a new frame has been updated.
-     
-     @param session The session being run.
-     @param frame The frame that has been updated.
-     */
-//    func session(_ session: ARSession, didUpdate frame: ARFrame) {
-//        print("The frame has been updated")
-//    }
-    
-    /**
-     This is called when anchors are removed from the session.
-     
-     @param session The session being run.
-     @param anchors An array of removed anchors.
-     */
-    func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
-        print("An anchor has been removed")
-    }
-    
+    #endif
 }

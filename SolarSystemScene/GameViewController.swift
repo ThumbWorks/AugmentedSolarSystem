@@ -13,25 +13,17 @@ import SceneKit
 class GameViewController: UIViewController {
     @IBOutlet var scnView: SCNView!
     
-    var planetNodes: [Planet:PlanetoidGroupNode]?
+    let solarSystem = Planet.buildSolarSystem()
+//    var planetNodes: [Planet:PlanetoidGroupNode]?
     var scaleSizeUp = false
     var scaleOrbitUp = false
-
+    var pinchController: PinchController?
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // create a new scene
-//        let scene = SCNScene(named: "art.scnassets/ship.scn")!
         let scene = SCNScene()
-        // create and add a camera to the scene
-//        let cameraNode = SCNNode()
-//        cameraNode.camera = SCNCamera()
-//        scene.rootNode.addChildNode(cameraNode)
-        
-        // place the camera
-//        cameraNode.position = SCNVector3(x: 0, y: 0, z: 15)
-        
+       
         // create and add a light to the scene
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
@@ -46,14 +38,14 @@ class GameViewController: UIViewController {
         ambientLightNode.light!.color = UIColor.darkGray
         scene.rootNode.addChildNode(ambientLightNode)
         
-        let createdPlanetNodes = Planet.buildSolarSystem()
-        planetNodes = createdPlanetNodes.planetoids
-        scene.rootNode.addChildNode(createdPlanetNodes.lightNodes[0])
-        for nodeMap in createdPlanetNodes.planetoids {
+        
+        scene.rootNode.addChildNode(solarSystem.lightNodes[0])
+        for nodeMap in solarSystem.planetoids {
             scene.rootNode.addChildNode(nodeMap.value)
         }
         
-        PlanetoidGroupNode.scale(nodes: createdPlanetNodes.planetoids, plutoTableRadius: 1)
+        pinchController = PinchController(with: solarSystem)
+        PlanetoidGroupNode.scale(nodes: solarSystem.planetoids, plutoTableRadius: 40)
         
         // set the scene to the view
         scnView.scene = scene
@@ -72,39 +64,30 @@ class GameViewController: UIViewController {
         scnView.addGestureRecognizer(tapGesture)
     }
     
+    @IBAction func pinch(_ sender: UIPinchGestureRecognizer) {
+        pinchController?.pinch(with: sender)
+    }
+    
     @IBAction func changeScaleTapped(_ sender: UIButton) {
         print("changing scale")
         
-        guard let nodes = planetNodes else {
-            print("We don't have any planets")
-            return
-        }
         // toggle the state
         scaleSizeUp = !scaleSizeUp
 
-        PlanetoidGroupNode.scaleNodes(nodes: nodes, scaleUp: scaleSizeUp)
+        PlanetoidGroupNode.scaleNodes(nodes: solarSystem.planetoids, scaleUp: scaleSizeUp)
     }
     
     @IBAction func toggleTrails() {
-        
-        guard let nodes = planetNodes else {
-            print("We don't have any planets")
-            return
-        }
-        for (_, planetoidNode) in nodes {
+        for (_, planetoidNode) in solarSystem.planetoids {
             // do something with button
             planetoidNode.path?.isHidden = !(planetoidNode.path?.isHidden)!
         }
     }
     
     @IBAction func changeOrbitScaleTapped(_ sender: UIButton) {
-        guard let nodes = planetNodes else {
-            print("We don't have any planets")
-            return
-        }
         // toggle the state
         scaleOrbitUp = !scaleOrbitUp
-        PlanetoidGroupNode.scaleOrbit(planetoids: nodes, scalingUp: scaleOrbitUp)
+        PlanetoidGroupNode.scaleOrbit(planetoids: solarSystem.planetoids, scalingUp: scaleOrbitUp)
     }
     
     @objc

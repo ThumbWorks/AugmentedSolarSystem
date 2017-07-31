@@ -80,7 +80,7 @@ class PlanetoidGroupNode: SCNNode {
             return
         }
         planet.addChildNode(moon)
-        moon.rotate(duration: 2, clockwise: false)
+        moon.rotate(duration: 5, clockwise: false)
     }
     
     func addRings() {
@@ -123,12 +123,12 @@ class PlanetoidGroupNode: SCNNode {
     
     class func scale(nodes: [Planet:PlanetoidGroupNode], plutoTableRadius: Float) {
         SCNTransaction.begin()
-        SCNTransaction.animationDuration = 2
+        SCNTransaction.animationDuration = 1
         let orbitalDelta = plutoTableRadius / 8
         var currentRadius: Float = 0
         let planetSize = orbitalDelta / 4 /*A fraction of the delta gives us some space (har)*/
         for planet in Planet.allPlanets {
-            print("scale \(planet.name)")
+            
             guard let groupNode = nodes[planet] else {
                 continue
             }
@@ -159,5 +159,4 @@ class PlanetoidGroupNode: SCNNode {
         }
         SCNTransaction.commit()
     }
-    
 }
