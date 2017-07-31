@@ -48,6 +48,7 @@
 /* Begin PBXFileReference section */
 		5F0662BA1F1D1F6600D66563 /* PlanetCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetCollectionViewController.swift; sourceTree = "<group>"; };
 		5F0CC2131F2814BD00E25474 /* Mixpanel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mixpanel.framework; path = Carthage/Build/iOS/Mixpanel.framework; sourceTree = "<group>"; };
+		5F255D8A1F2BA0A400E9F62E /* DocumentationScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = DocumentationScene.scn; path = art.scnassets/DocumentationScene.scn; sourceTree = "<group>"; };
 		5F27FD171F061C5200498524 /* Mars.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Mars.scn; path = art.scnassets/Mars.scn; sourceTree = "<group>"; };
 		5F30D4DB1F16CD68006A45B1 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		5F30D4DE1F16CDB7006A45B1 /* PlanetoidGroupNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetoidGroupNode.swift; sourceTree = "<group>"; };
@@ -145,6 +146,7 @@
 				5F27FD171F061C5200498524 /* Mars.scn */,
 				5F30D4DB1F16CD68006A45B1 /* Planet.swift */,
 				5F0662BA1F1D1F6600D66563 /* PlanetCollectionViewController.swift */,
+				5F255D8A1F2BA0A400E9F62E /* DocumentationScene.scn */,
 			);
 			path = SolarSystem;
 			sourceTree = "<group>";
