@@ -1,0 +1,6 @@
+framework module SwiftAA {
+  umbrella header "SwiftAA.h"
+
+  export *
+  module * { export * }
+}

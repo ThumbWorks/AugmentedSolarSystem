@@ -29,6 +29,7 @@
 		5FC65CD81F01C93600D8C9CB /* Sun.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FC65CD71F01C93600D8C9CB /* Sun.scn */; };
 		5FC65CDA1F01C98800D8C9CB /* Mercury.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FC65CD91F01C98800D8C9CB /* Mercury.scn */; };
 		5FC65CDD1F02315000D8C9CB /* Jupiter.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FC65CDC1F02315000D8C9CB /* Jupiter.scn */; };
+		5FCE8E881F32F29300A38171 /* SwiftAA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FCE8E871F32F29300A38171 /* SwiftAA.framework */; };
 		5FDD81CE1F0DBB8C00F0B92D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDD81CD1F0DBB8C00F0B92D /* AppDelegate.swift */; };
 		5FDD81D01F0DBB8C00F0B92D /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FDD81CF1F0DBB8C00F0B92D /* art.scnassets */; };
 		5FDD81D21F0DBB8C00F0B92D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDD81D11F0DBB8C00F0B92D /* GameViewController.swift */; };
@@ -70,6 +71,7 @@
 		5FC65CD71F01C93600D8C9CB /* Sun.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Sun.scn; path = art.scnassets/Sun.scn; sourceTree = "<group>"; };
 		5FC65CD91F01C98800D8C9CB /* Mercury.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Mercury.scn; path = art.scnassets/Mercury.scn; sourceTree = "<group>"; };
 		5FC65CDC1F02315000D8C9CB /* Jupiter.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Jupiter.scn; path = art.scnassets/Jupiter.scn; sourceTree = "<group>"; };
+		5FCE8E871F32F29300A38171 /* SwiftAA.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftAA.framework; path = Carthage/Build/iOS/SwiftAA.framework; sourceTree = "<group>"; };
 		5FDD81CB1F0DBB8C00F0B92D /* SolarSystemScene.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolarSystemScene.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FDD81CD1F0DBB8C00F0B92D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FDD81CF1F0DBB8C00F0B92D /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F0CC2141F2814BD00E25474 /* Mixpanel.framework in Frameworks */,
+				5FCE8E881F32F29300A38171 /* SwiftAA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +106,7 @@
 		5F0CC2121F2814BD00E25474 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5FCE8E871F32F29300A38171 /* SwiftAA.framework */,
 				5F0CC2131F2814BD00E25474 /* Mixpanel.framework */,
 			);
 			name = Frameworks;
@@ -292,9 +296,11 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Mixpanel.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftAA.framework",
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Mixpanel.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftAA.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -480,6 +486,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = SolarSystem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -498,6 +505,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = SolarSystem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

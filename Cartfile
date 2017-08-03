@@ -1,1 +1,2 @@
 github "mixpanel/mixpanel-iphone"
+github "Thumbworks/SwiftAA" "migrateSwift4"
