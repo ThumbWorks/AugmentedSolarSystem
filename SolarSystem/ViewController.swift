@@ -19,6 +19,9 @@ class ViewController: UIViewController {
     var scalingOrbitUp = false
     var scaleSizeUp = false
     
+    @IBOutlet var toggleViews: [UIView]!
+    @IBOutlet var resetViews: [UIView]!
+    
     var anchorWidth: Float?
     let cameraState: ARCamera.TrackingState = .normal
 
@@ -37,10 +40,6 @@ class ViewController: UIViewController {
     
     // TODO make this lazy
     var blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
-
-    
-    // Change the text when tapped
-    @IBOutlet weak var resetButton: UIButton!
     
     #if DEBUG
     // For debug purposes, count and color the discovered planes
@@ -53,6 +52,14 @@ class ViewController: UIViewController {
         pincher = PinchController(with: solarSystemNodes)
         Mixpanel.sharedInstance()?.track("view did load")
         
+        // hide the toggleviews
+        _ = toggleViews.map { (view) in
+            view.isHidden = true
+        }
+        
+        _ = resetViews.map { (view) in
+            view.isHidden = true
+        }
         // start the hud out of view
         hudBottomConstraint.constant = -hudHeightConstraint.constant
         
@@ -129,7 +136,9 @@ extension ViewController {
     
     @IBAction func pinchedScreen(_ sender: UIPinchGestureRecognizer) {
         pincher?.pinch(with: sender)
-        resetButton.isHidden = false
+        _ = resetViews.map({ (view) in
+            view.isHidden = false
+        })
     }
     
     @IBAction func tappedScreen(_ sender: UITapGestureRecognizer) {
@@ -173,7 +182,9 @@ extension ViewController {
         scaleSizeUp = !scaleSizeUp
         
         PlanetoidGroupNode.scale(nodes: solarSystemNodes.planetoids, plutoTableRadius: radius)
-        resetButton.isHidden = true
+        _ = resetViews.map({ (view) in
+            view.isHidden = true
+        })
     }
     
     @IBAction func toggleTrails() {
@@ -191,7 +202,10 @@ extension ViewController {
         // toggle the state
         scalingOrbitUp = !scalingOrbitUp
         PlanetoidGroupNode.scaleOrbit(planetoids: solarSystemNodes.planetoids, scalingUp: scalingOrbitUp)
-        resetButton.isHidden = false
+        
+        _ = resetViews.map { (view) in
+            view.isHidden = false
+        }
     }
     
     @IBAction func changeSizeScaleTapped(_ sender: Any) {
@@ -205,7 +219,9 @@ extension ViewController {
         PlanetoidGroupNode.scaleNodes(nodes: solarSystemNodes.planetoids, scaleUp: scaleSizeUp)
         
         // ensure that the reset button is not hidden
-        resetButton.isHidden = false
+        _ = resetViews.map({ (view)  in
+            view.isHidden = false
+        })
     }
     
     func blurBackground() {
@@ -411,6 +427,10 @@ extension ViewController: ARSCNViewDelegate {
                     node.addChildNode(light)
                 }
                 
+                // unhide the toggleViews
+                _ = self.toggleViews.map({ (view) in
+                    view.isHidden = false
+                })
                 self.done = true
                 for planetNode in self.solarSystemNodes.planetoids {
                     node.addChildNode(planetNode.value)
