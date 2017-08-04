@@ -144,9 +144,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NIA-GT-PYt">
-                                <rect key="frame" x="103" y="0.0" width="272" height="174"/>
+                                <rect key="frame" x="121" y="0.0" width="254" height="174"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="XGd-uj-Lrk">
-                                    <rect key="frame" x="0.0" y="0.0" width="272" height="174"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="254" height="174"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S7z-pB-mRa">
@@ -189,7 +189,7 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="reference size" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwe-w6-Lhu">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="reference size" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwe-w6-Lhu">
                                 <rect key="frame" x="93" y="113" width="98" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="highlightedColor"/>
@@ -244,8 +244,10 @@
                             <constraint firstItem="Hnc-7a-xbT" firstAttribute="trailing" secondItem="fvg-6d-imw" secondAttribute="trailing" id="C8O-yd-kAu"/>
                             <constraint firstItem="wpt-2x-SUA" firstAttribute="trailing" secondItem="EVR-xK-nAa" secondAttribute="trailing" id="HBq-FV-dd7"/>
                             <constraint firstAttribute="trailing" secondItem="NIA-GT-PYt" secondAttribute="trailing" id="IYj-rQ-sy3"/>
+                            <constraint firstItem="wpt-2x-SUA" firstAttribute="leading" secondItem="NIA-GT-PYt" secondAttribute="leading" constant="10" id="KPx-wi-FPI"/>
                             <constraint firstItem="wpt-2x-SUA" firstAttribute="top" secondItem="EVR-xK-nAa" secondAttribute="bottom" id="LOj-Co-j8d"/>
-                            <constraint firstItem="Fwe-w6-Lhu" firstAttribute="trailing" secondItem="wpt-2x-SUA" secondAttribute="trailing" id="NOf-j6-FcH"/>
+                            <constraint firstItem="Fwe-w6-Lhu" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wpt-2x-SUA" secondAttribute="trailing" symbolic="YES" id="NOf-j6-FcH"/>
+                            <constraint firstItem="Fwe-w6-Lhu" firstAttribute="leading" secondItem="7s1-Fo-PoE" secondAttribute="leading" constant="93" id="P9F-2E-3N7"/>
                             <constraint firstItem="2e9-1e-UMA" firstAttribute="top" secondItem="Zu8-KH-hCY" secondAttribute="bottom" id="Qfz-Wj-Kvm"/>
                             <constraint firstItem="Zu8-KH-hCY" firstAttribute="leading" secondItem="MSa-mx-J6A" secondAttribute="trailing" constant="10" id="RTp-Wv-ANS"/>
                             <constraint firstItem="wpt-2x-SUA" firstAttribute="bottom" secondItem="Fwe-w6-Lhu" secondAttribute="top" id="Siv-V6-k9A"/>
@@ -259,8 +261,6 @@
                             <constraint firstItem="Hnc-7a-xbT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7s1-Fo-PoE" secondAttribute="leading" constant="20" symbolic="YES" id="qsm-iA-Uxo"/>
                             <constraint firstItem="Hnc-7a-xbT" firstAttribute="top" secondItem="fvg-6d-imw" secondAttribute="bottom" id="tyF-xb-ly3"/>
                             <constraint firstItem="EVR-xK-nAa" firstAttribute="leading" secondItem="7s1-Fo-PoE" secondAttribute="leading" constant="148.5" id="u7L-MY-MiN"/>
-                            <constraint firstItem="wpt-2x-SUA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NIA-GT-PYt" secondAttribute="leading" constant="10" id="ugv-I9-4vY"/>
-                            <constraint firstItem="NIA-GT-PYt" firstAttribute="leading" secondItem="Fwe-w6-Lhu" secondAttribute="leading" constant="10" id="vMG-36-cbj"/>
                             <constraint firstItem="fvg-6d-imw" firstAttribute="top" secondItem="MSa-mx-J6A" secondAttribute="bottom" id="wyd-sn-qPW"/>
                             <constraint firstItem="2e9-1e-UMA" firstAttribute="top" secondItem="NIA-GT-PYt" secondAttribute="bottom" id="zBQ-Yc-8Wv"/>
                             <constraint firstItem="MSa-mx-J6A" firstAttribute="top" secondItem="A4E-Sz-o2i" secondAttribute="bottom" constant="10" id="zoh-ZL-MLS"/>

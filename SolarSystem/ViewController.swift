@@ -320,7 +320,7 @@ extension ViewController: ARSCNViewDelegate {
             let distance = cameraNode.position.distance(receiver: planetNode.position)
             distances[planet] = distance
             
-            sizes[planet] = planetNode.boundingSphere.radius
+            sizes[planet] = planetNode.boundingSphere.radius * planetNode.scale.x
             if let sphere = planetNode.geometry as? SCNSphere {
                 let radius = sphere.radius * CGFloat(planetNode.scale.x)
                 if CGFloat(distance) < radius {
@@ -333,7 +333,8 @@ extension ViewController: ARSCNViewDelegate {
             self.updateLabel()
 
             self.collectionViewController?.updateDistance(distances)
-            self.collectionViewController?.updateReferenceSize(sizes)
+            //TODO come back to this
+//            self.collectionViewController?.updateReferenceSize(sizes)
             
             let lookats: [SCNLookAtConstraint] = self.arrowNode.constraints?.filter({ (constraint) -> Bool in
                 if let _ = constraint as? SCNLookAtConstraint {
