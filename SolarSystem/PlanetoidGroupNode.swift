@@ -95,11 +95,25 @@ class PlanetoidGroupNode: SCNNode {
     }
     
     class func scaleOrbit(planetoids: [Planet:PlanetoidGroupNode], scalingUp: Bool) {
+        // Figure out the current orbit of mercury. Scale the rest based on that.
+        // So mercury doesn't really move from where it is, everything else does.
+        guard let merc = planetoids[Planet.mercury]?.planetNode else {return}
+
+        // retain the current mercury position
+        let mercuryARRadius = CGFloat(merc.position.x)
+        
         SCNTransaction.begin()
         SCNTransaction.animationDuration = scalingUp ? 5 : 1
-        for (planet,node) in planetoids {
-            
-            guard let planetNode = node.planetNode else {
+        
+        var counter: CGFloat = 0
+        for planet in Planet.allPlanets {
+            // don't scale mercury or sun
+            if counter < 2 {
+                counter = counter + 1
+                continue
+            }
+            let node = planetoids[planet]
+            guard let planetNode = node?.planetNode else {
                 print("we have no planet node")
                 return
             }
@@ -109,18 +123,25 @@ class PlanetoidGroupNode: SCNNode {
             // both be the same value
             var radius: CGFloat = 0
             if scalingUp {
-                radius = planet.orbitalRadius
+                radius = mercuryARRadius * planet.orbitalRadius / Planet.mercury.orbitalRadius
             } else {
-                radius = planet.displayOrbitalRadius
+                radius = mercuryARRadius * counter
             }
             var position = planetNode.position
             position.x = Float(radius)
-            node.torus?.ringRadius = radius
+            node?.torus?.ringRadius = radius
             planetNode.position = position
+            counter = counter + 1
         }
         SCNTransaction.commit()
     }
     
+    /*!
+     @method scale:nodes:plutoTableRadius:
+     @abstract Scales the set of Planet:PlanetoidGroupNode objects based on the desired radius of pluto
+     @param nodes the set of nodes to scale
+     @param plutoTableRadius the desired radius of the node set
+     */
     class func scale(nodes: [Planet:PlanetoidGroupNode], plutoTableRadius: Float) {
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 1

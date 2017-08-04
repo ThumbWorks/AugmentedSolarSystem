@@ -73,10 +73,10 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMR-IA-p4n">
-                                <rect key="frame" x="280" y="30" width="95" height="30"/>
-                                <state key="normal" title="scale to plane"/>
+                                <rect key="frame" x="340" y="30" width="35" height="30"/>
+                                <state key="normal" title="reset"/>
                                 <connections>
-                                    <action selector="scaleToARPlane" destination="BV1-FR-VrT" eventType="touchUpInside" id="WNS-vH-d7Y"/>
+                                    <action selector="resetToDetectedPlane" destination="BV1-FR-VrT" eventType="touchUpInside" id="cqN-ti-aJ5"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -112,7 +112,7 @@
                     <connections>
                         <outlet property="hudBottomConstraint" destination="agn-eF-OC7" id="upM-v8-Xsm"/>
                         <outlet property="hudHeightConstraint" destination="vRk-96-Kbf" id="jp1-b7-qIC"/>
-                        <outlet property="scaleButton" destination="GMR-IA-p4n" id="eHZ-fI-rd7"/>
+                        <outlet property="resetButton" destination="GMR-IA-p4n" id="Q8b-S7-ZkO"/>
                         <outlet property="sceneView" destination="Y8e-tj-9vj" id="zCK-fe-vs0"/>
                         <outlet property="status" destination="KlY-l3-zEO" id="F55-OO-f9p"/>
                     </connections>

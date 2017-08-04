@@ -40,7 +40,7 @@ class ViewController: UIViewController {
 
     
     // Change the text when tapped
-    @IBOutlet weak var scaleButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
     
     #if DEBUG
     // For debug purposes, count and color the discovered planes
@@ -126,19 +126,24 @@ extension SCNVector3 {
 }
 
 extension ViewController {
+    
     @IBAction func pinchedScreen(_ sender: UIPinchGestureRecognizer) {
         pincher?.pinch(with: sender)
+        resetButton.isHidden = false
     }
     
     @IBAction func tappedScreen(_ sender: UITapGestureRecognizer) {
-        
         // determine if we've tapped a planet
         if (sender.state == .ended) {
             let location = sender.location(in: view)
             let options: [SCNHitTestOption: Any] = [.searchMode: SCNHitTestSearchMode.all.rawValue]
             let hittestResults = sceneView.hitTest(location, options: options)
             for result in hittestResults {
+                
+                // the node of the hit test result
                 let node = result.node
+                
+                // see if it has a planetNode
                 if self.solarSystemNodes.planetoids.contains(where: { (planets) -> Bool in
                     return node == planets.value.planetNode
                 }) {
@@ -148,6 +153,8 @@ extension ViewController {
 
                         // now scroll to this node. We've got a name
                         self.collectionViewController?.changeToPlanet(name: name)
+                        
+                        // We only want the first one, so return out of the method
                         return
                     }
                 }
@@ -155,20 +162,18 @@ extension ViewController {
         }
     }
     
-    @IBAction func scaleToARPlane() {
-        Mixpanel.sharedInstance()?.track("tapped scale to plane")
-
-        if let anchorWidth = anchorWidth {
-            
-            // if we are currently scaling up, we need to set the width to the size of the plane, otherwise multiply it all by 10
-            let radius = scaleSizeUp ? anchorWidth / 2 : anchorWidth / 2 * 10
-            scaleSizeUp = !scaleSizeUp
-            
-            let buttonTitle = scaleSizeUp ? "1x" : "10x"
-            scaleButton.setTitle(buttonTitle, for: .normal)
-            
-            PlanetoidGroupNode.scale(nodes: solarSystemNodes.planetoids, plutoTableRadius: radius)
+    // This is essentially reset
+    @IBAction func resetToDetectedPlane() {
+        Mixpanel.sharedInstance()?.track("tapped reset to detected plane")
+        guard let anchorWidth = anchorWidth else {
+            print("Tapped reset without an anchorWidth")
+            return
         }
+        let radius = anchorWidth / 2
+        scaleSizeUp = !scaleSizeUp
+        
+        PlanetoidGroupNode.scale(nodes: solarSystemNodes.planetoids, plutoTableRadius: radius)
+        resetButton.isHidden = true
     }
     
     @IBAction func toggleTrails() {
@@ -181,12 +186,12 @@ extension ViewController {
     }
     
     @IBAction func changeOrbitScaleTapped(_ sender: Any) {
-        print("changing orbit scale")
         Mixpanel.sharedInstance()?.track("change orbit scale")
 
         // toggle the state
         scalingOrbitUp = !scalingOrbitUp
         PlanetoidGroupNode.scaleOrbit(planetoids: solarSystemNodes.planetoids, scalingUp: scalingOrbitUp)
+        resetButton.isHidden = false
     }
     
     @IBAction func changeSizeScaleTapped(_ sender: Any) {
@@ -202,6 +207,7 @@ extension ViewController {
         }
         
         PlanetoidGroupNode.scaleNodes(nodes: solarSystemNodes.planetoids, scaleUp: scaleSizeUp)
+        resetButton.isHidden = false
     }
     
     func blurBackground() {
@@ -392,7 +398,7 @@ extension ViewController: ARSCNViewDelegate {
                 self.hudBottomConstraint.constant = 0
                 
                 // Make the bottom HUD show, hint that it is scrollable
-                UIView.animate(withDuration: 0.6, delay: 2, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.3, delay: 2, options: .curveEaseInOut, animations: {
                     self.view.layoutIfNeeded()
                 }, completion: { (completed) in
                     self.collectionViewController?.hintScrollable()
