@@ -19,12 +19,20 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var rotationDuration: UILabel!
     @IBOutlet weak var radius: UILabel!
     @IBOutlet weak var distance: UILabel!
+    @IBOutlet weak var sizeReference: UILabel!
     
     var planetSelectionChanged: ((Planet) -> ())?
     var currentPlanet: Planet?
-    func updateDistance(distances: [Planet:Float]) {
+    
+    func updateDistance(_ distances: [Planet:Float]) {
         if let planet = currentPlanet, let meters = distances[planet] {
             distance.text =  "\(meters.format(f: ".1")) real meters away"
+        }
+    }
+    
+    func updateReferenceSize(_ sizes: [Planet:Float]) {
+        if let planet = currentPlanet, let meters = sizes[planet] {
+            sizeReference.text =  ScaleReference.objectSizeDescription(for: meters)
         }
     }
     

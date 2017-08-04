@@ -38,6 +38,10 @@ class ViewController: UIViewController {
     // TODO make this lazy
     var blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
 
+    
+    // Change the text when tapped
+    @IBOutlet weak var scaleButton: UIButton!
+    
     #if DEBUG
     // For debug purposes, count and color the discovered planes
     var planeCount = 0
@@ -155,7 +159,15 @@ extension ViewController {
         Mixpanel.sharedInstance()?.track("tapped scale to plane")
 
         if let anchorWidth = anchorWidth {
-            PlanetoidGroupNode.scale(nodes: solarSystemNodes.planetoids, plutoTableRadius: anchorWidth / 2)
+            
+            // if we are currently scaling up, we need to set the width to the size of the plane, otherwise multiply it all by 10
+            let radius = scaleSizeUp ? anchorWidth / 2 : anchorWidth / 2 * 10
+            scaleSizeUp = !scaleSizeUp
+            
+            let buttonTitle = scaleSizeUp ? "1x" : "10x"
+            scaleButton.setTitle(buttonTitle, for: .normal)
+            
+            PlanetoidGroupNode.scale(nodes: solarSystemNodes.planetoids, plutoTableRadius: radius)
         }
     }
     
@@ -288,11 +300,11 @@ extension ViewController: ARSCNViewDelegate {
             return
         }
 
-        
         // we calculate the distances so we can
         // a) display the distance for each planet in the hud
         // b) determine if we are inside of a node
         var distances = [Planet:Float]()
+        var sizes = [Planet:Float]()
         insidePlanet = nil
 
         for (planet, node) in solarSystemNodes.planetoids {
@@ -304,6 +316,7 @@ extension ViewController: ARSCNViewDelegate {
             let distance = cameraNode.position.distance(receiver: planetNode.position)
             distances[planet] = distance
             
+            sizes[planet] = planetNode.boundingSphere.radius
             if let sphere = planetNode.geometry as? SCNSphere {
                 let radius = sphere.radius * CGFloat(planetNode.scale.x)
                 if CGFloat(distance) < radius {
@@ -315,7 +328,8 @@ extension ViewController: ARSCNViewDelegate {
         DispatchQueue.main.async {
             self.updateLabel()
 
-            self.collectionViewController?.updateDistance(distances: distances)
+            self.collectionViewController?.updateDistance(distances)
+            self.collectionViewController?.updateReferenceSize(sizes)
             
             let lookats: [SCNLookAtConstraint] = self.arrowNode.constraints?.filter({ (constraint) -> Bool in
                 if let _ = constraint as? SCNLookAtConstraint {
@@ -358,7 +372,7 @@ extension ViewController: ARSCNViewDelegate {
 
 
                 #endif
-                
+
                 let width = planeAnchor.extent.x
                 let length = planeAnchor.extent.y
                 let depth = planeAnchor.extent.z

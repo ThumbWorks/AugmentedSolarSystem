@@ -73,7 +73,7 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMR-IA-p4n">
-                                <rect key="frame" x="0.0" y="128" width="95" height="30"/>
+                                <rect key="frame" x="280" y="30" width="95" height="30"/>
                                 <state key="normal" title="scale to plane"/>
                                 <connections>
                                     <action selector="scaleToARPlane" destination="BV1-FR-VrT" eventType="touchUpInside" id="WNS-vH-d7Y"/>
@@ -83,11 +83,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GMR-IA-p4n" secondAttribute="trailing" id="1Ot-kV-8Mb"/>
+                            <constraint firstAttribute="trailing" secondItem="GMR-IA-p4n" secondAttribute="trailing" id="1Ot-kV-8Mb"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yOl-4w-DAM" secondAttribute="trailing" constant="20" symbolic="YES" id="2vb-OU-kFN"/>
-                            <constraint firstItem="GMR-IA-p4n" firstAttribute="leading" secondItem="yOl-4w-DAM" secondAttribute="leading" id="BMa-vi-KRL"/>
+                            <constraint firstItem="GMR-IA-p4n" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="AuZ-Mn-9n4"/>
                             <constraint firstItem="zEO-LC-Gb3" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="Be4-3y-LDa"/>
-                            <constraint firstItem="GMR-IA-p4n" firstAttribute="top" secondItem="yOl-4w-DAM" secondAttribute="bottom" constant="8" id="G4j-0q-xt9"/>
                             <constraint firstItem="KlY-l3-zEO" firstAttribute="centerX" secondItem="Y8e-tj-9vj" secondAttribute="centerX" id="NR6-6d-oJe"/>
                             <constraint firstItem="bi2-3a-bee" firstAttribute="top" secondItem="Y8e-tj-9vj" secondAttribute="bottom" id="P79-Rf-TpU"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="top" secondItem="Wef-8h-2Ru" secondAttribute="top" id="PcF-Nr-kPL"/>
@@ -96,6 +95,7 @@
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="top" secondItem="KlY-l3-zEO" secondAttribute="bottom" constant="-41" id="YPM-B6-M3f"/>
                             <constraint firstItem="bi2-3a-bee" firstAttribute="top" secondItem="zEO-LC-Gb3" secondAttribute="bottom" id="agn-eF-OC7"/>
                             <constraint firstItem="omW-cd-Viv" firstAttribute="top" secondItem="3Do-Nz-vPN" secondAttribute="bottom" id="amZ-Ig-BdL"/>
+                            <constraint firstItem="GMR-IA-p4n" firstAttribute="top" secondItem="7fE-TC-662" secondAttribute="bottom" constant="10" id="kfA-bl-R7u"/>
                             <constraint firstAttribute="trailing" secondItem="zEO-LC-Gb3" secondAttribute="trailing" id="kqR-qf-mnv"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="l9v-9V-kOQ"/>
                             <constraint firstItem="yOl-4w-DAM" firstAttribute="top" secondItem="omW-cd-Viv" secondAttribute="bottom" id="nJ3-4N-YW3"/>
@@ -112,6 +112,7 @@
                     <connections>
                         <outlet property="hudBottomConstraint" destination="agn-eF-OC7" id="upM-v8-Xsm"/>
                         <outlet property="hudHeightConstraint" destination="vRk-96-Kbf" id="jp1-b7-qIC"/>
+                        <outlet property="scaleButton" destination="GMR-IA-p4n" id="eHZ-fI-rd7"/>
                         <outlet property="sceneView" destination="Y8e-tj-9vj" id="zCK-fe-vs0"/>
                         <outlet property="status" destination="KlY-l3-zEO" id="F55-OO-f9p"/>
                     </connections>
@@ -143,9 +144,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NIA-GT-PYt">
-                                <rect key="frame" x="121" y="0.0" width="254" height="174"/>
+                                <rect key="frame" x="103" y="0.0" width="272" height="174"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="XGd-uj-Lrk">
-                                    <rect key="frame" x="0.0" y="0.0" width="254" height="174"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="272" height="174"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S7z-pB-mRa">
@@ -185,6 +186,11 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="distance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpt-2x-SUA">
                                 <rect key="frame" x="131" y="92" width="60" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="reference size" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwe-w6-Lhu">
+                                <rect key="frame" x="93" y="113" width="98" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -239,8 +245,10 @@
                             <constraint firstItem="wpt-2x-SUA" firstAttribute="trailing" secondItem="EVR-xK-nAa" secondAttribute="trailing" id="HBq-FV-dd7"/>
                             <constraint firstAttribute="trailing" secondItem="NIA-GT-PYt" secondAttribute="trailing" id="IYj-rQ-sy3"/>
                             <constraint firstItem="wpt-2x-SUA" firstAttribute="top" secondItem="EVR-xK-nAa" secondAttribute="bottom" id="LOj-Co-j8d"/>
+                            <constraint firstItem="Fwe-w6-Lhu" firstAttribute="trailing" secondItem="wpt-2x-SUA" secondAttribute="trailing" id="NOf-j6-FcH"/>
                             <constraint firstItem="2e9-1e-UMA" firstAttribute="top" secondItem="Zu8-KH-hCY" secondAttribute="bottom" id="Qfz-Wj-Kvm"/>
                             <constraint firstItem="Zu8-KH-hCY" firstAttribute="leading" secondItem="MSa-mx-J6A" secondAttribute="trailing" constant="10" id="RTp-Wv-ANS"/>
+                            <constraint firstItem="wpt-2x-SUA" firstAttribute="bottom" secondItem="Fwe-w6-Lhu" secondAttribute="top" id="Siv-V6-k9A"/>
                             <constraint firstItem="fvg-6d-imw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7s1-Fo-PoE" secondAttribute="leading" constant="10" id="UNA-j4-y8q"/>
                             <constraint firstItem="EVR-xK-nAa" firstAttribute="top" secondItem="Hnc-7a-xbT" secondAttribute="bottom" id="X5b-Ed-q0n"/>
                             <constraint firstItem="NIA-GT-PYt" firstAttribute="top" secondItem="A4E-Sz-o2i" secondAttribute="bottom" id="a9C-21-6yg"/>
@@ -251,7 +259,8 @@
                             <constraint firstItem="Hnc-7a-xbT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7s1-Fo-PoE" secondAttribute="leading" constant="20" symbolic="YES" id="qsm-iA-Uxo"/>
                             <constraint firstItem="Hnc-7a-xbT" firstAttribute="top" secondItem="fvg-6d-imw" secondAttribute="bottom" id="tyF-xb-ly3"/>
                             <constraint firstItem="EVR-xK-nAa" firstAttribute="leading" secondItem="7s1-Fo-PoE" secondAttribute="leading" constant="148.5" id="u7L-MY-MiN"/>
-                            <constraint firstItem="wpt-2x-SUA" firstAttribute="leading" secondItem="NIA-GT-PYt" secondAttribute="leading" constant="10" id="ugv-I9-4vY"/>
+                            <constraint firstItem="wpt-2x-SUA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NIA-GT-PYt" secondAttribute="leading" constant="10" id="ugv-I9-4vY"/>
+                            <constraint firstItem="NIA-GT-PYt" firstAttribute="leading" secondItem="Fwe-w6-Lhu" secondAttribute="leading" constant="10" id="vMG-36-cbj"/>
                             <constraint firstItem="fvg-6d-imw" firstAttribute="top" secondItem="MSa-mx-J6A" secondAttribute="bottom" id="wyd-sn-qPW"/>
                             <constraint firstItem="2e9-1e-UMA" firstAttribute="top" secondItem="NIA-GT-PYt" secondAttribute="bottom" id="zBQ-Yc-8Wv"/>
                             <constraint firstItem="MSa-mx-J6A" firstAttribute="top" secondItem="A4E-Sz-o2i" secondAttribute="bottom" constant="10" id="zoh-ZL-MLS"/>
@@ -265,6 +274,7 @@
                         <outlet property="name" destination="MSa-mx-J6A" id="Rr7-Th-EHi"/>
                         <outlet property="radius" destination="EVR-xK-nAa" id="eGd-0y-ZSU"/>
                         <outlet property="rotationDuration" destination="Hnc-7a-xbT" id="rio-ce-jRW"/>
+                        <outlet property="sizeReference" destination="Fwe-w6-Lhu" id="edJ-EE-pET"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="539-ER-Fmd" userLabel="First Responder" sceneMemberID="firstResponder"/>
