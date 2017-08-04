@@ -162,6 +162,11 @@ class PlanetoidGroupNode: SCNNode {
     }
     
     class func scaleNodes(nodes: [Planet:PlanetoidGroupNode], scaleUp: Bool) {
+        // determine size of sun
+        // if scaling down, make everything the size of the sun
+        // if scaling up, do the math to figure out what size everything should be
+        guard let currentScale = nodes[Planet.sun]?.planetNode?.scale.x else {return}
+        
         SCNTransaction.begin()
         SCNTransaction.animationDuration = scaleUp ? 5 : 1
         for (planet,node) in nodes {
@@ -172,9 +177,9 @@ class PlanetoidGroupNode: SCNNode {
             }
             var scale: Float = 0
             if scaleUp {
-                scale = planet.radius / Planet.earth.radius / 20
+                scale = planet.radius / Planet.sun.radius * currentScale
             } else {
-                scale = 0.05
+                scale = currentScale
             }
             planetNode.scale = SCNVector3Make(scale, scale, scale)
         }

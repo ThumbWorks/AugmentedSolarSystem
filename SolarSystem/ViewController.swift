@@ -199,14 +199,12 @@ extension ViewController {
         Mixpanel.sharedInstance()?.track("change size scale")
 
         // toggle the state
-        // we must scale the orbit if we are going to scale the nodes. Otherwise we get into a bad state
         scaleSizeUp = !scaleSizeUp
-        if (!scalingOrbitUp) {
-            scalingOrbitUp = !scalingOrbitUp
-            PlanetoidGroupNode.scaleOrbit(planetoids: solarSystemNodes.planetoids, scalingUp: scalingOrbitUp)
-        }
         
+        // do the scale
         PlanetoidGroupNode.scaleNodes(nodes: solarSystemNodes.planetoids, scaleUp: scaleSizeUp)
+        
+        // ensure that the reset button is not hidden
         resetButton.isHidden = false
     }
     
@@ -375,8 +373,6 @@ extension ViewController: ARSCNViewDelegate {
                     let borderMaterial = SCNMaterial()
                     borderMaterial.diffuse.contents = UIColor.blue
                     plane.addBorder(materials: [borderMaterial])
-
-
                 #endif
 
                 let width = planeAnchor.extent.x
@@ -443,7 +439,7 @@ extension ViewController: ARSCNViewDelegate {
      @param anchor The anchor that was updated.
      */
     func renderer(_ renderer: SCNSceneRenderer, willUpdate node: SCNNode, for anchor: ARAnchor) {
-        print("will update node \(node) for anchor \(anchor.identifier)")
+//        print("will update node \(node) for anchor \(anchor.identifier)")
         
         // Since we added our SCNPlane to the node as a child, we must find the first child
         // The anchor, of course, must be an ARPlaneAnchor
