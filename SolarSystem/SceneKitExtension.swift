@@ -113,9 +113,10 @@ extension SCNNode {
     func rotate(duration: CFTimeInterval, clockwise: Bool = true) {
         let rotationValue = clockwise ? CGFloat.pi : -CGFloat.pi
         let rotate = SCNAction.rotateBy(x: 0, y: rotationValue, z: 0, duration: duration)
-        if let moveSequence = SCNAction.sequence([rotate]), let moveLoop = SCNAction.repeatForever(moveSequence)  {
+        let moveSequence = SCNAction.sequence([rotate])
+        let moveLoop = SCNAction.repeatForever(moveSequence)
             self.runAction(moveLoop)
-        }
+        
     }
     
     // Creates a planet that has the ability to orbit around a central point
