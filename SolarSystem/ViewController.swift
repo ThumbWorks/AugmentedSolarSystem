@@ -451,6 +451,14 @@ extension ViewController: ARSCNViewDelegate {
                 }
                 PlanetoidGroupNode.scale(nodes: self.solarSystemNodes.planetoids, plutoTableRadius: radius / 2)
                 self.anchorWidth = radius
+                
+                // At this point the planets are visible. Set a timer for the rating mechanism.
+                // The thinking here is that they've seen the planets and are playing with them for a minute.
+                // A this point people seem to really like it, now would be the time to ask
+                let deadlineTime = DispatchTime.now() + .seconds(60)
+                DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                    AppRater.requestEventIsAppropriate()
+                }
             }
         }
     }
