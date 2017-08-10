@@ -7,3 +7,22 @@
 //
 
 import Foundation
+import UIKit
+import Mixpanel
+
+class AboutViewController: UIViewController {
+    override func viewDidLoad() {
+        Mixpanel.sharedInstance()?.track("About View Loaded")
+    }
+    
+    @IBAction func dismiss(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
+    @IBAction func visitThumbworks(_ sender: Any) {
+        Mixpanel.sharedInstance()?.track("Visit Thumbworks")
+        if let url = URL(string: "http://thumbworks.io") {
+            UIApplication.shared.open(url, options:[:] )
+        }
+    }
+}
