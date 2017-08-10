@@ -24,10 +24,8 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
     var planetSelectionChanged: ((Planet) -> ())?
     var currentPlanet: Planet?
     
-    func updateDistance(_ distances: [Planet:Float]) {
-        if let planet = currentPlanet, let meters = distances[planet] {
-            distance.text =  "\(meters.format(f: ".1")) real meters away"
-        }
+    func updateDistance(_ distanceString: String) {
+        distance.text =  distanceString
     }
     
     func updateReferenceSize(_ sizes: [Planet:Float]) {

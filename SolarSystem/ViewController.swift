@@ -344,11 +344,14 @@ extension ViewController: ARSCNViewDelegate {
                 }
             }
         }
-
+        var distanceString = ""
+        if let planet = collectionViewController?.currentPlanet, let meters = distances[planet] {
+            distanceString =  "\(meters.format(f: ".1")) real meters away"
+        }
         DispatchQueue.main.async {
             self.updateLabel()
 
-            self.collectionViewController?.updateDistance(distances)
+            self.collectionViewController?.updateDistance(distanceString)
             //TODO come back to this
 //            self.collectionViewController?.updateReferenceSize(sizes)
             
