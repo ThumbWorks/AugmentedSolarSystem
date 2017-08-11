@@ -102,32 +102,9 @@
                                     <action selector="resetToDetectedPlane" destination="BV1-FR-VrT" eventType="touchUpInside" id="cqN-ti-aJ5"/>
                                 </connections>
                             </button>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Dm-1S-Vsb">
-                                <rect key="frame" x="343" y="20" width="32" height="30"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Nww-GI-nK1">
-                                    <rect key="frame" x="0.0" y="0.0" width="32" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CbV-aM-IhS">
-                                            <rect key="frame" x="0.0" y="0.0" width="32" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="JmP-Ye-Hgy">
-                                                <rect key="frame" x="0.0" y="0.0" width="32" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </view>
-                                            <vibrancyEffect>
-                                                <blurEffect style="light"/>
-                                            </vibrancyEffect>
-                                        </visualEffectView>
-                                    </subviews>
-                                </view>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="xE0-ar-xEY"/>
-                                </constraints>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8K-3O-Oc1">
                                 <rect key="frame" x="348" y="24" width="22" height="22"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="FIY-YT-HUc" kind="popoverPresentation" popoverAnchorView="t8K-3O-Oc1" id="McC-Qy-uEW">
                                         <segue key="commit" inheritsFrom="parent" id="uW2-8x-Rou"/>
@@ -142,25 +119,21 @@
                         <constraints>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yOl-4w-DAM" secondAttribute="trailing" constant="20" symbolic="YES" id="2vb-OU-kFN"/>
                             <constraint firstItem="vDu-Ri-qEF" firstAttribute="bottom" secondItem="yOl-4w-DAM" secondAttribute="bottom" id="4lo-js-RLC"/>
+                            <constraint firstAttribute="trailing" secondItem="t8K-3O-Oc1" secondAttribute="trailing" constant="5" id="5i2-is-52c"/>
                             <constraint firstItem="vDu-Ri-qEF" firstAttribute="top" secondItem="3Do-Nz-vPN" secondAttribute="top" constant="-20" id="AhN-wi-nv4"/>
                             <constraint firstItem="zEO-LC-Gb3" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="Be4-3y-LDa"/>
                             <constraint firstItem="GMR-IA-p4n" firstAttribute="top" secondItem="yOl-4w-DAM" secondAttribute="bottom" id="L1x-QT-aLb"/>
                             <constraint firstItem="KlY-l3-zEO" firstAttribute="centerX" secondItem="Y8e-tj-9vj" secondAttribute="centerX" id="NR6-6d-oJe"/>
-                            <constraint firstItem="4Dm-1S-Vsb" firstAttribute="top" secondItem="7fE-TC-662" secondAttribute="bottom" id="P1c-j2-LBb"/>
                             <constraint firstItem="bi2-3a-bee" firstAttribute="top" secondItem="Y8e-tj-9vj" secondAttribute="bottom" id="P79-Rf-TpU"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="top" secondItem="Wef-8h-2Ru" secondAttribute="top" id="PcF-Nr-kPL"/>
                             <constraint firstItem="3Do-Nz-vPN" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" constant="10" id="Ptz-h0-1lJ"/>
-                            <constraint firstItem="t8K-3O-Oc1" firstAttribute="centerY" secondItem="4Dm-1S-Vsb" secondAttribute="centerY" id="QeX-ZR-tlL"/>
                             <constraint firstItem="dTE-ea-BUo" firstAttribute="width" secondItem="vDu-Ri-qEF" secondAttribute="width" id="RNP-1H-Kty"/>
                             <constraint firstAttribute="trailing" secondItem="Y8e-tj-9vj" secondAttribute="trailing" id="Rb7-i7-hlA"/>
-                            <constraint firstItem="t8K-3O-Oc1" firstAttribute="centerX" secondItem="4Dm-1S-Vsb" secondAttribute="centerX" id="Rq5-zb-PCY"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="top" secondItem="KlY-l3-zEO" secondAttribute="bottom" constant="-41" id="YPM-B6-M3f"/>
                             <constraint firstItem="dTE-ea-BUo" firstAttribute="top" secondItem="GMR-IA-p4n" secondAttribute="top" id="a8I-o4-KzH"/>
                             <constraint firstItem="bi2-3a-bee" firstAttribute="top" secondItem="zEO-LC-Gb3" secondAttribute="bottom" id="agn-eF-OC7"/>
                             <constraint firstItem="omW-cd-Viv" firstAttribute="top" secondItem="3Do-Nz-vPN" secondAttribute="bottom" id="amZ-Ig-BdL"/>
                             <constraint firstItem="dTE-ea-BUo" firstAttribute="centerY" secondItem="GMR-IA-p4n" secondAttribute="centerY" id="d0j-cB-jfy"/>
-                            <constraint firstAttribute="trailing" secondItem="4Dm-1S-Vsb" secondAttribute="trailing" id="fi6-uB-2fQ"/>
-                            <constraint firstItem="4Dm-1S-Vsb" firstAttribute="width" secondItem="t8K-3O-Oc1" secondAttribute="width" constant="10" id="gTn-YH-lDL"/>
                             <constraint firstItem="dTE-ea-BUo" firstAttribute="centerX" secondItem="GMR-IA-p4n" secondAttribute="centerX" id="iDk-dZ-0Hz"/>
                             <constraint firstAttribute="trailing" secondItem="zEO-LC-Gb3" secondAttribute="trailing" id="kqR-qf-mnv"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="l9v-9V-kOQ"/>
@@ -173,6 +146,7 @@
                             <constraint firstItem="yOl-4w-DAM" firstAttribute="leading" secondItem="omW-cd-Viv" secondAttribute="leading" id="t3u-H2-aK5"/>
                             <constraint firstItem="omW-cd-Viv" firstAttribute="leading" secondItem="3Do-Nz-vPN" secondAttribute="leading" id="vnc-SI-0ud"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3Do-Nz-vPN" secondAttribute="trailing" constant="20" symbolic="YES" id="wXr-DO-cTd"/>
+                            <constraint firstItem="t8K-3O-Oc1" firstAttribute="top" secondItem="7fE-TC-662" secondAttribute="bottom" constant="4" id="zds-vx-7Bh"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="wBF-bN-l1W" appends="YES" id="Mfk-Ro-hQJ"/>

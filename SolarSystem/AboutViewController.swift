@@ -20,8 +20,8 @@ class AboutViewController: UIViewController {
     }
     
     @IBAction func visitThumbworks(_ sender: Any) {
-        Mixpanel.sharedInstance()?.track("Visit Thumbworks")
-        if let url = URL(string: "http://thumbworks.io") {
+        Mixpanel.sharedInstance()?.track("Tap Thumbworks")
+        if let url = URL(string: "http://twitter.com/thumbworksinc") {
             UIApplication.shared.open(url, options:[:] )
         }
     }
