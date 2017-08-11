@@ -21,6 +21,8 @@ class ViewController: UIViewController {
     
     @IBOutlet var toggleViews: [UIView]!
     @IBOutlet var resetViews: [UIView]!
+    @IBOutlet weak var timeScaleSlider: UISlider!
+    @IBOutlet weak var timeScaleButton: UIButton!
     
     var anchorWidth: Float?
     let cameraState: ARCamera.TrackingState = .normal
@@ -133,6 +135,22 @@ extension SCNVector3 {
 }
 
 extension ViewController {
+    @IBAction func timeScaleButtonPressed(_ button: UIButton) {
+        timeScaleSlider.isHidden = !timeScaleSlider.isHidden
+    }
+    
+    @IBAction func sliderValueChanged(_ slider: UISlider) {
+        print("value is \(slider.value)")
+        let value = Double(slider.value)
+        // iterate over all of the planets stop rotation and orbit, set with new float
+        _ = solarSystemNodes.planetoids.map { (planet, node) in
+            print("change speed \(planet.name)")
+            if let planetNode = node.planetNode {
+                node.beginRotation(planet: planet, node: planetNode, multiplier: value)
+            }
+            node.beginOrbit(planet: planet, multiplier: value)
+        }
+    }
     
     @IBAction func pinchedScreen(_ sender: UIPinchGestureRecognizer) {
         pincher?.pinch(with: sender)
@@ -434,6 +452,7 @@ extension ViewController: ARSCNViewDelegate {
                 _ = self.toggleViews.map({ (view) in
                     view.isHidden = false
                 })
+                self.timeScaleButton.isHidden = false
                 self.done = true
                 for planetNode in self.solarSystemNodes.planetoids {
                     node.addChildNode(planetNode.value)

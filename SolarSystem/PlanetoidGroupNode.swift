@@ -20,9 +20,10 @@ class PlanetoidGroupNode: SCNNode {
     
     // The geometry representing the orbital path which is used for scaling
     let torus: SCNTorus?
-//    let label: SCNText
-//    let textNode: SCNNode
+    
     var planetNode: SCNNode?
+    
+    
     required init(planet: Planet) {
         
         let sceneString = "art.scnassets/\(planet.name).scn"
@@ -54,20 +55,32 @@ class PlanetoidGroupNode: SCNNode {
             self.addChildNode(aPlanetNode)
             let radianTilt = planet.axialTilt / 360 * 2*Float.pi
             aPlanetNode.rotation = SCNVector4Make(0, 0, 1, radianTilt)
-            
-            // Normalize to Earth's rotation (earth is now 1 second)
-            let normalizedRotationDuration = planet.rotationDuration / Planet.earth.rotationDuration
-            aPlanetNode.rotate(duration: normalizedRotationDuration)
+            beginRotation(planet: planet, node: aPlanetNode, multiplier: 1)
             self.planetNode = aPlanetNode
-//            textNode.constraints = [SCNBillboardConstraint()]
-//            aPlanetNode.addChildNode(textNode)
-//            textNode.isHidden = true
         }
         if let path = path {
             self.addChildNode(path)
-            // Normalize to Earth's rotation. Once earth year is 365 seconds
-            self.rotate(duration: planet.orbitPeriod * 365)
+            beginOrbit(planet: planet, multiplier: 1)
         }
+    }
+    
+    func beginOrbit(planet: Planet, multiplier: Double) {
+        // cleanup just in case
+        removeAction(forKey: "orbit")
+        
+        // Normalize to Earth's rotation. Once earth year is 365 seconds
+        let action = SCNAction.createRotateAction(duration: planet.orbitPeriod * 365 / multiplier)
+        runAction(action, forKey: "orbit")
+    }
+    
+    func beginRotation(planet: Planet, node: SCNNode, multiplier: Double) {
+        // cleanup just in case
+        node.removeAction(forKey: "rotation")
+        
+        // Normalize to Earth's rotation (earth is now 1 second)
+        let normalizedRotationDuration = planet.rotationDuration / Planet.earth.rotationDuration / multiplier
+        let action = SCNAction.createRotateAction(duration: normalizedRotationDuration)
+        node.runAction(action, forKey: "rotation")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -80,7 +93,8 @@ class PlanetoidGroupNode: SCNNode {
             return
         }
         planet.addChildNode(moon)
-        moon.rotate(duration: 5, clockwise: false)
+        let action = SCNAction.createRotateAction(duration: 5, clockwise: false)
+        moon.runAction(action)
     }
     
     func addRings() {

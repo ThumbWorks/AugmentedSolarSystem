@@ -67,6 +67,16 @@ class BorderedPlane: SCNNode {
     
 }
 
+extension SCNAction {
+    class func createRotateAction(duration: CFTimeInterval, clockwise: Bool = true) -> SCNAction {
+        let rotationValue = clockwise ? CGFloat.pi : -CGFloat.pi
+        let rotate = SCNAction.rotateBy(x: 0, y: rotationValue, z: 0, duration: duration)
+        let moveSequence = SCNAction.sequence([rotate])
+        let moveLoop = SCNAction.repeatForever(moveSequence)
+        return moveLoop
+    }
+}
+
 extension SCNNode {
     
     class func arrow() -> SCNNode {
@@ -108,15 +118,6 @@ extension SCNNode {
         lightNode.position = SCNVector3Make(averageX, averageY, averageZ)
         lightNode.light = sunLight
         return lightNode
-    }
-    
-    func rotate(duration: CFTimeInterval, clockwise: Bool = true) {
-        let rotationValue = clockwise ? CGFloat.pi : -CGFloat.pi
-        let rotate = SCNAction.rotateBy(x: 0, y: rotationValue, z: 0, duration: duration)
-        let moveSequence = SCNAction.sequence([rotate])
-        let moveLoop = SCNAction.repeatForever(moveSequence)
-            self.runAction(moveLoop)
-        
     }
     
     // Creates a planet that has the ability to orbit around a central point

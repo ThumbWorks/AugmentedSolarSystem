@@ -126,7 +126,8 @@ class PlanetDataSource: NSObject, UICollectionViewDataSource {
         aPlanetNode.rotation = SCNVector4Make(0, 0, 1, radianTilt)
         
         let rotationDuration = 16.0 // seems like a good rotation
-        aPlanetNode.rotate(duration: rotationDuration)
+        let action = SCNAction.createRotateAction(duration: rotationDuration)
+        aPlanetNode.runAction(action)
         return cell
     }
 }
