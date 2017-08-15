@@ -23,7 +23,10 @@ class ViewController: UIViewController {
     @IBOutlet var resetViews: [UIView]!
     @IBOutlet weak var timeScaleSlider: UISlider!
     @IBOutlet weak var timeScaleButton: UIButton!
-    
+    @IBOutlet weak var planetScaleButton: UIButton!
+    @IBOutlet weak var orbitScaleButton: UIButton!
+    @IBOutlet weak var orbitShowButton: UIButton!
+
     var anchorWidth: Float?
     let cameraState: ARCamera.TrackingState = .normal
 
@@ -73,6 +76,8 @@ class ViewController: UIViewController {
         
         // Set the scene to the view
         sceneView.scene = SCNScene()
+        
+        updateLabel()
     }
     
     func restartPlaneDetection() {
@@ -133,7 +138,11 @@ extension SCNVector3 {
         return distance
     }
 }
-
+extension UIImage {
+    static func hideOrbit() -> UIImage {
+        return #imageLiteral(resourceName: "Hide Orbit")
+    }
+}
 extension ViewController {
     @IBAction func timeScaleButtonPressed(_ button: UIButton) {
         timeScaleSlider.isHidden = !timeScaleSlider.isHidden
@@ -203,22 +212,33 @@ extension ViewController {
         _ = resetViews.map({ (view) in
             view.isHidden = true
         })
+        
+        orbitShowButton.setImage(#imageLiteral(resourceName: "Hide Orbit"), for: .normal)
+        orbitScaleButton.setImage(#imageLiteral(resourceName: "Scale Orbit"), for: .normal)
+        planetScaleButton.setImage(#imageLiteral(resourceName: "Scale Planets"), for: .normal)
     }
     
-    @IBAction func toggleTrails() {
+    @IBAction func toggleTrails(_ button: UIButton) {
         Mixpanel.sharedInstance()?.track("toggled trails")
-
+        guard let firstPath = solarSystemNodes.planetoids.first?.value.path else {
+            print("hidden value not determined")
+            return
+        }
+        let newHiddenValue = !firstPath.isHidden
         for (_, planetoidNode) in solarSystemNodes.planetoids {
             // do something with button
-            planetoidNode.path?.isHidden = !(planetoidNode.path?.isHidden)!
+            planetoidNode.path?.isHidden = newHiddenValue
         }
+        button.setImage(newHiddenValue ? #imageLiteral(resourceName: "Hide Orbit Selected") : #imageLiteral(resourceName: "Hide Orbit"), for: .normal)
     }
     
-    @IBAction func changeOrbitScaleTapped(_ sender: Any) {
+    @IBAction func changeOrbitScaleTapped(_ button: UIButton) {
         Mixpanel.sharedInstance()?.track("change orbit scale")
-
+        
         // toggle the state
         scalingOrbitUp = !scalingOrbitUp
+        button.setImage(scalingOrbitUp ? #imageLiteral(resourceName: "Scale Orbit Selected") : #imageLiteral(resourceName: "Scale Orbit"), for: .normal)
+        
         PlanetoidGroupNode.scaleOrbit(planetoids: solarSystemNodes.planetoids, scalingUp: scalingOrbitUp)
         
         _ = resetViews.map { (view) in
@@ -226,13 +246,13 @@ extension ViewController {
         }
     }
     
-    @IBAction func changeSizeScaleTapped(_ sender: Any) {
-        print("changing scale")
+    @IBAction func changeSizeScaleTapped(_ button: UIButton) {
         Mixpanel.sharedInstance()?.track("change size scale")
-
+        
         // toggle the state
         scaleSizeUp = !scaleSizeUp
         
+        button.setImage(scaleSizeUp ? #imageLiteral(resourceName: "Scale Planets Selected") : #imageLiteral(resourceName: "Scale Planets"), for: .normal)
         // do the scale
         PlanetoidGroupNode.scaleNodes(nodes: solarSystemNodes.planetoids, scaleUp: scaleSizeUp)
         
