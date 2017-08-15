@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     // the optional planet that the camera is within the bounding volume of
     var insidePlanet: Planet?
     
-    var sessionConfig = ARWorldTrackingSessionConfiguration()
+    var sessionConfig = ARWorldTrackingConfiguration()
     let solarSystemNodes = Planet.buildSolarSystem()
     
     var pincher: PinchController?
