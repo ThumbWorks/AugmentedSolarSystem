@@ -50,6 +50,7 @@ class ViewController: UIViewController {
     // For debug purposes, count and color the discovered planes
     var planeCount = 0
     let colors: [UIColor] = [.red, .orange, .yellow, .green, .blue, .purple]
+    var debugPlaneAnchorNode: SCNNode?
     #endif
 
     override func viewDidLoad() {
@@ -405,7 +406,12 @@ extension ViewController: ARSCNViewDelegate {
             }
         }
     }
-    
+    #if DEBUG
+    @objc func handleDoubleTap(_ recognizer: UITapGestureRecognizer) {
+        guard let anchor = self.debugPlaneAnchorNode else {return}
+        anchor.isHidden = !anchor.isHidden
+    }
+    #endif
     /**
      Called when a new node has been mapped to the given anchor.
      
@@ -426,11 +432,16 @@ extension ViewController: ARSCNViewDelegate {
                     
                     // We get a plane, this should roughly match a tabletop or a floor
                     let plane = BorderedPlane(width: planeAnchor.extent.x, height: planeAnchor.extent.z, color: .blue)
+                    self.debugPlaneAnchorNode = plane
                     node.addChildNode(plane)
                     
                     let borderMaterial = SCNMaterial()
                     borderMaterial.diffuse.contents = UIColor.blue
                     plane.addBorder(materials: [borderMaterial])
+                    
+                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleDoubleTap(_:)))
+                    tap.numberOfTapsRequired = 3
+                    self.view.addGestureRecognizer(tap)
                 #endif
 
                 let width = planeAnchor.extent.x
