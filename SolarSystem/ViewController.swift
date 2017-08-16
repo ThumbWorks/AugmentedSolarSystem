@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     var done = false
     var scalingOrbitUp = false
     var scaleSizeUp = false
+    var lastUpdateTime: TimeInterval = 0
     
     @IBOutlet var toggleViews: [UIView]!
     @IBOutlet var resetViews: [UIView]!
@@ -56,6 +57,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         pincher = PinchController(with: solarSystemNodes)
+       
         Mixpanel.sharedInstance()?.track("view did load")
         
         // hide the toggleviews
@@ -66,19 +68,18 @@ class ViewController: UIViewController {
         _ = resetViews.map { (view) in
             view.isHidden = true
         }
-        // start the hud out of view
-        hudBottomConstraint.constant = -hudHeightConstraint.constant
         
         // Set the view's delegate
         sceneView.delegate = self
         
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
-        
         // Set the scene to the view
         sceneView.scene = SCNScene()
-        
-        updateLabel()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
+    }
+    
+    @objc func willEnterForeground() {
+        restartEverything()
     }
     
     func restartPlaneDetection() {
@@ -87,17 +88,54 @@ class ViewController: UIViewController {
         sceneView.session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        print("view will appear. restart plane detection")
+    fileprivate func restartEverything() {
         restartPlaneDetection()
         
-        // Create a session configuration
-        sessionConfig.planeDetection = .horizontal
+        arrowNode.isHidden = true
+        
+        #if DEBUG
+        // clear the debug plane
+        debugPlaneAnchorNode?.removeFromParentNode()
+        debugPlaneAnchorNode = nil
+        #endif
 
+        // reset hudBottomConstraint
+        // start the hud out of view
+        hudBottomConstraint.constant = -hudHeightConstraint.constant
+        
+        done = false
+        timeScaleButton.isHidden = true
+        timeScaleSlider.isHidden = true
+
+        // unhide the toggleViews
+        _ = toggleViews.map({ (view) in
+            view.isHidden = true
+        })
+        
+        _ = resetViews.map({ (view) in
+            view.isHidden = true
+        })
+        
+        for planetNode in solarSystemNodes.planetoids {
+            planetNode.value.removeFromParentNode()
+        }
+        
+        for light in solarSystemNodes.lightNodes {
+            light.removeFromParentNode()
+        }
+        // Create a session configuration
+        //        sessionConfig.planeDetection = .horizontal
+        
         // Run the view's session
-        sceneView.session.run(sessionConfig)
+        //        sceneView.session.run(sessionConfig)
+        
+        updateLabel()
+        unblurBackground()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        restartEverything()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -297,6 +335,7 @@ extension ViewController {
     }
 }
 
+
 extension ViewController: ARSessionObserver {
     func session(_ session: ARSession, didFailWithError error: Error) {
         print("error \(error.localizedDescription)")
@@ -383,14 +422,19 @@ extension ViewController: ARSCNViewDelegate {
                 }
             }
         }
-        var distanceString = ""
-        if let planet = collectionViewController?.currentPlanet, let meters = distances[planet] {
-            distanceString =  "\(meters.format(f: ".1")) real meters away"
+        // rate limit
+        if (self.lastUpdateTime + 1.0) > time {
+            return
         }
         DispatchQueue.main.async {
             self.updateLabel()
-
-            self.collectionViewController?.updateDistance(distanceString)
+            self.lastUpdateTime = time
+            if let planet = self.collectionViewController?.currentPlanet, let meters = distances[planet] {
+                var distanceString = ""
+                print("calculating distance")
+                distanceString =  "\(meters.format(f: ".1")) real meters away"
+                self.collectionViewController?.updateDistance(distanceString)
+            }
             //TODO come back to this
 //            self.collectionViewController?.updateReferenceSize(sizes)
             
@@ -439,6 +483,7 @@ extension ViewController: ARSCNViewDelegate {
                     borderMaterial.diffuse.contents = UIColor.blue
                     plane.addBorder(materials: [borderMaterial])
                     
+                    // once we are restarting a session, this needs to be checked
                     let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleDoubleTap(_:)))
                     tap.numberOfTapsRequired = 3
                     self.view.addGestureRecognizer(tap)
