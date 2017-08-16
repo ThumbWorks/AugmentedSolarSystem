@@ -41,7 +41,7 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func changePlanetSelection() {
-        
+        print("change planet selection")
         // find the center of the frame wrt the content offset. 10 is
         let collectionViewSize = collectionView.frame.size
         let centerXFrame = collectionView.contentOffset.x + collectionViewSize.width/2
@@ -81,10 +81,10 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func hintScrollable() {
-        UIView.animate(withDuration: 2, delay: 3, options: [], animations: {
+        UIView.animate(withDuration: 0.5, delay: 3, options: [], animations: {
             self.collectionView.contentOffset = CGPoint(x: self.collectionView.frame.size.width / 2, y: 0)
         }) { (completed) in
-            UIView.animate(withDuration: 2, animations: {
+            UIView.animate(withDuration: 0.5, animations: {
                 self.collectionView.contentOffset = CGPoint(x: 0, y: 0)
             })
         }
@@ -101,6 +101,7 @@ class PlanetDataSource: NSObject, UICollectionViewDataSource {
     let planets = Planet.allPlanets
     
     func pathForPlanet(with name: String) -> IndexPath? {
+        print("path for planet")
         if let index = planets.index(where: { (planet) -> Bool in
             return planet.name == name
         }) {
