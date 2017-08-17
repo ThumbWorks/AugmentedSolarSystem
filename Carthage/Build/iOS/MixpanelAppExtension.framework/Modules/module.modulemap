@@ -1,5 +1,0 @@
-framework module MixpanelAppExtension {
-    header "Mixpanel.h"
-    header "MixpanelPeople.h"
-    export *
-}
