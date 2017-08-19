@@ -401,16 +401,16 @@ extension ARSCNView {
 		
 		var results = [FeatureHitTestResult]()
 		
-		guard let features = self.session.currentFrame?.rawFeaturePoints else {
-			return results
-		}
+//        guard let features = self.session.currentFrame?.rawFeaturePoints else {
+//            return results
+//        }
+//
+//        guard let ray = hitTestRayFromScreenPos(point) else {
+//            return results
+//        }
 		
-		guard let ray = hitTestRayFromScreenPos(point) else {
-			return results
-		}
-		
-		let maxAngleInDeg = min(coneOpeningAngleInDegrees, 360) / 2
-		let maxAngle = ((maxAngleInDeg / 180) * Float.pi)
+//        let maxAngleInDeg = min(coneOpeningAngleInDegrees, 360) / 2
+//        let maxAngle = ((maxAngleInDeg / 180) * Float.pi)
 		
 //        let points = features.points
 //
@@ -480,9 +480,9 @@ extension ARSCNView {
 	
 	func hitTestFromOrigin(origin: SCNVector3, direction: SCNVector3) -> FeatureHitTestResult? {
 		
-		guard let features = self.session.currentFrame?.rawFeaturePoints else {
+//        guard let features = self.session.currentFrame?.rawFeaturePoints else {
 			return nil
-		}
+//        }
 		
 //        let points = features.points
 //
@@ -503,7 +503,7 @@ extension ARSCNView {
 //                minDistance = featureDistanceFromResult
 //            }
 //        }
-		return nil
+//        return nil
 		// Compute the point along the ray that is closest to the selected feature.
 //        let originToFeature = closestFeaturePoint - origin
 //        let hitTestResult = origin + (direction * direction.dot(originToFeature))

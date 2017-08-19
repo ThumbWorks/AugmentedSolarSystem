@@ -159,7 +159,6 @@ class ViewController: UIViewController {
                         let lookat = SCNLookAtConstraint(target: node.planetNode)
                         self.arrowNode.constraints = [lookat]
                         SCNTransaction.commit()
-
                     }
                 }
             }
@@ -168,20 +167,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension SCNVector3 {
-    func distance(receiver: SCNVector3) -> Float {
-        let xd = receiver.x - self.x
-        let yd = receiver.y - self.y
-        let zd = receiver.y - self.z
-        let distance = abs(sqrt(xd*xd + yd*yd + zd * zd))
-        return distance
-    }
-}
-extension UIImage {
-    static func hideOrbit() -> UIImage {
-        return #imageLiteral(resourceName: "Hide Orbit")
-    }
-}
+// IBActions
 extension ViewController {
     @IBAction func timeScaleButtonPressed(_ button: UIButton) {
         timeScaleSlider.isHidden = !timeScaleSlider.isHidden
@@ -248,6 +234,7 @@ extension ViewController {
         scaleSizeUp = !scaleSizeUp
         
         PlanetoidGroupNode.scale(nodes: solarSystemNodes.planetoids, plutoTableRadius: radius)
+        
         _ = resetViews.map({ (view) in
             view.isHidden = true
         })
@@ -450,12 +437,14 @@ extension ViewController: ARSCNViewDelegate {
             }
         }
     }
+    
     #if DEBUG
     @objc func handleDoubleTap(_ recognizer: UITapGestureRecognizer) {
         guard let anchor = self.debugPlaneAnchorNode else {return}
         anchor.isHidden = !anchor.isHidden
     }
     #endif
+    
     /**
      Called when a new node has been mapped to the given anchor.
      
@@ -588,7 +577,7 @@ extension ViewController: ARSCNViewDelegate {
     #if DEBUG
     func nextMaterial() -> SCNMaterial {
         let material = SCNMaterial()
-        let color = UIColor.blue// self.colors[self.planeCount % self.colors.count]
+        let color = self.colors[self.planeCount % self.colors.count]
         print("The color is \(color)")
         material.diffuse.contents = color.withAlphaComponent(0.6)
         self.planeCount = self.planeCount + 1

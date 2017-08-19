@@ -67,6 +67,16 @@ class BorderedPlane: SCNNode {
     
 }
 
+extension SCNVector3 {
+    func distance(receiver: SCNVector3) -> Float {
+        let xd = receiver.x - self.x
+        let yd = receiver.y - self.y
+        let zd = receiver.y - self.z
+        let distance = abs(sqrt(xd*xd + yd*yd + zd * zd))
+        return distance
+    }
+}
+
 extension SCNAction {
     class func createRotateAction(duration: CFTimeInterval, clockwise: Bool = true) -> SCNAction {
         let rotationValue = clockwise ? CGFloat.pi : -CGFloat.pi
