@@ -116,13 +116,9 @@ class ViewController: UIViewController {
             view.isHidden = true
         })
         
-        for planetNode in solarSystemNodes.planetoids {
-            planetNode.value.removeFromParentNode()
-        }
         
-        for light in solarSystemNodes.lightNodes {
-            light.removeFromParentNode()
-        }
+        solarSystemNodes.removeAllNodesFromParent()
+        
         // Create a session configuration
         //        sessionConfig.planeDetection = .horizontal
         
@@ -131,6 +127,8 @@ class ViewController: UIViewController {
         
         updateLabel()
         unblurBackground()
+        
+        resetToDetectedPlane()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -151,16 +149,7 @@ class ViewController: UIViewController {
           print("set the thing")
             dest.planetSelectionChanged = { (newlySelectedPlanet) in
                 print("planet \(newlySelectedPlanet)")
-                
-                for (planet, node) in self.solarSystemNodes.planetoids {
-                    if newlySelectedPlanet == planet {
-                        SCNTransaction.begin()
-                        SCNTransaction.animationDuration = 0.5
-                        let lookat = SCNLookAtConstraint(target: node.planetNode)
-                        self.arrowNode.constraints = [lookat]
-                        SCNTransaction.commit()
-                    }
-                }
+                self.solarSystemNodes.updateLookat(selected: newlySelectedPlanet, arrowNode: self.arrowNode)
             }
             collectionViewController = dest
         }
@@ -177,13 +166,7 @@ extension ViewController {
         print("value is \(slider.value)")
         let value = Double(slider.value)
         // iterate over all of the planets stop rotation and orbit, set with new float
-        _ = solarSystemNodes.planetoids.map { (planet, node) in
-            print("change speed \(planet.name)")
-            if let planetNode = node.planetNode {
-                node.beginRotation(planet: planet, node: planetNode, multiplier: value)
-            }
-            node.beginOrbit(planet: planet, multiplier: value)
-        }
+        solarSystemNodes.updateSpeed(value)
     }
     
     @IBAction func pinchedScreen(_ sender: UIPinchGestureRecognizer) {
@@ -199,16 +182,16 @@ extension ViewController {
             let location = sender.location(in: view)
             let options: [SCNHitTestOption: Any] = [.searchMode: SCNHitTestSearchMode.all.rawValue]
             let hittestResults = sceneView.hitTest(location, options: options)
-            for result in hittestResults {
-                
-                // the node of the hit test result
-                let node = result.node
-                
+            let nodes = hittestResults.map({ (hitTest) -> SCNNode in
+                return hitTest.node
+            })
+            
+            for node in nodes {
                 // see if it has a planetNode
                 if self.solarSystemNodes.planetoids.contains(where: { (planets) -> Bool in
                     return node == planets.value.planetNode
                 }) {
-                    if let name = result.node.name {
+                    if let name = node.name {
                         print("tapped \(name))")
                         Mixpanel.sharedInstance()?.track("tracked a planet", properties: ["name" : name])
 
@@ -233,7 +216,7 @@ extension ViewController {
         let radius = anchorWidth / 2
         scaleSizeUp = !scaleSizeUp
         
-        PlanetoidGroupNode.scale(nodes: solarSystemNodes.planetoids, plutoTableRadius: radius)
+        solarSystemNodes.scalePlanets(to: radius)
         
         _ = resetViews.map({ (view) in
             view.isHidden = true
@@ -244,18 +227,11 @@ extension ViewController {
         planetScaleButton.setImage(#imageLiteral(resourceName: "Scale Planets"), for: .normal)
     }
     
-    @IBAction func toggleTrails(_ button: UIButton) {
-        Mixpanel.sharedInstance()?.track("toggled trails")
-        guard let firstPath = solarSystemNodes.planetoids.first?.value.path else {
-            print("hidden value not determined")
-            return
-        }
-        let newHiddenValue = !firstPath.isHidden
-        for (_, planetoidNode) in solarSystemNodes.planetoids {
-            // do something with button
-            planetoidNode.path?.isHidden = newHiddenValue
-        }
-        button.setImage(newHiddenValue ? #imageLiteral(resourceName: "Hide Orbit Selected") : #imageLiteral(resourceName: "Hide Orbit"), for: .normal)
+    @IBAction func togglePaths(_ button: UIButton) {
+        Mixpanel.sharedInstance()?.track("toggled paths")
+        let currentlyShowing = solarSystemNodes.showingPaths()
+        solarSystemNodes.toggleOrbitPaths(to: !currentlyShowing)
+        button.setImage(!currentlyShowing ? #imageLiteral(resourceName: "Hide Orbit Selected") : #imageLiteral(resourceName: "Hide Orbit"), for: .normal)
     }
     
     @IBAction func changeOrbitScaleTapped(_ button: UIButton) {
@@ -263,9 +239,10 @@ extension ViewController {
         
         // toggle the state
         scalingOrbitUp = !scalingOrbitUp
+        
         button.setImage(scalingOrbitUp ? #imageLiteral(resourceName: "Scale Orbit Selected") : #imageLiteral(resourceName: "Scale Orbit"), for: .normal)
         
-        PlanetoidGroupNode.scaleOrbit(planetoids: solarSystemNodes.planetoids, scalingUp: scalingOrbitUp)
+        solarSystemNodes.scaleOrbit(scalingUp: scaleSizeUp)
         
         _ = resetViews.map { (view) in
             view.isHidden = false
@@ -279,8 +256,9 @@ extension ViewController {
         scaleSizeUp = !scaleSizeUp
         
         button.setImage(scaleSizeUp ? #imageLiteral(resourceName: "Scale Planets Selected") : #imageLiteral(resourceName: "Scale Planets"), for: .normal)
+        
         // do the scale
-        PlanetoidGroupNode.scaleNodes(nodes: solarSystemNodes.planetoids, scaleUp: scaleSizeUp)
+        solarSystemNodes.scaleNodes(scaleUp: scaleSizeUp)
         
         // ensure that the reset button is not hidden
         _ = resetViews.map({ (view)  in
@@ -377,7 +355,6 @@ extension ViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         if !done {
-//            print("Wait until we find an anchor for the sun")
             return
         }
         guard let cameraNode = sceneView.pointOfView else {
@@ -424,16 +401,18 @@ extension ViewController: ARSCNViewDelegate {
             }
             //TODO come back to this
 //            self.collectionViewController?.updateReferenceSize(sizes)
-            
-            let lookats: [SCNLookAtConstraint] = self.arrowNode.constraints?.filter({ (constraint) -> Bool in
-                if let _ = constraint as? SCNLookAtConstraint {
-                    return true
+            let arrowNode = self.arrowNode
+            if let constraints = arrowNode.constraints {
+                let lookats: [SCNLookAtConstraint] = constraints.filter({ (constraint) -> Bool in
+                    if let _ = constraint as? SCNLookAtConstraint {
+                        return true
+                    }
+                    return false
+                }) as! [SCNLookAtConstraint]
+                
+                if let lookatTarget = lookats.first?.target {
+                    self.arrowNode.isHidden = self.sceneView.isNode(lookatTarget, insideFrustumOf: cameraNode)
                 }
-                return false
-            }) as! [SCNLookAtConstraint]
-            
-            if let lookatTarget = lookats.first?.target {
-                self.arrowNode.isHidden = self.sceneView.isNode(lookatTarget, insideFrustumOf: cameraNode)
             }
         }
     }
@@ -506,7 +485,7 @@ extension ViewController: ARSCNViewDelegate {
                 if let cameraNode = self.sceneView.pointOfView {
                     self.arrowNode.categoryBitMask = 4
                     cameraNode.addChildNode(self.arrowNode)
-                    
+                    self.solarSystemNodes.updateLookat(selected: Planet.sun, arrowNode: self.arrowNode)
                     var lightVector = node.position
                     lightVector.y = 10
                     let light = SCNNode.omniLight(lightVector)
@@ -519,13 +498,9 @@ extension ViewController: ARSCNViewDelegate {
                 })
                 self.timeScaleButton.isHidden = false
                 self.done = true
-                for planetNode in self.solarSystemNodes.planetoids {
-                    node.addChildNode(planetNode.value)
-                }
-                for light in self.solarSystemNodes.lightNodes {
-                    node.addChildNode(light)
-                }
                 
+                self.solarSystemNodes.addAllNodesAsChild(to: node)
+               
                 // determine scale based on the size of the plane
                 var radius: Float
                 if depth < width {
@@ -533,7 +508,7 @@ extension ViewController: ARSCNViewDelegate {
                 } else {
                     radius = width
                 }
-                PlanetoidGroupNode.scale(nodes: self.solarSystemNodes.planetoids, plutoTableRadius: radius / 2)
+                self.solarSystemNodes.scalePlanets(to: radius / 2)
                 self.anchorWidth = radius
                 
                 // At this point the planets are visible. Set a timer for the rating mechanism.
@@ -562,7 +537,6 @@ extension ViewController: ARSCNViewDelegate {
         // Update the SCNPlane geometry of this SCNNode to resemble our new understanding
         if let thePlaneNode = node.childNodes.first, let planeAnchor = anchor as? ARPlaneAnchor {
             for line in thePlaneNode.childNodes {
-                print("the line is a \(line)")
                 line.removeFromParentNode()
             }
             

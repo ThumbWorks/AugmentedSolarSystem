@@ -45,8 +45,7 @@ class GameViewController: UIViewController {
         }
         
         pinchController = PinchController(with: solarSystem)
-        PlanetoidGroupNode.scale(nodes: solarSystem.planetoids, plutoTableRadius: 40)
-        
+        solarSystem.scalePlanets(to: 40)
         // set the scene to the view
         scnView.scene = scene
         
@@ -74,10 +73,10 @@ class GameViewController: UIViewController {
         // toggle the state
         scaleSizeUp = !scaleSizeUp
 
-        PlanetoidGroupNode.scaleNodes(nodes: solarSystem.planetoids, scaleUp: scaleSizeUp)
+        solarSystem.scaleNodes(scaleUp: scaleSizeUp)
     }
     
-    @IBAction func toggleTrails() {
+    @IBAction func togglePaths() {
         for (_, planetoidNode) in solarSystem.planetoids {
             // do something with button
             planetoidNode.path?.isHidden = !(planetoidNode.path?.isHidden)!
@@ -87,7 +86,7 @@ class GameViewController: UIViewController {
     @IBAction func changeOrbitScaleTapped(_ sender: UIButton) {
         // toggle the state
         scaleOrbitUp = !scaleOrbitUp
-        PlanetoidGroupNode.scaleOrbit(planetoids: solarSystem.planetoids, scalingUp: scaleOrbitUp)
+        solarSystem.scaleOrbit(scalingUp: scaleSizeUp)
     }
     
     @objc

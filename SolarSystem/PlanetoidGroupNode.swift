@@ -12,6 +12,153 @@ import SceneKit
 struct SolarSystemNodes {
     let lightNodes: [SCNNode]
     let planetoids: [Planet:PlanetoidGroupNode]
+    
+    func addAllNodesAsChild(to node: SCNNode) {
+        for planetNode in planetoids {
+            node.addChildNode(planetNode.value)
+        }
+        for light in lightNodes {
+            node.addChildNode(light)
+        }
+    }
+    
+    func showingPaths() -> Bool {
+        if let anyNode = planetoids.first?.value.path {
+            return anyNode.isHidden
+        }
+        return false
+    }
+    
+    func toggleOrbitPaths(to isHidden: Bool) {
+        for (_, planetoidNode) in planetoids {
+            // do something with the orbit path
+            planetoidNode.path?.isHidden = isHidden
+        }
+    }
+    
+    func scaleOrbit(scalingUp: Bool) {
+        // Figure out the current orbit of mercury. Scale the rest based on that.
+        // So mercury doesn't really move from where it is, everything else does.
+        guard let merc = planetoids[Planet.mercury]?.planetNode else {return}
+        
+        // retain the current mercury position
+        let mercuryARRadius = CGFloat(merc.position.x)
+        
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = scalingUp ? 5 : 1
+        
+        var counter: CGFloat = 0
+        for planet in Planet.allPlanets {
+            // don't scale mercury or sun
+            if counter < 2 {
+                counter = counter + 1
+                continue
+            }
+            let node = planetoids[planet]
+            guard let planetNode = node?.planetNode else {
+                print("we have no planet node")
+                return
+            }
+            
+            // We really only want to change the radius of the planet's orbit, so the torus and
+            // the x position of the planet are the only 2 things that need to change. They will
+            // both be the same value
+            var radius: CGFloat = 0
+            if scalingUp {
+                radius = mercuryARRadius * planet.orbitalRadius / Planet.mercury.orbitalRadius
+            } else {
+                radius = mercuryARRadius * counter
+            }
+            var position = planetNode.position
+            position.x = Float(radius)
+            node?.torus?.ringRadius = radius
+            planetNode.position = position
+            counter = counter + 1
+        }
+        SCNTransaction.commit()
+    }
+    
+    func scaleNodes(scaleUp: Bool) {
+        // determine size of sun
+        // if scaling down, make everything the size of the sun
+        // if scaling up, do the math to figure out what size everything should be
+        guard let currentScale = planetoids[Planet.sun]?.planetNode?.scale.x else {return}
+        
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = scaleUp ? 5 : 1
+        for (planet,node) in planetoids {
+            // update the scale here
+            guard let planetNode = node.planetNode else {
+                print("we have no planet node")
+                return
+            }
+            var scale: Float = 0
+            if scaleUp {
+                scale = planet.radius / Planet.sun.radius * currentScale
+            } else {
+                scale = currentScale
+            }
+            planetNode.scale = SCNVector3Make(scale, scale, scale)
+        }
+        SCNTransaction.commit()
+    }
+    
+    /*!
+     @method scale:nodes:plutoTableRadius:
+     @abstract Scales the set of Planet:PlanetoidGroupNode objects based on the desired radius of pluto
+     @param nodes the set of nodes to scale
+     @param plutoTableRadius the desired radius of the node set
+     */
+    func scalePlanets(to plutoRadius: Float) {
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 1
+        let orbitalDelta = plutoRadius / 8
+        var currentRadius: Float = 0
+        let planetSize = orbitalDelta / 4 /*A fraction of the delta gives us some space (har)*/
+        for planet in Planet.allPlanets {
+            
+            guard let groupNode = planetoids[planet] else {
+                continue
+            }
+            groupNode.planetNode?.scale = SCNVector3Make(planetSize, planetSize, planetSize)
+            groupNode.torus?.ringRadius = CGFloat(currentRadius)
+            groupNode.planetNode?.position = SCNVector3Make(currentRadius, 0, 0)
+            currentRadius = currentRadius + orbitalDelta
+        }
+        SCNTransaction.commit()
+    }
+    
+    func updateSpeed(_ value: Double) {
+        _ = planetoids.map { (planet, node) in
+            print("change speed \(planet.name)")
+            if let planetNode = node.planetNode {
+                node.beginRotation(planet: planet, node: planetNode, multiplier: value)
+            }
+            node.beginOrbit(planet: planet, multiplier: value)
+        }
+    }
+    
+    func updateLookat(selected planet: Planet, arrowNode: SCNNode) {
+        for (solarSystemPlanet, planetoidGroup) in planetoids {
+            if planet == solarSystemPlanet {
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 0.5
+                let lookat = SCNLookAtConstraint(target: planetoidGroup.planetNode)
+                arrowNode.constraints = [lookat]
+                SCNTransaction.commit()
+            }
+        }        
+    }
+    
+    func removeAllNodesFromParent() {
+        for planetNode in planetoids {
+            planetNode.value.removeFromParentNode()
+        }
+        
+        for light in lightNodes {
+            light.removeFromParentNode()
+        }
+    }
 }
 
 class PlanetoidGroupNode: SCNNode {
@@ -108,95 +255,5 @@ class PlanetoidGroupNode: SCNNode {
         planet.addChildNode(torusNode)
     }
     
-    class func scaleOrbit(planetoids: [Planet:PlanetoidGroupNode], scalingUp: Bool) {
-        // Figure out the current orbit of mercury. Scale the rest based on that.
-        // So mercury doesn't really move from where it is, everything else does.
-        guard let merc = planetoids[Planet.mercury]?.planetNode else {return}
-
-        // retain the current mercury position
-        let mercuryARRadius = CGFloat(merc.position.x)
-        
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = scalingUp ? 5 : 1
-        
-        var counter: CGFloat = 0
-        for planet in Planet.allPlanets {
-            // don't scale mercury or sun
-            if counter < 2 {
-                counter = counter + 1
-                continue
-            }
-            let node = planetoids[planet]
-            guard let planetNode = node?.planetNode else {
-                print("we have no planet node")
-                return
-            }
-            
-            // We really only want to change the radius of the planet's orbit, so the torus and
-            // the x position of the planet are the only 2 things that need to change. They will
-            // both be the same value
-            var radius: CGFloat = 0
-            if scalingUp {
-                radius = mercuryARRadius * planet.orbitalRadius / Planet.mercury.orbitalRadius
-            } else {
-                radius = mercuryARRadius * counter
-            }
-            var position = planetNode.position
-            position.x = Float(radius)
-            node?.torus?.ringRadius = radius
-            planetNode.position = position
-            counter = counter + 1
-        }
-        SCNTransaction.commit()
-    }
-    
-    /*!
-     @method scale:nodes:plutoTableRadius:
-     @abstract Scales the set of Planet:PlanetoidGroupNode objects based on the desired radius of pluto
-     @param nodes the set of nodes to scale
-     @param plutoTableRadius the desired radius of the node set
-     */
-    class func scale(nodes: [Planet:PlanetoidGroupNode], plutoTableRadius: Float) {
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 1
-        let orbitalDelta = plutoTableRadius / 8
-        var currentRadius: Float = 0
-        let planetSize = orbitalDelta / 4 /*A fraction of the delta gives us some space (har)*/
-        for planet in Planet.allPlanets {
-            
-            guard let groupNode = nodes[planet] else {
-                continue
-            }
-            groupNode.planetNode?.scale = SCNVector3Make(planetSize, planetSize, planetSize)
-            groupNode.torus?.ringRadius = CGFloat(currentRadius)
-            groupNode.planetNode?.position = SCNVector3Make(currentRadius, 0, 0)
-            currentRadius = currentRadius + orbitalDelta
-        }
-        SCNTransaction.commit()
-    }
-    
-    class func scaleNodes(nodes: [Planet:PlanetoidGroupNode], scaleUp: Bool) {
-        // determine size of sun
-        // if scaling down, make everything the size of the sun
-        // if scaling up, do the math to figure out what size everything should be
-        guard let currentScale = nodes[Planet.sun]?.planetNode?.scale.x else {return}
-        
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = scaleUp ? 5 : 1
-        for (planet,node) in nodes {
-            // update the scale here
-            guard let planetNode = node.planetNode else {
-                print("we have no planet node")
-                return
-            }
-            var scale: Float = 0
-            if scaleUp {
-                scale = planet.radius / Planet.sun.radius * currentScale
-            } else {
-                scale = currentScale
-            }
-            planetNode.scale = SCNVector3Make(scale, scale, scale)
-        }
-        SCNTransaction.commit()
-    }
+   
 }
