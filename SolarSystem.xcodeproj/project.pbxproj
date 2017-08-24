@@ -10,6 +10,7 @@
 		5F01E11B1F39419100BFF9B0 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F01E11A1F39419100BFF9B0 /* AboutViewController.swift */; };
 		5F0662BB1F1D1F6600D66563 /* PlanetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0662BA1F1D1F6600D66563 /* PlanetCollectionViewController.swift */; };
 		5F0CC2141F2814BD00E25474 /* Mixpanel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0CC2131F2814BD00E25474 /* Mixpanel.framework */; };
+		5F2641621F4C9C8300FE1F20 /* SwiftAA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FCE8E871F32F29300A38171 /* SwiftAA.framework */; };
 		5F27FD181F061C5200498524 /* Mars.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5F27FD171F061C5200498524 /* Mars.scn */; };
 		5F28BC341F3388AF003E013F /* ScaleReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F28BC331F3388AF003E013F /* ScaleReference.swift */; };
 		5F30D4DC1F16CD68006A45B1 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F30D4DB1F16CD68006A45B1 /* Planet.swift */; };
@@ -103,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F2641621F4C9C8300FE1F20 /* SwiftAA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +212,7 @@
 				5FDD81C71F0DBB8C00F0B92D /* Sources */,
 				5FDD81C81F0DBB8C00F0B92D /* Frameworks */,
 				5FDD81C91F0DBB8C00F0B92D /* Resources */,
+				5F2641631F4C9C9000FE1F20 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -314,6 +317,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		5F2641631F4C9C9000FE1F20 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftAA.framework",
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftAA.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks ";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -539,6 +557,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = F4WTN36U2F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = SolarSystemScene/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.thumbworks.SolarSystemScene;
@@ -553,6 +575,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = F4WTN36U2F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = SolarSystemScene/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.thumbworks.SolarSystemScene;

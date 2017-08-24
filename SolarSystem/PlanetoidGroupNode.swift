@@ -128,15 +128,15 @@ struct SolarSystemNodes {
         SCNTransaction.commit()
     }
     
-    func updateSpeed(_ value: Double) {
-        _ = planetoids.map { (planet, node) in
-            print("change speed \(planet.name)")
-            if let planetNode = node.planetNode {
-                node.beginRotation(planet: planet, node: planetNode, multiplier: value)
-            }
-            node.beginOrbit(planet: planet, multiplier: value)
-        }
-    }
+//    func updateSpeed(_ value: Double) {
+//        _ = planetoids.map { (planet, node) in
+//            print("change speed \(planet.name)")
+//            if let planetNode = node.planetNode {
+//                node.beginRotation(planet: planet, node: planetNode, multiplier: value)
+//            }
+//            node.beginOrbit(planet: planet, multiplier: value)
+//        }
+//    }
     
     func updateLookat(selected planet: Planet, arrowNode: SCNNode) {
         for (solarSystemPlanet, planetoidGroup) in planetoids {
@@ -169,7 +169,6 @@ class PlanetoidGroupNode: SCNNode {
     let torus: SCNTorus?
     
     var planetNode: SCNNode?
-    
     
     required init(planet: Planet) {
         
@@ -207,18 +206,23 @@ class PlanetoidGroupNode: SCNNode {
         }
         if let path = path {
             self.addChildNode(path)
-            beginOrbit(planet: planet, multiplier: 1)
+//            beginOrbit(planet: planet, multiplier: 1)
         }
     }
     
-    func beginOrbit(planet: Planet, multiplier: Double) {
-        // cleanup just in case
-        removeAction(forKey: "orbit")
-        
-        // Normalize to Earth's rotation. Once earth year is 365 seconds
-        let action = SCNAction.createRotateAction(duration: planet.orbitPeriod * 365 / multiplier)
-        runAction(action, forKey: "orbit")
+    func updatePlanetLocation(_ celestialLongitude: Float) {
+        print("longitude \(celestialLongitude)")
+        self.rotation = SCNVector4Make(0, 1, 0, celestialLongitude * Float.pi / 180)
     }
+    
+//    func beginOrbit(planet: Planet, multiplier: Double) {
+//        // cleanup just in case
+//        removeAction(forKey: "orbit")
+//
+//        // Normalize to Earth's rotation. Once earth year is 365 seconds
+//        let action = SCNAction.createRotateAction(duration: planet.orbitPeriod * 365 / multiplier)
+//        runAction(action, forKey: "orbit")
+//    }
     
     func beginRotation(planet: Planet, node: SCNNode, multiplier: Double) {
         // cleanup just in case

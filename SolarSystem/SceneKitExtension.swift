@@ -8,6 +8,7 @@
 
 import Foundation
 import SceneKit
+import SwiftAA
 
 extension SCNGeometry {
     class func lineFrom(vector vector1: SCNVector3, toVector vector2: SCNVector3) -> SCNGeometry {
@@ -147,22 +148,47 @@ extension SCNNode {
         return rotationNode
     }
 }
+extension SwiftAA.Planet {
+    func position() -> Float {
+        return Float(self.heliocentricEclipticCoordinates.celestialLongitude.magnitude)
+    }
+}
 
 extension Planet {
     
     static func buildSolarSystem() -> SolarSystemNodes {
         var nodes = [Planet:PlanetoidGroupNode]()
 
+        let date = JulianDay(year: Date().year, month: Date().month, day: Date().day)
+        let mars = Mars(julianDay: date)
+        print("mars \(mars.name)")
+        
+        let marsCoordinates = mars.heliocentricEclipticCoordinates
+        let venusCoordinates = Venus(julianDay: date).heliocentricEclipticCoordinates
+        let jupiterCoordinates = Jupiter(julianDay: date).heliocentricEclipticCoordinates
+        let mercuryCoordinates = Mercury(julianDay: date).heliocentricEclipticCoordinates
+        print("\(mercuryCoordinates)\n\(venusCoordinates)\n\(marsCoordinates)\n\(jupiterCoordinates)")
+        
         // Data on sizes of planets http://www.freemars.org/jeff/planets/planets5.htm
         
         let sunNode = PlanetoidGroupNode(planet: Planet.sun)
         sunNode.planetNode?.categoryBitMask = 2
         nodes[Planet.sun] = sunNode
+        
+        // Add the light from the sun
         let light = SCNNode.sunLight(geometry: sunNode.planetNode!.geometry!)
 
-        // Add the light from the sun
-        nodes[Planet.mercury] = PlanetoidGroupNode(planet: Planet.mercury)
-        nodes[Planet.venus] = PlanetoidGroupNode(planet: Planet.venus)
+
+        // Mercury
+        let mercury = PlanetoidGroupNode(planet: Planet.mercury)
+        let coordinates = mercuryAA.heliocentricEclipticCoordinates
+        mercury.updatePlanetLocation(mercuryAA.position())
+        nodes[Planet.mercury] = mercury
+        
+        let venus = PlanetoidGroupNode(planet: Planet.venus)
+        venus.updatePlanetLocation(venusAA.position())
+        nodes[Planet.venus] = venus
+        
 //        return SolarSystemNodes(lightNodes: [light], planetoids: nodes)
 
         let earthNode = PlanetoidGroupNode(planet: Planet.earth)
@@ -172,24 +198,35 @@ extension Planet {
         earthNode.addMoon(moon)
         nodes[Planet.earth] = earthNode
         
-        nodes[Planet.mars] = PlanetoidGroupNode(planet: Planet.mars)
+        let marsGroup = PlanetoidGroupNode(planet: Planet.mars)
+        marsGroup.updatePlanetLocation(marsAA.position())
+        nodes[Planet.mars] = marsGroup
         
         // Jupiter has a moon
         let jupiterNode = PlanetoidGroupNode(planet: Planet.jupiter)
         let jupiterMoon = SCNNode.planetGroup(orbitRadius: 3,
                                        planetRadius: 0.2,
                                        planetColor: .gray)
+        jupiterNode.updatePlanetLocation(jupiterAA.position())
         jupiterNode.addMoon(jupiterMoon)
         nodes[Planet.jupiter] = jupiterNode
-        
+
         // Saturn has rings
         let saturnNode = PlanetoidGroupNode(planet: Planet.saturn)
+        saturnNode.updatePlanetLocation(saturnAA.position())
         saturnNode.addRings()
         nodes[Planet.saturn] = saturnNode
+
+        let uranus = PlanetoidGroupNode(planet: Planet.uranus)
+        uranus.updatePlanetLocation(uranusAA.position())
+        nodes[Planet.uranus] = uranus
         
-        nodes[Planet.uranus] = PlanetoidGroupNode(planet: Planet.uranus)
-        nodes[Planet.neptune] = PlanetoidGroupNode(planet: Planet.neptune)
-        nodes[Planet.pluto] = PlanetoidGroupNode(planet: Planet.pluto)
+        let neptune = PlanetoidGroupNode(planet: Planet.neptune)
+        neptune.updatePlanetLocation(neptuneAA.position())
+        nodes[Planet.neptune] = neptune
+        
+        let pluto = PlanetoidGroupNode(planet: Planet.pluto)
+        nodes[Planet.pluto] = pluto
         
 
         return SolarSystemNodes(lightNodes: [light], planetoids: nodes)

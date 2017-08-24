@@ -74,7 +74,7 @@ class ViewController: UIViewController {
         
         // Set the scene to the view
         sceneView.scene = SCNScene()
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
     }
     
@@ -146,7 +146,7 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? PlanetCollectionViewController {
-          print("set the thing")
+            print("set the thing")
             dest.planetSelectionChanged = { (newlySelectedPlanet) in
                 print("planet \(newlySelectedPlanet)")
                 self.solarSystemNodes.updateLookat(selected: newlySelectedPlanet, arrowNode: self.arrowNode)
@@ -166,7 +166,8 @@ extension ViewController {
         print("value is \(slider.value)")
         let value = Double(slider.value)
         // iterate over all of the planets stop rotation and orbit, set with new float
-        solarSystemNodes.updateSpeed(value)
+//        solarSystemNodes.updateSpeed(value)
+        print("currently this is a no-op until we re-do time")
     }
     
     @IBAction func pinchedScreen(_ sender: UIPinchGestureRecognizer) {
