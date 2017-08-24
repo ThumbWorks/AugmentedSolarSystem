@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -133,6 +134,20 @@
                                     <action selector="timeScaleButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="1Ge-r4-cOE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jdw-Ds-j5h">
+                                <rect key="frame" x="153.5" y="86" width="34" height="30"/>
+                                <state key="normal" title="back"/>
+                                <connections>
+                                    <action selector="backDate:" destination="BV1-FR-VrT" eventType="touchUpInside" id="wMh-DK-A5d"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3KW-Gx-zbR">
+                                <rect key="frame" x="203" y="86" width="53" height="30"/>
+                                <state key="normal" title="forward"/>
+                                <connections>
+                                    <action selector="forwardDate:" destination="BV1-FR-VrT" eventType="touchUpInside" id="FKi-2N-6vh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -158,14 +173,18 @@
                             <constraint firstItem="dTE-ea-BUo" firstAttribute="top" secondItem="GMR-IA-p4n" secondAttribute="top" id="a8I-o4-KzH"/>
                             <constraint firstItem="bi2-3a-bee" firstAttribute="top" secondItem="zEO-LC-Gb3" secondAttribute="bottom" id="agn-eF-OC7"/>
                             <constraint firstItem="omW-cd-Viv" firstAttribute="top" secondItem="3Do-Nz-vPN" secondAttribute="bottom" id="amZ-Ig-BdL"/>
+                            <constraint firstItem="Jdw-Ds-j5h" firstAttribute="trailing" secondItem="Wef-8h-2Ru" secondAttribute="centerX" id="bsj-Aj-eiL"/>
                             <constraint firstItem="dTE-ea-BUo" firstAttribute="centerY" secondItem="GMR-IA-p4n" secondAttribute="centerY" id="d0j-cB-jfy"/>
+                            <constraint firstItem="3KW-Gx-zbR" firstAttribute="centerY" secondItem="Jdw-Ds-j5h" secondAttribute="centerY" id="dpl-SR-nWS"/>
                             <constraint firstAttribute="trailing" secondItem="dxo-rv-kME" secondAttribute="trailing" constant="77" id="eaQ-Rw-4Uy"/>
+                            <constraint firstItem="3KW-Gx-zbR" firstAttribute="leading" secondItem="Jdw-Ds-j5h" secondAttribute="trailing" constant="15.5" id="g5l-SC-M8E"/>
                             <constraint firstItem="dTE-ea-BUo" firstAttribute="centerX" secondItem="GMR-IA-p4n" secondAttribute="centerX" id="iDk-dZ-0Hz"/>
                             <constraint firstAttribute="trailing" secondItem="zEO-LC-Gb3" secondAttribute="trailing" id="kqR-qf-mnv"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="l9v-9V-kOQ"/>
                             <constraint firstItem="GMR-IA-p4n" firstAttribute="centerX" secondItem="yOl-4w-DAM" secondAttribute="centerX" id="lRz-Y2-kKp"/>
                             <constraint firstItem="yOl-4w-DAM" firstAttribute="top" secondItem="omW-cd-Viv" secondAttribute="bottom" id="nJ3-4N-YW3"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="omW-cd-Viv" secondAttribute="trailing" constant="20" symbolic="YES" id="o5Q-YV-lMG"/>
+                            <constraint firstItem="Jdw-Ds-j5h" firstAttribute="top" secondItem="7fE-TC-662" secondAttribute="bottom" constant="66" id="oqN-RF-1qN"/>
                             <constraint firstItem="vDu-Ri-qEF" firstAttribute="centerX" secondItem="3Do-Nz-vPN" secondAttribute="centerX" id="piC-QZ-Sby"/>
                             <constraint firstItem="dxo-rv-kME" firstAttribute="centerX" secondItem="Oig-4M-jrG" secondAttribute="centerX" id="q0I-nH-Rqo"/>
                             <constraint firstItem="3Do-Nz-vPN" firstAttribute="top" secondItem="7fE-TC-662" secondAttribute="bottom" id="qf6-rg-di0"/>

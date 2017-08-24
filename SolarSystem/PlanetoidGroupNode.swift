@@ -8,6 +8,7 @@
 
 import Foundation
 import SceneKit
+import SwiftAA
 
 struct SolarSystemNodes {
     let lightNodes: [SCNNode]
@@ -19,6 +20,16 @@ struct SolarSystemNodes {
         }
         for light in lightNodes {
             node.addChildNode(light)
+        }
+    }
+    
+    func updatePostions(to date: Date) {
+        _ = planetoids.map { (planet, groupNode) in
+            if let type = planet.type {
+                let day = JulianDay(date)
+                let planetAA = type.init(julianDay: day)
+                groupNode.updatePlanetLocation(planetAA.position())
+            }
         }
     }
     

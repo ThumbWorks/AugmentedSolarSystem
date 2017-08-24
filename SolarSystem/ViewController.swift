@@ -12,7 +12,8 @@ import ARKit
 import Mixpanel
 
 class ViewController: UIViewController {
-    
+    var date = Date()
+
     @IBOutlet var status: UILabel!
     @IBOutlet var sceneView: ARSCNView!
     var done = false
@@ -168,6 +169,15 @@ extension ViewController {
         // iterate over all of the planets stop rotation and orbit, set with new float
 //        solarSystemNodes.updateSpeed(value)
         print("currently this is a no-op until we re-do time")
+    }
+    
+    @IBAction func backDate(_ sender: UIButton) {
+        date = Date(timeInterval: -60*60*24, since: date)
+        solarSystemNodes.updatePostions(to: date)
+    }
+    @IBAction func forwardDate(_ sender: UIButton) {
+        date = Date(timeInterval: 60*60*24, since: date)
+        solarSystemNodes.updatePostions(to: date)
     }
     
     @IBAction func pinchedScreen(_ sender: UIPinchGestureRecognizer) {
