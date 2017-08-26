@@ -23,6 +23,7 @@
 		5F9126B71F2F918100678A8F /* PinchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9126B51F2F8EAE00678A8F /* PinchController.swift */; };
 		5FA91A731F02C5DC00D8AFC1 /* Saturn.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FA91A721F02C5DC00D8AFC1 /* Saturn.scn */; };
 		5FA91A751F02C76C00D8AFC1 /* Uranus.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FA91A741F02C76C00D8AFC1 /* Uranus.scn */; };
+		5FAD55E21F50852F0016B04E /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAD55E11F50852F0016B04E /* DatePickerViewController.swift */; };
 		5FB0E6771F05D26E00B3000B /* Venus.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FB0E6761F05D26E00B3000B /* Venus.scn */; };
 		5FBAF96E1EE8B78400FAA54B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBAF96D1EE8B78400FAA54B /* AppDelegate.swift */; };
 		5FBAF9701EE8B78400FAA54B /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBAF96F1EE8B78400FAA54B /* art.scnassets */; };
@@ -66,6 +67,7 @@
 		5F9126B51F2F8EAE00678A8F /* PinchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchController.swift; sourceTree = "<group>"; };
 		5FA91A721F02C5DC00D8AFC1 /* Saturn.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Saturn.scn; path = art.scnassets/Saturn.scn; sourceTree = "<group>"; };
 		5FA91A741F02C76C00D8AFC1 /* Uranus.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Uranus.scn; path = art.scnassets/Uranus.scn; sourceTree = "<group>"; };
+		5FAD55E11F50852F0016B04E /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		5FB0E6761F05D26E00B3000B /* Venus.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Venus.scn; path = art.scnassets/Venus.scn; sourceTree = "<group>"; };
 		5FBAF96A1EE8B78400FAA54B /* SolarSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolarSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBAF96D1EE8B78400FAA54B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				5F28BC331F3388AF003E013F /* ScaleReference.swift */,
 				5F01E11A1F39419100BFF9B0 /* AboutViewController.swift */,
 				5F78D70D1F3D222A0059FDA1 /* AppRater.swift */,
+				5FAD55E11F50852F0016B04E /* DatePickerViewController.swift */,
 			);
 			path = SolarSystem;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				5FBAF96E1EE8B78400FAA54B /* AppDelegate.swift in Sources */,
 				5F9126B61F2F8EAE00678A8F /* PinchController.swift in Sources */,
 				5F28BC341F3388AF003E013F /* ScaleReference.swift in Sources */,
+				5FAD55E21F50852F0016B04E /* DatePickerViewController.swift in Sources */,
 				5F01E11B1F39419100BFF9B0 /* AboutViewController.swift in Sources */,
 				5F78D70E1F3D222A0059FDA1 /* AppRater.swift in Sources */,
 				5F30D4DC1F16CD68006A45B1 /* Planet.swift in Sources */,

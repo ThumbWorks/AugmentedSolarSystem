@@ -42,8 +42,6 @@ class BorderedPlane: SCNNode {
         plane.materials = [material]
         geometry = plane
         transform = SCNMatrix4MakeRotation(-Float.pi / 2.0, 1, 0, 0)
-
-        
 //        addBorder(materials: [borderMaterial])
     }
     
@@ -53,7 +51,6 @@ class BorderedPlane: SCNNode {
         let corner2 = SCNVector3Make(box.max.x, box.min.y, box.min.z)
         let corner3 = box.max
         let corner4 = SCNVector3Make(box.min.x, box.max.y, box.max.z)
-        print("The corners are \(corner1) \(corner2) \(corner3) \(corner4) ")
         for geometry in [SCNGeometry.lineFrom(vector: corner1, toVector: corner2),
                          SCNGeometry.lineFrom(vector: corner2, toVector: corner3),
                          SCNGeometry.lineFrom(vector: corner3, toVector: corner4),
@@ -81,6 +78,14 @@ extension SCNVector3 {
 extension SCNAction {
     class func createRotateAction(duration: CFTimeInterval, clockwise: Bool = true) -> SCNAction {
         let rotationValue = clockwise ? CGFloat.pi : -CGFloat.pi
+        let rotate = SCNAction.rotate(by: rotationValue, around: SCNVector3Make(0, 1, 0), duration: duration)
+        let moveSequence = SCNAction.sequence([rotate])
+        let moveLoop = SCNAction.repeatForever(moveSequence)
+        return moveLoop
+    }
+    
+    class func createSpinAction(duration: CFTimeInterval) -> SCNAction {
+        let rotationValue = CGFloat.pi
         let rotate = SCNAction.rotateBy(x: 0, y: rotationValue, z: 0, duration: duration)
         let moveSequence = SCNAction.sequence([rotate])
         let moveLoop = SCNAction.repeatForever(moveSequence)
@@ -181,7 +186,6 @@ extension Planet {
 
         // Mercury
         let mercury = PlanetoidGroupNode(planet: Planet.mercury)
-        let coordinates = mercuryAA.heliocentricEclipticCoordinates
         mercury.updatePlanetLocation(mercuryAA.position())
         nodes[Planet.mercury] = mercury
         
@@ -192,6 +196,8 @@ extension Planet {
 //        return SolarSystemNodes(lightNodes: [light], planetoids: nodes)
 
         let earthNode = PlanetoidGroupNode(planet: Planet.earth)
+        earthNode.updatePlanetLocation(earthAA.position())
+        
         let moon = SCNNode.planetGroup(orbitRadius: 2,
                                        planetRadius: 0.09,
                                        planetColor: .gray)
@@ -226,9 +232,9 @@ extension Planet {
         nodes[Planet.neptune] = neptune
         
         let pluto = PlanetoidGroupNode(planet: Planet.pluto)
+        pluto.updatePlanetLocation(plutoAA.position())
         nodes[Planet.pluto] = pluto
         
-
         return SolarSystemNodes(lightNodes: [light], planetoids: nodes)
     }
 }

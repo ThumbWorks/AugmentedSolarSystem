@@ -38,12 +38,13 @@ class GameViewController: UIViewController {
         ambientLightNode.light!.color = UIColor.darkGray
         scene.rootNode.addChildNode(ambientLightNode)
         
-        
         scene.rootNode.addChildNode(solarSystem.lightNodes[0])
         for nodeMap in solarSystem.planetoids {
             scene.rootNode.addChildNode(nodeMap.value)
         }
         
+        solarSystem.startOrbits()
+
         pinchController = PinchController(with: solarSystem)
         solarSystem.scalePlanets(to: 40)
         // set the scene to the view

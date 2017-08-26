@@ -12,8 +12,17 @@ import ARKit
 import Mixpanel
 
 class ViewController: UIViewController {
-    var date = Date()
-
+    var displayedDate = Date()
+    var displaySpeed: Double = 1
+   
+    lazy var dateFormatter = { () -> DateFormatter in
+        // TODO This should happen once. 
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter
+    }
+    
     @IBOutlet var status: UILabel!
     @IBOutlet var sceneView: ARSCNView!
     var done = false
@@ -23,8 +32,10 @@ class ViewController: UIViewController {
     
     @IBOutlet var toggleViews: [UIView]!
     @IBOutlet var resetViews: [UIView]!
-    @IBOutlet weak var timeScaleSlider: UISlider!
-    @IBOutlet weak var timeScaleButton: UIButton!
+    
+    
+    @IBOutlet weak var dateButton: UIButton!
+    @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var planetScaleButton: UIButton!
     @IBOutlet weak var orbitScaleButton: UIButton!
     @IBOutlet weak var orbitShowButton: UIButton!
@@ -55,10 +66,15 @@ class ViewController: UIViewController {
     var debugPlaneAnchorNode: SCNNode?
     #endif
 
+    func updateDateString(_ date: Date) {
+        let dateString = dateFormatter().string(from: date)
+        dateButton.setTitle(dateString, for: .normal)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         pincher = PinchController(with: solarSystemNodes)
-       
+        
         Mixpanel.sharedInstance()?.track("view did load")
         
         // hide the toggleviews
@@ -76,6 +92,8 @@ class ViewController: UIViewController {
         // Set the scene to the view
         sceneView.scene = SCNScene()
         
+        updateDateString(displayedDate)
+
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
     }
     
@@ -105,8 +123,7 @@ class ViewController: UIViewController {
         hudBottomConstraint.constant = -hudHeightConstraint.constant
         
         done = false
-        timeScaleButton.isHidden = true
-        timeScaleSlider.isHidden = true
+        pauseButton.isHidden = true
 
         // unhide the toggleViews
         _ = toggleViews.map({ (view) in
@@ -147,37 +164,37 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? PlanetCollectionViewController {
-            print("set the thing")
             dest.planetSelectionChanged = { (newlySelectedPlanet) in
-                print("planet \(newlySelectedPlanet)")
                 self.solarSystemNodes.updateLookat(selected: newlySelectedPlanet, arrowNode: self.arrowNode)
             }
             collectionViewController = dest
+        }
+        
+        if let dest = segue.destination as? DatePickerViewController {
+            dest.dateSelection = { (date) in
+                self.displayedDate = date
+                self.updateDateString(date)
+                self.solarSystemNodes.updatePostions(to: date)
+            }
         }
     }
 }
 
 // IBActions
 extension ViewController {
-    @IBAction func timeScaleButtonPressed(_ button: UIButton) {
-        timeScaleSlider.isHidden = !timeScaleSlider.isHidden
+    
+    @IBAction func pausePressed(_ button: UIButton) {
+        displaySpeed = 0
+        solarSystemNodes.updateSpeed(displaySpeed)
     }
     
-    @IBAction func sliderValueChanged(_ slider: UISlider) {
-        print("value is \(slider.value)")
-        let value = Double(slider.value)
-        // iterate over all of the planets stop rotation and orbit, set with new float
-//        solarSystemNodes.updateSpeed(value)
-        print("currently this is a no-op until we re-do time")
+    @IBAction func slowDown(_ sender: UIButton) {
+        displaySpeed = displaySpeed - 1
+        solarSystemNodes.updateSpeed(displaySpeed)
     }
-    
-    @IBAction func backDate(_ sender: UIButton) {
-        date = Date(timeInterval: -60*60*24, since: date)
-        solarSystemNodes.updatePostions(to: date)
-    }
-    @IBAction func forwardDate(_ sender: UIButton) {
-        date = Date(timeInterval: 60*60*24, since: date)
-        solarSystemNodes.updatePostions(to: date)
+    @IBAction func speedUp(_ sender: UIButton) {
+        displaySpeed = displaySpeed + 1
+        solarSystemNodes.updateSpeed(displaySpeed)
     }
     
     @IBAction func pinchedScreen(_ sender: UIPinchGestureRecognizer) {
@@ -406,7 +423,6 @@ extension ViewController: ARSCNViewDelegate {
             self.lastUpdateTime = time
             if let planet = self.collectionViewController?.currentPlanet, let meters = distances[planet] {
                 var distanceString = ""
-                print("calculating distance")
                 distanceString =  "\(meters.format(f: ".1")) real meters away"
                 self.collectionViewController?.updateDistance(distanceString)
             }
@@ -507,11 +523,12 @@ extension ViewController: ARSCNViewDelegate {
                 _ = self.toggleViews.map({ (view) in
                     view.isHidden = false
                 })
-                self.timeScaleButton.isHidden = false
+                self.pauseButton.isHidden = false
                 self.done = true
                 
                 self.solarSystemNodes.addAllNodesAsChild(to: node)
-               
+                self.solarSystemNodes.startOrbits()
+                
                 // determine scale based on the size of the plane
                 var radius: Float
                 if depth < width {

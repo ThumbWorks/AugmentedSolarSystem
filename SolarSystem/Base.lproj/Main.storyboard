@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,6 +20,54 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Date Picker View Controller-->
+        <scene sceneID="cis-05-etZ">
+            <objects>
+                <viewController id="iOO-jj-ov9" customClass="DatePickerViewController" customModule="SolarSystem" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rJn-fC-iZX"/>
+                        <viewControllerLayoutGuide type="bottom" id="AZk-D0-GVj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iQ0-wQ-Pui">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="202"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="00c-z5-V4U">
+                                <rect key="frame" x="27.5" y="0.0" width="320" height="162"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="162" id="unv-WK-yVh"/>
+                                </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="525370415.26752198">
+                                    <!--2017-08-25 16:13:35 +0000-->
+                                </date>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0Q-Rq-6A4">
+                                <rect key="frame" x="169" y="170" width="37" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="doneButtonPressed:" destination="iOO-jj-ov9" eventType="touchUpInside" id="tWR-nA-cll"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="00c-z5-V4U" firstAttribute="centerX" secondItem="iQ0-wQ-Pui" secondAttribute="centerX" id="7VS-RF-jHQ"/>
+                            <constraint firstItem="00c-z5-V4U" firstAttribute="top" secondItem="rJn-fC-iZX" secondAttribute="bottom" id="AQc-6M-bLn"/>
+                            <constraint firstItem="AZk-D0-GVj" firstAttribute="top" secondItem="Z0Q-Rq-6A4" secondAttribute="bottom" constant="2" id="BrL-sm-mJV"/>
+                            <constraint firstItem="Z0Q-Rq-6A4" firstAttribute="top" secondItem="00c-z5-V4U" secondAttribute="bottom" constant="8" id="HGk-RO-WW1"/>
+                            <constraint firstItem="AZk-D0-GVj" firstAttribute="top" secondItem="00c-z5-V4U" secondAttribute="bottom" constant="40" id="TqA-qw-oPv"/>
+                            <constraint firstItem="Z0Q-Rq-6A4" firstAttribute="centerX" secondItem="00c-z5-V4U" secondAttribute="centerX" id="wMN-cH-9Ty"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="375" height="202"/>
+                    <connections>
+                        <outlet property="datePicker" destination="00c-z5-V4U" id="b4r-RU-hrJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BS6-7g-WhQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="866" y="-540"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
@@ -116,36 +163,40 @@
                                     </segue>
                                 </connections>
                             </button>
-                            <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.10000000000000001" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="dxo-rv-kME">
-                                <rect key="frame" x="75" y="57" width="225" height="31"/>
-                                <connections>
-                                    <action selector="sliderValueChanged:" destination="BV1-FR-VrT" eventType="valueChanged" id="or7-am-bDI"/>
-                                </connections>
-                            </slider>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oig-4M-jrG" userLabel="Time Scale Button">
-                                <rect key="frame" x="175.5" y="23" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="6qe-JZ-YS2"/>
-                                    <constraint firstAttribute="height" constant="24" id="uPL-is-M4D"/>
-                                </constraints>
-                                <state key="normal" image="Clock"/>
-                                <state key="highlighted" image="Clock Selected"/>
+                                <rect key="frame" x="163.5" y="11" width="48" height="48"/>
+                                <state key="normal" image="Pause"/>
                                 <connections>
-                                    <action selector="timeScaleButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="1Ge-r4-cOE"/>
+                                    <action selector="pausePressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Cmr-Jn-oZW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jdw-Ds-j5h">
-                                <rect key="frame" x="153.5" y="86" width="34" height="30"/>
-                                <state key="normal" title="back"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ro0-Sl-bqX">
+                                <rect key="frame" x="219.5" y="11" width="48" height="48"/>
+                                <state key="normal" image="Change Speed"/>
                                 <connections>
-                                    <action selector="backDate:" destination="BV1-FR-VrT" eventType="touchUpInside" id="wMh-DK-A5d"/>
+                                    <action selector="speedUp:" destination="BV1-FR-VrT" eventType="touchUpInside" id="mOm-Kn-os3"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3KW-Gx-zbR">
-                                <rect key="frame" x="203" y="86" width="53" height="30"/>
-                                <state key="normal" title="forward"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ux8-NI-u26">
+                                <rect key="frame" x="108" y="11" width="48" height="48"/>
+                                <state key="normal" image="Change Speed"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.transform.rotation">
+                                        <real key="value" value="3.1419999999999999"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="forwardDate:" destination="BV1-FR-VrT" eventType="touchUpInside" id="FKi-2N-6vh"/>
+                                    <action selector="slowDown:" destination="BV1-FR-VrT" eventType="touchUpInside" id="N8F-CA-k2A"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0l-HH-Eoi">
+                                <rect key="frame" x="171.5" y="59" width="33" height="33"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="Date"/>
+                                <connections>
+                                    <segue destination="iOO-jj-ov9" kind="popoverPresentation" identifier="DatePickerSegueID" popoverAnchorView="V0l-HH-Eoi" id="jkI-bL-LxO">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
                                 </connections>
                             </button>
                         </subviews>
@@ -159,35 +210,33 @@
                             <constraint firstItem="zEO-LC-Gb3" firstAttribute="top" secondItem="KlY-l3-zEO" secondAttribute="bottom" constant="10" id="7lh-cb-nX7"/>
                             <constraint firstItem="vDu-Ri-qEF" firstAttribute="top" secondItem="3Do-Nz-vPN" secondAttribute="top" constant="-20" id="AhN-wi-nv4"/>
                             <constraint firstItem="zEO-LC-Gb3" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="Be4-3y-LDa"/>
-                            <constraint firstItem="dxo-rv-kME" firstAttribute="top" secondItem="Oig-4M-jrG" secondAttribute="bottom" constant="10" id="Dih-1t-bon"/>
+                            <constraint firstItem="Ro0-Sl-bqX" firstAttribute="leading" secondItem="Oig-4M-jrG" secondAttribute="trailing" constant="8" id="Dgd-dE-Y0N"/>
+                            <constraint firstItem="Ro0-Sl-bqX" firstAttribute="centerY" secondItem="Oig-4M-jrG" secondAttribute="centerY" id="EYi-tw-oaQ"/>
+                            <constraint firstItem="Ux8-NI-u26" firstAttribute="centerY" secondItem="Oig-4M-jrG" secondAttribute="centerY" id="F63-5s-kv6"/>
                             <constraint firstItem="Oig-4M-jrG" firstAttribute="centerY" secondItem="t8K-3O-Oc1" secondAttribute="centerY" id="FDE-Ia-Sam"/>
                             <constraint firstItem="GMR-IA-p4n" firstAttribute="top" secondItem="yOl-4w-DAM" secondAttribute="bottom" id="L1x-QT-aLb"/>
                             <constraint firstItem="KlY-l3-zEO" firstAttribute="centerX" secondItem="Y8e-tj-9vj" secondAttribute="centerX" id="NR6-6d-oJe"/>
-                            <constraint firstItem="dxo-rv-kME" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" constant="77" id="ONJ-nT-GBk"/>
                             <constraint firstItem="bi2-3a-bee" firstAttribute="top" secondItem="Y8e-tj-9vj" secondAttribute="bottom" id="P79-Rf-TpU"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="top" secondItem="Wef-8h-2Ru" secondAttribute="top" id="PcF-Nr-kPL"/>
                             <constraint firstItem="3Do-Nz-vPN" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" constant="10" id="Ptz-h0-1lJ"/>
                             <constraint firstItem="dTE-ea-BUo" firstAttribute="width" secondItem="vDu-Ri-qEF" secondAttribute="width" id="RNP-1H-Kty"/>
                             <constraint firstAttribute="trailing" secondItem="Y8e-tj-9vj" secondAttribute="trailing" id="Rb7-i7-hlA"/>
+                            <constraint firstItem="Oig-4M-jrG" firstAttribute="leading" secondItem="Ux8-NI-u26" secondAttribute="trailing" constant="8" id="VoK-Yj-gLm"/>
                             <constraint firstItem="Oig-4M-jrG" firstAttribute="centerX" secondItem="Wef-8h-2Ru" secondAttribute="centerX" id="Xys-zb-JGG"/>
                             <constraint firstItem="dTE-ea-BUo" firstAttribute="top" secondItem="GMR-IA-p4n" secondAttribute="top" id="a8I-o4-KzH"/>
                             <constraint firstItem="bi2-3a-bee" firstAttribute="top" secondItem="zEO-LC-Gb3" secondAttribute="bottom" id="agn-eF-OC7"/>
                             <constraint firstItem="omW-cd-Viv" firstAttribute="top" secondItem="3Do-Nz-vPN" secondAttribute="bottom" id="amZ-Ig-BdL"/>
-                            <constraint firstItem="Jdw-Ds-j5h" firstAttribute="trailing" secondItem="Wef-8h-2Ru" secondAttribute="centerX" id="bsj-Aj-eiL"/>
                             <constraint firstItem="dTE-ea-BUo" firstAttribute="centerY" secondItem="GMR-IA-p4n" secondAttribute="centerY" id="d0j-cB-jfy"/>
-                            <constraint firstItem="3KW-Gx-zbR" firstAttribute="centerY" secondItem="Jdw-Ds-j5h" secondAttribute="centerY" id="dpl-SR-nWS"/>
-                            <constraint firstAttribute="trailing" secondItem="dxo-rv-kME" secondAttribute="trailing" constant="77" id="eaQ-Rw-4Uy"/>
-                            <constraint firstItem="3KW-Gx-zbR" firstAttribute="leading" secondItem="Jdw-Ds-j5h" secondAttribute="trailing" constant="15.5" id="g5l-SC-M8E"/>
                             <constraint firstItem="dTE-ea-BUo" firstAttribute="centerX" secondItem="GMR-IA-p4n" secondAttribute="centerX" id="iDk-dZ-0Hz"/>
                             <constraint firstAttribute="trailing" secondItem="zEO-LC-Gb3" secondAttribute="trailing" id="kqR-qf-mnv"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="l9v-9V-kOQ"/>
                             <constraint firstItem="GMR-IA-p4n" firstAttribute="centerX" secondItem="yOl-4w-DAM" secondAttribute="centerX" id="lRz-Y2-kKp"/>
                             <constraint firstItem="yOl-4w-DAM" firstAttribute="top" secondItem="omW-cd-Viv" secondAttribute="bottom" id="nJ3-4N-YW3"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="omW-cd-Viv" secondAttribute="trailing" constant="20" symbolic="YES" id="o5Q-YV-lMG"/>
-                            <constraint firstItem="Jdw-Ds-j5h" firstAttribute="top" secondItem="7fE-TC-662" secondAttribute="bottom" constant="66" id="oqN-RF-1qN"/>
+                            <constraint firstItem="V0l-HH-Eoi" firstAttribute="top" secondItem="Oig-4M-jrG" secondAttribute="bottom" id="oRE-77-qU1"/>
                             <constraint firstItem="vDu-Ri-qEF" firstAttribute="centerX" secondItem="3Do-Nz-vPN" secondAttribute="centerX" id="piC-QZ-Sby"/>
-                            <constraint firstItem="dxo-rv-kME" firstAttribute="centerX" secondItem="Oig-4M-jrG" secondAttribute="centerX" id="q0I-nH-Rqo"/>
                             <constraint firstItem="3Do-Nz-vPN" firstAttribute="top" secondItem="7fE-TC-662" secondAttribute="bottom" id="qf6-rg-di0"/>
+                            <constraint firstItem="V0l-HH-Eoi" firstAttribute="centerX" secondItem="Oig-4M-jrG" secondAttribute="centerX" id="rfo-Xr-8Qf"/>
                             <constraint firstItem="yOl-4w-DAM" firstAttribute="leading" secondItem="omW-cd-Viv" secondAttribute="leading" id="t3u-H2-aK5"/>
                             <constraint firstItem="omW-cd-Viv" firstAttribute="leading" secondItem="3Do-Nz-vPN" secondAttribute="leading" id="vnc-SI-0ud"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3Do-Nz-vPN" secondAttribute="trailing" constant="20" symbolic="YES" id="wXr-DO-cTd"/>
@@ -198,21 +247,24 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="dateButton" destination="V0l-HH-Eoi" id="9VI-ko-7O6"/>
                         <outlet property="hudBottomConstraint" destination="agn-eF-OC7" id="upM-v8-Xsm"/>
                         <outlet property="hudHeightConstraint" destination="vRk-96-Kbf" id="jp1-b7-qIC"/>
                         <outlet property="orbitScaleButton" destination="omW-cd-Viv" id="MI9-j8-g6n"/>
                         <outlet property="orbitShowButton" destination="3Do-Nz-vPN" id="zSU-de-6Bl"/>
+                        <outlet property="pauseButton" destination="Oig-4M-jrG" id="gDC-5a-opw"/>
                         <outlet property="planetScaleButton" destination="yOl-4w-DAM" id="f4p-2q-RFJ"/>
                         <outlet property="sceneView" destination="Y8e-tj-9vj" id="zCK-fe-vs0"/>
                         <outlet property="status" destination="KlY-l3-zEO" id="F55-OO-f9p"/>
-                        <outlet property="timeScaleButton" destination="Oig-4M-jrG" id="eGc-yB-a2w"/>
-                        <outlet property="timeScaleSlider" destination="dxo-rv-kME" id="kWr-xI-vc3"/>
                         <outletCollection property="toggleViews" destination="yOl-4w-DAM" collectionClass="NSMutableArray" id="QdQ-hv-MSP"/>
                         <outletCollection property="toggleViews" destination="vDu-Ri-qEF" collectionClass="NSMutableArray" id="Nob-Ub-wZd"/>
                         <outletCollection property="toggleViews" destination="3Do-Nz-vPN" collectionClass="NSMutableArray" id="r3l-Am-ELn"/>
                         <outletCollection property="toggleViews" destination="omW-cd-Viv" collectionClass="NSMutableArray" id="kPk-h4-eCV"/>
                         <outletCollection property="resetViews" destination="dTE-ea-BUo" collectionClass="NSMutableArray" id="NlF-AH-DDd"/>
                         <outletCollection property="resetViews" destination="GMR-IA-p4n" collectionClass="NSMutableArray" id="6r2-qK-2vd"/>
+                        <outletCollection property="toggleViews" destination="Ro0-Sl-bqX" collectionClass="NSMutableArray" id="jZx-1D-oWg"/>
+                        <outletCollection property="toggleViews" destination="Ux8-NI-u26" collectionClass="NSMutableArray" id="bto-Pa-t6g"/>
+                        <outletCollection property="toggleViews" destination="Oig-4M-jrG" collectionClass="NSMutableArray" id="oYr-az-BC3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -463,10 +515,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Clock" width="48" height="48"/>
-        <image name="Clock Selected" width="48" height="48"/>
+        <image name="Change Speed" width="48" height="48"/>
         <image name="Hide Orbit" width="48" height="48"/>
         <image name="Hide Orbit Selected" width="48" height="48"/>
+        <image name="Pause" width="48" height="48"/>
         <image name="Scale Orbit" width="48" height="48"/>
         <image name="Scale Orbit Selected" width="48" height="48"/>
         <image name="Scale Planets" width="48" height="48"/>

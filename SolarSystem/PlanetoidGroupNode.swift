@@ -14,6 +14,12 @@ struct SolarSystemNodes {
     let lightNodes: [SCNNode]
     let planetoids: [Planet:PlanetoidGroupNode]
     
+    func startOrbits() {
+        // begin all of the rotations
+        _ = planetoids.map { (planet, groupNode) in
+            groupNode.beginOrbit(planet: planet, multiplier: 1)
+        }
+    }
     func addAllNodesAsChild(to node: SCNNode) {
         for planetNode in planetoids {
             node.addChildNode(planetNode.value)
@@ -24,6 +30,8 @@ struct SolarSystemNodes {
     }
     
     func updatePostions(to date: Date) {
+        
+        // update the planet positions
         _ = planetoids.map { (planet, groupNode) in
             if let type = planet.type {
                 let day = JulianDay(date)
@@ -31,6 +39,9 @@ struct SolarSystemNodes {
                 groupNode.updatePlanetLocation(planetAA.position())
             }
         }
+        
+        // TODO update the moons
+        
     }
     
     func showingPaths() -> Bool {
@@ -139,15 +150,14 @@ struct SolarSystemNodes {
         SCNTransaction.commit()
     }
     
-//    func updateSpeed(_ value: Double) {
-//        _ = planetoids.map { (planet, node) in
-//            print("change speed \(planet.name)")
-//            if let planetNode = node.planetNode {
-//                node.beginRotation(planet: planet, node: planetNode, multiplier: value)
-//            }
-//            node.beginOrbit(planet: planet, multiplier: value)
-//        }
-//    }
+    func updateSpeed(_ value: Double) {
+        _ = planetoids.map { (planet, node) in
+            if let planetNode = node.planetNode {
+                node.beginRotation(planet: planet, node: planetNode, multiplier: value)
+            }
+            node.beginOrbit(planet: planet, multiplier: value)
+        }
+    }
     
     func updateLookat(selected planet: Planet, arrowNode: SCNNode) {
         for (solarSystemPlanet, planetoidGroup) in planetoids {
@@ -217,23 +227,23 @@ class PlanetoidGroupNode: SCNNode {
         }
         if let path = path {
             self.addChildNode(path)
-//            beginOrbit(planet: planet, multiplier: 1)
         }
     }
     
     func updatePlanetLocation(_ celestialLongitude: Float) {
-        print("longitude \(celestialLongitude)")
-        self.rotation = SCNVector4Make(0, 1, 0, celestialLongitude * Float.pi / 180)
+        let rad = celestialLongitude * Float.pi / 180
+        self.rotation = SCNVector4Make(0, 1, 0, rad)
     }
     
-//    func beginOrbit(planet: Planet, multiplier: Double) {
-//        // cleanup just in case
-//        removeAction(forKey: "orbit")
-//
-//        // Normalize to Earth's rotation. Once earth year is 365 seconds
-//        let action = SCNAction.createRotateAction(duration: planet.orbitPeriod * 365 / multiplier)
-//        runAction(action, forKey: "orbit")
-//    }
+    func beginOrbit(planet: Planet, multiplier: Double) {
+        let duration = planet.orbitPeriod * 365 / multiplier
+        // cleanup just in case
+        removeAction(forKey: "orbit")
+
+        // Normalize to Earth's rotation. Once earth year is 365 seconds
+        let action = SCNAction.createRotateAction(duration: duration)
+        runAction(action, forKey: "orbit")
+    }
     
     func beginRotation(planet: Planet, node: SCNNode, multiplier: Double) {
         // cleanup just in case
@@ -241,7 +251,7 @@ class PlanetoidGroupNode: SCNNode {
         
         // Normalize to Earth's rotation (earth is now 1 second)
         let normalizedRotationDuration = planet.rotationDuration / Planet.earth.rotationDuration / multiplier
-        let action = SCNAction.createRotateAction(duration: normalizedRotationDuration)
+        let action = SCNAction.createSpinAction(duration: normalizedRotationDuration)
         node.runAction(action, forKey: "rotation")
     }
     
