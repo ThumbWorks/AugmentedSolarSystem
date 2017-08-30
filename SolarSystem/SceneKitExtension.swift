@@ -137,25 +137,23 @@ extension SCNNode {
     }
     
     // Creates a planet that has the ability to orbit around a central point
-    class func planetGroup(orbitRadius: CGFloat, planetRadius: CGFloat, planetColor: UIColor, position: SCNVector3? = nil) -> SCNNode {
+    class func moonGroup(orbitRadius: CGFloat, planetRadius: CGFloat, planetColor: UIColor, lat: Double, lon: Double) -> SCNNode {
         let rotationSphere = SCNGeometry.planetoid(radius: orbitRadius, color: .clear)
         let rotationNode = SCNNode(geometry: rotationSphere)
         let geometry  = SCNGeometry.planetoid(radius: planetRadius, color: planetColor)
+        let moon = SCNNode(geometry: geometry)
+        moon.categoryBitMask = 1
+        moon.position = SCNVector3Make(Float(orbitRadius), 0, 0)
+        rotationNode.addChildNode(moon)
         
-        let planet = SCNNode(geometry: geometry)
-        planet.categoryBitMask = 1
-        if let position = position {
-            planet.position = position
-        } else {
-            planet.position = SCNVector3Make(Float(orbitRadius), 0, 0)
-        }
-        rotationNode.addChildNode(planet)
+//        let q = SCNQuaternion.init(0, lat, lon, 1)
+//        rotationNode.rotate(by: q, aroundTarget: SCNVector3Zero)
         return rotationNode
     }
 }
 extension SwiftAA.Planet {
-    func position() -> Float {
-        return Float(self.heliocentricEclipticCoordinates.celestialLongitude.magnitude)
+    func position() -> (EclipticCoordinates) {
+        return self.heliocentricEclipticCoordinates
     }
 }
 
@@ -164,15 +162,6 @@ extension Planet {
     static func buildSolarSystem() -> SolarSystemNodes {
         var nodes = [Planet:PlanetoidGroupNode]()
 
-        let date = JulianDay(year: Date().year, month: Date().month, day: Date().day)
-        let mars = Mars(julianDay: date)
-        print("mars \(mars.name)")
-        
-        let marsCoordinates = mars.heliocentricEclipticCoordinates
-        let venusCoordinates = Venus(julianDay: date).heliocentricEclipticCoordinates
-        let jupiterCoordinates = Jupiter(julianDay: date).heliocentricEclipticCoordinates
-        let mercuryCoordinates = Mercury(julianDay: date).heliocentricEclipticCoordinates
-        print("\(mercuryCoordinates)\n\(venusCoordinates)\n\(marsCoordinates)\n\(jupiterCoordinates)")
         
         // Data on sizes of planets http://www.freemars.org/jeff/planets/planets5.htm
         
@@ -198,23 +187,33 @@ extension Planet {
         let earthNode = PlanetoidGroupNode(planet: Planet.earth)
         earthNode.updatePlanetLocation(earthAA.position())
         
-        let moon = SCNNode.planetGroup(orbitRadius: 2,
-                                       planetRadius: 0.09,
-                                       planetColor: .gray)
-        earthNode.addMoon(moon)
+//        let moonLat = moonAA.eclipticCoordinates.celestialLatitude.magnitude
+//        let moonLong = moonAA.eclipticCoordinates.celestialLongitude.magnitude
+        let moon = SCNNode.moonGroup(orbitRadius: 2,
+                                     planetRadius: 0.09, //CGFloat(moonAA.radiusVector.km.magnitude),
+                                     planetColor: .gray,
+                                     lat: 0.0,
+                                     lon: 0.0)
+
+//        earthNode.planetNode?.addChildNode(moon)
+//        earthNode.addMoon(moon)
         nodes[Planet.earth] = earthNode
         
         let marsGroup = PlanetoidGroupNode(planet: Planet.mars)
         marsGroup.updatePlanetLocation(marsAA.position())
         nodes[Planet.mars] = marsGroup
         
-        // Jupiter has a moon
         let jupiterNode = PlanetoidGroupNode(planet: Planet.jupiter)
-        let jupiterMoon = SCNNode.planetGroup(orbitRadius: 3,
-                                       planetRadius: 0.2,
-                                       planetColor: .gray)
+        // Jupiter has a moon
+//        let europaLat = jupiterAA.Europa.EquatorialLatitude.magnitude
+//        let europaLon = jupiterAA.Europa.TrueLongitude.magnitude
+//        let jupiterMoon = SCNNode.moonGroup(orbitRadius: 3,
+//                                            planetRadius: 0.2,
+//                                            planetColor: .gray,
+//                                            lat: europaLat,
+//                                            lon: europaLon)
+//        jupiterNode.addMoon(jupiterMoon)
         jupiterNode.updatePlanetLocation(jupiterAA.position())
-        jupiterNode.addMoon(jupiterMoon)
         nodes[Planet.jupiter] = jupiterNode
 
         // Saturn has rings
@@ -235,6 +234,6 @@ extension Planet {
         pluto.updatePlanetLocation(plutoAA.position())
         nodes[Planet.pluto] = pluto
         
-        return SolarSystemNodes(lightNodes: [light], planetoids: nodes)
+        return SolarSystemNodes(lightNodes: [light], planetoids: nodes, moon: moon)
     }
 }

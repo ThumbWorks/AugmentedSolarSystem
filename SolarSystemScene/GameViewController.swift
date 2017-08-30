@@ -43,8 +43,6 @@ class GameViewController: UIViewController {
             scene.rootNode.addChildNode(nodeMap.value)
         }
         
-        solarSystem.startOrbits()
-
         pinchController = PinchController(with: solarSystem)
         solarSystem.scalePlanets(to: 40)
         // set the scene to the view

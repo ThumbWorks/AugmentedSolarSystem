@@ -262,9 +262,6 @@
                         <outletCollection property="toggleViews" destination="omW-cd-Viv" collectionClass="NSMutableArray" id="kPk-h4-eCV"/>
                         <outletCollection property="resetViews" destination="dTE-ea-BUo" collectionClass="NSMutableArray" id="NlF-AH-DDd"/>
                         <outletCollection property="resetViews" destination="GMR-IA-p4n" collectionClass="NSMutableArray" id="6r2-qK-2vd"/>
-                        <outletCollection property="toggleViews" destination="Ro0-Sl-bqX" collectionClass="NSMutableArray" id="jZx-1D-oWg"/>
-                        <outletCollection property="toggleViews" destination="Ux8-NI-u26" collectionClass="NSMutableArray" id="bto-Pa-t6g"/>
-                        <outletCollection property="toggleViews" destination="Oig-4M-jrG" collectionClass="NSMutableArray" id="oYr-az-BC3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>

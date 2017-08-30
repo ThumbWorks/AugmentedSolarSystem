@@ -13,13 +13,8 @@ import SwiftAA
 struct SolarSystemNodes {
     let lightNodes: [SCNNode]
     let planetoids: [Planet:PlanetoidGroupNode]
-    
-    func startOrbits() {
-        // begin all of the rotations
-        _ = planetoids.map { (planet, groupNode) in
-            groupNode.beginOrbit(planet: planet, multiplier: 1)
-        }
-    }
+    var moon = SCNNode()
+
     func addAllNodesAsChild(to node: SCNNode) {
         for planetNode in planetoids {
             node.addChildNode(planetNode.value)
@@ -32,16 +27,24 @@ struct SolarSystemNodes {
     func updatePostions(to date: Date) {
         
         // update the planet positions
+        let day = JulianDay(date)
         _ = planetoids.map { (planet, groupNode) in
             if let type = planet.type {
-                let day = JulianDay(date)
                 let planetAA = type.init(julianDay: day)
                 groupNode.updatePlanetLocation(planetAA.position())
             }
         }
-        
-        // TODO update the moons
-        
+        // TODO add the moons back in (again)
+
+//        let moonAA = Moon(julianDay: day)
+//
+//        let coords = moonAA.apparentEclipticCoordinates
+//        let lat = Float(coords.celestialLatitude.magnitude)
+//        let lon = Float(coords.celestialLongitude.magnitude)
+//        print("lat \(lat) lon \(lon)")
+//        moon.eulerAngles = SCNVector3Make(lat, lon, 0)
+//        moon.rotation = SCNVector4Make(0, 1, 0, lon)
+//        moon.rotation = SCNVector4Make(1, 0, 0, lat)
     }
     
     func showingPaths() -> Bool {
@@ -155,7 +158,6 @@ struct SolarSystemNodes {
             if let planetNode = node.planetNode {
                 node.beginRotation(planet: planet, node: planetNode, multiplier: value)
             }
-            node.beginOrbit(planet: planet, multiplier: value)
         }
     }
     
@@ -204,9 +206,6 @@ class PlanetoidGroupNode: SCNNode {
             torus = nil
         }
         
-//        let label = SCNText(string: planet.name, extrusionDepth: 1)
-//        textNode = SCNNode(geometry: label)
-
         super.init()
         
         if let node = scene.rootNode.childNodes.first {
@@ -230,19 +229,12 @@ class PlanetoidGroupNode: SCNNode {
         }
     }
     
-    func updatePlanetLocation(_ celestialLongitude: Float) {
-        let rad = celestialLongitude * Float.pi / 180
-        self.rotation = SCNVector4Make(0, 1, 0, rad)
-    }
-    
-    func beginOrbit(planet: Planet, multiplier: Double) {
-        let duration = planet.orbitPeriod * 365 / multiplier
-        // cleanup just in case
-        removeAction(forKey: "orbit")
-
-        // Normalize to Earth's rotation. Once earth year is 365 seconds
-        let action = SCNAction.createRotateAction(duration: duration)
-        runAction(action, forKey: "orbit")
+    func updatePlanetLocation(_ coords: EclipticCoordinates) {
+        let latitude = Float(coords.celestialLatitude.magnitude)
+        let longitude = Float(coords.celestialLongitude.magnitude)
+        let latitudeInRadians = latitude * Float.pi / 180
+        let longitudeInRadians = longitude * Float.pi / 180
+        self.rotation = SCNVector4Make(0, 1, 0, longitudeInRadians)
     }
     
     func beginRotation(planet: Planet, node: SCNNode, multiplier: Double) {
@@ -265,8 +257,8 @@ class PlanetoidGroupNode: SCNNode {
             return
         }
         planet.addChildNode(moon)
-        let action = SCNAction.createRotateAction(duration: 5, clockwise: false)
-        moon.runAction(action)
+//        let action = SCNAction.createRotateAction(duration: 5, clockwise: false)
+//        moon.runAction(action)
     }
     
     func addRings() {

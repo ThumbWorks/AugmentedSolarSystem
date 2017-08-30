@@ -12,6 +12,8 @@ import ARKit
 import Mixpanel
 
 class ViewController: UIViewController {
+    var startTime: TimeInterval = 0
+    var startDate = Date()
     var displayedDate = Date()
     var displaySpeed: Double = 1
    
@@ -123,7 +125,6 @@ class ViewController: UIViewController {
         hudBottomConstraint.constant = -hudHeightConstraint.constant
         
         done = false
-        pauseButton.isHidden = true
 
         // unhide the toggleViews
         _ = toggleViews.map({ (view) in
@@ -173,6 +174,8 @@ class ViewController: UIViewController {
         if let dest = segue.destination as? DatePickerViewController {
             dest.dateSelection = { (date) in
                 self.displayedDate = date
+                self.startTime = 0
+                self.startDate = date
                 self.updateDateString(date)
                 self.solarSystemNodes.updatePostions(to: date)
             }
@@ -205,6 +208,9 @@ extension ViewController {
     }
     
     @IBAction func tappedScreen(_ sender: UITapGestureRecognizer) {
+        // TODO something gets laggy whenever we tap, so this gets removed till we figure it out
+        return
+        
         // determine if we've tapped a planet
         if (sender.state == .ended) {
             let location = sender.location(in: view)
@@ -385,6 +391,10 @@ extension ViewController: ARSCNViewDelegate {
         if !done {
             return
         }
+        
+        if startTime == 0 {
+            startTime = time
+        }
         guard let cameraNode = sceneView.pointOfView else {
             print("we got an update but we don't have a camera. No distance calculations can happen")
             return
@@ -397,6 +407,11 @@ extension ViewController: ARSCNViewDelegate {
         var sizes = [Planet:Float]()
         insidePlanet = nil
 
+        let delta = (time - startTime) * 60 * 60 * 24
+
+        let newDate = startDate.addingTimeInterval(delta)
+        displayedDate = newDate
+        solarSystemNodes.updatePostions(to: newDate)
         for (planet, node) in solarSystemNodes.planetoids {
             
             guard let planetNode = node.planetNode else {
@@ -420,6 +435,8 @@ extension ViewController: ARSCNViewDelegate {
         }
         DispatchQueue.main.async {
             self.updateLabel()
+            self.updateDateString(newDate)
+
             self.lastUpdateTime = time
             if let planet = self.collectionViewController?.currentPlanet, let meters = distances[planet] {
                 var distanceString = ""
@@ -523,12 +540,8 @@ extension ViewController: ARSCNViewDelegate {
                 _ = self.toggleViews.map({ (view) in
                     view.isHidden = false
                 })
-                self.pauseButton.isHidden = false
                 self.done = true
-                
-                self.solarSystemNodes.addAllNodesAsChild(to: node)
-                self.solarSystemNodes.startOrbits()
-                
+                self.solarSystemNodes.addAllNodesAsChild(to: node)                
                 // determine scale based on the size of the plane
                 var radius: Float
                 if depth < width {
