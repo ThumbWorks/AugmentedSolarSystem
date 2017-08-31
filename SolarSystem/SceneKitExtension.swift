@@ -76,6 +76,27 @@ extension SCNVector3 {
 }
 
 extension SCNAction {
+    class func createARKitCalibrationAction() -> SCNAction {
+        let duration = 0.5
+        let rotationValue = CGFloat.pi / 5
+        let rotateX = SCNAction.rotateBy(x: rotationValue * 2, y: 0, z: 0, duration: duration)
+        let rotateY = SCNAction.rotateBy(x: 0, y: rotationValue, z: 0, duration: duration)
+        let rotateZ = SCNAction.rotateBy(x: 0, y: 0, z: rotationValue, duration: duration)
+        
+        let rotateNegativeX = SCNAction.rotateBy(x: -rotationValue * 2, y: 0, z: 0, duration: duration)
+        let rotateNegativeY = SCNAction.rotateBy(x: 0, y: -rotationValue, z: 0, duration: duration)
+        let rotateNegativeZ = SCNAction.rotateBy(x: 0, y: 0, z: -rotationValue, duration: duration)
+        
+        let moveLeft = SCNAction.move(by: SCNVector3Make(-1, 0, 0), duration: duration * 2)
+        let moveRight = SCNAction.move(by: SCNVector3Make(1, 0, 0), duration: duration * 2)
+
+        let moveSequence = SCNAction.sequence([rotateNegativeX, moveLeft, rotateY, rotateZ, rotateNegativeY, moveRight, rotateNegativeZ, moveRight, rotateX, rotateNegativeZ, rotateNegativeX, moveLeft, rotateNegativeY, rotateZ, rotateY, rotateX])
+
+        
+        let loop = SCNAction.repeatForever(moveSequence)
+        return loop
+    }
+    
     class func createRotateAction(duration: CFTimeInterval, clockwise: Bool = true) -> SCNAction {
         let rotationValue = clockwise ? CGFloat.pi : -CGFloat.pi
         let rotate = SCNAction.rotate(by: rotationValue, around: SCNVector3Make(0, 1, 0), duration: duration)

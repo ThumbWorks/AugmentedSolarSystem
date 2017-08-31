@@ -53,6 +53,7 @@ class ViewController: UIViewController {
     
     var pincher: PinchController?
     
+    var tutorialNode = SCNNode()
     var arrowNode = SCNNode.arrow()
     
     @IBOutlet weak var hudHeightConstraint: NSLayoutConstraint!
@@ -388,16 +389,36 @@ extension ViewController: ARSessionObserver {
 extension ViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        guard let cameraNode = sceneView.pointOfView else {
+            print("we got an update but we don't have a camera. No distance calculations can happen")
+            return
+        }
+        
         if !done {
+            
+            // Run the makeshift tutorial if possible
+            if cameraNode.childNodes.count == 0 {
+                // Load the asset
+                let iOSDeviceNode = SCNScene(named: "art.scnassets/iPhone6.dae")!.rootNode
+                iOSDeviceNode.scale = SCNVector3Make(0.05, 0.05, 0.05)
+                iOSDeviceNode.rotation = SCNVector4Make(1, 0, 0, 90)
+                iOSDeviceNode.pivot = SCNMatrix4MakeTranslation(-15.5, -25.5, -15.5)
+                
+                // at this point, tutorialNode is just an empty node with no parent
+                tutorialNode.addChildNode(iOSDeviceNode)
+                tutorialNode.position = SCNVector3Make(0, 0, -7)
+                cameraNode.addChildNode(tutorialNode)
+                
+                // create and add the repeating animation
+                let action = SCNAction.createARKitCalibrationAction()
+                tutorialNode.runAction(action)
+            }
+            
             return
         }
         
         if startTime == 0 {
             startTime = time
-        }
-        guard let cameraNode = sceneView.pointOfView else {
-            print("we got an update but we don't have a camera. No distance calculations can happen")
-            return
         }
 
         // we calculate the distances so we can
@@ -516,8 +537,13 @@ extension ViewController: ARSCNViewDelegate {
                 }
                 Mixpanel.sharedInstance()?.track("Discovered an Anchor")
 
+                // remove the tutorial
+                self.tutorialNode.removeFromParentNode()
+                
                 // move the HUD so it's visible
                 self.hudBottomConstraint.constant = 0
+                
+                
                 
                 // Make the bottom HUD show, hint that it is scrollable
                 UIView.animate(withDuration: 0.3, delay: 2, options: .curveEaseInOut, animations: {
