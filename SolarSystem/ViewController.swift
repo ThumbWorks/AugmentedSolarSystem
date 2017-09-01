@@ -53,7 +53,7 @@ class ViewController: UIViewController {
     
     var pincher: PinchController?
     
-    var tutorialNode = SCNNode()
+    var tutorialNodes = [SCNNode]()
     var arrowNode = SCNNode.arrow()
     
     @IBOutlet weak var hudHeightConstraint: NSLayoutConstraint!
@@ -398,20 +398,31 @@ extension ViewController: ARSCNViewDelegate {
             
             // Run the makeshift tutorial if possible
             if cameraNode.childNodes.count == 0 {
-                // Load the asset
+
+                // load the table asset
+                let tableNode = SCNScene(named: "art.scnassets/table.dae")!.rootNode
+                tutorialNodes.append(tableNode)
+                tableNode.position = SCNVector3Make(-0.5, -1, -7)
+                tableNode.rotation = SCNVector4Make(1, 0, 0, Float.pi/20)
+                tableNode.scale = SCNVector3Make(0.02, 0.02, 0.02)
+                cameraNode.addChildNode(tableNode)
+                
+                // Load the device asset
                 let iOSDeviceNode = SCNScene(named: "art.scnassets/iPhone6.dae")!.rootNode
                 iOSDeviceNode.scale = SCNVector3Make(0.05, 0.05, 0.05)
-                iOSDeviceNode.rotation = SCNVector4Make(1, 0, 0, 90)
                 iOSDeviceNode.pivot = SCNMatrix4MakeTranslation(-15.5, -25.5, -15.5)
+                iOSDeviceNode.rotation = SCNVector4Make(1, 0, 0, Float.pi/2)
                 
                 // at this point, tutorialNode is just an empty node with no parent
-                tutorialNode.addChildNode(iOSDeviceNode)
-                tutorialNode.position = SCNVector3Make(0, 0, -7)
-                cameraNode.addChildNode(tutorialNode)
+                let deviceRotatingNode = SCNNode()
+                tutorialNodes.append(deviceRotatingNode)
+                deviceRotatingNode.addChildNode(iOSDeviceNode)
+                deviceRotatingNode.position = SCNVector3Make(0, 0, -7)
+                cameraNode.addChildNode(deviceRotatingNode)
                 
                 // create and add the repeating animation
                 let action = SCNAction.createARKitCalibrationAction()
-                tutorialNode.runAction(action)
+                deviceRotatingNode.runAction(action)
             }
             
             return
@@ -538,7 +549,9 @@ extension ViewController: ARSCNViewDelegate {
                 Mixpanel.sharedInstance()?.track("Discovered an Anchor")
 
                 // remove the tutorial
-                self.tutorialNode.removeFromParentNode()
+                _ = self.tutorialNodes.map({ (node) in
+                    node.removeFromParentNode()
+                })
                 
                 // move the HUD so it's visible
                 self.hudBottomConstraint.constant = 0

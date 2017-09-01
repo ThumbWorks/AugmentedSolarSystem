@@ -78,7 +78,7 @@ extension SCNVector3 {
 extension SCNAction {
     class func createARKitCalibrationAction() -> SCNAction {
         let duration = 0.5
-        let rotationValue = CGFloat.pi / 5
+        let rotationValue = CGFloat.pi / 10
         let rotateX = SCNAction.rotateBy(x: rotationValue * 2, y: 0, z: 0, duration: duration)
         let rotateY = SCNAction.rotateBy(x: 0, y: rotationValue, z: 0, duration: duration)
         let rotateZ = SCNAction.rotateBy(x: 0, y: 0, z: rotationValue, duration: duration)
