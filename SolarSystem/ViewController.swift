@@ -136,8 +136,8 @@ class ViewController: UIViewController {
             view.isHidden = true
         })
         
-        
         solarSystemNodes.removeAllNodesFromParent()
+        createTutorial()
         
         // Create a session configuration
         //        sessionConfig.planeDetection = .horizontal
@@ -388,6 +388,38 @@ extension ViewController: ARSessionObserver {
 
 extension ViewController: ARSCNViewDelegate {
     
+    func createTutorial() {
+        guard let cameraNode = sceneView.pointOfView else {
+            print("Attempting to create the tutorial without a camera")
+            return
+        }
+        
+        // load the table asset
+        let tableNode = SCNScene(named: "art.scnassets/table.dae")!.rootNode
+        tutorialNodes.append(tableNode)
+        tableNode.position = SCNVector3Make(-0.5, -1, -7)
+        tableNode.rotation = SCNVector4Make(1, 0, 0, Float.pi/20)
+        tableNode.scale = SCNVector3Make(0.02, 0.02, 0.02)
+        cameraNode.addChildNode(tableNode)
+        
+        // Load the device asset
+        let iOSDeviceNode = SCNScene(named: "art.scnassets/iPhone6.dae")!.rootNode
+        iOSDeviceNode.scale = SCNVector3Make(0.05, 0.05, 0.05)
+        iOSDeviceNode.pivot = SCNMatrix4MakeTranslation(-15.5, -25.5, -15.5)
+        iOSDeviceNode.rotation = SCNVector4Make(1, 0, 0, Float.pi/2)
+        
+        // at this point, tutorialNode is just an empty node with no parent
+        let deviceRotatingNode = SCNNode()
+        tutorialNodes.append(deviceRotatingNode)
+        deviceRotatingNode.addChildNode(iOSDeviceNode)
+        deviceRotatingNode.position = SCNVector3Make(0, 0, -7)
+        cameraNode.addChildNode(deviceRotatingNode)
+        
+        // create and add the repeating animation
+        let action = SCNAction.createARKitCalibrationAction()
+        deviceRotatingNode.runAction(action)
+    }
+    
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         guard let cameraNode = sceneView.pointOfView else {
             print("we got an update but we don't have a camera. No distance calculations can happen")
@@ -398,31 +430,7 @@ extension ViewController: ARSCNViewDelegate {
             
             // Run the makeshift tutorial if possible
             if cameraNode.childNodes.count == 0 {
-
-                // load the table asset
-                let tableNode = SCNScene(named: "art.scnassets/table.dae")!.rootNode
-                tutorialNodes.append(tableNode)
-                tableNode.position = SCNVector3Make(-0.5, -1, -7)
-                tableNode.rotation = SCNVector4Make(1, 0, 0, Float.pi/20)
-                tableNode.scale = SCNVector3Make(0.02, 0.02, 0.02)
-                cameraNode.addChildNode(tableNode)
-                
-                // Load the device asset
-                let iOSDeviceNode = SCNScene(named: "art.scnassets/iPhone6.dae")!.rootNode
-                iOSDeviceNode.scale = SCNVector3Make(0.05, 0.05, 0.05)
-                iOSDeviceNode.pivot = SCNMatrix4MakeTranslation(-15.5, -25.5, -15.5)
-                iOSDeviceNode.rotation = SCNVector4Make(1, 0, 0, Float.pi/2)
-                
-                // at this point, tutorialNode is just an empty node with no parent
-                let deviceRotatingNode = SCNNode()
-                tutorialNodes.append(deviceRotatingNode)
-                deviceRotatingNode.addChildNode(iOSDeviceNode)
-                deviceRotatingNode.position = SCNVector3Make(0, 0, -7)
-                cameraNode.addChildNode(deviceRotatingNode)
-                
-                // create and add the repeating animation
-                let action = SCNAction.createARKitCalibrationAction()
-                deviceRotatingNode.runAction(action)
+                createTutorial()
             }
             
             return
@@ -555,8 +563,6 @@ extension ViewController: ARSCNViewDelegate {
                 
                 // move the HUD so it's visible
                 self.hudBottomConstraint.constant = 0
-                
-                
                 
                 // Make the bottom HUD show, hint that it is scrollable
                 UIView.animate(withDuration: 0.3, delay: 2, options: .curveEaseInOut, animations: {
