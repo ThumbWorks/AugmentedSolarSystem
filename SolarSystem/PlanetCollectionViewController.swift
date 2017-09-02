@@ -24,6 +24,9 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
     var planetSelectionChanged: ((Planet) -> ())?
     var currentPlanet: Planet?
     
+    override func viewDidLoad() {
+        distance.text = ""
+    }
     func updateDistance(_ distanceString: String) {
         distance.text =  distanceString
     }

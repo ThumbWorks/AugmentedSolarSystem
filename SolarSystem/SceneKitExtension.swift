@@ -76,14 +76,13 @@ extension SCNVector3 {
 }
 
 extension SCNAction {
-    class func createARKitCalibrationAction() -> SCNAction {
+    class func createARKitCalibrationAction(rotationValue: CGFloat) -> SCNAction {
         let duration = 0.5
-        let rotationValue = CGFloat.pi / 10
-        let rotateX = SCNAction.rotateBy(x: rotationValue * 2, y: 0, z: 0, duration: duration)
+        let rotateX = SCNAction.rotateBy(x: rotationValue, y: 0, z: 0, duration: duration)
         let rotateY = SCNAction.rotateBy(x: 0, y: rotationValue, z: 0, duration: duration)
         let rotateZ = SCNAction.rotateBy(x: 0, y: 0, z: rotationValue, duration: duration)
-        
-        let rotateNegativeX = SCNAction.rotateBy(x: -rotationValue * 2, y: 0, z: 0, duration: duration)
+
+        let rotateNegativeX = SCNAction.rotateBy(x: -rotationValue, y: 0, z: 0, duration: duration)
         let rotateNegativeY = SCNAction.rotateBy(x: 0, y: -rotationValue, z: 0, duration: duration)
         let rotateNegativeZ = SCNAction.rotateBy(x: 0, y: 0, z: -rotationValue, duration: duration)
         
@@ -92,7 +91,6 @@ extension SCNAction {
 
         let moveSequence = SCNAction.sequence([rotateNegativeX, moveLeft, rotateY, rotateZ, rotateNegativeY, moveRight, rotateNegativeZ, moveRight, rotateX, rotateNegativeZ, rotateNegativeX, moveLeft, rotateNegativeY, rotateZ, rotateY, rotateX])
 
-        
         let loop = SCNAction.repeatForever(moveSequence)
         return loop
     }

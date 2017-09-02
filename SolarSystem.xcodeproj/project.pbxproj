@@ -13,6 +13,7 @@
 		5F2641621F4C9C8300FE1F20 /* SwiftAA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FCE8E871F32F29300A38171 /* SwiftAA.framework */; };
 		5F27FD181F061C5200498524 /* Mars.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5F27FD171F061C5200498524 /* Mars.scn */; };
 		5F28BC341F3388AF003E013F /* ScaleReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F28BC331F3388AF003E013F /* ScaleReference.swift */; };
+		5F2D207F1F5A007E005D2C3C /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2D207E1F5A0031005D2C3C /* TutorialViewController.swift */; };
 		5F30D4DC1F16CD68006A45B1 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F30D4DB1F16CD68006A45B1 /* Planet.swift */; };
 		5F30D4DD1F16CD7D006A45B1 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F30D4DB1F16CD68006A45B1 /* Planet.swift */; };
 		5F30D4DF1F16CDB7006A45B1 /* PlanetoidGroupNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F30D4DE1F16CDB7006A45B1 /* PlanetoidGroupNode.swift */; };
@@ -60,6 +61,7 @@
 		5F255D8A1F2BA0A400E9F62E /* DocumentationScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = DocumentationScene.scn; path = art.scnassets/DocumentationScene.scn; sourceTree = "<group>"; };
 		5F27FD171F061C5200498524 /* Mars.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Mars.scn; path = art.scnassets/Mars.scn; sourceTree = "<group>"; };
 		5F28BC331F3388AF003E013F /* ScaleReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleReference.swift; sourceTree = "<group>"; };
+		5F2D207E1F5A0031005D2C3C /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = SOURCE_ROOT; };
 		5F30D4DB1F16CD68006A45B1 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		5F30D4DE1F16CDB7006A45B1 /* PlanetoidGroupNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetoidGroupNode.swift; sourceTree = "<group>"; };
 		5F39596D1EE934B200EDEBEE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		5FBAF96C1EE8B78400FAA54B /* SolarSystem */ = {
 			isa = PBXGroup;
 			children = (
+				5F2D207E1F5A0031005D2C3C /* TutorialViewController.swift */,
 				5F30D4DE1F16CDB7006A45B1 /* PlanetoidGroupNode.swift */,
 				5FBAF96D1EE8B78400FAA54B /* AppDelegate.swift */,
 				5F39596D1EE934B200EDEBEE /* Utilities.swift */,
@@ -349,6 +352,7 @@
 				5F30D4DF1F16CDB7006A45B1 /* PlanetoidGroupNode.swift in Sources */,
 				5FBAF9721EE8B78400FAA54B /* ViewController.swift in Sources */,
 				5FBAF96E1EE8B78400FAA54B /* AppDelegate.swift in Sources */,
+				5F2D207F1F5A007E005D2C3C /* TutorialViewController.swift in Sources */,
 				5F9126B61F2F8EAE00678A8F /* PinchController.swift in Sources */,
 				5F28BC341F3388AF003E013F /* ScaleReference.swift in Sources */,
 				5FAD55E21F50852F0016B04E /* DatePickerViewController.swift in Sources */,

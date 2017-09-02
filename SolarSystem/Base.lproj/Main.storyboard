@@ -261,6 +261,7 @@
                         <outletCollection property="toggleViews" destination="omW-cd-Viv" collectionClass="NSMutableArray" id="kPk-h4-eCV"/>
                         <outletCollection property="resetViews" destination="dTE-ea-BUo" collectionClass="NSMutableArray" id="NlF-AH-DDd"/>
                         <outletCollection property="resetViews" destination="GMR-IA-p4n" collectionClass="NSMutableArray" id="6r2-qK-2vd"/>
+                        <segue destination="jgu-ml-S2V" kind="presentation" identifier="TutorialSegueID" modalPresentationStyle="overCurrentContext" id="EWA-fa-b3I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -276,6 +277,75 @@
                 </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="144.80000000000001" y="129.98500749625188"/>
+        </scene>
+        <!--Tutorial View Controller-->
+        <scene sceneID="VI2-cy-hHF">
+            <objects>
+                <viewController id="jgu-ml-S2V" customClass="TutorialViewController" customModule="SolarSystem" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vqU-bc-gkk"/>
+                        <viewControllerLayoutGuide type="bottom" id="t7i-F7-hkp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="b9g-uJ-UXJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xD1-d8-bvu">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LSR-91-FgL">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="imH-AM-wmS" userLabel="Rounded Edge View">
+                                <rect key="frame" x="32" y="178" width="310" height="310"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QdQ-pG-OE2">
+                                <rect key="frame" x="37.5" y="183.5" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="FiS-pW-fjf"/>
+                                    <constraint firstAttribute="height" constant="300" id="XyC-9o-ADr"/>
+                                </constraints>
+                            </sceneKitView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Move the device around a surface to anchor your Solar System" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpA-N5-GXZ">
+                                <rect key="frame" x="47.5" y="387.5" width="280" height="86"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="xD1-d8-bvu" secondAttribute="trailing" id="13k-mn-1Lm"/>
+                            <constraint firstItem="xD1-d8-bvu" firstAttribute="top" secondItem="vqU-bc-gkk" secondAttribute="bottom" constant="-20" id="42t-i1-on7"/>
+                            <constraint firstItem="imH-AM-wmS" firstAttribute="centerX" secondItem="QdQ-pG-OE2" secondAttribute="centerX" id="726-nG-ILH"/>
+                            <constraint firstItem="imH-AM-wmS" firstAttribute="centerY" secondItem="QdQ-pG-OE2" secondAttribute="centerY" id="8mi-d2-xyz"/>
+                            <constraint firstItem="imH-AM-wmS" firstAttribute="width" secondItem="QdQ-pG-OE2" secondAttribute="width" constant="10" id="CZG-xu-gti"/>
+                            <constraint firstItem="QdQ-pG-OE2" firstAttribute="trailing" secondItem="tpA-N5-GXZ" secondAttribute="trailing" constant="10" id="NVi-ih-Mgd"/>
+                            <constraint firstItem="tpA-N5-GXZ" firstAttribute="leading" secondItem="QdQ-pG-OE2" secondAttribute="leading" constant="10" id="Q1L-aa-CcD"/>
+                            <constraint firstItem="QdQ-pG-OE2" firstAttribute="bottom" secondItem="tpA-N5-GXZ" secondAttribute="bottom" constant="10" id="SMo-Oh-0Kt"/>
+                            <constraint firstItem="QdQ-pG-OE2" firstAttribute="centerY" secondItem="b9g-uJ-UXJ" secondAttribute="centerY" id="Yr8-zF-6pS"/>
+                            <constraint firstItem="xD1-d8-bvu" firstAttribute="leading" secondItem="b9g-uJ-UXJ" secondAttribute="leading" id="cVW-VN-QUG"/>
+                            <constraint firstItem="QdQ-pG-OE2" firstAttribute="centerX" secondItem="b9g-uJ-UXJ" secondAttribute="centerX" id="cxO-DO-GnO"/>
+                            <constraint firstItem="imH-AM-wmS" firstAttribute="height" secondItem="QdQ-pG-OE2" secondAttribute="height" constant="10" id="fXB-QM-cAq"/>
+                            <constraint firstItem="t7i-F7-hkp" firstAttribute="top" secondItem="xD1-d8-bvu" secondAttribute="bottom" id="w4E-1y-SWr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="sceneView" destination="QdQ-pG-OE2" id="lkg-wO-f9g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fji-Co-Qni" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1479" y="-48"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="eVx-LO-WJb">
@@ -356,7 +426,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DeP-YV-bPF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1084" y="130"/>
+            <point key="canvasLocation" x="1348" y="450"/>
         </scene>
         <!--Planet Collection View Controller-->
         <scene sceneID="Pgb-bw-15q">
