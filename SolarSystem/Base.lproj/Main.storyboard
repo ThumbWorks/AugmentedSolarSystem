@@ -162,36 +162,9 @@
                                     </segue>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oig-4M-jrG" userLabel="Time Scale Button">
-                                <rect key="frame" x="163.5" y="11" width="48" height="48"/>
-                                <state key="normal" image="Pause"/>
-                                <connections>
-                                    <action selector="pausePressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Cmr-Jn-oZW"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ro0-Sl-bqX">
-                                <rect key="frame" x="219.5" y="11" width="48" height="48"/>
-                                <state key="normal" image="Change Speed"/>
-                                <connections>
-                                    <action selector="speedUp:" destination="BV1-FR-VrT" eventType="touchUpInside" id="mOm-Kn-os3"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ux8-NI-u26">
-                                <rect key="frame" x="108" y="11" width="48" height="48"/>
-                                <state key="normal" image="Change Speed"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.transform.rotation">
-                                        <real key="value" value="3.1419999999999999"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="slowDown:" destination="BV1-FR-VrT" eventType="touchUpInside" id="N8F-CA-k2A"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0l-HH-Eoi">
-                                <rect key="frame" x="171.5" y="59" width="33" height="33"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
-                                <state key="normal" title="Date"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0l-HH-Eoi">
+                                <rect key="frame" x="163.5" y="30" width="48" height="48"/>
+                                <state key="normal" image="Clock"/>
                                 <connections>
                                     <segue destination="iOO-jj-ov9" kind="popoverPresentation" identifier="DatePickerSegueID" popoverAnchorView="V0l-HH-Eoi" id="jkI-bL-LxO">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -209,19 +182,14 @@
                             <constraint firstItem="zEO-LC-Gb3" firstAttribute="top" secondItem="KlY-l3-zEO" secondAttribute="bottom" constant="10" id="7lh-cb-nX7"/>
                             <constraint firstItem="vDu-Ri-qEF" firstAttribute="top" secondItem="3Do-Nz-vPN" secondAttribute="top" constant="-20" id="AhN-wi-nv4"/>
                             <constraint firstItem="zEO-LC-Gb3" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="Be4-3y-LDa"/>
-                            <constraint firstItem="Ro0-Sl-bqX" firstAttribute="leading" secondItem="Oig-4M-jrG" secondAttribute="trailing" constant="8" id="Dgd-dE-Y0N"/>
-                            <constraint firstItem="Ro0-Sl-bqX" firstAttribute="centerY" secondItem="Oig-4M-jrG" secondAttribute="centerY" id="EYi-tw-oaQ"/>
-                            <constraint firstItem="Ux8-NI-u26" firstAttribute="centerY" secondItem="Oig-4M-jrG" secondAttribute="centerY" id="F63-5s-kv6"/>
-                            <constraint firstItem="Oig-4M-jrG" firstAttribute="centerY" secondItem="t8K-3O-Oc1" secondAttribute="centerY" id="FDE-Ia-Sam"/>
                             <constraint firstItem="GMR-IA-p4n" firstAttribute="top" secondItem="yOl-4w-DAM" secondAttribute="bottom" id="L1x-QT-aLb"/>
                             <constraint firstItem="KlY-l3-zEO" firstAttribute="centerX" secondItem="Y8e-tj-9vj" secondAttribute="centerX" id="NR6-6d-oJe"/>
+                            <constraint firstItem="V0l-HH-Eoi" firstAttribute="top" secondItem="7fE-TC-662" secondAttribute="bottom" constant="10" id="Oej-FN-D82"/>
                             <constraint firstItem="bi2-3a-bee" firstAttribute="top" secondItem="Y8e-tj-9vj" secondAttribute="bottom" id="P79-Rf-TpU"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="top" secondItem="Wef-8h-2Ru" secondAttribute="top" id="PcF-Nr-kPL"/>
                             <constraint firstItem="3Do-Nz-vPN" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" constant="10" id="Ptz-h0-1lJ"/>
                             <constraint firstItem="dTE-ea-BUo" firstAttribute="width" secondItem="vDu-Ri-qEF" secondAttribute="width" id="RNP-1H-Kty"/>
                             <constraint firstAttribute="trailing" secondItem="Y8e-tj-9vj" secondAttribute="trailing" id="Rb7-i7-hlA"/>
-                            <constraint firstItem="Oig-4M-jrG" firstAttribute="leading" secondItem="Ux8-NI-u26" secondAttribute="trailing" constant="8" id="VoK-Yj-gLm"/>
-                            <constraint firstItem="Oig-4M-jrG" firstAttribute="centerX" secondItem="Wef-8h-2Ru" secondAttribute="centerX" id="Xys-zb-JGG"/>
                             <constraint firstItem="dTE-ea-BUo" firstAttribute="top" secondItem="GMR-IA-p4n" secondAttribute="top" id="a8I-o4-KzH"/>
                             <constraint firstItem="bi2-3a-bee" firstAttribute="top" secondItem="zEO-LC-Gb3" secondAttribute="bottom" id="agn-eF-OC7"/>
                             <constraint firstItem="omW-cd-Viv" firstAttribute="top" secondItem="3Do-Nz-vPN" secondAttribute="bottom" id="amZ-Ig-BdL"/>
@@ -232,13 +200,12 @@
                             <constraint firstItem="GMR-IA-p4n" firstAttribute="centerX" secondItem="yOl-4w-DAM" secondAttribute="centerX" id="lRz-Y2-kKp"/>
                             <constraint firstItem="yOl-4w-DAM" firstAttribute="top" secondItem="omW-cd-Viv" secondAttribute="bottom" id="nJ3-4N-YW3"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="omW-cd-Viv" secondAttribute="trailing" constant="20" symbolic="YES" id="o5Q-YV-lMG"/>
-                            <constraint firstItem="V0l-HH-Eoi" firstAttribute="top" secondItem="Oig-4M-jrG" secondAttribute="bottom" id="oRE-77-qU1"/>
                             <constraint firstItem="vDu-Ri-qEF" firstAttribute="centerX" secondItem="3Do-Nz-vPN" secondAttribute="centerX" id="piC-QZ-Sby"/>
                             <constraint firstItem="3Do-Nz-vPN" firstAttribute="top" secondItem="7fE-TC-662" secondAttribute="bottom" id="qf6-rg-di0"/>
-                            <constraint firstItem="V0l-HH-Eoi" firstAttribute="centerX" secondItem="Oig-4M-jrG" secondAttribute="centerX" id="rfo-Xr-8Qf"/>
                             <constraint firstItem="yOl-4w-DAM" firstAttribute="leading" secondItem="omW-cd-Viv" secondAttribute="leading" id="t3u-H2-aK5"/>
                             <constraint firstItem="omW-cd-Viv" firstAttribute="leading" secondItem="3Do-Nz-vPN" secondAttribute="leading" id="vnc-SI-0ud"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3Do-Nz-vPN" secondAttribute="trailing" constant="20" symbolic="YES" id="wXr-DO-cTd"/>
+                            <constraint firstItem="V0l-HH-Eoi" firstAttribute="centerX" secondItem="Wef-8h-2Ru" secondAttribute="centerX" id="xAX-Fe-KOb"/>
                             <constraint firstItem="t8K-3O-Oc1" firstAttribute="top" secondItem="7fE-TC-662" secondAttribute="bottom" constant="4" id="zds-vx-7Bh"/>
                         </constraints>
                         <connections>
@@ -251,7 +218,6 @@
                         <outlet property="hudHeightConstraint" destination="vRk-96-Kbf" id="jp1-b7-qIC"/>
                         <outlet property="orbitScaleButton" destination="omW-cd-Viv" id="MI9-j8-g6n"/>
                         <outlet property="orbitShowButton" destination="3Do-Nz-vPN" id="zSU-de-6Bl"/>
-                        <outlet property="pauseButton" destination="Oig-4M-jrG" id="gDC-5a-opw"/>
                         <outlet property="planetScaleButton" destination="yOl-4w-DAM" id="f4p-2q-RFJ"/>
                         <outlet property="sceneView" destination="Y8e-tj-9vj" id="zCK-fe-vs0"/>
                         <outlet property="status" destination="KlY-l3-zEO" id="F55-OO-f9p"/>
@@ -576,10 +542,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Change Speed" width="48" height="48"/>
+        <image name="Clock" width="48" height="48"/>
         <image name="Hide Orbit" width="48" height="48"/>
         <image name="Hide Orbit Selected" width="48" height="48"/>
-        <image name="Pause" width="48" height="48"/>
         <image name="Scale Orbit" width="48" height="48"/>
         <image name="Scale Orbit Selected" width="48" height="48"/>
         <image name="Scale Planets" width="48" height="48"/>

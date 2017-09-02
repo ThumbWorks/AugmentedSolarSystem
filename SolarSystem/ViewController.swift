@@ -68,10 +68,10 @@ class ViewController: UIViewController {
     var debugPlaneAnchorNode: SCNNode?
     #endif
 
-    func updateDateString(_ date: Date) {
-        let dateString = dateFormatter().string(from: date)
-        dateButton.setTitle(dateString, for: .normal)
-    }
+//    func updateDateString(_ date: Date) {
+//        let dateString = dateFormatter().string(from: date)
+//        dateButton.setTitle(dateString, for: .normal)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,7 +94,7 @@ class ViewController: UIViewController {
         // Set the scene to the view
         sceneView.scene = SCNScene()
         
-        updateDateString(displayedDate)
+//        updateDateString(displayedDate)
 
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
     }
@@ -177,7 +177,7 @@ class ViewController: UIViewController {
                 self.displayedDate = date
                 self.startTime = 0
                 self.startDate = date
-                self.updateDateString(date)
+//                self.updateDateString(date)
                 self.solarSystemNodes.updatePostions(to: date)
             }
         }
@@ -439,7 +439,7 @@ extension ViewController: ARSCNViewDelegate {
         }
         DispatchQueue.main.async {
             self.updateLabel()
-            self.updateDateString(newDate)
+//            self.updateDateString(newDate)
 
             self.lastUpdateTime = time
             if let planet = self.collectionViewController?.currentPlanet, let meters = distances[planet] {
