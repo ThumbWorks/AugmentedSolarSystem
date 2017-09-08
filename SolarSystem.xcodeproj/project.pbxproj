@@ -22,6 +22,7 @@
 		5F78D70E1F3D222A0059FDA1 /* AppRater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F78D70D1F3D222A0059FDA1 /* AppRater.swift */; };
 		5F9126B61F2F8EAE00678A8F /* PinchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9126B51F2F8EAE00678A8F /* PinchController.swift */; };
 		5F9126B71F2F918100678A8F /* PinchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9126B51F2F8EAE00678A8F /* PinchController.swift */; };
+		5FA2CD1E1F5A7D5B00E870A5 /* nasalization-rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FA2CD1C1F5A7B8E00E870A5 /* nasalization-rg.ttf */; };
 		5FA91A731F02C5DC00D8AFC1 /* Saturn.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FA91A721F02C5DC00D8AFC1 /* Saturn.scn */; };
 		5FA91A751F02C76C00D8AFC1 /* Uranus.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FA91A741F02C76C00D8AFC1 /* Uranus.scn */; };
 		5FAD55E21F50852F0016B04E /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAD55E11F50852F0016B04E /* DatePickerViewController.swift */; };
@@ -67,6 +68,7 @@
 		5F39596D1EE934B200EDEBEE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		5F78D70D1F3D222A0059FDA1 /* AppRater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRater.swift; sourceTree = "<group>"; };
 		5F9126B51F2F8EAE00678A8F /* PinchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchController.swift; sourceTree = "<group>"; };
+		5FA2CD1C1F5A7B8E00E870A5 /* nasalization-rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "nasalization-rg.ttf"; sourceTree = "<group>"; };
 		5FA91A721F02C5DC00D8AFC1 /* Saturn.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Saturn.scn; path = art.scnassets/Saturn.scn; sourceTree = "<group>"; };
 		5FA91A741F02C76C00D8AFC1 /* Uranus.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Uranus.scn; path = art.scnassets/Uranus.scn; sourceTree = "<group>"; };
 		5FAD55E11F50852F0016B04E /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				5F01E11A1F39419100BFF9B0 /* AboutViewController.swift */,
 				5F78D70D1F3D222A0059FDA1 /* AppRater.swift */,
 				5FAD55E11F50852F0016B04E /* DatePickerViewController.swift */,
+				5FA2CD1C1F5A7B8E00E870A5 /* nasalization-rg.ttf */,
 			);
 			path = SolarSystem;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 			files = (
 				5FA91A751F02C76C00D8AFC1 /* Uranus.scn in Resources */,
 				5F27FD181F061C5200498524 /* Mars.scn in Resources */,
+				5FA2CD1E1F5A7D5B00E870A5 /* nasalization-rg.ttf in Resources */,
 				5FBAF9701EE8B78400FAA54B /* art.scnassets in Resources */,
 				5FC65CDA1F01C98800D8C9CB /* Mercury.scn in Resources */,
 				5FBAF97A1EE8B78400FAA54B /* LaunchScreen.storyboard in Resources */,

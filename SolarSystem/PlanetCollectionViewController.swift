@@ -64,7 +64,7 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
             closure(currentPlanet)
         }
         
-        name.text = currentPlanet.name
+        name.text = currentPlanet.name.uppercased()
         axialTilt.text = "\(currentPlanet.axialTilt) degree tilt"
         rotationDuration.text = "\(currentPlanet.rotationDuration) hour days"
         radius.text = "\(currentPlanet.radius) km radius"
