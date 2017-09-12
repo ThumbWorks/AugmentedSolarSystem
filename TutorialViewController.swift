@@ -27,29 +27,16 @@ class TutorialViewController: UIViewController {
 //        scene.rootNode.addChildNode(sphereNode)
         
         // load the table asset
-        let tableNode = SCNScene(named: "art.scnassets/table.dae")!.rootNode
+        let tableNode = SCNScene(named: "art.scnassets/table.scn")!.rootNode
         tableNode.position = SCNVector3Make(0, 0, -12)
-        tableNode.rotation = SCNVector4Make(1, 0, 0, Float.pi/20)
+        tableNode.rotation = SCNVector4Make(1, 0, 0, Float.pi * 1.8)
         tableNode.scale = SCNVector3Make(0.06, 0.06, 0.06)
         scene.rootNode.addChildNode(tableNode)
         
         // Load the device asset
-        let iOSDeviceNode = SCNScene(named: "art.scnassets/iPhone6.dae")!.rootNode
+        let iOSDeviceNode = SCNScene(named: "art.scnassets/iPhone6.scn")!.rootNode
         iOSDeviceNode.scale = SCNVector3Make(0.05, 0.05, 0.05)
-//        iOSDeviceNode.pivot = SCNMatrix4MakeTranslation(-15.5, -25.5, -15.5)
-        iOSDeviceNode.rotation = SCNVector4Make(1, 0, 0, Float.pi/2)
         iOSDeviceNode.position = SCNVector3Make(0, 0, 3)
-
-        let min = iOSDeviceNode.boundingBox.min
-        let max = iOSDeviceNode.boundingBox.max
-        let diff = max - min
-//        let algorithmicDiff = SCNVector3Make(-(max.x - min.x) / 2, -(max.x - min.x) / 2, -(max.x - min.x) / 2)
-//        print("diff is \(diff)")
-//        iOSDeviceNode.position = diff
-
-//        let phoneLookatTable = SCNLookAtConstraint(target: tableNode)
-//        iOSDeviceNode.constraints = [phoneLookatTable]
-//        scene.rootNode.addChildNode(iOSDeviceNode)
 
         // at this point, tutorialNode is just an empty node with no parent
         let deviceRotatingNode = SCNNode()
