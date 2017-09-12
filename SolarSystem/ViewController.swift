@@ -33,8 +33,6 @@ class ViewController: UIViewController {
     var lastUpdateTime: TimeInterval = 0
     
     @IBOutlet var toggleViews: [UIView]!
-    @IBOutlet var resetViews: [UIView]!
-    
     
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var pauseButton: UIButton!
@@ -84,10 +82,6 @@ class ViewController: UIViewController {
             view.isHidden = true
         }
         
-        _ = resetViews.map { (view) in
-            view.isHidden = true
-        }
-        
         // Set the view's delegate
         sceneView.delegate = self
         
@@ -122,16 +116,12 @@ class ViewController: UIViewController {
 
         // reset hudBottomConstraint
         // start the hud out of view
-//        hudBottomConstraint.constant = -hudHeightConstraint.constant
+        hudBottomConstraint.constant = -hudHeightConstraint.constant
         
         done = false
 
         // unhide the toggleViews
         _ = toggleViews.map({ (view) in
-            view.isHidden = true
-        })
-        
-        _ = resetViews.map({ (view) in
             view.isHidden = true
         })
         
@@ -203,9 +193,6 @@ extension ViewController {
     
     @IBAction func pinchedScreen(_ sender: UIPinchGestureRecognizer) {
         pincher?.pinch(with: sender)
-        _ = resetViews.map({ (view) in
-            view.isHidden = false
-        })
     }
     
     @IBAction func tappedScreen(_ sender: UITapGestureRecognizer) {
@@ -253,16 +240,12 @@ extension ViewController {
         
         solarSystemNodes.scalePlanets(to: radius)
         
-        _ = resetViews.map({ (view) in
-            view.isHidden = true
-        })
-        
         orbitShowButton.setImage(#imageLiteral(resourceName: "Hide Orbit"), for: .normal)
         orbitScaleButton.setImage(#imageLiteral(resourceName: "Scale Orbit"), for: .normal)
         planetScaleButton.setImage(#imageLiteral(resourceName: "Scale Planets"), for: .normal)
         
         // show the orbits
-        solarSystemNodes.toggleOrbitPaths(hidden: true)
+        solarSystemNodes.toggleOrbitPaths(hidden: false)
         orbitShowButton.setImage(#imageLiteral(resourceName: "Hide Orbit"), for: .normal)
     }
     
@@ -282,10 +265,6 @@ extension ViewController {
         button.setImage(scalingOrbitUp ? #imageLiteral(resourceName: "Scale Orbit Selected") : #imageLiteral(resourceName: "Scale Orbit"), for: .normal)
         
         solarSystemNodes.scaleOrbit(scalingUp: scalingOrbitUp)
-        
-        _ = resetViews.map { (view) in
-            view.isHidden = false
-        }
     }
     
     @IBAction func changeSizeScaleTapped(_ button: UIButton) {
@@ -298,11 +277,6 @@ extension ViewController {
         
         // do the scale
         solarSystemNodes.scaleNodes(scaleUp: scaleSizeUp)
-        
-        // ensure that the reset button is not hidden
-        _ = resetViews.map({ (view)  in
-            view.isHidden = false
-        })
     }
     
     func blurBackground() {
@@ -527,7 +501,7 @@ extension ViewController: ARSCNViewDelegate {
                 self.dismiss(animated: false)
                 
                 // move the HUD so it's visible *** removed now that we have a tutorial
-//                self.hudBottomConstraint.constant = 0
+                self.hudBottomConstraint.constant = 0
                 
                 self.collectionViewController?.hintScrollable()
 

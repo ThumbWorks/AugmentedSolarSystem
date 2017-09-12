@@ -30,7 +30,7 @@ class TutorialViewController: UIViewController {
         let tableNode = SCNScene(named: "art.scnassets/table.scn")!.rootNode
         tableNode.position = SCNVector3Make(0, 0, -12)
         tableNode.rotation = SCNVector4Make(1, 0, 0, Float.pi * 1.8)
-        tableNode.scale = SCNVector3Make(0.06, 0.06, 0.06)
+        tableNode.scale = SCNVector3Make(0.08, 0.08, 0.08)
         scene.rootNode.addChildNode(tableNode)
         
         // Load the device asset
