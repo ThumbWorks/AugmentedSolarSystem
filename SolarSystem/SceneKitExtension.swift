@@ -195,11 +195,9 @@ extension Planet {
         // Mercury
         let mercury = PlanetoidGroupNode(planet: Planet.mercury)
         mercury.updatePlanetLocation(mercuryAA.position())
-        nodes[Planet.mercury] = mercury
         
         let venus = PlanetoidGroupNode(planet: Planet.venus)
         venus.updatePlanetLocation(venusAA.position())
-        nodes[Planet.venus] = venus
         
 //        return SolarSystemNodes(lightNodes: [light], planetoids: nodes)
 
@@ -213,14 +211,9 @@ extension Planet {
                                      planetColor: .gray,
                                      lat: 0.0,
                                      lon: 0.0)
-
-//        earthNode.planetNode?.addChildNode(moon)
-//        earthNode.addMoon(moon)
-        nodes[Planet.earth] = earthNode
         
         let marsGroup = PlanetoidGroupNode(planet: Planet.mars)
         marsGroup.updatePlanetLocation(marsAA.position())
-        nodes[Planet.mars] = marsGroup
         
         let jupiterNode = PlanetoidGroupNode(planet: Planet.jupiter)
         // Jupiter has a moon
@@ -231,26 +224,29 @@ extension Planet {
 //                                            planetColor: .gray,
 //                                            lat: europaLat,
 //                                            lon: europaLon)
-//        jupiterNode.addMoon(jupiterMoon)
         jupiterNode.updatePlanetLocation(jupiterAA.position())
-        nodes[Planet.jupiter] = jupiterNode
 
         // Saturn has rings
         let saturnNode = PlanetoidGroupNode(planet: Planet.saturn)
         saturnNode.updatePlanetLocation(saturnAA.position())
-        saturnNode.addRings()
-        nodes[Planet.saturn] = saturnNode
-
+        
         let uranus = PlanetoidGroupNode(planet: Planet.uranus)
         uranus.updatePlanetLocation(uranusAA.position())
-        nodes[Planet.uranus] = uranus
         
         let neptune = PlanetoidGroupNode(planet: Planet.neptune)
         neptune.updatePlanetLocation(neptuneAA.position())
-        nodes[Planet.neptune] = neptune
         
         let pluto = PlanetoidGroupNode(planet: Planet.pluto)
         pluto.updatePlanetLocation(plutoAA.position())
+       
+        nodes[Planet.mercury] = mercury
+        nodes[Planet.venus] = venus
+        nodes[Planet.earth] = earthNode
+        nodes[Planet.mars] = marsGroup
+        nodes[Planet.jupiter] = jupiterNode
+        nodes[Planet.saturn] = saturnNode
+        nodes[Planet.uranus] = uranus
+        nodes[Planet.neptune] = neptune
         nodes[Planet.pluto] = pluto
         
         return SolarSystemNodes(lightNodes: [light], planetoids: nodes, moon: moon)

@@ -260,12 +260,16 @@ extension ViewController {
         orbitShowButton.setImage(#imageLiteral(resourceName: "Hide Orbit"), for: .normal)
         orbitScaleButton.setImage(#imageLiteral(resourceName: "Scale Orbit"), for: .normal)
         planetScaleButton.setImage(#imageLiteral(resourceName: "Scale Planets"), for: .normal)
+        
+        // show the orbits
+        solarSystemNodes.toggleOrbitPaths(hidden: true)
+        orbitShowButton.setImage(#imageLiteral(resourceName: "Hide Orbit"), for: .normal)
     }
     
     @IBAction func togglePaths(_ button: UIButton) {
         Mixpanel.sharedInstance()?.track("toggled paths")
         let currentlyShowing = solarSystemNodes.showingPaths()
-        solarSystemNodes.toggleOrbitPaths(to: !currentlyShowing)
+        solarSystemNodes.toggleOrbitPaths(hidden: !currentlyShowing)
         button.setImage(!currentlyShowing ? #imageLiteral(resourceName: "Hide Orbit Selected") : #imageLiteral(resourceName: "Hide Orbit"), for: .normal)
     }
     
@@ -277,7 +281,7 @@ extension ViewController {
         
         button.setImage(scalingOrbitUp ? #imageLiteral(resourceName: "Scale Orbit Selected") : #imageLiteral(resourceName: "Scale Orbit"), for: .normal)
         
-        solarSystemNodes.scaleOrbit(scalingUp: scaleSizeUp)
+        solarSystemNodes.scaleOrbit(scalingUp: scalingOrbitUp)
         
         _ = resetViews.map { (view) in
             view.isHidden = false

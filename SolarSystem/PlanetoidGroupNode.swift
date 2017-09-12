@@ -54,10 +54,10 @@ struct SolarSystemNodes {
         return false
     }
     
-    func toggleOrbitPaths(to isHidden: Bool) {
+    func toggleOrbitPaths(hidden: Bool) {
         for (_, planetoidNode) in planetoids {
             // do something with the orbit path
-            planetoidNode.path?.isHidden = isHidden
+            planetoidNode.path?.isHidden = hidden
         }
     }
     
@@ -135,8 +135,6 @@ struct SolarSystemNodes {
      @param plutoTableRadius the desired radius of the node set
      */
     func scalePlanets(to plutoRadius: Float) {
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 1
         let orbitalDelta = plutoRadius / 8
         var currentRadius: Float = 0
         let planetSize = orbitalDelta / 4 /*A fraction of the delta gives us some space (har)*/
@@ -150,7 +148,6 @@ struct SolarSystemNodes {
             groupNode.planetNode?.position = SCNVector3Make(currentRadius, 0, 0)
             currentRadius = currentRadius + orbitalDelta
         }
-        SCNTransaction.commit()
     }
     
     func updateSpeed(_ value: Double) {
@@ -200,7 +197,9 @@ class PlanetoidGroupNode: SCNNode {
         
         if planet.orbitalRadius > 0 {
             torus = SCNTorus(ringRadius: planet.displayOrbitalRadius, pipeRadius: 0.001)
+            torus?.name = "torus for \(planet.name)"
             path = SCNNode(geometry: torus)
+            path?.name = "path for \(planet.name)"
         } else {
             path = nil
             torus = nil
@@ -208,15 +207,10 @@ class PlanetoidGroupNode: SCNNode {
         
         super.init()
         
-        if let node = scene.rootNode.childNodes.first {
-            let geometry = node.geometry
-            
-            // TODO look into if I can just use the node that we know we have for this
-            let aPlanetNode = SCNNode(geometry: geometry)
-            //            aPlanetNode.scale = SCNVector3Make(planet.radius, planet.radius, planet.radius)
+        if let aPlanetNode = scene.rootNode.childNodes.first {
+
             aPlanetNode.scale = SCNVector3Make(0.05, 0.05, 0.05)
             aPlanetNode.position = SCNVector3Make(Float(planet.displayOrbitalRadius), 0, 0)
-            aPlanetNode.categoryBitMask = 1
             aPlanetNode.name = planet.name
             self.addChildNode(aPlanetNode)
             let radianTilt = planet.axialTilt / 360 * 2*Float.pi
@@ -250,27 +244,4 @@ class PlanetoidGroupNode: SCNNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func addMoon(_ moon: SCNNode) {
-        guard let planet = planetNode else {
-            print("there is no planet")
-            return
-        }
-        planet.addChildNode(moon)
-//        let action = SCNAction.createRotateAction(duration: 5, clockwise: false)
-//        moon.runAction(action)
-    }
-    
-    func addRings() {
-        guard let planet = planetNode else {
-            print("there is no planet")
-            return
-        }
-        let torus = SCNTorus(ringRadius: 2.0, pipeRadius: 0.3)
-        let torusNode = SCNNode(geometry: torus)
-        torusNode.scale = SCNVector3Make(1, 0.1, 1)
-        planet.addChildNode(torusNode)
-    }
-    
-   
 }
