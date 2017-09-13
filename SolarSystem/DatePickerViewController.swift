@@ -11,15 +11,18 @@ import UIKit
 class DatePickerViewController: UIViewController {
     
     @IBOutlet weak var datePicker: UIDatePicker!
-    var dateSelection: ((Date) -> ())?
+    var dateSelection: ((Date, Bool) -> ())?
 
+    @IBAction func datePickerValueChange(_ sender: Any) {
+        if let selection = dateSelection {
+            selection(datePicker.date, false)
+        }
+    }
+    
     @IBAction func doneButtonPressed(_ sender: Any) {
         // send it up
         if let selection = dateSelection {
-            selection(datePicker.date)
+            selection(datePicker.date, true)
         }
-        
-        // dismiss
-        self.dismiss(animated: true, completion: nil)
     }
 }

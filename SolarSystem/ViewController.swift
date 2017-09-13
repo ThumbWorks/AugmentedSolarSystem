@@ -25,6 +25,8 @@ class ViewController: UIViewController {
         return formatter
     }
     
+    var datePicker: DatePickerViewController?
+    
     @IBOutlet var status: UILabel!
     @IBOutlet var sceneView: ARSCNView!
     var done = false
@@ -56,7 +58,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var hudHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var hudBottomConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var datePickerBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var datePickerHeightConstraint: NSLayoutConstraint!
+
     // TODO make this lazy
     var blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
     
@@ -119,6 +123,8 @@ class ViewController: UIViewController {
         // start the hud out of view
         toggleHUD(toShowingState: false, animated: false)
 
+        toggleDatePicker(toShowingState: false, animated: false)
+        
         done = false
 
         // unhide the toggleViews
@@ -164,15 +170,37 @@ class ViewController: UIViewController {
         }
         
         if let dest = segue.destination as? DatePickerViewController {
-            dest.dateSelection = { (date) in
+            datePicker = dest
+            
+            dest.dateSelection = { (date, done) in
                 self.displayedDate = date
                 self.startTime = 0
                 self.startDate = date
 //                self.updateDateString(date)
                 self.solarSystemNodes.updatePostions(to: date)
+                
+                if done {
+                    self.toggleDatePicker(toShowingState: false)
+                }
             }
         }
     }
+    
+    func toggleDatePicker(toShowingState: Bool, animated: Bool = true) {
+        datePickerBottomConstraint.constant = toShowingState ? 0 : -datePickerHeightConstraint.constant
+        
+        let duration = animated ? 0.3 : 0.0
+        
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        })
+        
+        if toShowingState == true {
+            datePicker?.datePicker.setDate(displayedDate, animated: false)
+        }
+        
+    }
+    
     func toggleHUD(toShowingState: Bool, animated: Bool = true) {
         print("to showing state \(toShowingState)")
         hudBottomConstraint.constant = toShowingState ? 0 : -hudHeightConstraint.constant
@@ -190,6 +218,12 @@ class ViewController: UIViewController {
 
 // IBActions
 extension ViewController {
+    
+    @IBAction func toggleDateSelector(_ button: UIButton) {
+        let isUp = datePickerBottomConstraint.constant == 0
+        toggleDatePicker(toShowingState: !isUp)
+    }
+    
     @IBAction func toggleHUD(_ button: UIButton) {
         let isShowing = hudBottomConstraint.constant == 0
         toggleHUD(toShowingState: !isShowing)

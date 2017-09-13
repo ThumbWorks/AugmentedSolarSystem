@@ -19,54 +19,6 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Date Picker View Controller-->
-        <scene sceneID="cis-05-etZ">
-            <objects>
-                <viewController id="iOO-jj-ov9" customClass="DatePickerViewController" customModule="SolarSystem" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rJn-fC-iZX"/>
-                        <viewControllerLayoutGuide type="bottom" id="AZk-D0-GVj"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="iQ0-wQ-Pui">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="202"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="00c-z5-V4U">
-                                <rect key="frame" x="27.5" y="0.0" width="320" height="162"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="162" id="unv-WK-yVh"/>
-                                </constraints>
-                                <date key="date" timeIntervalSinceReferenceDate="525370415.26752198">
-                                    <!--2017-08-25 16:13:35 +0000-->
-                                </date>
-                            </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0Q-Rq-6A4">
-                                <rect key="frame" x="169" y="170" width="37" height="30"/>
-                                <state key="normal" title="Done"/>
-                                <connections>
-                                    <action selector="doneButtonPressed:" destination="iOO-jj-ov9" eventType="touchUpInside" id="tWR-nA-cll"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="00c-z5-V4U" firstAttribute="centerX" secondItem="iQ0-wQ-Pui" secondAttribute="centerX" id="7VS-RF-jHQ"/>
-                            <constraint firstItem="00c-z5-V4U" firstAttribute="top" secondItem="rJn-fC-iZX" secondAttribute="bottom" id="AQc-6M-bLn"/>
-                            <constraint firstItem="AZk-D0-GVj" firstAttribute="top" secondItem="Z0Q-Rq-6A4" secondAttribute="bottom" constant="2" id="BrL-sm-mJV"/>
-                            <constraint firstItem="Z0Q-Rq-6A4" firstAttribute="top" secondItem="00c-z5-V4U" secondAttribute="bottom" constant="8" id="HGk-RO-WW1"/>
-                            <constraint firstItem="AZk-D0-GVj" firstAttribute="top" secondItem="00c-z5-V4U" secondAttribute="bottom" constant="40" id="TqA-qw-oPv"/>
-                            <constraint firstItem="Z0Q-Rq-6A4" firstAttribute="centerX" secondItem="00c-z5-V4U" secondAttribute="centerX" id="wMN-cH-9Ty"/>
-                        </constraints>
-                    </view>
-                    <size key="freeformSize" width="375" height="202"/>
-                    <connections>
-                        <outlet property="datePicker" destination="00c-z5-V4U" id="b4r-RU-hrJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BS6-7g-WhQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="866" y="-540"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
@@ -154,9 +106,7 @@
                                 </constraints>
                                 <state key="normal" image="Clock"/>
                                 <connections>
-                                    <segue destination="iOO-jj-ov9" kind="popoverPresentation" identifier="DatePickerSegueID" popoverAnchorView="V0l-HH-Eoi" id="jkI-bL-LxO">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <action selector="toggleDateSelector:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Ml9-gy-QZ0"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMR-IA-p4n">
@@ -178,6 +128,15 @@
                                     </segue>
                                 </connections>
                             </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyC-bJ-Kac">
+                                <rect key="frame" x="0.0" y="387" width="375" height="280"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="280" id="Nr3-pW-0yW"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="N3K-JF-Vlu" kind="embed" id="gzJ-c6-rWU"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -185,10 +144,13 @@
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yOl-4w-DAM" secondAttribute="trailing" constant="20" symbolic="YES" id="2vb-OU-kFN"/>
                             <constraint firstItem="3Do-Nz-vPN" firstAttribute="top" secondItem="t8K-3O-Oc1" secondAttribute="bottom" id="5FT-A8-Hhs"/>
                             <constraint firstItem="vDu-Ri-qEF" firstAttribute="width" secondItem="3Do-Nz-vPN" secondAttribute="width" constant="20" id="5r3-jz-YdL"/>
+                            <constraint firstAttribute="trailing" secondItem="uyC-bJ-Kac" secondAttribute="trailing" id="7gk-f6-tuV"/>
                             <constraint firstItem="zEO-LC-Gb3" firstAttribute="top" secondItem="KlY-l3-zEO" secondAttribute="bottom" constant="10" id="7lh-cb-nX7"/>
                             <constraint firstItem="zEO-LC-Gb3" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="Be4-3y-LDa"/>
                             <constraint firstItem="lYO-0m-ZgV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Wef-8h-2Ru" secondAttribute="leading" constant="10" id="CEg-wX-PFn"/>
+                            <constraint firstItem="uyC-bJ-Kac" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="DnX-SF-Rbg"/>
                             <constraint firstItem="V0l-HH-Eoi" firstAttribute="centerX" secondItem="yOl-4w-DAM" secondAttribute="centerX" id="Iym-t5-96B"/>
+                            <constraint firstItem="bi2-3a-bee" firstAttribute="top" secondItem="uyC-bJ-Kac" secondAttribute="bottom" id="MbN-KJ-ej8"/>
                             <constraint firstItem="t8K-3O-Oc1" firstAttribute="centerX" secondItem="3Do-Nz-vPN" secondAttribute="centerX" id="Mrb-0j-oqw"/>
                             <constraint firstItem="KlY-l3-zEO" firstAttribute="centerX" secondItem="Y8e-tj-9vj" secondAttribute="centerX" id="NR6-6d-oJe"/>
                             <constraint firstItem="bi2-3a-bee" firstAttribute="top" secondItem="Y8e-tj-9vj" secondAttribute="bottom" id="P79-Rf-TpU"/>
@@ -220,6 +182,8 @@
                     </view>
                     <connections>
                         <outlet property="dateButton" destination="V0l-HH-Eoi" id="9VI-ko-7O6"/>
+                        <outlet property="datePickerBottomConstraint" destination="MbN-KJ-ej8" id="O1d-G0-12m"/>
+                        <outlet property="datePickerHeightConstraint" destination="Nr3-pW-0yW" id="eb7-nQ-Kn0"/>
                         <outlet property="hideHUDButton" destination="lYO-0m-ZgV" id="a0J-93-PfN"/>
                         <outlet property="hudBottomConstraint" destination="agn-eF-OC7" id="upM-v8-Xsm"/>
                         <outlet property="hudHeightConstraint" destination="vRk-96-Kbf" id="jp1-b7-qIC"/>
@@ -323,7 +287,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fji-Co-Qni" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1479" y="-48"/>
+            <point key="canvasLocation" x="1695" y="130"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="eVx-LO-WJb">
@@ -404,7 +368,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DeP-YV-bPF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1348" y="450"/>
+            <point key="canvasLocation" x="954" y="385"/>
         </scene>
         <!--Planet Collection View Controller-->
         <scene sceneID="Pgb-bw-15q">
@@ -550,7 +514,56 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="539-ER-Fmd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="Ffk-7P-j61" customClass="PlanetDataSource" customModule="SolarSystem" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="645.60000000000002" y="660.2698650674663"/>
+            <point key="canvasLocation" x="145" y="619"/>
+        </scene>
+        <!--Date Picker View Controller-->
+        <scene sceneID="Fyy-93-uU0">
+            <objects>
+                <viewController id="N3K-JF-Vlu" customClass="DatePickerViewController" customModule="SolarSystem" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ddc-t2-iod"/>
+                        <viewControllerLayoutGuide type="bottom" id="awH-ci-dh3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FJp-fL-2tL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="WvG-Jf-imt">
+                                <rect key="frame" x="27.5" y="40" width="320" height="240"/>
+                                <date key="date" timeIntervalSinceReferenceDate="527036358.805076">
+                                    <!--2017-09-13 22:59:18 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="datePickerValueChange:" destination="N3K-JF-Vlu" eventType="valueChanged" id="ehe-u1-tab"/>
+                                </connections>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAr-qV-gZc">
+                                <rect key="frame" x="162.5" y="8" width="50" height="32"/>
+                                <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="16"/>
+                                <state key="normal" title="DONE">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneButtonPressed:" destination="N3K-JF-Vlu" eventType="touchUpInside" id="4OZ-Ih-NdK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SAr-qV-gZc" firstAttribute="centerX" secondItem="WvG-Jf-imt" secondAttribute="centerX" id="Sjb-mE-Cdm"/>
+                            <constraint firstItem="awH-ci-dh3" firstAttribute="top" secondItem="WvG-Jf-imt" secondAttribute="bottom" id="Upv-wo-X7E"/>
+                            <constraint firstItem="WvG-Jf-imt" firstAttribute="top" secondItem="FJp-fL-2tL" secondAttribute="top" constant="40" id="WFF-uT-bqr"/>
+                            <constraint firstItem="SAr-qV-gZc" firstAttribute="bottom" secondItem="WvG-Jf-imt" secondAttribute="top" id="Zpj-Qz-gLX"/>
+                            <constraint firstItem="WvG-Jf-imt" firstAttribute="centerX" secondItem="FJp-fL-2tL" secondAttribute="centerX" id="e6b-kH-xkt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="datePicker" destination="WvG-Jf-imt" id="UXF-nF-ihc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nvd-pc-Ori" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="926" y="-193"/>
         </scene>
     </scenes>
     <resources>
