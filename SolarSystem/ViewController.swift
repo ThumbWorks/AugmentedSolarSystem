@@ -34,6 +34,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var toggleViews: [UIView]!
     
+    @IBOutlet weak var hideHUDButton: UIButton!
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var planetScaleButton: UIButton!
@@ -116,8 +117,8 @@ class ViewController: UIViewController {
 
         // reset hudBottomConstraint
         // start the hud out of view
-        hudBottomConstraint.constant = -hudHeightConstraint.constant
-        
+        toggleHUD(toShowingState: false, animated: false)
+
         done = false
 
         // unhide the toggleViews
@@ -172,11 +173,28 @@ class ViewController: UIViewController {
             }
         }
     }
+    func toggleHUD(toShowingState: Bool, animated: Bool = true) {
+        print("to showing state \(toShowingState)")
+        hudBottomConstraint.constant = toShowingState ? 0 : -hudHeightConstraint.constant
+        
+        let duration = animated ? 1.0 : 0.0
+        
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        }) { (completed) in
+            let newTitle = toShowingState ? "▼" : "▲"
+            self.hideHUDButton.setTitle(newTitle, for: .normal)
+        }
+    }
 }
 
 // IBActions
 extension ViewController {
-    
+    @IBAction func toggleHUD(_ button: UIButton) {
+        let isShowing = hudBottomConstraint.constant == 0
+        toggleHUD(toShowingState: !isShowing)
+    }
+ 
     @IBAction func pausePressed(_ button: UIButton) {
         displaySpeed = 0
         solarSystemNodes.updateSpeed(displaySpeed)
@@ -500,8 +518,8 @@ extension ViewController: ARSCNViewDelegate {
                 
                 self.dismiss(animated: false)
                 
-                // move the HUD so it's visible *** removed now that we have a tutorial
-                self.hudBottomConstraint.constant = 0
+                // move the HUD so it's visible
+                self.toggleHUD(toShowingState: true)
                 
                 self.collectionViewController?.hintScrollable()
 

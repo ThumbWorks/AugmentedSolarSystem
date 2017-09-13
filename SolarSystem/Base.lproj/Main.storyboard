@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -92,6 +92,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lYO-0m-ZgV" userLabel="Hide Collection">
+                                <rect key="frame" x="345" y="457" width="30" height="36"/>
+                                <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="20"/>
+                                <state key="normal" title="▼">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleHUD:" destination="BV1-FR-VrT" eventType="touchUpInside" id="17Z-yS-oer"/>
+                                </connections>
+                            </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zEO-LC-Gb3">
                                 <rect key="frame" x="0.0" y="493" width="375" height="174"/>
                                 <constraints>
@@ -177,6 +187,7 @@
                             <constraint firstItem="vDu-Ri-qEF" firstAttribute="width" secondItem="3Do-Nz-vPN" secondAttribute="width" constant="20" id="5r3-jz-YdL"/>
                             <constraint firstItem="zEO-LC-Gb3" firstAttribute="top" secondItem="KlY-l3-zEO" secondAttribute="bottom" constant="10" id="7lh-cb-nX7"/>
                             <constraint firstItem="zEO-LC-Gb3" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="Be4-3y-LDa"/>
+                            <constraint firstItem="lYO-0m-ZgV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Wef-8h-2Ru" secondAttribute="leading" constant="10" id="CEg-wX-PFn"/>
                             <constraint firstItem="V0l-HH-Eoi" firstAttribute="centerX" secondItem="yOl-4w-DAM" secondAttribute="centerX" id="Iym-t5-96B"/>
                             <constraint firstItem="t8K-3O-Oc1" firstAttribute="centerX" secondItem="3Do-Nz-vPN" secondAttribute="centerX" id="Mrb-0j-oqw"/>
                             <constraint firstItem="KlY-l3-zEO" firstAttribute="centerX" secondItem="Y8e-tj-9vj" secondAttribute="centerX" id="NR6-6d-oJe"/>
@@ -186,7 +197,9 @@
                             <constraint firstAttribute="trailing" secondItem="Y8e-tj-9vj" secondAttribute="trailing" id="Rb7-i7-hlA"/>
                             <constraint firstItem="bi2-3a-bee" firstAttribute="top" secondItem="zEO-LC-Gb3" secondAttribute="bottom" id="agn-eF-OC7"/>
                             <constraint firstItem="omW-cd-Viv" firstAttribute="top" secondItem="3Do-Nz-vPN" secondAttribute="bottom" id="amZ-Ig-BdL"/>
+                            <constraint firstAttribute="trailing" secondItem="lYO-0m-ZgV" secondAttribute="trailing" id="cD4-oX-9iC"/>
                             <constraint firstItem="GMR-IA-p4n" firstAttribute="bottom" secondItem="vDu-Ri-qEF" secondAttribute="bottom" id="cqZ-fq-HEV"/>
+                            <constraint firstItem="zEO-LC-Gb3" firstAttribute="top" secondItem="lYO-0m-ZgV" secondAttribute="bottom" id="dAF-rb-jT5"/>
                             <constraint firstAttribute="trailing" secondItem="zEO-LC-Gb3" secondAttribute="trailing" id="kqR-qf-mnv"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="l9v-9V-kOQ"/>
                             <constraint firstItem="GMR-IA-p4n" firstAttribute="centerX" secondItem="yOl-4w-DAM" secondAttribute="centerX" id="lRz-Y2-kKp"/>
@@ -207,6 +220,7 @@
                     </view>
                     <connections>
                         <outlet property="dateButton" destination="V0l-HH-Eoi" id="9VI-ko-7O6"/>
+                        <outlet property="hideHUDButton" destination="lYO-0m-ZgV" id="a0J-93-PfN"/>
                         <outlet property="hudBottomConstraint" destination="agn-eF-OC7" id="upM-v8-Xsm"/>
                         <outlet property="hudHeightConstraint" destination="vRk-96-Kbf" id="jp1-b7-qIC"/>
                         <outlet property="orbitScaleButton" destination="omW-cd-Viv" id="MI9-j8-g6n"/>
@@ -221,6 +235,7 @@
                         <outletCollection property="toggleViews" destination="V0l-HH-Eoi" collectionClass="NSMutableArray" id="6At-js-072"/>
                         <outletCollection property="toggleViews" destination="t8K-3O-Oc1" collectionClass="NSMutableArray" id="6JU-uh-Nxb"/>
                         <outletCollection property="toggleViews" destination="GMR-IA-p4n" collectionClass="NSMutableArray" id="T8p-TA-8FD"/>
+                        <outletCollection property="toggleViews" destination="lYO-0m-ZgV" collectionClass="NSMutableArray" id="BWe-aZ-8qL"/>
                         <segue destination="jgu-ml-S2V" kind="presentation" identifier="TutorialSegueID" animates="NO" modalPresentationStyle="overCurrentContext" id="EWA-fa-b3I"/>
                     </connections>
                 </viewController>
@@ -433,7 +448,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="axial" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvg-6d-imw">
-                                <rect key="frame" x="30" y="34" width="161" height="18"/>
+                                <rect key="frame" x="153" y="34" width="38" height="18"/>
                                 <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -443,7 +458,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="radius" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVR-xK-nAa">
-                                <rect key="frame" x="30" y="70" width="161" height="18"/>
+                                <rect key="frame" x="140" y="70" width="51" height="18"/>
                                 <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -501,8 +516,8 @@
                         <constraints>
                             <constraint firstItem="Zu8-KH-hCY" firstAttribute="top" secondItem="A4E-Sz-o2i" secondAttribute="bottom" id="6JW-E4-azA"/>
                             <constraint firstItem="Hnc-7a-xbT" firstAttribute="trailing" secondItem="fvg-6d-imw" secondAttribute="trailing" id="C8O-yd-kAu"/>
-                            <constraint firstItem="EVR-xK-nAa" firstAttribute="leading" secondItem="7s1-Fo-PoE" secondAttribute="leading" constant="30" id="F6e-bc-fNP"/>
-                            <constraint firstItem="wpt-2x-SUA" firstAttribute="trailing" secondItem="EVR-xK-nAa" secondAttribute="trailing" id="HBq-FV-dd7"/>
+                            <constraint firstItem="EVR-xK-nAa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7s1-Fo-PoE" secondAttribute="leading" constant="30" id="F6e-bc-fNP"/>
+                            <constraint firstItem="wpt-2x-SUA" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EVR-xK-nAa" secondAttribute="trailing" id="HBq-FV-dd7"/>
                             <constraint firstAttribute="trailing" secondItem="NIA-GT-PYt" secondAttribute="trailing" id="IYj-rQ-sy3"/>
                             <constraint firstItem="wpt-2x-SUA" firstAttribute="top" secondItem="EVR-xK-nAa" secondAttribute="bottom" id="LOj-Co-j8d"/>
                             <constraint firstItem="2e9-1e-UMA" firstAttribute="top" secondItem="Zu8-KH-hCY" secondAttribute="bottom" id="Qfz-Wj-Kvm"/>
@@ -517,7 +532,7 @@
                             <constraint firstItem="Hnc-7a-xbT" firstAttribute="top" secondItem="fvg-6d-imw" secondAttribute="bottom" id="tyF-xb-ly3"/>
                             <constraint firstItem="fvg-6d-imw" firstAttribute="top" secondItem="MSa-mx-J6A" secondAttribute="bottom" id="wyd-sn-qPW"/>
                             <constraint firstItem="Hnc-7a-xbT" firstAttribute="leading" secondItem="7s1-Fo-PoE" secondAttribute="leading" constant="30" id="xeq-gZ-sHR"/>
-                            <constraint firstItem="fvg-6d-imw" firstAttribute="leading" secondItem="7s1-Fo-PoE" secondAttribute="leading" constant="30" id="z8d-3z-TkI"/>
+                            <constraint firstItem="fvg-6d-imw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7s1-Fo-PoE" secondAttribute="leading" constant="30" id="z8d-3z-TkI"/>
                             <constraint firstItem="2e9-1e-UMA" firstAttribute="top" secondItem="NIA-GT-PYt" secondAttribute="bottom" id="zBQ-Yc-8Wv"/>
                             <constraint firstItem="MSa-mx-J6A" firstAttribute="top" secondItem="A4E-Sz-o2i" secondAttribute="bottom" constant="10" id="zoh-ZL-MLS"/>
                         </constraints>
