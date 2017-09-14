@@ -1,3 +1,5 @@
+[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=597283c15c1e310001f9eeeb&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/597283c15c1e310001f9eeeb/build/latest?branch=master)
+
 Now accepting beta testers. [Sign up here](https://augmentedsolarsystem.herokuapp.com) 
 
 # Augmented Reality Solar System
