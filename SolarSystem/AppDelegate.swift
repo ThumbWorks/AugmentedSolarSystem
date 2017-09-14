@@ -15,14 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        BuddyBuildSDK.setup()
-        
-        // Override point for customization after application launch.
-        
         // Tokens may be set within BuddyBuild device variables
         BuddyBuildSDK.setup()
-        let  token = BuddyBuildSDK.valueForDeviceKey("MIXPANEL_TOKEN")
-        Mixpanel.sharedInstance(withToken: token)
+        if let  token = BuddyBuildSDK.value(forDeviceKey: "MIXPANEL_TOKEN") {
+            Mixpanel.sharedInstance(withToken: token)
+        }
         return true
     }
 
