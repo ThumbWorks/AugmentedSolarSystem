@@ -145,6 +145,7 @@ class ViewController: UIViewController {
         
         resetToDetectedPlane()
         
+        collectionViewController?.changeToPlanet(name: Planet.sun.name)
         self.performSegue(withIdentifier: "TutorialSegueID", sender: self)
     }
     
