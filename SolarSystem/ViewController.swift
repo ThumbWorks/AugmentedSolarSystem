@@ -127,7 +127,7 @@ class ViewController: UIViewController {
         
         done = false
 
-        // unhide the toggleViews
+        // hide the toggleViews
         _ = toggleViews.map({ (view) in
             view.isHidden = true
         })
@@ -159,7 +159,9 @@ class ViewController: UIViewController {
         
         // Pause the view's session
         sceneView.session.pause()
+        restartEverything()
     }
+    
     var collectionViewController: PlanetCollectionViewController?
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
