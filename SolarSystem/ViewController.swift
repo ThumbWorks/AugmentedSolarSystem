@@ -79,7 +79,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         pincher = PinchController(with: solarSystemNodes)
-        
+        status.text = ""
         Mixpanel.sharedInstance()?.track("view did load")
         
         // hide the toggleviews
@@ -147,6 +147,12 @@ class ViewController: UIViewController {
         
         collectionViewController?.changeToPlanet(name: Planet.sun.name)
         self.performSegue(withIdentifier: "TutorialSegueID", sender: self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        toggleDatePicker(toShowingState: false)
+        toggleHUD(toShowingState: false, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
