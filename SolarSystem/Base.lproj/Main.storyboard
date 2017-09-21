@@ -40,7 +40,7 @@
                                 </connections>
                             </arscnView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KlY-l3-zEO">
-                                <rect key="frame" x="167" y="463" width="42" height="20"/>
+                                <rect key="frame" x="167.5" y="463" width="42" height="20"/>
                                 <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -313,7 +313,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNF-c6-Zht">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="-24" width="375" height="691"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.6648052377" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="375" id="FMp-bl-jaH"/>
@@ -508,7 +508,7 @@
                         <constraints>
                             <constraint firstItem="2NS-Ty-65E" firstAttribute="centerX" secondItem="VVZ-r6-rMK" secondAttribute="centerX" id="0Iv-Ze-CAi"/>
                             <constraint firstItem="K9j-YO-kF8" firstAttribute="centerX" secondItem="2NS-Ty-65E" secondAttribute="centerX" id="5Z7-qV-Aag"/>
-                            <constraint firstItem="jNF-c6-Zht" firstAttribute="top" secondItem="lnx-jK-Lil" secondAttribute="bottom" id="5lW-1r-PyB"/>
+                            <constraint firstItem="jNF-c6-Zht" firstAttribute="top" secondItem="lnx-jK-Lil" secondAttribute="bottom" constant="-44" id="5lW-1r-PyB"/>
                             <constraint firstItem="jNF-c6-Zht" firstAttribute="leading" secondItem="VVZ-r6-rMK" secondAttribute="leading" id="7jb-P5-QYo"/>
                             <constraint firstItem="K9j-YO-kF8" firstAttribute="centerY" secondItem="2NS-Ty-65E" secondAttribute="centerY" id="9sf-QE-md9"/>
                             <constraint firstItem="2NS-Ty-65E" firstAttribute="centerY" secondItem="VVZ-r6-rMK" secondAttribute="centerY" id="Ab6-QS-AWb"/>
