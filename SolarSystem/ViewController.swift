@@ -49,7 +49,6 @@ class ViewController: UIViewController {
     // the optional planet that the camera is within the bounding volume of
     var insidePlanet: Planet?
     
-    var sessionConfig = ARWorldTrackingConfiguration()
     let solarSystemNodes = Planet.buildSolarSystem()
     
     var pincher: PinchController?
@@ -60,9 +59,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var hudBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var datePickerBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var datePickerHeightConstraint: NSLayoutConstraint!
-
-    // TODO make this lazy
-    var blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
     
     #if DEBUG
     // For debug purposes, count and color the discovered planes
@@ -96,14 +92,25 @@ class ViewController: UIViewController {
 //        updateDateString(displayedDate)
 
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground), name: .UIApplicationDidEnterBackground, object: nil)
     }
     
     @objc func willEnterForeground() {
         restartEverything()
     }
     
+    @objc func didEnterBackground() {
+        // dismiss any view controller that is presented
+        if let presented = self.presentedViewController {
+            print("presented view controller is \(presented)")
+            self.dismiss(animated: false)
+        }
+    }
+    
     func restartPlaneDetection() {
         // configure session
+        let sessionConfig = ARWorldTrackingConfiguration()
         sessionConfig.planeDetection = .horizontal
         sceneView.session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
     }
@@ -141,8 +148,6 @@ class ViewController: UIViewController {
         //        sceneView.session.run(sessionConfig)
         
         updateLabel()
-        unblurBackground()
-        
         resetToDetectedPlane()
         
         collectionViewController?.changeToPlanet(name: Planet.sun.name)
@@ -164,7 +169,7 @@ class ViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         // Pause the view's session
-        sceneView.session.pause()
+//        sceneView.session.pause()
         restartEverything()
     }
     
@@ -340,16 +345,6 @@ extension ViewController {
         solarSystemNodes.scaleNodes(scaleUp: scaleSizeUp)
     }
     
-    func blurBackground() {
-        blurView.frame = view.bounds
-        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(blurView)
-    }
-    
-    func unblurBackground() {
-        blurView.removeFromSuperview()
-    }
-    
     func updateLabel() {
         
         switch cameraState {
@@ -405,7 +400,6 @@ extension ViewController: ARSessionObserver {
     func sessionWasInterrupted(_ session: ARSession) {
         print("session interupted")
         session.pause()
-        blurBackground()
     }
     
     /**
@@ -418,10 +412,10 @@ extension ViewController: ARSessionObserver {
      */
     func sessionInterruptionEnded(_ session: ARSession) {
         print("Session interruption ended")
+        let sessionConfig = ARWorldTrackingConfiguration()
         session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
         restartPlaneDetection()
         status.text = "Resetting Session"
-        unblurBackground()
     }
 }
 
