@@ -25,10 +25,15 @@ class ViewController: UIViewController {
         return formatter
     }
     
+    var screenCenter: CGPoint {
+        let bounds = sceneView.bounds
+        return CGPoint(x: bounds.midX, y: bounds.midY)
+    }
+    
     var datePicker: DatePickerViewController?
     
     @IBOutlet var status: UILabel!
-    @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet var sceneView: VirtualObjectARView!
     var done = false
     var scalingOrbitUp = false
     var scaleSizeUp = false
@@ -45,6 +50,7 @@ class ViewController: UIViewController {
 
     var anchorWidth: Float?
     let cameraState: ARCamera.TrackingState = .normal
+    var focusSquare = FocusSquare()
 
     // the optional planet that the camera is within the bounding volume of
     var insidePlanet: Planet?
@@ -74,6 +80,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         pincher = PinchController(with: solarSystemNodes)
         status.text = ""
         Mixpanel.sharedInstance()?.track("view did load")
@@ -88,7 +95,8 @@ class ViewController: UIViewController {
         
         // Set the scene to the view
         sceneView.scene = SCNScene()
-        
+        sceneView.scene.rootNode.addChildNode(focusSquare)
+
 //        updateDateString(displayedDate)
 
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
@@ -113,6 +121,29 @@ class ViewController: UIViewController {
         let sessionConfig = ARWorldTrackingConfiguration()
         sessionConfig.planeDetection = .horizontal
         sceneView.session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
+    }
+    
+    func updateFocusSquare() {
+        
+        // We should always have a valid world position unless the sceen is just being initialized.
+        guard let (worldPosition, planeAnchor, _) = sceneView.worldPosition(fromScreenPosition: screenCenter, objectPosition: focusSquare.lastPosition) else {
+            print("no world position, so still initializing")
+            self.focusSquare.state = .initializing
+            self.sceneView.pointOfView?.addChildNode(self.focusSquare)
+            return
+        }
+        
+        if let presented = self.presentedViewController as? TutorialViewController {
+            self.dismiss(animated: false)
+        }
+        
+        self.sceneView.scene.rootNode.addChildNode(self.focusSquare)
+        let camera = self.sceneView.session.currentFrame?.camera
+        if let planeAnchor = planeAnchor {
+            self.focusSquare.state = .planeDetected(anchorPosition: worldPosition, planeAnchor: planeAnchor, camera: camera)
+        } else {
+            self.focusSquare.state = .featuresDetected(anchorPosition: worldPosition, camera: camera)
+        }
     }
     
     fileprivate func restartEverything() {
@@ -261,7 +292,43 @@ extension ViewController {
         pincher?.pinch(with: sender)
     }
     
+    func addSolarSystemToFocusSquareLocation() {
+        switch focusSquare.state {
+        case .initializing:
+            break
+        case .featuresDetected(_, _):
+            break
+            
+        case .planeDetected(let anchorPosition, let planeAnchor, _):
+            print("set the sun here \(anchorPosition)")
+            Mixpanel.sharedInstance()?.track("Tapped to set solar system")
+
+            let root = sceneView.scene.rootNode
+            let position = SCNVector3Make(anchorPosition.x, anchorPosition.y, anchorPosition.z)
+            solarSystemNodes.placeSolarSystem(on: root, at: position)
+            
+            let width = planeAnchor.extent.x
+            let depth = planeAnchor.extent.z
+            
+            // determine scale based on the size of the plane
+            var radius: Float
+            if depth < width {
+                radius = depth
+            } else {
+                radius = width
+            }
+            updateUIAfterPlacingObjects(root, radius: radius)
+            focusSquare.hide()
+        }
+    }
+    
     @IBAction func tappedScreen(_ sender: UITapGestureRecognizer) {
+
+        if !done {
+            addSolarSystemToFocusSquareLocation()
+            return
+        }
+        
         // TODO something gets laggy whenever we tap, so this gets removed till we figure it out
         return
         
@@ -429,9 +496,9 @@ extension ViewController: ARSCNViewDelegate {
             return
         }
         
-        if !done {
-            return
-        }
+//        if !done {
+//            return
+//        }
         
         if startTime == 0 {
             startTime = time
@@ -466,11 +533,8 @@ extension ViewController: ARSCNViewDelegate {
                 }
             }
         }
-        // rate limit
-        if (self.lastUpdateTime + 1.0) > time {
-            return
-        }
         DispatchQueue.main.async {
+            self.updateFocusSquare()
             self.updateLabel()
 //            self.updateDateString(newDate)
 
@@ -515,7 +579,7 @@ extension ViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         DispatchQueue.main.async {
             print("did add node, pushed to main queue")
-           
+            
             if let planeAnchor = anchor as? ARPlaneAnchor {
                 #if DEBUG
                     // DEBUG: Display all of the ARPlaneAnchors that we see
@@ -537,69 +601,12 @@ extension ViewController: ARSCNViewDelegate {
                     tap.numberOfTapsRequired = 3
                     self.view.addGestureRecognizer(tap)
                 #endif
-
-                let width = planeAnchor.extent.x
-                let length = planeAnchor.extent.y
-                let depth = planeAnchor.extent.z
-                print("The plane w: \(width) l: \(length) d: \(depth)")
-                
-                if width < 0.1 && length < 0.1 {
-                    print("We need a minimum sized anchor plane")
-                    return
-                }
                 
                 if self.done {
                     return
                 }
                 Mixpanel.sharedInstance()?.track("Discovered an Anchor")
-                
                 self.dismiss(animated: false)
-                
-                // move the HUD so it's visible
-                self.toggleHUD(toShowingState: true)
-                
-                self.collectionViewController?.hintScrollable()
-
-                // Make the bottom HUD show, hint that it is scrollable
-//                UIView.animate(withDuration: 0.3, delay: 2, options: .curveEaseInOut, animations: {
-//                    self.view.layoutIfNeeded()
-//                }, completion: { (completed) in
-//                    self.collectionViewController?.hintScrollable()
-//                })
-                
-                if let cameraNode = self.sceneView.pointOfView {
-                    self.arrowNode.categoryBitMask = 4
-                    cameraNode.addChildNode(self.arrowNode)
-                    self.solarSystemNodes.updateLookat(selected: Planet.sun, arrowNode: self.arrowNode)
-                    var lightVector = node.position
-                    lightVector.y = 10
-                    let light = SCNNode.omniLight(lightVector)
-                    node.addChildNode(light)
-                }
-                
-                // unhide the toggleViews
-                _ = self.toggleViews.map({ (view) in
-                    view.isHidden = false
-                })
-                self.done = true
-                self.solarSystemNodes.addAllNodesAsChild(to: node)                
-                // determine scale based on the size of the plane
-                var radius: Float
-                if depth < width {
-                    radius = depth
-                } else {
-                    radius = width
-                }
-                self.solarSystemNodes.scalePlanets(to: radius / 2)
-                self.anchorWidth = radius
-                
-                // At this point the planets are visible. Set a timer for the rating mechanism.
-                // The thinking here is that they've seen the planets and are playing with them for a minute.
-                // A this point people seem to really like it, now would be the time to ask
-                let deadlineTime = DispatchTime.now() + .seconds(60)
-                DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-                    AppRater.requestEventIsAppropriate()
-                }
             }
         }
     }
@@ -630,6 +637,45 @@ extension ViewController: ARSCNViewDelegate {
         }
     }
     
+    func updateUIAfterPlacingObjects(_ node: SCNNode, radius: Float) {
+        // move the HUD so it's visible
+        self.toggleHUD(toShowingState: true)
+        
+        self.collectionViewController?.hintScrollable()
+        
+        // Make the bottom HUD show, hint that it is scrollable
+        //                UIView.animate(withDuration: 0.3, delay: 2, options: .curveEaseInOut, animations: {
+        //                    self.view.layoutIfNeeded()
+        //                }, completion: { (completed) in
+        //                    self.collectionViewController?.hintScrollable()
+        //                })
+        
+        if let cameraNode = self.sceneView.pointOfView {
+            self.arrowNode.categoryBitMask = 4
+            cameraNode.addChildNode(self.arrowNode)
+            self.solarSystemNodes.updateLookat(selected: Planet.sun, arrowNode: self.arrowNode)
+            var lightVector = node.position
+            lightVector.y = 10
+            let light = SCNNode.omniLight(lightVector)
+            node.addChildNode(light)
+        }
+        
+        // unhide the toggleViews
+        _ = self.toggleViews.map({ (view) in
+            view.isHidden = false
+        })
+        self.done = true
+        self.solarSystemNodes.scalePlanets(to: radius / 2)
+        self.anchorWidth = radius
+        
+        // At this point the planets are visible. Set a timer for the rating mechanism.
+        // The thinking here is that they've seen the planets and are playing with them for a minute.
+        // A this point people seem to really like it, now would be the time to ask
+        let deadlineTime = DispatchTime.now() + .seconds(60)
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+            AppRater.requestEventIsAppropriate()
+        }
+    }
     #if DEBUG
     func nextMaterial() -> SCNMaterial {
         let material = SCNMaterial()

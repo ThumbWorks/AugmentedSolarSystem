@@ -24,6 +24,9 @@
 		5F8B38BD1F7474BC00F0F7D1 /* SwiftAA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F8B38BC1F7474B800F0F7D1 /* SwiftAA.framework */; };
 		5F8B38C01F74760B00F0F7D1 /* SwiftAA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F8B38BC1F7474B800F0F7D1 /* SwiftAA.framework */; };
 		5F8B38C11F74760B00F0F7D1 /* SwiftAA.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5F8B38BC1F7474B800F0F7D1 /* SwiftAA.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5F8B38C61F74CAE600F0F7D1 /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B38C41F74CAD200F0F7D1 /* FocusSquare.swift */; };
+		5F8B38C71F74CAE900F0F7D1 /* FocusSquareSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B38C51F74CAD200F0F7D1 /* FocusSquareSegment.swift */; };
+		5F8B38C91F74CCEB00F0F7D1 /* VirtualObjectARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B38C81F74CCE800F0F7D1 /* VirtualObjectARView.swift */; };
 		5F9126B61F2F8EAE00678A8F /* PinchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9126B51F2F8EAE00678A8F /* PinchController.swift */; };
 		5F9126B71F2F918100678A8F /* PinchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9126B51F2F8EAE00678A8F /* PinchController.swift */; };
 		5FA2CD1E1F5A7D5B00E870A5 /* nasalization-rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FA2CD1C1F5A7B8E00E870A5 /* nasalization-rg.ttf */; };
@@ -97,6 +100,9 @@
 		5F39596D1EE934B200EDEBEE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		5F78D70D1F3D222A0059FDA1 /* AppRater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRater.swift; sourceTree = "<group>"; };
 		5F8B38BC1F7474B800F0F7D1 /* SwiftAA.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftAA.framework; sourceTree = "<group>"; };
+		5F8B38C41F74CAD200F0F7D1 /* FocusSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
+		5F8B38C51F74CAD200F0F7D1 /* FocusSquareSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquareSegment.swift; sourceTree = "<group>"; };
+		5F8B38C81F74CCE800F0F7D1 /* VirtualObjectARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectARView.swift; sourceTree = "<group>"; };
 		5F9126B51F2F8EAE00678A8F /* PinchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchController.swift; sourceTree = "<group>"; };
 		5FA2CD1C1F5A7B8E00E870A5 /* nasalization-rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "nasalization-rg.ttf"; sourceTree = "<group>"; };
 		5FA91A721F02C5DC00D8AFC1 /* Saturn.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Saturn.scn; path = art.scnassets/Saturn.scn; sourceTree = "<group>"; };
@@ -178,6 +184,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5F8B38C31F74CABC00F0F7D1 /* Focus Square */ = {
+			isa = PBXGroup;
+			children = (
+				5F8B38C41F74CAD200F0F7D1 /* FocusSquare.swift */,
+				5F8B38C51F74CAD200F0F7D1 /* FocusSquareSegment.swift */,
+			);
+			path = "Focus Square";
+			sourceTree = "<group>";
+		};
 		5FBAF9611EE8B78400FAA54B = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +216,8 @@
 		5FBAF96C1EE8B78400FAA54B /* SolarSystem */ = {
 			isa = PBXGroup;
 			children = (
+				5F8B38C31F74CABC00F0F7D1 /* Focus Square */,
+				5F8B38C81F74CCE800F0F7D1 /* VirtualObjectARView.swift */,
 				5F2D207E1F5A0031005D2C3C /* TutorialViewController.swift */,
 				5F30D4DE1F16CDB7006A45B1 /* PlanetoidGroupNode.swift */,
 				5FBAF96D1EE8B78400FAA54B /* AppDelegate.swift */,
@@ -402,7 +419,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F8B38C91F74CCEB00F0F7D1 /* VirtualObjectARView.swift in Sources */,
 				5F0662BB1F1D1F6600D66563 /* PlanetCollectionViewController.swift in Sources */,
+				5F8B38C61F74CAE600F0F7D1 /* FocusSquare.swift in Sources */,
 				5F39596E1EE9898200EDEBEE /* Utilities.swift in Sources */,
 				5FF9CEF11EE9C00D00A84513 /* SceneKitExtension.swift in Sources */,
 				5F30D4DF1F16CDB7006A45B1 /* PlanetoidGroupNode.swift in Sources */,
@@ -411,6 +430,7 @@
 				5F2D207F1F5A007E005D2C3C /* TutorialViewController.swift in Sources */,
 				5F9126B61F2F8EAE00678A8F /* PinchController.swift in Sources */,
 				5F28BC341F3388AF003E013F /* ScaleReference.swift in Sources */,
+				5F8B38C71F74CAE900F0F7D1 /* FocusSquareSegment.swift in Sources */,
 				5FAD55E21F50852F0016B04E /* DatePickerViewController.swift in Sources */,
 				5F01E11B1F39419100BFF9B0 /* AboutViewController.swift in Sources */,
 				5F78D70E1F3D222A0059FDA1 /* AppRater.swift in Sources */,

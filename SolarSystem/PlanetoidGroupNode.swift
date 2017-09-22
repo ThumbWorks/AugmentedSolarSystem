@@ -15,11 +15,23 @@ struct SolarSystemNodes {
     let planetoids: [Planet:PlanetoidGroupNode]
     var moon = SCNNode()
 
-    func addAllNodesAsChild(to node: SCNNode) {
+    func placeSolarSystem(on node: SCNNode, at position: SCNVector3) {
+        guard let sun = planetoids[Planet.sun] else {return}
+        sun.position = position
+        addAllNodesAsChild(to: node, position: position)
+    }
+    
+    func addAllNodesAsChild(to node: SCNNode, position: SCNVector3? = nil) {
         for planetNode in planetoids {
+            if let position = position {
+                planetNode.value.position = position
+            }
             node.addChildNode(planetNode.value)
         }
         for light in lightNodes {
+            if let position = position {
+                light.position = position
+            }
             node.addChildNode(light)
         }
     }
