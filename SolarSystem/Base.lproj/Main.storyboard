@@ -339,7 +339,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="K9j-YO-kF8">
                                 <rect key="frame" x="37" y="141.5" width="300" height="384"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKY-Uf-ts4">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKY-Uf-ts4" userLabel="Close Button Wrapper">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="33"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rea-pR-HJQ">
@@ -364,7 +364,7 @@
                                             <constraint firstItem="Rea-pR-HJQ" firstAttribute="centerY" secondItem="gKY-Uf-ts4" secondAttribute="centerY" id="ufK-B7-9Lc"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bWV-4U-yog">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bWV-4U-yog" userLabel="Top Text Wrapper">
                                         <rect key="frame" x="0.0" y="33" width="300" height="130"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKt-im-zOD">
@@ -387,7 +387,7 @@
                                             <constraint firstAttribute="trailing" secondItem="oKt-im-zOD" secondAttribute="trailing" constant="10" id="mop-Y7-qQg"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OzI-85-SUZ">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OzI-85-SUZ" userLabel="Made By Thumbworks Wrapper">
                                         <rect key="frame" x="0.0" y="163" width="300" height="33"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSB-rT-Bzw">
@@ -432,7 +432,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="y4t-C7-Jza"/>
                                                 </constraints>
-                                                <string key="text">We are a bouitque Software Development shop focusing on delightful iOS experiences. If you would like to talk to us about building an Augmented Reality or any other iOS app, feel free to reach out.</string>
+                                                <string key="text">We are a Software Development shop focusing on delightful iOS experiences. If you would like to talk to us about building an Augmented Reality or any other iOS app, feel free to reach out.</string>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

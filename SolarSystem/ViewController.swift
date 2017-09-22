@@ -121,6 +121,8 @@ class ViewController: UIViewController {
         let sessionConfig = ARWorldTrackingConfiguration()
         sessionConfig.planeDetection = .horizontal
         sceneView.session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
+        focusSquare.unhide()
+        arrowNode.isHidden = true
     }
     
     func updateFocusSquare() {
@@ -133,7 +135,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if let presented = self.presentedViewController as? TutorialViewController {
+        if let _ = self.presentedViewController as? TutorialViewController {
             self.dismiss(animated: false)
         }
         
@@ -296,10 +298,12 @@ extension ViewController {
         switch focusSquare.state {
         case .initializing:
             break
+            
         case .featuresDetected(_, _):
             break
             
         case .planeDetected(let anchorPosition, let planeAnchor, _):
+            updateLabel()
             print("set the sun here \(anchorPosition)")
             Mixpanel.sharedInstance()?.track("Tapped to set solar system")
 
@@ -417,9 +421,18 @@ extension ViewController {
         switch cameraState {
         case .normal:
             if (!done) {
-                status.text = "Searching for a surface"
-            }
-            if let planet = insidePlanet {
+                switch focusSquare.state {
+                case .initializing:
+                    break
+                    
+                case .featuresDetected(_, _):
+                    status.text = "Searching for a surface"
+                    break
+                    
+                case .planeDetected(_, _, _):
+                    status.text = "Tap to set the Solar System"
+                }
+            } else if let planet = insidePlanet {
                 if planet == Planet.sun {
                     status.text = "You are inside the \(planet.name)"
                 } else {
@@ -467,6 +480,7 @@ extension ViewController: ARSessionObserver {
     func sessionWasInterrupted(_ session: ARSession) {
         print("session interupted")
         session.pause()
+        restartEverything()
     }
     
     /**
@@ -487,8 +501,6 @@ extension ViewController: ARSessionObserver {
 }
 
 extension ViewController: ARSCNViewDelegate {
-    
-    
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         guard let cameraNode = sceneView.pointOfView else {
@@ -556,7 +568,7 @@ extension ViewController: ARSCNViewDelegate {
                 }) as! [SCNLookAtConstraint]
                 
                 if let lookatTarget = lookats.first?.target {
-                    self.arrowNode.isHidden = self.sceneView.isNode(lookatTarget, insideFrustumOf: cameraNode)
+                    self.arrowNode.isHidden = self.sceneView.isNode(lookatTarget, insideFrustumOf: cameraNode) || !self.done
                 }
             }
         }
