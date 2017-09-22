@@ -33,20 +33,23 @@ class AboutViewController: UIViewController {
     }
     
     @IBAction func seeOtherApps(_ sender: Any) {
+        Mixpanel.sharedInstance()?.track("See other apps")
         if let url = URL(string: "http://appstore.com/thumbworks") {
             UIApplication.shared.open(url, options:[:] )
         }
     }
     
     @IBAction func visitTwitter(_ sender: Any) {
-        Mixpanel.sharedInstance()?.track("Tap Twitter")
         if let url = URL(string: "twitter://user?screen_name=thumbworksinc") {
             if UIApplication.shared.canOpenURL(url) {
+                Mixpanel.sharedInstance()?.track("Tap Twitter Native")
+
                 UIApplication.shared.open(url, options:[:] )
                 return
             }
         }
         if let url = URL(string: "http://twitter.com/thumbworksinc") {
+            Mixpanel.sharedInstance()?.track("Tap Twitter Safari")
             UIApplication.shared.open(url, options:[:] )
         }
     }
