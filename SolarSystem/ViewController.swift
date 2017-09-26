@@ -122,8 +122,14 @@ class ViewController: UIViewController {
         sessionConfig.planeDetection = .horizontal
         sceneView.session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
         focusSquare.unhide()
-        arrowNode.isHidden = true
     }
+    
+    func restartSessionNoPlaneDetection() {
+        // configure session
+        let sessionConfig = ARWorldTrackingConfiguration()
+        sceneView.session.run(sessionConfig, options:[])
+    }
+    
     
     func updateFocusSquare() {
         
@@ -323,6 +329,12 @@ extension ViewController {
             }
             updateUIAfterPlacingObjects(root, radius: radius)
             focusSquare.hide()
+            
+            // Testing to see if this helps with performance at all. After 6 seconds, just change the session configuration to something less aggressive
+            let deadlineTime = DispatchTime.now() + .seconds(6)
+            DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
+                self.restartSessionNoPlaneDetection()
+            })
         }
     }
     
@@ -332,10 +344,7 @@ extension ViewController {
             addSolarSystemToFocusSquareLocation()
             return
         }
-        
-        // TODO something gets laggy whenever we tap, so this gets removed till we figure it out
-        return
-        
+                
         // determine if we've tapped a planet
         if (sender.state == .ended) {
             let location = sender.location(in: view)
