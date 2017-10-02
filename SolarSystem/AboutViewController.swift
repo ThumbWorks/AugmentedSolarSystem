@@ -32,6 +32,14 @@ class AboutViewController: UIViewController {
         }
     }
     
+    @IBAction func rateTheApp(_ sender: Any) {
+        Mixpanel.sharedInstance()?.track("Rate the app")
+        let appID = "1262856697"
+        if let url = URL(string: "itms-apps://itunes.apple.com/app/id\(appID)?action=write-review") {
+            UIApplication.shared.open(url, options:[:] )
+        }
+    }
+    
     @IBAction func seeOtherApps(_ sender: Any) {
         Mixpanel.sharedInstance()?.track("See other apps")
         if let url = URL(string: "http://appstore.com/thumbworks") {
