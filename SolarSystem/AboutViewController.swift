@@ -15,8 +15,8 @@ class AboutViewController: UIViewController {
     @IBOutlet weak var bottomText: UITextView!
     @IBOutlet weak var topText: UITextView!
     @IBOutlet weak var topTextHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var bottomTextHeightConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         Mixpanel.sharedInstance()?.track("About View Loaded")
     }
@@ -51,7 +51,6 @@ class AboutViewController: UIViewController {
         if let url = URL(string: "twitter://user?screen_name=thumbworksinc") {
             if UIApplication.shared.canOpenURL(url) {
                 Mixpanel.sharedInstance()?.track("Tap Twitter Native")
-
                 UIApplication.shared.open(url, options:[:] )
                 return
             }
@@ -62,13 +61,23 @@ class AboutViewController: UIViewController {
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
+    func updateHeightConstraints() {
         bottomTextHeightConstraint.constant = bottomText.contentSize.height
         bottomText.layoutIfNeeded()
         
         topTextHeightConstraint.constant = topText.contentSize.height
         topText.layoutIfNeeded()
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: nil) { _ in
+           self.updateHeightConstraints()
+        }
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateHeightConstraints()
     }
 }
