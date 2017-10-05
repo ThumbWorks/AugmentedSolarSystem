@@ -189,6 +189,19 @@ extension SwiftAA.Planet {
 
 extension Planet {
     
+    static func earthMoonNode(planetNode: SCNNode) -> SCNNode {
+        
+        let earthRadius = earth.radius
+        let moonRadius = moonAA.diameter.magnitude / 2 / 1000
+        let scaledMoonRadius = Float(moonRadius) / Float(earthRadius)
+        let moon = SCNNode.moonGroup(orbitRadius: 2,
+                                     planetRadius:CGFloat(scaledMoonRadius), //CGFloat(moonAA.radiusVector.km.magnitude),
+            planetColor: .gray,
+            lat: 0.0,
+            lon: 0.0)
+        return moon
+    }
+    
     static func buildSolarSystem() -> SolarSystemNodes {
         var nodes = [Planet:PlanetoidGroupNode]()
 
@@ -202,7 +215,6 @@ extension Planet {
         // Add the light from the sun
         let light = SCNNode.sunLight(geometry: sunNode.planetNode!.geometry!)
 
-
         // Mercury
         let mercury = PlanetoidGroupNode(planet: Planet.mercury)
         mercury.updatePlanetLocation(mercuryAA.position())
@@ -215,26 +227,25 @@ extension Planet {
         let earthNode = PlanetoidGroupNode(planet: Planet.earth)
         earthNode.updatePlanetLocation(earthAA.position())
         
-//        let moonLat = moonAA.eclipticCoordinates.celestialLatitude.magnitude
-//        let moonLong = moonAA.eclipticCoordinates.celestialLongitude.magnitude
-        let moon = SCNNode.moonGroup(orbitRadius: 2,
-                                     planetRadius: 0.09, //CGFloat(moonAA.radiusVector.km.magnitude),
-                                     planetColor: .gray,
-                                     lat: 0.0,
-                                     lon: 0.0)
-        
+        var moon = SCNNode()
+        if let planetNode = earthNode.planetNode {
+            moon = earthMoonNode(planetNode: planetNode)
+        }
+        earthNode.planetNode?.addChildNode(moon)
+
         let marsGroup = PlanetoidGroupNode(planet: Planet.mars)
         marsGroup.updatePlanetLocation(marsAA.position())
         
         let jupiterNode = PlanetoidGroupNode(planet: Planet.jupiter)
-        // Jupiter has a moon
-//        let europaLat = jupiterAA.Europa.EquatorialLatitude.magnitude
-//        let europaLon = jupiterAA.Europa.TrueLongitude.magnitude
-//        let jupiterMoon = SCNNode.moonGroup(orbitRadius: 3,
-//                                            planetRadius: 0.2,
-//                                            planetColor: .gray,
-//                                            lat: europaLat,
-//                                            lon: europaLon)
+        // Jupiter has moons
+        let europa = jupiterAA.Europa
+        let europaLat = europa.EquatorialLatitude.magnitude
+        let europaLon = europa.TrueLongitude.magnitude
+        let jupiterMoon = SCNNode.moonGroup(orbitRadius: 3,
+                                            planetRadius: 0.2,
+                                            planetColor: .gray,
+                                            lat: europaLat,
+                                            lon: europaLon)
         jupiterNode.updatePlanetLocation(jupiterAA.position())
 
         // Saturn has rings

@@ -13,7 +13,7 @@ import SwiftAA
 struct SolarSystemNodes {
     let lightNodes: [SCNNode]
     let planetoids: [Planet:PlanetoidGroupNode]
-    var moon = SCNNode()
+    var moon: SCNNode?
 
     func placeSolarSystem(on node: SCNNode, at position: SCNVector3) {
         guard let sun = planetoids[Planet.sun] else {return}
@@ -34,9 +34,15 @@ struct SolarSystemNodes {
             }
             node.addChildNode(light)
         }
+        
     }
     
-    func updatePostions(to date: Date) {
+    func updatePositions(to date: Date, duration: CFTimeInterval) {
+        
+        SCNTransaction.begin()
+        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction.init(name: "linear"))
+        SCNTransaction.animationDuration = duration
+        
         
         // update the planet positions
         let day = JulianDay(date)
@@ -46,17 +52,13 @@ struct SolarSystemNodes {
                 groupNode.updatePlanetLocation(planetAA.position())
             }
         }
-        // TODO add the moons back in (again)
-
-//        let moonAA = Moon(julianDay: day)
-//
-//        let coords = moonAA.apparentEclipticCoordinates
-//        let lat = Float(coords.celestialLatitude.magnitude)
-//        let lon = Float(coords.celestialLongitude.magnitude)
-//        print("lat \(lat) lon \(lon)")
-//        moon.eulerAngles = SCNVector3Make(lat, lon, 0)
-//        moon.rotation = SCNVector4Make(0, 1, 0, lon)
-//        moon.rotation = SCNVector4Make(1, 0, 0, lat)
+        let moonAA = Moon(julianDay: day)
+        let coords = moonAA.apparentEclipticCoordinates
+        let lat = Float(coords.celestialLatitude.magnitude)
+        let lon = Float(coords.celestialLongitude.magnitude)
+//        print("\(date) lat \(lat) lon \(lon)")
+        moon?.eulerAngles = SCNVector3Make(lat, lon, 0)
+        SCNTransaction.commit()
     }
     
     func showingPaths() -> Bool {

@@ -13,6 +13,10 @@ import SceneKit
 class GameViewController: UIViewController {
     @IBOutlet var scnView: SCNView!
     
+    var isPlaying = false
+    var currentDate = Date()
+    @IBOutlet weak var dateLabel: UILabel!
+    
     let solarSystem = Planet.buildSolarSystem()
 //    var planetNodes: [Planet:PlanetoidGroupNode]?
     var scaleSizeUp = false
@@ -48,18 +52,22 @@ class GameViewController: UIViewController {
         // set the scene to the view
         scnView.scene = scene
         
-        // allows the user to manipulate the camera
-        scnView.allowsCameraControl = true
-        
-        // show statistics such as fps and timing information
-        scnView.showsStatistics = true
-        
         // configure the view
         scnView.backgroundColor = UIColor.black
         
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
+    }
+    
+    
+    @IBAction func dateSelected(_ picker: UIDatePicker) {
+        currentDate = picker.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full
+        dateFormatter.timeStyle = .full        
+        dateLabel.text = dateFormatter.string(from: picker.date)
+        solarSystem.updatePositions(to: picker.date, duration: 3)
     }
     
     @IBAction func pinch(_ sender: UIPinchGestureRecognizer) {
@@ -73,6 +81,26 @@ class GameViewController: UIViewController {
         scaleSizeUp = !scaleSizeUp
 
         solarSystem.scaleNodes(scaleUp: scaleSizeUp)
+    }
+
+    @IBAction func togglePlayPause(_ sender: Any) {
+        isPlaying = !isPlaying
+        movePlanets()
+    }
+    
+    func movePlanets() {
+        let newTimeInterval = currentDate.timeIntervalSince1970 + 60 * 60
+        currentDate = Date(timeIntervalSince1970: newTimeInterval)
+        print("new date \(currentDate)")
+        solarSystem.updatePositions(to: currentDate, duration: 0.01)
+        print("done updating position for new date \(currentDate)")
+
+        if isPlaying {
+            let deadlineTime = DispatchTime.now() + .milliseconds(20)
+            DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
+                self.movePlanets()
+            })
+        }
     }
     
     @IBAction func togglePaths() {

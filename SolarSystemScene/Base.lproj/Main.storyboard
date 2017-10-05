@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xkr-aa-hH1">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" allowsCameraControl="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xkr-aa-hH1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="451"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="mRM-rT-3AG" appends="YES" id="JQr-Cu-ydZ"/>
@@ -45,26 +45,59 @@
                                     <action selector="changeScaleTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="eBw-MV-Shb"/>
                                 </connections>
                             </button>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="isn-lq-KSx">
+                                <rect key="frame" x="27.5" y="451" width="320" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="527922308.60127801">
+                                    <!--2017-09-24 05:05:08 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="dateSelected:" destination="BV1-FR-VrT" eventType="valueChanged" id="Kft-n2-6gW"/>
+                                </connections>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pam-ew-LLg">
+                                <rect key="frame" x="16" y="118" width="74" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="Fh6-nQ-pSd"/>
+                                </constraints>
+                                <state key="normal" title="play/pause"/>
+                                <connections>
+                                    <action selector="togglePlayPause:" destination="BV1-FR-VrT" eventType="touchUpInside" id="8Bp-kZ-2Qo"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xwq-cw-v10">
+                                <rect key="frame" x="166" y="422" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="isn-lq-KSx" firstAttribute="centerX" secondItem="eQQ-Qe-w6g" secondAttribute="centerX" id="4y0-sf-zVJ"/>
+                            <constraint firstItem="Pam-ew-LLg" firstAttribute="leading" secondItem="P6V-Gb-ADU" secondAttribute="leading" id="5ec-hZ-oxb"/>
                             <constraint firstItem="xkr-aa-hH1" firstAttribute="leading" secondItem="eQQ-Qe-w6g" secondAttribute="leading" id="6fi-gu-KHK"/>
+                            <constraint firstItem="Xwq-cw-v10" firstAttribute="centerX" secondItem="isn-lq-KSx" secondAttribute="centerX" id="7Rn-Wi-utp"/>
                             <constraint firstItem="eQQ-Qe-w6g" firstAttribute="trailing" secondItem="xkr-aa-hH1" secondAttribute="trailing" id="8UW-rA-MaY"/>
                             <constraint firstItem="Qv6-7T-7Na" firstAttribute="top" secondItem="eQQ-Qe-w6g" secondAttribute="top" id="AX7-wy-xhy"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Qv6-7T-7Na" secondAttribute="trailing" constant="20" symbolic="YES" id="DPp-rO-6Lw"/>
+                            <constraint firstItem="eQQ-Qe-w6g" firstAttribute="bottom" secondItem="isn-lq-KSx" secondAttribute="bottom" id="HJV-v3-VZE"/>
                             <constraint firstItem="P6V-Gb-ADU" firstAttribute="leading" secondItem="H8K-uv-pwF" secondAttribute="leading" id="N1d-xc-Aff"/>
-                            <constraint firstItem="eQQ-Qe-w6g" firstAttribute="bottom" secondItem="xkr-aa-hH1" secondAttribute="bottom" id="QwR-84-Dgu"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Pam-ew-LLg" secondAttribute="trailing" constant="20" symbolic="YES" id="P32-bc-nql"/>
                             <constraint firstItem="Qv6-7T-7Na" firstAttribute="leading" secondItem="eQQ-Qe-w6g" secondAttribute="leading" constant="16" id="TmK-xe-2PJ"/>
+                            <constraint firstItem="isn-lq-KSx" firstAttribute="top" secondItem="Xwq-cw-v10" secondAttribute="bottom" constant="8" id="Ujh-Jr-PJh"/>
                             <constraint firstItem="eQQ-Qe-w6g" firstAttribute="top" secondItem="xkr-aa-hH1" secondAttribute="top" constant="20" id="YTq-PU-a3e"/>
                             <constraint firstItem="H8K-uv-pwF" firstAttribute="leading" secondItem="Qv6-7T-7Na" secondAttribute="leading" id="Z1l-cf-Y1B"/>
                             <constraint firstItem="P6V-Gb-ADU" firstAttribute="top" secondItem="H8K-uv-pwF" secondAttribute="bottom" id="bSf-Hw-FmF"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P6V-Gb-ADU" secondAttribute="trailing" constant="20" symbolic="YES" id="iYZ-Hm-vyG"/>
+                            <constraint firstItem="Pam-ew-LLg" firstAttribute="top" secondItem="P6V-Gb-ADU" secondAttribute="bottom" constant="8" id="pdf-DW-xxI"/>
+                            <constraint firstItem="isn-lq-KSx" firstAttribute="top" secondItem="xkr-aa-hH1" secondAttribute="bottom" id="q00-he-iDO"/>
                             <constraint firstItem="H8K-uv-pwF" firstAttribute="top" secondItem="Qv6-7T-7Na" secondAttribute="bottom" id="ucp-G7-bnn"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="H8K-uv-pwF" secondAttribute="trailing" constant="20" symbolic="YES" id="vbI-EQ-kvY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eQQ-Qe-w6g"/>
                     </view>
                     <connections>
+                        <outlet property="dateLabel" destination="Xwq-cw-v10" id="uGM-Wa-jhk"/>
                         <outlet property="scnView" destination="xkr-aa-hH1" id="7EM-9D-vek"/>
                     </connections>
                 </viewController>

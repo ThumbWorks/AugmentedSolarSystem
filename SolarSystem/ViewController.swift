@@ -230,7 +230,7 @@ class ViewController: UIViewController {
                 self.startTime = 0
                 self.startDate = date
 //                self.updateDateString(date)
-                self.solarSystemNodes.updatePostions(to: date)
+                self.solarSystemNodes.updatePositions(to: date, duration: 0)
                 
                 if done {
                     self.toggleDatePicker(toShowingState: false)
@@ -344,7 +344,7 @@ extension ViewController {
             addSolarSystemToFocusSquareLocation()
             return
         }
-                
+        
         // determine if we've tapped a planet
         if (sender.state == .ended) {
             let location = sender.location(in: view)
@@ -536,7 +536,7 @@ extension ViewController: ARSCNViewDelegate {
 
         let newDate = startDate.addingTimeInterval(delta)
         displayedDate = newDate
-        solarSystemNodes.updatePostions(to: newDate)
+        solarSystemNodes.updatePositions(to: newDate, duration: 0)
         for (planet, node) in solarSystemNodes.planetoids {
             
             guard let planetNode = node.planetNode else {

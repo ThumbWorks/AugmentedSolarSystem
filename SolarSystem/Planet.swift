@@ -67,6 +67,7 @@ struct Planet: Equatable {
     static let neptuneAA = Neptune(julianDay: JulianDay(Date()))
     static let uranusAA = Uranus(julianDay: JulianDay(Date()))
     static let plutoAA = Pluto(julianDay: JulianDay(Date()))
+    static let moonAA = Moon(julianDay: JulianDay(Date()))
     
     static let sun = Planet(type: nil, name: "Sun", orbitalRadius: 0, radius: 695700, rotationDuration: 1000, axialTilt: 1, orbitPeriod: 1)
     static let mercury = Planet(type: Mercury.self, name: mercuryAA.name, orbitalRadius: 57.9, radius: 2439.7, rotationDuration: 1407.6, axialTilt: 0.03, orbitPeriod: 0.240846)
