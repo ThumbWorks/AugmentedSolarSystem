@@ -662,15 +662,6 @@ extension ViewController: ARSCNViewDelegate {
         // move the HUD so it's visible
         self.toggleHUD(toShowingState: true)
         
-        self.collectionViewController?.hintScrollable()
-        
-        // Make the bottom HUD show, hint that it is scrollable
-        //                UIView.animate(withDuration: 0.3, delay: 2, options: .curveEaseInOut, animations: {
-        //                    self.view.layoutIfNeeded()
-        //                }, completion: { (completed) in
-        //                    self.collectionViewController?.hintScrollable()
-        //                })
-        
         if let cameraNode = self.sceneView.pointOfView {
             self.arrowNode.categoryBitMask = 4
             cameraNode.addChildNode(self.arrowNode)
