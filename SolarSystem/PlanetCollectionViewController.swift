@@ -120,7 +120,6 @@ class PlanetDataSource: NSObject, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let planet = planets[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "planetCell", for: indexPath) as! PlanetCell
-        
         let sceneString = "art.scnassets/\(planet.name).scn"
         let scene = SCNScene(named: sceneString)!
         cell.sceneView.scene = scene
@@ -138,4 +137,9 @@ class PlanetDataSource: NSObject, UICollectionViewDataSource {
 
 class PlanetCell: UICollectionViewCell {
     @IBOutlet var sceneView: SCNView!
+    
+    override func prepareForReuse() {
+        sceneView.scene = nil
+    }
+    
 }
