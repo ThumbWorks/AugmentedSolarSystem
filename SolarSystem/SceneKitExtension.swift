@@ -181,9 +181,14 @@ extension SCNNode {
         return rotationNode
     }
 }
-extension SwiftAA.Planet {
-    func position() -> (EclipticCoordinates) {
-        return self.heliocentricEclipticCoordinates
+extension SwiftAA.Object {
+    func position() -> EclipticCoordinates {
+        if let planet = self as? SwiftAA.Planet {
+            return planet.heliocentricEclipticCoordinates
+        } else if let earth = self as? SwiftAA.Earth {
+            return earth.heliocentricEclipticCoordinates
+        }
+        return SwiftAA.EclipticCoordinates(celestialLongitude: 0, celestialLatitude: 0)
     }
 }
 
@@ -246,10 +251,11 @@ extension Planet {
         
         let neptune = PlanetoidGroupNode(planet: Planet.neptune)
         neptune.updatePlanetLocation(neptuneAA.position())
-        
-        let pluto = PlanetoidGroupNode(planet: Planet.pluto)
-        pluto.updatePlanetLocation(plutoAA.position())
-       
+
+        // Pluto lives matter
+//        let pluto = PlanetoidGroupNode(planet: Planet.pluto)
+//        pluto.updatePlanetLocation(plutoAA.position())
+
         nodes[Planet.mercury] = mercury
         nodes[Planet.venus] = venus
         nodes[Planet.earth] = earthNode
@@ -258,8 +264,8 @@ extension Planet {
         nodes[Planet.saturn] = saturnNode
         nodes[Planet.uranus] = uranus
         nodes[Planet.neptune] = neptune
-        nodes[Planet.pluto] = pluto
-        
+//        nodes[Planet.pluto] = pluto
+
         return SolarSystemNodes(lightNodes: [light], planetoids: nodes, moon: moon)
     }
 }

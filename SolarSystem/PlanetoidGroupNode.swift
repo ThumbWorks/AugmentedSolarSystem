@@ -236,11 +236,9 @@ class PlanetoidGroupNode: SCNNode {
     }
     
     func updatePlanetLocation(_ coords: EclipticCoordinates) {
-        let latitude = Float(coords.celestialLatitude.magnitude)
-        let longitude = Float(coords.celestialLongitude.magnitude)
-        let latitudeInRadians = latitude * Float.pi / 180
-        let longitudeInRadians = longitude * Float.pi / 180
-        self.rotation = SCNVector4Make(0, 1, 0, longitudeInRadians)
+        let longitude = coords.celestialLongitude.magnitude.value
+        let longitudeInRadians = longitude * Double.pi / 180
+        self.rotation = SCNVector4Make(0, 1, 0, Float(longitudeInRadians))
     }
     
     func beginRotation(planet: Planet, node: SCNNode, multiplier: Double) {
