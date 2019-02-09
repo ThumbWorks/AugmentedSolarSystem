@@ -15,11 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Tokens may be set within BuddyBuild device variables
-        BuddyBuildSDK.setup()
-        if let  token = BuddyBuildSDK.value(forDeviceKey: "MIXPANEL_TOKEN") {
-            Mixpanel.sharedInstance(withToken: token)
-        }
+        Mixpanel.sharedInstance(withToken: "10c58d6d70784636ac9b3edc135a9e2f")
         return true
     }
 

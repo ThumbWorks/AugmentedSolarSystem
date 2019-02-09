@@ -135,7 +135,6 @@ class ViewController: UIViewController {
         
         // We should always have a valid world position unless the sceen is just being initialized.
         guard let (worldPosition, planeAnchor, _) = sceneView.worldPosition(fromScreenPosition: screenCenter, objectPosition: focusSquare.lastPosition) else {
-            print("no world position, so still initializing")
             self.focusSquare.state = .initializing
             self.sceneView.pointOfView?.addChildNode(self.focusSquare)
             return

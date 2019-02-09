@@ -59,7 +59,6 @@
 		5FF9CEF11EE9C00D00A84513 /* SceneKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF9CEF01EE9C00D00A84513 /* SceneKitExtension.swift */; };
 		65E69A70C61562F94B2514E1 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46267284C2EBEFD65B20CCA6 /* CoreText.framework */; };
 		81F43EDC0F64A38CEE5F37C2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F19230B2264C6E45B5CA90A /* AVFoundation.framework */; };
-		857C7513D5A11193D90F0F17 /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C54F36D8B0BA965D4145B6 /* BuddyBuildSDK.framework */; };
 		8F909B3F9BC3BA392B1542DF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE6A4A4E0D34347FC052697 /* CoreMedia.framework */; };
 		98E5F380AC90E1950A5C65FA /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A97186C5D8E146BE8573A1 /* CoreTelephony.framework */; };
 		CD562CDF09A6E4A6A86EE518 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6534EA2F6D7099D59E3BE61 /* CoreVideo.framework */; };
@@ -129,7 +128,6 @@
 		84A97186C5D8E146BE8573A1 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		8CADC108C15A59E1D0BE2296 /* Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		9EE6A4A4E0D34347FC052697 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		A9C54F36D8B0BA965D4145B6 /* BuddyBuildSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BuddyBuildSDK.framework; sourceTree = "<group>"; };
 		C6534EA2F6D7099D59E3BE61 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -140,7 +138,6 @@
 			files = (
 				5F86ACB7220EA5370011A98B /* SwiftAA.framework in Frameworks */,
 				5F0CC2141F2814BD00E25474 /* Mixpanel.framework in Frameworks */,
-				857C7513D5A11193D90F0F17 /* BuddyBuildSDK.framework in Frameworks */,
 				17FC693338E5C451EEFBD6FA /* AssetsLibrary.framework in Frameworks */,
 				65E69A70C61562F94B2514E1 /* CoreText.framework in Frameworks */,
 				98E5F380AC90E1950A5C65FA /* CoreTelephony.framework in Frameworks */,
@@ -167,7 +164,6 @@
 			children = (
 				5F86ACB6220EA5370011A98B /* SwiftAA.framework */,
 				5F0CC2131F2814BD00E25474 /* Mixpanel.framework */,
-				A9C54F36D8B0BA965D4145B6 /* BuddyBuildSDK.framework */,
 				39DFC5695AC98A1CFA61E623 /* AssetsLibrary.framework */,
 				46267284C2EBEFD65B20CCA6 /* CoreText.framework */,
 				84A97186C5D8E146BE8573A1 /* CoreTelephony.framework */,
