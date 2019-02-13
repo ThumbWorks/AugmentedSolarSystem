@@ -11,11 +11,21 @@ import UIKit
 import Mixpanel
 
 class AboutViewController: UIViewController {
-    
-    @IBOutlet weak var bottomText: UITextView!
-    @IBOutlet weak var topText: UITextView!
-    @IBOutlet weak var topTextHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomTextHeightConstraint: NSLayoutConstraint!
+
+    let aboutView = AboutView()
+
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    override func loadView() {
+        view = aboutView
+    }
+
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         Mixpanel.sharedInstance()?.track("About View Loaded")
@@ -60,24 +70,16 @@ class AboutViewController: UIViewController {
             UIApplication.shared.open(url, options:[:] )
         }
     }
-    
-    func updateHeightConstraints() {
-        bottomTextHeightConstraint.constant = bottomText.contentSize.height
-        bottomText.layoutIfNeeded()
-        
-        topTextHeightConstraint.constant = topText.contentSize.height
-        topText.layoutIfNeeded()
-    }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: nil) { _ in
-           self.updateHeightConstraints()
+           self.aboutView.updateHeightConstraints()
         }
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        updateHeightConstraints()
+        aboutView.updateHeightConstraints()
     }
 }

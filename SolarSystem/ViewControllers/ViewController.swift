@@ -10,6 +10,7 @@ import UIKit
 import SceneKit
 import ARKit
 import Mixpanel
+import SwiftMessages
 
 class ViewController: UIViewController {
     var startTime: TimeInterval = 0
@@ -37,8 +38,7 @@ class ViewController: UIViewController {
     var done = false
     var scalingOrbitUp = false
     var scaleSizeUp = false
-    var lastUpdateTime: TimeInterval = 0
-    
+
     @IBOutlet var toggleViews: [UIView]!
     
     @IBOutlet weak var hideHUDButton: UIButton!
@@ -274,7 +274,28 @@ class ViewController: UIViewController {
 
 // IBActions
 extension ViewController {
-    
+    @IBAction func tappedInfo(_ button: UIButton) {
+//        let view: AboutView
+//        do {
+//            view = try SwiftMessages.viewFromNib(named: "AboutView")
+//        } catch {
+//            print("error \(error)")
+//            return
+//        }
+//        //view.delegate = delegate
+//        //view.update()
+//
+//        var config = SwiftMessages.Config()
+//
+////        config.presentationContext = .window(windowLevel: .alert)
+//        config.duration = .forever
+//        config.presentationStyle = .center
+//        config.dimMode = .blur(style: .dark,
+//                               alpha: 1,
+//                               interactive: true)
+//        SwiftMessages.show(config: config, view: view)
+    }
+
     @IBAction func toggleDateSelector(_ button: UIButton) {
         let isUp = datePickerBottomConstraint.constant == 0
         toggleDatePicker(toShowingState: !isUp)
@@ -319,10 +340,10 @@ extension ViewController {
             let root = sceneView.scene.rootNode
             let position = SCNVector3Make(anchorPosition.x, anchorPosition.y, anchorPosition.z)
             solarSystemNodes.placeSolarSystem(on: root, at: position)
-            
+
             let width = planeAnchor.extent.x
             let depth = planeAnchor.extent.z
-            
+
             // determine scale based on the size of the plane
             var radius: Float
             if depth < width {
@@ -330,14 +351,16 @@ extension ViewController {
             } else {
                 radius = width
             }
-            updateUIAfterPlacingObjects(root, radius: radius)
+            DispatchQueue.main.async {
+                self.updateUIAfterPlacingObjects(root, radius: radius)
+            }
             focusSquare.hide()
-            
-            // Testing to see if this helps with performance at all. After 6 seconds, just change the session configuration to something less aggressive
-            let deadlineTime = DispatchTime.now() + .seconds(6)
-            DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
-                self.restartSessionNoPlaneDetection()
-            })
+//
+//            // Testing to see if this helps with performance at all. After 6 seconds, just change the session configuration to something less aggressive
+//            let deadlineTime = DispatchTime.now() + .seconds(6)
+//            DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
+//                self.restartSessionNoPlaneDetection()
+//            })
         }
     }
     
@@ -429,7 +452,9 @@ extension ViewController {
     }
     
     func updateLabel() {
-        
+        return
+
+            //print("🐛 update label")
         switch cameraState {
         case .normal:
             if (!done) {
@@ -557,33 +582,34 @@ extension ViewController: ARSCNViewDelegate {
                 }
             }
         }
-        DispatchQueue.main.async {
-            self.updateFocusSquare()
-            self.updateLabel()
-//            self.updateDateString(newDate)
+        self.updateFocusSquare()
 
-            self.lastUpdateTime = time
-            if let planet = self.collectionViewController?.currentPlanet, let meters = distances[planet] {
-                var distanceString = ""
-                distanceString =  "\(meters.format(f: ".1")) real meters away"
-                self.collectionViewController?.updateDistance(distanceString)
-            }
-            //TODO come back to this
-//            self.collectionViewController?.updateReferenceSize(sizes)
-            let arrowNode = self.arrowNode
-            if let constraints = arrowNode.constraints {
-                let lookats: [SCNLookAtConstraint] = constraints.filter({ (constraint) -> Bool in
-                    if let _ = constraint as? SCNLookAtConstraint {
-                        return true
-                    }
-                    return false
-                }) as! [SCNLookAtConstraint]
-                
-                if let lookatTarget = lookats.first?.target {
-                    self.arrowNode.isHidden = self.sceneView.isNode(lookatTarget, insideFrustumOf: cameraNode) || !self.done
-                }
-            }
-        }
+//        DispatchQueue.main.async {
+//            self.updateFocusSquare()
+//            self.updateLabel()
+////            self.updateDateString(newDate)
+//
+//            if let planet = self.collectionViewController?.currentPlanet, let meters = distances[planet] {
+//                var distanceString = ""
+//                distanceString =  "\(meters.format(f: ".1")) real meters away"
+//                self.collectionViewController?.updateDistance(distanceString)
+//            }
+//            //TODO come back to this
+////            self.collectionViewController?.updateReferenceSize(sizes)
+//            let arrowNode = self.arrowNode
+//            if let constraints = arrowNode.constraints {
+//                let lookats: [SCNLookAtConstraint] = constraints.filter({ (constraint) -> Bool in
+//                    if let _ = constraint as? SCNLookAtConstraint {
+//                        return true
+//                    }
+//                    return false
+//                }) as! [SCNLookAtConstraint]
+//
+//                if let lookatTarget = lookats.first?.target {
+//                    self.arrowNode.isHidden = self.sceneView.isNode(lookatTarget, insideFrustumOf: cameraNode) || !self.done
+//                }
+//            }
+//        }
     }
     
     #if DEBUG
@@ -601,11 +627,12 @@ extension ViewController: ARSCNViewDelegate {
      @param anchor The added anchor.
      */
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        print("did add node. we go to async after this")
         DispatchQueue.main.async {
             print("did add node, pushed to main queue")
             
             if let planeAnchor = anchor as? ARPlaneAnchor {
-                #if DEBUG
+                #if DEBUG || false
                     // DEBUG: Display all of the ARPlaneAnchors that we see
                     let pos = SCNVector3.positionFromTransform(planeAnchor.transform)
                     print("NEW SURFACE DETECTED AT \(pos.friendlyString())")
@@ -663,10 +690,10 @@ extension ViewController: ARSCNViewDelegate {
     
     func updateUIAfterPlacingObjects(_ node: SCNNode, radius: Float) {
         // move the HUD so it's visible
-        self.toggleHUD(toShowingState: true)
-        
-        self.collectionViewController?.hintScrollable()
-        
+//        self.toggleHUD(toShowingState: true)
+
+//        self.collectionViewController?.hintScrollable()
+
         // Make the bottom HUD show, hint that it is scrollable
         //                UIView.animate(withDuration: 0.3, delay: 2, options: .curveEaseInOut, animations: {
         //                    self.view.layoutIfNeeded()
@@ -700,14 +727,4 @@ extension ViewController: ARSCNViewDelegate {
             AppRater.requestEventIsAppropriate()
         }
     }
-    #if DEBUG
-    func nextMaterial() -> SCNMaterial {
-        let material = SCNMaterial()
-        let color = self.colors[self.planeCount % self.colors.count]
-        print("The color is \(color)")
-        material.diffuse.contents = color.withAlphaComponent(0.6)
-        self.planeCount = self.planeCount + 1
-        return material
-    }
-    #endif
 }

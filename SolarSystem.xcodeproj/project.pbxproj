@@ -21,6 +21,9 @@
 		5F39596E1EE9898200EDEBEE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F39596D1EE934B200EDEBEE /* Utilities.swift */; };
 		5F3B3360220FEA5400F961C1 /* TutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B335F220FEA5400F961C1 /* TutorialView.xib */; };
 		5F3B33662213DD6D00F961C1 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B33652213DD6D00F961C1 /* TutorialViewController.swift */; };
+		5F3B33682213DE0800F961C1 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B33672213DE0800F961C1 /* AboutView.xib */; };
+		5F3B336D2213E15100F961C1 /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F3B336C2213E15100F961C1 /* SwiftMessages.framework */; };
+		5F3B336F2213E1A800F961C1 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B336E2213E1A800F961C1 /* AboutView.swift */; };
 		5F78D70E1F3D222A0059FDA1 /* AppRater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F78D70D1F3D222A0059FDA1 /* AppRater.swift */; };
 		5F86ACB7220EA5370011A98B /* SwiftAA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F86ACB6220EA5370011A98B /* SwiftAA.framework */; };
 		5F8B38C61F74CAE600F0F7D1 /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B38C41F74CAD200F0F7D1 /* FocusSquare.swift */; };
@@ -96,6 +99,9 @@
 		5F39596D1EE934B200EDEBEE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		5F3B335F220FEA5400F961C1 /* TutorialView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialView.xib; sourceTree = "<group>"; };
 		5F3B33652213DD6D00F961C1 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		5F3B33672213DE0800F961C1 /* AboutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
+		5F3B336C2213E15100F961C1 /* SwiftMessages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftMessages.framework; path = Carthage/Build/iOS/SwiftMessages.framework; sourceTree = "<group>"; };
+		5F3B336E2213E1A800F961C1 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		5F78D70D1F3D222A0059FDA1 /* AppRater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRater.swift; sourceTree = "<group>"; };
 		5F86ACB6220EA5370011A98B /* SwiftAA.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftAA.framework; path = Carthage/Build/iOS/SwiftAA.framework; sourceTree = "<group>"; };
 		5F8B38C41F74CAD200F0F7D1 /* FocusSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
@@ -138,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F3B336D2213E15100F961C1 /* SwiftMessages.framework in Frameworks */,
 				5F86ACB7220EA5370011A98B /* SwiftAA.framework in Frameworks */,
 				5F0CC2141F2814BD00E25474 /* Mixpanel.framework in Frameworks */,
 				17FC693338E5C451EEFBD6FA /* AssetsLibrary.framework in Frameworks */,
@@ -164,6 +171,7 @@
 		5F0CC2121F2814BD00E25474 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5F3B336C2213E15100F961C1 /* SwiftMessages.framework */,
 				5F86ACB6220EA5370011A98B /* SwiftAA.framework */,
 				5F0CC2131F2814BD00E25474 /* Mixpanel.framework */,
 				39DFC5695AC98A1CFA61E623 /* AssetsLibrary.framework */,
@@ -182,8 +190,20 @@
 			isa = PBXGroup;
 			children = (
 				5F3B335F220FEA5400F961C1 /* TutorialView.xib */,
+				5F3B33672213DE0800F961C1 /* AboutView.xib */,
+				5F3B336E2213E1A800F961C1 /* AboutView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		5F3B33692213DE5D00F961C1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5F3B33652213DD6D00F961C1 /* TutorialViewController.swift */,
+				5F01E11A1F39419100BFF9B0 /* AboutViewController.swift */,
+				5FBAF9711EE8B78400FAA54B /* ViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		5F8B38C31F74CABC00F0F7D1 /* Focus Square */ = {
@@ -218,15 +238,14 @@
 		5FBAF96C1EE8B78400FAA54B /* SolarSystem */ = {
 			isa = PBXGroup;
 			children = (
+				5F3B33692213DE5D00F961C1 /* ViewControllers */,
 				5F3B335E220FEA3B00F961C1 /* Views */,
 				5F8B38C31F74CABC00F0F7D1 /* Focus Square */,
 				5F8B38C81F74CCE800F0F7D1 /* VirtualObjectARView.swift */,
 				5F30D4DE1F16CDB7006A45B1 /* PlanetoidGroupNode.swift */,
 				5FBAF96D1EE8B78400FAA54B /* AppDelegate.swift */,
-				5F3B33652213DD6D00F961C1 /* TutorialViewController.swift */,
 				5F39596D1EE934B200EDEBEE /* Utilities.swift */,
 				5FBAF96F1EE8B78400FAA54B /* art.scnassets */,
-				5FBAF9711EE8B78400FAA54B /* ViewController.swift */,
 				5FBAF9731EE8B78400FAA54B /* Main.storyboard */,
 				5FBAF9761EE8B78400FAA54B /* Assets.xcassets */,
 				5FBAF9781EE8B78400FAA54B /* LaunchScreen.storyboard */,
@@ -244,7 +263,6 @@
 				5F255D8A1F2BA0A400E9F62E /* DocumentationScene.scn */,
 				5F9126B51F2F8EAE00678A8F /* PinchController.swift */,
 				5F28BC331F3388AF003E013F /* ScaleReference.swift */,
-				5F01E11A1F39419100BFF9B0 /* AboutViewController.swift */,
 				5F78D70D1F3D222A0059FDA1 /* AppRater.swift */,
 				5FAD55E11F50852F0016B04E /* DatePickerViewController.swift */,
 				5FA2CD1C1F5A7B8E00E870A5 /* nasalization-rg.ttf */,
@@ -356,6 +374,7 @@
 				5FC65CDA1F01C98800D8C9CB /* Mercury.scn in Resources */,
 				5FBAF97A1EE8B78400FAA54B /* LaunchScreen.storyboard in Resources */,
 				5FC65CDD1F02315000D8C9CB /* Jupiter.scn in Resources */,
+				5F3B33682213DE0800F961C1 /* AboutView.xib in Resources */,
 				5FC65CD81F01C93600D8C9CB /* Sun.scn in Resources */,
 				5FBAF9771EE8B78400FAA54B /* Assets.xcassets in Resources */,
 				5FBAF9751EE8B78400FAA54B /* Main.storyboard in Resources */,
@@ -394,10 +413,12 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Mixpanel.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftAA.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftMessages.framework",
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Mixpanel.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftAA.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftMessages.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -427,6 +448,7 @@
 			files = (
 				5F8B38C91F74CCEB00F0F7D1 /* VirtualObjectARView.swift in Sources */,
 				5F0662BB1F1D1F6600D66563 /* PlanetCollectionViewController.swift in Sources */,
+				5F3B336F2213E1A800F961C1 /* AboutView.swift in Sources */,
 				5F8B38C61F74CAE600F0F7D1 /* FocusSquare.swift in Sources */,
 				5F39596E1EE9898200EDEBEE /* Utilities.swift in Sources */,
 				5FF9CEF11EE9C00D00A84513 /* SceneKitExtension.swift in Sources */,

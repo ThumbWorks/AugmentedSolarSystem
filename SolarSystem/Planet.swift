@@ -68,11 +68,29 @@ struct Planet: Equatable {
     static let uranusAA = Uranus(julianDay: JulianDay(Date()))
     static let plutoAA = Pluto(julianDay: JulianDay(Date()))
     
-    static let sun = Planet(type: nil, name: "Sun", orbitalRadius: 0, radius: 695700, rotationDuration: 1000, axialTilt: 1, orbitPeriod: 1)
+    static let sun: Planet = {
+        print("make sun")
+        return Planet(type: nil,
+                      name: "Sun",
+                      orbitalRadius: 0,
+                      radius: 695700,
+                      rotationDuration: 1000,
+                      axialTilt: 1,
+                      orbitPeriod: 1)
+    }()
     static let mercury = Planet(type: Mercury.self, name: mercuryAA.name, orbitalRadius: 57.9, radius: 2439.7, rotationDuration: 1407.6, axialTilt: 0.03, orbitPeriod: 0.240846)
     static let venus = Planet(type: Venus.self, name: venusAA.name, orbitalRadius: 108.2, radius: 6051.8, rotationDuration: 5832.6, axialTilt: 2.64, orbitPeriod: 0.615)
 
-    static let earth = Planet(type: Earth.self, name: "Earth", orbitalRadius: 149.6, radius: 6371, rotationDuration: 23.93, axialTilt: 23.44, orbitPeriod: 1)
+    static let earth: Planet = {
+        print("make earth")
+        return Planet(type: Earth.self,
+                      name: "Earth",
+                      orbitalRadius: 149.6,
+                      radius: 6371,
+                      rotationDuration: 23.93,
+                      axialTilt: 23.44,
+                      orbitPeriod: 1)
+    }()
     static let mars = Planet(type: Mars.self, name: marsAA.name, orbitalRadius: 227.9, radius: 3389.5, rotationDuration: 24.62, axialTilt: 25.19, orbitPeriod: 1.881)
     static let jupiter = Planet(type: Jupiter.self, name: jupiterAA.name, orbitalRadius: 778.3, radius: 69911, rotationDuration: 9.93, axialTilt: 3.13, orbitPeriod: 11.86)
     static let saturn = Planet(type: Saturn.self, name: saturnAA.name, orbitalRadius: 1427, radius: 58232, rotationDuration: 10.66, axialTilt: 26.73, orbitPeriod: 29.46)
