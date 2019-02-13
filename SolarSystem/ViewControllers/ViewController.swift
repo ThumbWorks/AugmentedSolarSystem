@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     var startDate = Date()
     var displayedDate = Date()
     var displaySpeed: Double = 1
-   
+
     lazy var dateFormatter = { () -> DateFormatter in
         // TODO This should happen once. 
         let formatter = DateFormatter()
@@ -86,10 +86,8 @@ class ViewController: UIViewController {
         Mixpanel.sharedInstance()?.track("view did load")
         
         // hide the toggleviews
-        _ = toggleViews.map { (view) in
-            view.isHidden = true
-        }
-        
+        toggleViews.forEach { $0.isHidden = true }
+
         // Set the view's delegate
         sceneView.delegate = self
         
@@ -173,10 +171,8 @@ class ViewController: UIViewController {
         done = false
 
         // hide the toggleViews
-        _ = toggleViews.map({ (view) in
-            view.isHidden = true
-        })
-        
+        toggleViews.forEach { $0.isHidden = true }
+
         solarSystemNodes.removeAllNodesFromParent()
         
         // Create a session configuration
@@ -275,25 +271,25 @@ class ViewController: UIViewController {
 // IBActions
 extension ViewController {
     @IBAction func tappedInfo(_ button: UIButton) {
-//        let view: AboutView
-//        do {
-//            view = try SwiftMessages.viewFromNib(named: "AboutView")
-//        } catch {
-//            print("error \(error)")
-//            return
-//        }
-//        //view.delegate = delegate
-//        //view.update()
-//
-//        var config = SwiftMessages.Config()
-//
-////        config.presentationContext = .window(windowLevel: .alert)
-//        config.duration = .forever
-//        config.presentationStyle = .center
-//        config.dimMode = .blur(style: .dark,
-//                               alpha: 1,
-//                               interactive: true)
-//        SwiftMessages.show(config: config, view: view)
+        let aboutView: AboutView
+        do {
+            aboutView = try SwiftMessages.viewFromNib(named: "AboutView")
+        } catch {
+            print("error \(error)")
+            return
+        }
+        //view.delegate = delegate
+        //view.update()
+
+        var config = SwiftMessages.Config()
+
+        config.presentationContext = .window(windowLevel: .alert)
+        config.duration = .forever
+        config.presentationStyle = .center
+        config.dimMode = .blur(style: .dark,
+                               alpha: 1,
+                               interactive: true)
+        SwiftMessages.show(config: config, view: aboutView)
     }
 
     @IBAction func toggleDateSelector(_ button: UIButton) {
@@ -582,34 +578,33 @@ extension ViewController: ARSCNViewDelegate {
                 }
             }
         }
-        self.updateFocusSquare()
 
-//        DispatchQueue.main.async {
-//            self.updateFocusSquare()
-//            self.updateLabel()
-////            self.updateDateString(newDate)
-//
-//            if let planet = self.collectionViewController?.currentPlanet, let meters = distances[planet] {
-//                var distanceString = ""
-//                distanceString =  "\(meters.format(f: ".1")) real meters away"
-//                self.collectionViewController?.updateDistance(distanceString)
-//            }
-//            //TODO come back to this
-////            self.collectionViewController?.updateReferenceSize(sizes)
-//            let arrowNode = self.arrowNode
-//            if let constraints = arrowNode.constraints {
-//                let lookats: [SCNLookAtConstraint] = constraints.filter({ (constraint) -> Bool in
-//                    if let _ = constraint as? SCNLookAtConstraint {
-//                        return true
-//                    }
-//                    return false
-//                }) as! [SCNLookAtConstraint]
-//
-//                if let lookatTarget = lookats.first?.target {
-//                    self.arrowNode.isHidden = self.sceneView.isNode(lookatTarget, insideFrustumOf: cameraNode) || !self.done
-//                }
-//            }
-//        }
+        DispatchQueue.main.async {
+            self.updateFocusSquare()
+            self.updateLabel()
+//            self.updateDateString(newDate)
+
+            if let planet = self.collectionViewController?.currentPlanet, let meters = distances[planet] {
+                var distanceString = ""
+                distanceString =  "\(meters.format(f: ".1")) real meters away"
+                self.collectionViewController?.updateDistance(distanceString)
+            }
+            //TODO come back to this
+//            self.collectionViewController?.updateReferenceSize(sizes)
+            let arrowNode = self.arrowNode
+            if let constraints = arrowNode.constraints {
+                let lookats: [SCNLookAtConstraint] = constraints.filter({ (constraint) -> Bool in
+                    if let _ = constraint as? SCNLookAtConstraint {
+                        return true
+                    }
+                    return false
+                }) as! [SCNLookAtConstraint]
+
+                if let lookatTarget = lookats.first?.target {
+                    self.arrowNode.isHidden = self.sceneView.isNode(lookatTarget, insideFrustumOf: cameraNode) || !self.done
+                }
+            }
+        }
     }
     
     #if DEBUG
@@ -712,9 +707,8 @@ extension ViewController: ARSCNViewDelegate {
         }
         
         // unhide the toggleViews
-        _ = self.toggleViews.map({ (view) in
-            view.isHidden = false
-        })
+        toggleViews.forEach { $0.isHidden = false }
+
         self.done = true
         self.solarSystemNodes.scalePlanets(to: radius / 2)
         self.anchorWidth = radius

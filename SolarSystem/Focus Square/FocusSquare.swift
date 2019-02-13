@@ -294,12 +294,12 @@ class FocusSquare: SCNNode {
         positioningNode.removeAction(forKey: "pulse")
         positioningNode.opacity = 1.0
 		
-		// Close animation
-		SCNTransaction.begin()
+        // Close animation
+        SCNTransaction.begin()
         SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
-		SCNTransaction.animationDuration = FocusSquare.animationDuration / 2
-		positioningNode.opacity = 0.99
-		SCNTransaction.completionBlock = {
+        SCNTransaction.animationDuration = FocusSquare.animationDuration / 2
+        positioningNode.opacity = 0.99
+        SCNTransaction.completionBlock = {
 			SCNTransaction.begin()
             SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
 			SCNTransaction.animationDuration = FocusSquare.animationDuration / 4

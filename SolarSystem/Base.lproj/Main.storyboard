@@ -115,6 +115,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8K-3O-Oc1" userLabel="info">
                                 <rect key="frame" x="23" y="40" width="22" height="22"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="tappedInfo:" destination="BV1-FR-VrT" eventType="touchUpInside" id="qos-uy-d4B"/>
+                                </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyC-bJ-Kac">
                                 <rect key="frame" x="0.0" y="532" width="375" height="280"/>

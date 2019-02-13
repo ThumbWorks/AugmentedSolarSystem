@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		17FC693338E5C451EEFBD6FA /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DFC5695AC98A1CFA61E623 /* AssetsLibrary.framework */; };
 		36B36DE405C67DDC5ADFD0AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A6E595CD2E4C2C0D91515B6 /* QuartzCore.framework */; };
-		5F01E11B1F39419100BFF9B0 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F01E11A1F39419100BFF9B0 /* AboutViewController.swift */; };
 		5F0662BB1F1D1F6600D66563 /* PlanetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0662BA1F1D1F6600D66563 /* PlanetCollectionViewController.swift */; };
 		5F0CC2141F2814BD00E25474 /* Mixpanel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0CC2131F2814BD00E25474 /* Mixpanel.framework */; };
 		5F27FD181F061C5200498524 /* Mars.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5F27FD171F061C5200498524 /* Mars.scn */; };
@@ -88,7 +87,6 @@
 		39DFC5695AC98A1CFA61E623 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		3F19230B2264C6E45B5CA90A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		46267284C2EBEFD65B20CCA6 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		5F01E11A1F39419100BFF9B0 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		5F0662BA1F1D1F6600D66563 /* PlanetCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetCollectionViewController.swift; sourceTree = "<group>"; };
 		5F0CC2131F2814BD00E25474 /* Mixpanel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mixpanel.framework; path = Carthage/Build/iOS/Mixpanel.framework; sourceTree = "<group>"; };
 		5F255D8A1F2BA0A400E9F62E /* DocumentationScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = DocumentationScene.scn; path = art.scnassets/DocumentationScene.scn; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 			isa = PBXGroup;
 			children = (
 				5F3B33652213DD6D00F961C1 /* TutorialViewController.swift */,
-				5F01E11A1F39419100BFF9B0 /* AboutViewController.swift */,
 				5FBAF9711EE8B78400FAA54B /* ViewController.swift */,
 			);
 			path = ViewControllers;
@@ -460,7 +457,6 @@
 				5F3B33662213DD6D00F961C1 /* TutorialViewController.swift in Sources */,
 				5F8B38C71F74CAE900F0F7D1 /* FocusSquareSegment.swift in Sources */,
 				5FAD55E21F50852F0016B04E /* DatePickerViewController.swift in Sources */,
-				5F01E11B1F39419100BFF9B0 /* AboutViewController.swift in Sources */,
 				5F78D70E1F3D222A0059FDA1 /* AppRater.swift in Sources */,
 				5F30D4DC1F16CD68006A45B1 /* Planet.swift in Sources */,
 			);

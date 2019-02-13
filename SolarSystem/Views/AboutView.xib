@@ -9,49 +9,20 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner">
-            <connections>
-                <outlet property="view" destination="iN0-l3-epB" id="8bj-tt-OQ0"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutView" customModule="SolAR" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" ambiguous="YES" id="iN0-l3-epB" customClass="AboutView" customModule="SolAR" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AboutView" customModule="SolAR" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="378" height="469"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vyS-3e-gva">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vyS-3e-gva">
+                    <rect key="frame" x="0.0" y="34.5" width="378" height="400"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="puT-Ss-M9B" userLabel="Close Button Wrapper">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="33"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Jp-wm-tyL" userLabel="Top Text Wrapper">
+                            <rect key="frame" x="0.0" y="0.0" width="378" height="130"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pLG-Bi-nni">
-                                    <rect key="frame" x="345" y="0.0" width="30" height="33"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="33" id="lkA-Fm-NOB"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
-                                    <state key="normal" title="x">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="dismiss:" destination="-1" eventType="touchUpInside" id="5lM-sn-DNy"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="pLG-Bi-nni" secondAttribute="trailing" id="6pN-0W-RuE"/>
-                                <constraint firstItem="pLG-Bi-nni" firstAttribute="centerY" secondItem="puT-Ss-M9B" secondAttribute="centerY" id="GgX-bz-Uak"/>
-                                <constraint firstItem="pLG-Bi-nni" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="puT-Ss-M9B" secondAttribute="leading" constant="20" symbolic="YES" id="n2A-xS-v84"/>
-                                <constraint firstAttribute="height" secondItem="pLG-Bi-nni" secondAttribute="height" id="t5f-3P-0na"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Jp-wm-tyL" userLabel="Top Text Wrapper">
-                            <rect key="frame" x="0.0" y="33" width="375" height="344"/>
-                            <subviews>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" ambiguous="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjM-bR-TW3">
-                                    <rect key="frame" x="10" y="0.0" width="355" height="344"/>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjM-bR-TW3">
+                                    <rect key="frame" x="10" y="0.0" width="358" height="130"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="130" id="qcR-PG-f9w"/>
@@ -70,25 +41,25 @@
                                 <constraint firstItem="jjM-bR-TW3" firstAttribute="leading" secondItem="9Jp-wm-tyL" secondAttribute="leading" constant="10" id="dQ5-Iv-mOx"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a3g-WY-bds" userLabel="Made By Thumbworks Wrapper">
-                            <rect key="frame" x="0.0" y="377" width="375" height="44"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a3g-WY-bds" userLabel="Made By Thumbworks Wrapper">
+                            <rect key="frame" x="0.0" y="130" width="378" height="44"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Io2-AC-sHC">
-                                    <rect key="frame" x="158.5" y="-2.5" width="38" height="23"/>
+                                    <rect key="frame" x="160" y="-2.5" width="38" height="23"/>
                                     <fontDescription key="fontDescription" name="DejaVuSans" family="DejaVu Sans" pointSize="9"/>
                                     <state key="normal" title="Made by:">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hql-Ye-H5Z" userLabel="Thumbworks Button">
-                                    <rect key="frame" x="132" y="5.5" width="111" height="33"/>
+                                    <rect key="frame" x="133.5" y="5.5" width="111" height="33"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="33" id="1zy-xr-8Oz"/>
                                         <constraint firstAttribute="width" constant="111" id="dC1-IV-UXG"/>
                                     </constraints>
                                     <state key="normal" image="ThumbworksLogo"/>
                                     <connections>
-                                        <action selector="visitThumbworks:" destination="-1" eventType="touchUpInside" id="Bbc-Rs-vMU"/>
+                                        <action selector="visitThumbworks:" destination="iN0-l3-epB" eventType="touchUpInside" id="XE5-eu-PMf"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -101,11 +72,11 @@
                                 <constraint firstItem="Io2-AC-sHC" firstAttribute="centerY" secondItem="Hql-Ye-H5Z" secondAttribute="centerY" constant="-13" id="eKa-0J-tAZ"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="17e-dH-9VT">
-                            <rect key="frame" x="0.0" y="421" width="375" height="100"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="17e-dH-9VT">
+                            <rect key="frame" x="0.0" y="174" width="378" height="100"/>
                             <subviews>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bFb-Eq-CKT">
-                                    <rect key="frame" x="8" y="0.0" width="359" height="100"/>
+                                    <rect key="frame" x="8" y="0.0" width="362" height="100"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="100" id="7Iw-M4-K66"/>
@@ -124,15 +95,15 @@
                                 <constraint firstItem="bFb-Eq-CKT" firstAttribute="top" secondItem="17e-dH-9VT" secondAttribute="top" id="eTV-ID-pIq"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gEZ-7x-FIR">
-                            <rect key="frame" x="0.0" y="521" width="375" height="36"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gEZ-7x-FIR">
+                            <rect key="frame" x="0.0" y="274" width="378" height="36"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFw-wL-HAm">
-                                    <rect key="frame" x="104.5" y="-2" width="166" height="40"/>
+                                    <rect key="frame" x="106" y="-2" width="166" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <state key="normal" title="@thumbworksinc" image="TwitterBird"/>
                                     <connections>
-                                        <action selector="visitTwitter:" destination="-1" eventType="touchUpInside" id="3EN-g9-IdU"/>
+                                        <action selector="visitTwitter:" destination="iN0-l3-epB" eventType="touchUpInside" id="TeJ-1j-RpY"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -143,18 +114,18 @@
                                 <constraint firstItem="zFw-wL-HAm" firstAttribute="centerX" secondItem="gEZ-7x-FIR" secondAttribute="centerX" id="sQp-5y-0l7"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Cp-2F-YbM" userLabel="See our other work">
-                            <rect key="frame" x="0.0" y="557" width="375" height="36"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Cp-2F-YbM" userLabel="See our other work">
+                            <rect key="frame" x="0.0" y="310" width="378" height="36"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="nce-GY-Zkl">
-                                    <rect key="frame" x="10" y="2" width="355" height="32"/>
+                                    <rect key="frame" x="10" y="2" width="358" height="32"/>
                                     <gestureRecognizers/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <state key="normal" title="Tap to see our other work.">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="seeOtherApps:" destination="-1" eventType="touchUpInside" id="OZg-66-hmX"/>
+                                        <action selector="seeOtherApps:" destination="iN0-l3-epB" eventType="touchUpInside" id="bj0-jf-lSt"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -166,8 +137,8 @@
                                 <constraint firstItem="nce-GY-Zkl" firstAttribute="leading" secondItem="3Cp-2F-YbM" secondAttribute="leading" constant="10" id="iJa-dX-5NE"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6dB-7o-eHE" userLabel="Leave a review">
-                            <rect key="frame" x="27.5" y="593" width="320" height="44"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6dB-7o-eHE" userLabel="Leave a review">
+                            <rect key="frame" x="29" y="346" width="320" height="44"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to leave us a ⭐️⭐️⭐️⭐️⭐️review." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ov-zB-cra">
                                     <rect key="frame" x="10" y="12" width="300" height="20.5"/>
@@ -185,11 +156,11 @@
                                 <constraint firstItem="8Ov-zB-cra" firstAttribute="centerY" secondItem="6dB-7o-eHE" secondAttribute="centerY" id="ozO-ZF-exD"/>
                             </constraints>
                             <connections>
-                                <outletCollection property="gestureRecognizers" destination="job-Lu-WMp" appends="YES" id="PTk-O1-lqa"/>
+                                <outletCollection property="gestureRecognizers" destination="fXV-l4-7Ie" appends="YES" id="AxR-1Y-SnE"/>
                             </connections>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5VD-Am-IAg" userLabel="Bottom Buffer">
-                            <rect key="frame" x="37.5" y="637" width="300" height="10"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5VD-Am-IAg" userLabel="Bottom Buffer">
+                            <rect key="frame" x="39" y="390" width="300" height="10"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="jnO-7h-0iK"/>
@@ -197,8 +168,6 @@
                         </view>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="puT-Ss-M9B" secondAttribute="trailing" id="3vs-8F-YIu"/>
-                        <constraint firstItem="puT-Ss-M9B" firstAttribute="leading" secondItem="vyS-3e-gva" secondAttribute="leading" id="4vd-Y3-hqT"/>
                         <constraint firstAttribute="trailing" secondItem="3Cp-2F-YbM" secondAttribute="trailing" id="752-pJ-0oc"/>
                         <constraint firstAttribute="trailing" secondItem="a3g-WY-bds" secondAttribute="trailing" id="Iou-vp-CX1"/>
                         <constraint firstItem="a3g-WY-bds" firstAttribute="leading" secondItem="vyS-3e-gva" secondAttribute="leading" id="M5h-nm-GfL"/>
@@ -213,24 +182,25 @@
                     <viewLayoutGuide key="safeArea" id="1dU-7P-1xO"/>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="vyS-3e-gva" secondAttribute="bottom" id="BKn-z9-17e"/>
-                <constraint firstItem="vyS-3e-gva" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Gce-HE-ATD"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="vyS-3e-gva" secondAttribute="trailing" id="Jed-7O-vIa"/>
+                <constraint firstItem="vyS-3e-gva" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="34.5" id="KEG-RF-799"/>
                 <constraint firstItem="vyS-3e-gva" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="YSr-TD-X13"/>
+                <constraint firstItem="vyS-3e-gva" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="plg-tB-1jg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="vyS-3e-gva" secondAttribute="bottom" constant="34.5" id="y3d-3s-Utv"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="bottomText" destination="bFb-Eq-CKT" id="qbR-a0-DsW"/>
-                <outlet property="bottomTextHeightConstraint" destination="7Iw-M4-K66" id="KKt-Nk-1tz"/>
+                <outlet property="bottomText" destination="bFb-Eq-CKT" id="fYo-4p-SHu"/>
                 <outlet property="topText" destination="jjM-bR-TW3" id="Xsn-nD-YdP"/>
-                <outlet property="topTextHeightConstraint" destination="qcR-PG-f9w" id="1O1-ai-83v"/>
             </connections>
+            <point key="canvasLocation" x="56" y="171.36431784107947"/>
         </view>
-        <tapGestureRecognizer id="job-Lu-WMp">
+        <tapGestureRecognizer id="fXV-l4-7Ie">
             <connections>
-                <action selector="rateTheApp:" destination="-1" id="viq-R1-tWR"/>
+                <action selector="rateTheApp:" destination="iN0-l3-epB" id="QFZ-2K-iCw"/>
             </connections>
         </tapGestureRecognizer>
     </objects>
