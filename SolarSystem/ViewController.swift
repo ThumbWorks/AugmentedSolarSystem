@@ -189,7 +189,11 @@ class ViewController: UIViewController {
         resetToDetectedPlane()
         
         collectionViewController?.changeToPlanet(name: Planet.sun.name)
-        self.performSegue(withIdentifier: "TutorialSegueID", sender: self)
+        let tutorial = TutorialViewController()
+        tutorial.definesPresentationContext = true
+        tutorial.modalPresentationStyle = .overCurrentContext
+        present(tutorial, animated: true)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

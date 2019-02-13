@@ -189,7 +189,6 @@
                         <outletCollection property="toggleViews" destination="t8K-3O-Oc1" collectionClass="NSMutableArray" id="6JU-uh-Nxb"/>
                         <outletCollection property="toggleViews" destination="GMR-IA-p4n" collectionClass="NSMutableArray" id="T8p-TA-8FD"/>
                         <outletCollection property="toggleViews" destination="lYO-0m-ZgV" collectionClass="NSMutableArray" id="BWe-aZ-8qL"/>
-                        <segue destination="jgu-ml-S2V" kind="presentation" identifier="TutorialSegueID" animates="NO" modalPresentationStyle="overCurrentContext" id="EWA-fa-b3I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -205,75 +204,6 @@
                 </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="144.80000000000001" y="129.98500749625188"/>
-        </scene>
-        <!--Tutorial View Controller-->
-        <scene sceneID="VI2-cy-hHF">
-            <objects>
-                <viewController id="jgu-ml-S2V" customClass="TutorialViewController" customModule="SolAR" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="b9g-uJ-UXJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVb-tz-OLZ" userLabel="DarkenView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.66480523767605637" colorSpace="calibratedRGB"/>
-                            </view>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xD1-d8-bvu">
-                                <rect key="frame" x="37.666666666666657" y="256" width="300" height="300"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LSR-91-FgL">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <blurEffect style="light"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </visualEffectView>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QdQ-pG-OE2">
-                                <rect key="frame" x="37.666666666666657" y="256" width="300" height="300"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="FiS-pW-fjf"/>
-                                    <constraint firstAttribute="height" constant="300" id="XyC-9o-ADr"/>
-                                </constraints>
-                            </sceneKitView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Move the device around a surface to anchor your Solar System" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpA-N5-GXZ">
-                                <rect key="frame" x="47.666666666666657" y="485.33333333333331" width="280" height="60.666666666666686"/>
-                                <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="xD1-d8-bvu" firstAttribute="centerX" secondItem="QdQ-pG-OE2" secondAttribute="centerX" id="2tL-rq-o9C"/>
-                            <constraint firstAttribute="trailing" secondItem="bVb-tz-OLZ" secondAttribute="trailing" id="Ia7-3c-VFb"/>
-                            <constraint firstItem="QdQ-pG-OE2" firstAttribute="trailing" secondItem="tpA-N5-GXZ" secondAttribute="trailing" constant="10" id="NVi-ih-Mgd"/>
-                            <constraint firstItem="bVb-tz-OLZ" firstAttribute="top" secondItem="b9g-uJ-UXJ" secondAttribute="top" id="O29-yn-DkL"/>
-                            <constraint firstItem="tpA-N5-GXZ" firstAttribute="leading" secondItem="QdQ-pG-OE2" secondAttribute="leading" constant="10" id="Q1L-aa-CcD"/>
-                            <constraint firstItem="QdQ-pG-OE2" firstAttribute="bottom" secondItem="tpA-N5-GXZ" secondAttribute="bottom" constant="10" id="SMo-Oh-0Kt"/>
-                            <constraint firstItem="xD1-d8-bvu" firstAttribute="centerY" secondItem="QdQ-pG-OE2" secondAttribute="centerY" id="SzV-dO-gwM"/>
-                            <constraint firstItem="QdQ-pG-OE2" firstAttribute="centerY" secondItem="b9g-uJ-UXJ" secondAttribute="centerY" id="Yr8-zF-6pS"/>
-                            <constraint firstItem="QdQ-pG-OE2" firstAttribute="centerX" secondItem="2nd-84-UOY" secondAttribute="centerX" id="cxO-DO-GnO"/>
-                            <constraint firstAttribute="bottom" secondItem="bVb-tz-OLZ" secondAttribute="bottom" id="dXd-a2-JcP"/>
-                            <constraint firstItem="xD1-d8-bvu" firstAttribute="height" secondItem="QdQ-pG-OE2" secondAttribute="height" id="jgR-6v-X4E"/>
-                            <constraint firstItem="xD1-d8-bvu" firstAttribute="width" secondItem="QdQ-pG-OE2" secondAttribute="width" id="m0K-Z3-AsI"/>
-                            <constraint firstItem="bVb-tz-OLZ" firstAttribute="leading" secondItem="b9g-uJ-UXJ" secondAttribute="leading" id="s7q-bV-EJ2"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="2nd-84-UOY"/>
-                    </view>
-                    <connections>
-                        <outlet property="sceneView" destination="QdQ-pG-OE2" id="lkg-wO-f9g"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fji-Co-Qni" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1695" y="130"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="eVx-LO-WJb">

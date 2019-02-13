@@ -13,7 +13,15 @@ import SceneKit
 class TutorialViewController: UIViewController {
     
     @IBOutlet weak var sceneView: SCNView!
-    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     func createTutorial() {
         
         let scene = SCNScene()
