@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import SceneKit
 
 class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet var collectionView: UICollectionView!
@@ -38,12 +37,13 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func changeToPlanet(name: String) {
-        if let indexPath = dataSource.pathForPlanet(with: name) {
-            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        }
+//        if let indexPath = dataSource.pathForPlanet(with: name) {
+//            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+//        }
     }
     
     func changePlanetSelection() {
+        return
         print("change planet selection")
         // find the center of the frame wrt the content offset. 10 is
         let collectionViewSize = collectionView.frame.size
@@ -98,48 +98,4 @@ extension Float {
     func format(f: String) -> String {
         return String(format: "%\(f)f", self)
     }
-}
-
-class PlanetDataSource: NSObject, UICollectionViewDataSource {
-    let planets = Planet.allPlanets
-    
-    func pathForPlanet(with name: String) -> IndexPath? {
-        print("path for planet")
-        if let index = planets.index(where: { (planet) -> Bool in
-            return planet.name == name
-        }) {
-            return IndexPath(row: index, section: 0)
-        }
-        return nil
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return planets.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let planet = planets[indexPath.row]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "planetCell", for: indexPath) as! PlanetCell
-        let sceneString = "art.scnassets/\(planet.name).scn"
-        let scene = SCNScene(named: sceneString)!
-        cell.sceneView.scene = scene
-        
-        let aPlanetNode = scene.rootNode
-        let radianTilt = planet.axialTilt / 360 * 2*Float.pi
-        aPlanetNode.rotation = SCNVector4Make(0, 0, 1, radianTilt)
-        
-        let rotationDuration = 16.0 // seems like a good rotation
-        let action = SCNAction.createRotateAction(duration: rotationDuration)
-        aPlanetNode.runAction(action)
-        return cell
-    }
-}
-
-class PlanetCell: UICollectionViewCell {
-    @IBOutlet var sceneView: SCNView!
-    
-    override func prepareForReuse() {
-        sceneView.scene = nil
-    }
-    
 }

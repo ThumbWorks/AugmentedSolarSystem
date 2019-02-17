@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanetCell" id="iPn-ws-yAm" customClass="PlanetCell" customModule="SolAR" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="249" height="159"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="249" height="159"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aud-Wh-mGh">
+                        <rect key="frame" x="4" y="0.0" width="245" height="159"/>
+                    </sceneKitView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="lhK-uP-VlJ" firstAttribute="trailing" secondItem="aud-Wh-mGh" secondAttribute="trailing" id="9Df-Os-fvG"/>
+                <constraint firstItem="aud-Wh-mGh" firstAttribute="leading" secondItem="lhK-uP-VlJ" secondAttribute="leading" constant="4" id="Ira-8p-50r"/>
+                <constraint firstItem="lhK-uP-VlJ" firstAttribute="bottom" secondItem="aud-Wh-mGh" secondAttribute="bottom" id="WGh-jg-1HZ"/>
+                <constraint firstItem="aud-Wh-mGh" firstAttribute="top" secondItem="lhK-uP-VlJ" secondAttribute="top" id="jr0-ni-4hj"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="lhK-uP-VlJ"/>
+            <size key="customSize" width="249" height="159"/>
+            <connections>
+                <outlet property="sceneView" destination="aud-Wh-mGh" id="Fhp-VB-TjN"/>
+            </connections>
+            <point key="canvasLocation" x="122.40000000000001" y="269.41529235382313"/>
+        </collectionViewCell>
+    </objects>
+</document>

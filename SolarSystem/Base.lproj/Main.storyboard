@@ -52,9 +52,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="174" id="vRk-96-Kbf"/>
                                 </constraints>
-                                <connections>
-                                    <segue destination="nHx-ZE-K7m" kind="embed" id="9hd-et-zfR"/>
-                                </connections>
                             </containerView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vDu-Ri-qEF">
                                 <rect key="frame" x="0.0" y="0.0" width="68" height="279"/>
@@ -174,8 +171,6 @@
                         <outlet property="datePickerBottomConstraint" destination="MbN-KJ-ej8" id="O1d-G0-12m"/>
                         <outlet property="datePickerHeightConstraint" destination="Nr3-pW-0yW" id="eb7-nQ-Kn0"/>
                         <outlet property="hideHUDButton" destination="lYO-0m-ZgV" id="a0J-93-PfN"/>
-                        <outlet property="hudBottomConstraint" destination="agn-eF-OC7" id="upM-v8-Xsm"/>
-                        <outlet property="hudHeightConstraint" destination="vRk-96-Kbf" id="jp1-b7-qIC"/>
                         <outlet property="orbitScaleButton" destination="omW-cd-Viv" id="MI9-j8-g6n"/>
                         <outlet property="orbitShowButton" destination="3Do-Nz-vPN" id="zSU-de-6Bl"/>
                         <outlet property="planetScaleButton" destination="yOl-4w-DAM" id="f4p-2q-RFJ"/>
@@ -204,121 +199,6 @@
                 </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="144.80000000000001" y="129.98500749625188"/>
-        </scene>
-        <!--Planet Collection View Controller-->
-        <scene sceneID="Pgb-bw-15q">
-            <objects>
-                <viewController id="nHx-ZE-K7m" customClass="PlanetCollectionViewController" customModule="SolAR" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="7s1-Fo-PoE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="174"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mars" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSa-mx-J6A">
-                                <rect key="frame" x="10" y="10" width="181" height="24"/>
-                                <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="20"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="axial" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvg-6d-imw">
-                                <rect key="frame" x="153" y="34" width="38" height="18"/>
-                                <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="15"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hours" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hnc-7a-xbT">
-                                <rect key="frame" x="30" y="52" width="161" height="18"/>
-                                <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="15"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="radius" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVR-xK-nAa">
-                                <rect key="frame" x="140" y="70" width="51" height="18"/>
-                                <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="15"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="distance long one" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wpt-2x-SUA">
-                                <rect key="frame" x="30" y="88" width="161" height="18"/>
-                                <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="15"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Zu8-KH-hCY">
-                                <rect key="frame" x="201" y="0.0" width="174" height="140"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="174" id="bRK-qL-qg2"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="10" id="v58-TR-uFb">
-                                    <size key="itemSize" width="173" height="173"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="planetCell" id="iuI-TW-DdJ" customClass="PlanetCell" customModule="SolAR" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-16.666666666666668" width="173" height="173"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="173" height="173"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XeL-la-GcD">
-                                                    <rect key="frame" x="0.0" y="0.0" width="173" height="173"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </sceneKitView>
-                                            </subviews>
-                                        </view>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="XeL-la-GcD" firstAttribute="leading" secondItem="iuI-TW-DdJ" secondAttribute="leading" id="0Sj-sA-UUS"/>
-                                            <constraint firstAttribute="bottom" secondItem="XeL-la-GcD" secondAttribute="bottom" id="HhW-IF-Oao"/>
-                                            <constraint firstAttribute="trailing" secondItem="XeL-la-GcD" secondAttribute="trailing" id="Pfb-8P-aue"/>
-                                            <constraint firstItem="XeL-la-GcD" firstAttribute="top" secondItem="iuI-TW-DdJ" secondAttribute="top" id="QLe-1A-01J"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="sceneView" destination="XeL-la-GcD" id="YCA-8f-K5F"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="Ffk-7P-j61" id="H4x-fS-cbj"/>
-                                    <outlet property="delegate" destination="nHx-ZE-K7m" id="dig-l4-aL7"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Zu8-KH-hCY" firstAttribute="top" secondItem="7s1-Fo-PoE" secondAttribute="top" id="6JW-E4-azA"/>
-                            <constraint firstItem="Hnc-7a-xbT" firstAttribute="trailing" secondItem="fvg-6d-imw" secondAttribute="trailing" id="C8O-yd-kAu"/>
-                            <constraint firstItem="EVR-xK-nAa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TDr-ha-gnO" secondAttribute="leading" constant="30" id="F6e-bc-fNP"/>
-                            <constraint firstItem="wpt-2x-SUA" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EVR-xK-nAa" secondAttribute="trailing" id="HBq-FV-dd7"/>
-                            <constraint firstItem="wpt-2x-SUA" firstAttribute="top" secondItem="EVR-xK-nAa" secondAttribute="bottom" id="LOj-Co-j8d"/>
-                            <constraint firstItem="TDr-ha-gnO" firstAttribute="bottom" secondItem="Zu8-KH-hCY" secondAttribute="bottom" id="Qfz-Wj-Kvm"/>
-                            <constraint firstItem="Zu8-KH-hCY" firstAttribute="leading" secondItem="MSa-mx-J6A" secondAttribute="trailing" constant="10" id="RTp-Wv-ANS"/>
-                            <constraint firstItem="EVR-xK-nAa" firstAttribute="top" secondItem="Hnc-7a-xbT" secondAttribute="bottom" id="X5b-Ed-q0n"/>
-                            <constraint firstItem="wpt-2x-SUA" firstAttribute="leading" secondItem="TDr-ha-gnO" secondAttribute="leading" constant="30" id="XEQ-QG-fyu"/>
-                            <constraint firstItem="fvg-6d-imw" firstAttribute="trailing" secondItem="MSa-mx-J6A" secondAttribute="trailing" id="eGT-9Q-X1q"/>
-                            <constraint firstItem="EVR-xK-nAa" firstAttribute="trailing" secondItem="Hnc-7a-xbT" secondAttribute="trailing" id="eaW-5U-H6L"/>
-                            <constraint firstItem="MSa-mx-J6A" firstAttribute="leading" secondItem="TDr-ha-gnO" secondAttribute="leading" constant="10" id="gpA-LO-EIs"/>
-                            <constraint firstItem="TDr-ha-gnO" firstAttribute="trailing" secondItem="Zu8-KH-hCY" secondAttribute="trailing" id="i7V-hx-k3Z"/>
-                            <constraint firstItem="Hnc-7a-xbT" firstAttribute="top" secondItem="fvg-6d-imw" secondAttribute="bottom" id="tyF-xb-ly3"/>
-                            <constraint firstItem="fvg-6d-imw" firstAttribute="top" secondItem="MSa-mx-J6A" secondAttribute="bottom" id="wyd-sn-qPW"/>
-                            <constraint firstItem="Hnc-7a-xbT" firstAttribute="leading" secondItem="TDr-ha-gnO" secondAttribute="leading" constant="30" id="xeq-gZ-sHR"/>
-                            <constraint firstItem="fvg-6d-imw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TDr-ha-gnO" secondAttribute="leading" constant="30" id="z8d-3z-TkI"/>
-                            <constraint firstItem="MSa-mx-J6A" firstAttribute="top" secondItem="7s1-Fo-PoE" secondAttribute="top" constant="10" id="zoh-ZL-MLS"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="TDr-ha-gnO"/>
-                    </view>
-                    <connections>
-                        <outlet property="axialTilt" destination="fvg-6d-imw" id="cVk-zJ-9dL"/>
-                        <outlet property="collectionView" destination="Zu8-KH-hCY" id="gIW-l0-GDK"/>
-                        <outlet property="dataSource" destination="Ffk-7P-j61" id="HXX-cw-RRJ"/>
-                        <outlet property="distance" destination="wpt-2x-SUA" id="HaF-pY-BfE"/>
-                        <outlet property="name" destination="MSa-mx-J6A" id="Rr7-Th-EHi"/>
-                        <outlet property="radius" destination="EVR-xK-nAa" id="eGd-0y-ZSU"/>
-                        <outlet property="rotationDuration" destination="Hnc-7a-xbT" id="rio-ce-jRW"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="539-ER-Fmd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="Ffk-7P-j61" customClass="PlanetDataSource" customModule="SolAR" customModuleProvider="target"/>
-            </objects>
-            <point key="canvasLocation" x="145" y="619"/>
         </scene>
         <!--Date Picker View Controller-->
         <scene sceneID="Fyy-93-uU0">

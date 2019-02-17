@@ -61,8 +61,6 @@ class ViewController: UIViewController {
     
     var arrowNode = SCNNode.arrow()
     
-    @IBOutlet weak var hudHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var hudBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var datePickerBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var datePickerHeightConstraint: NSLayoutConstraint!
     
@@ -80,7 +78,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        #if targetEnvironment(simulator)
+        view.backgroundColor = .gray
+        #endif
         pincher = PinchController(with: solarSystemNodes)
         status.text = ""
         Mixpanel.sharedInstance()?.track("view did load")
@@ -164,7 +164,7 @@ class ViewController: UIViewController {
 
         // reset hudBottomConstraint
         // start the hud out of view
-        toggleHUD(toShowingState: false, animated: false)
+        toggleHUD(toShowingState: true, animated: false)
 
         toggleDatePicker(toShowingState: false, animated: false)
         
@@ -185,11 +185,11 @@ class ViewController: UIViewController {
         resetToDetectedPlane()
         
         collectionViewController?.changeToPlanet(name: Planet.sun.name)
+
         let tutorial = TutorialViewController()
         tutorial.definesPresentationContext = true
         tutorial.modalPresentationStyle = .overCurrentContext
         present(tutorial, animated: true)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -250,21 +250,48 @@ class ViewController: UIViewController {
         if toShowingState == true {
             datePicker?.datePicker.setDate(displayedDate, animated: false)
         }
-        
     }
-    
+
     func toggleHUD(toShowingState: Bool, animated: Bool = true) {
-        print("to showing state \(toShowingState)")
-        hudBottomConstraint.constant = toShowingState ? 0 : -hudHeightConstraint.constant
-        
-        let duration = animated ? 1.0 : 0.0
-        
-        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseInOut, animations: {
-            self.view.layoutIfNeeded()
-        }) { (completed) in
-            let newTitle = toShowingState ? "▼" : "▲"
-            self.hideHUDButton.setTitle(newTitle, for: .normal)
-        }
+        let hudViewController = HUDViewController()
+        hudViewController.modalPresentationStyle = .custom
+        hudViewController.transitioningDelegate = self
+        present(hudViewController, animated: true)
+    }
+}
+
+class HUDPresentationController: UIPresentationController {
+    override var frameOfPresentedViewInContainerView: CGRect {
+        guard let containerView = containerView,
+            let presentedView = presentedView else { return .zero }
+
+        let inset: CGFloat = 16
+
+        // Make sure to account for the safe area insets
+        let safeAreaFrame = containerView.bounds
+            .inset(by: containerView.safeAreaInsets)
+
+        let targetWidth = safeAreaFrame.width - 2 * inset
+        let fittingSize = CGSize(
+            width: targetWidth,
+            height: UIView.layoutFittingCompressedSize.height
+        )
+        let targetHeight = presentedView.systemLayoutSizeFitting(
+            fittingSize, withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .defaultLow).height
+
+        var frame = safeAreaFrame
+        frame.origin.x += inset
+        frame.origin.y += frame.size.height - targetHeight - inset
+        frame.size.width = targetWidth
+        frame.size.height = targetHeight
+        return frame
+    }
+}
+
+extension ViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return HUDPresentationController.init(presentedViewController: presented, presenting: presenting)
     }
 }
 
@@ -295,11 +322,6 @@ extension ViewController {
     @IBAction func toggleDateSelector(_ button: UIButton) {
         let isUp = datePickerBottomConstraint.constant == 0
         toggleDatePicker(toShowingState: !isUp)
-    }
-    
-    @IBAction func toggleHUD(_ button: UIButton) {
-        let isShowing = hudBottomConstraint.constant == 0
-        toggleHUD(toShowingState: !isShowing)
     }
  
     @IBAction func pausePressed(_ button: UIButton) {

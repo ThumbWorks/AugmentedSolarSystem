@@ -11,6 +11,8 @@
 		36B36DE405C67DDC5ADFD0AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A6E595CD2E4C2C0D91515B6 /* QuartzCore.framework */; };
 		5F0662BB1F1D1F6600D66563 /* PlanetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0662BA1F1D1F6600D66563 /* PlanetCollectionViewController.swift */; };
 		5F0CC2141F2814BD00E25474 /* Mixpanel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0CC2131F2814BD00E25474 /* Mixpanel.framework */; };
+		5F0E92072215D88B000D1EA9 /* PlanetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F0E92062215D88B000D1EA9 /* PlanetCell.xib */; };
+		5F0E92092215D895000D1EA9 /* PlanetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0E92082215D895000D1EA9 /* PlanetCell.swift */; };
 		5F27FD181F061C5200498524 /* Mars.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5F27FD171F061C5200498524 /* Mars.scn */; };
 		5F28BC341F3388AF003E013F /* ScaleReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F28BC331F3388AF003E013F /* ScaleReference.swift */; };
 		5F30D4DC1F16CD68006A45B1 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F30D4DB1F16CD68006A45B1 /* Planet.swift */; };
@@ -41,6 +43,7 @@
 		5FBAF9751EE8B78400FAA54B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FBAF9731EE8B78400FAA54B /* Main.storyboard */; };
 		5FBAF9771EE8B78400FAA54B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBAF9761EE8B78400FAA54B /* Assets.xcassets */; };
 		5FBAF97A1EE8B78400FAA54B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FBAF9781EE8B78400FAA54B /* LaunchScreen.storyboard */; };
+		5FBD07DD221693B30060A6C0 /* PlanetDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBD07DC221693B30060A6C0 /* PlanetDataSource.swift */; };
 		5FC65CD81F01C93600D8C9CB /* Sun.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FC65CD71F01C93600D8C9CB /* Sun.scn */; };
 		5FC65CDA1F01C98800D8C9CB /* Mercury.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FC65CD91F01C98800D8C9CB /* Mercury.scn */; };
 		5FC65CDD1F02315000D8C9CB /* Jupiter.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FC65CDC1F02315000D8C9CB /* Jupiter.scn */; };
@@ -59,6 +62,9 @@
 		5FDD81E51F0DBD2D00F0B92D /* Venus.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FB0E6761F05D26E00B3000B /* Venus.scn */; };
 		5FDD81E61F0DBD2D00F0B92D /* Mars.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5F27FD171F061C5200498524 /* Mars.scn */; };
 		5FDD81E71F0DBD4000F0B92D /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBAF96F1EE8B78400FAA54B /* art.scnassets */; };
+		5FDE10942215B8DF00607C0A /* HUDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDE10932215B8DF00607C0A /* HUDView.xib */; };
+		5FDE10962215B92200607C0A /* HUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDE10952215B92200607C0A /* HUDView.swift */; };
+		5FDE10982215B99C00607C0A /* HUDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDE10972215B99C00607C0A /* HUDViewController.swift */; };
 		5FF9CEF11EE9C00D00A84513 /* SceneKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF9CEF01EE9C00D00A84513 /* SceneKitExtension.swift */; };
 		65E69A70C61562F94B2514E1 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46267284C2EBEFD65B20CCA6 /* CoreText.framework */; };
 		81F43EDC0F64A38CEE5F37C2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F19230B2264C6E45B5CA90A /* AVFoundation.framework */; };
@@ -89,6 +95,8 @@
 		46267284C2EBEFD65B20CCA6 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		5F0662BA1F1D1F6600D66563 /* PlanetCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetCollectionViewController.swift; sourceTree = "<group>"; };
 		5F0CC2131F2814BD00E25474 /* Mixpanel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mixpanel.framework; path = Carthage/Build/iOS/Mixpanel.framework; sourceTree = "<group>"; };
+		5F0E92062215D88B000D1EA9 /* PlanetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlanetCell.xib; sourceTree = "<group>"; };
+		5F0E92082215D895000D1EA9 /* PlanetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetCell.swift; sourceTree = "<group>"; };
 		5F255D8A1F2BA0A400E9F62E /* DocumentationScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = DocumentationScene.scn; path = art.scnassets/DocumentationScene.scn; sourceTree = "<group>"; };
 		5F27FD171F061C5200498524 /* Mars.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Mars.scn; path = art.scnassets/Mars.scn; sourceTree = "<group>"; };
 		5F28BC331F3388AF003E013F /* ScaleReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleReference.swift; sourceTree = "<group>"; };
@@ -119,6 +127,7 @@
 		5FBAF9761EE8B78400FAA54B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5FBAF9791EE8B78400FAA54B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FBAF97B1EE8B78400FAA54B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5FBD07DC221693B30060A6C0 /* PlanetDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetDataSource.swift; sourceTree = "<group>"; };
 		5FC65CD71F01C93600D8C9CB /* Sun.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Sun.scn; path = art.scnassets/Sun.scn; sourceTree = "<group>"; };
 		5FC65CD91F01C98800D8C9CB /* Mercury.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Mercury.scn; path = art.scnassets/Mercury.scn; sourceTree = "<group>"; };
 		5FC65CDC1F02315000D8C9CB /* Jupiter.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Jupiter.scn; path = art.scnassets/Jupiter.scn; sourceTree = "<group>"; };
@@ -130,6 +139,9 @@
 		5FDD81D61F0DBB8C00F0B92D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5FDD81D91F0DBB8C00F0B92D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FDD81DB1F0DBB8C00F0B92D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5FDE10932215B8DF00607C0A /* HUDView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HUDView.xib; sourceTree = "<group>"; };
+		5FDE10952215B92200607C0A /* HUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDView.swift; sourceTree = "<group>"; };
+		5FDE10972215B99C00607C0A /* HUDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDViewController.swift; sourceTree = "<group>"; };
 		5FF9CEF01EE9C00D00A84513 /* SceneKitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKitExtension.swift; sourceTree = "<group>"; };
 		84A97186C5D8E146BE8573A1 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		8CADC108C15A59E1D0BE2296 /* Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
@@ -190,6 +202,10 @@
 				5F3B335F220FEA5400F961C1 /* TutorialView.xib */,
 				5F3B33672213DE0800F961C1 /* AboutView.xib */,
 				5F3B336E2213E1A800F961C1 /* AboutView.swift */,
+				5FDE10932215B8DF00607C0A /* HUDView.xib */,
+				5FDE10952215B92200607C0A /* HUDView.swift */,
+				5F0E92062215D88B000D1EA9 /* PlanetCell.xib */,
+				5F0E92082215D895000D1EA9 /* PlanetCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -199,6 +215,7 @@
 			children = (
 				5F3B33652213DD6D00F961C1 /* TutorialViewController.swift */,
 				5FBAF9711EE8B78400FAA54B /* ViewController.swift */,
+				5FDE10972215B99C00607C0A /* HUDViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -235,6 +252,7 @@
 		5FBAF96C1EE8B78400FAA54B /* SolarSystem */ = {
 			isa = PBXGroup;
 			children = (
+				5FBD07DB221693A40060A6C0 /* Data */,
 				5F3B33692213DE5D00F961C1 /* ViewControllers */,
 				5F3B335E220FEA3B00F961C1 /* Views */,
 				5F8B38C31F74CABC00F0F7D1 /* Focus Square */,
@@ -265,6 +283,14 @@
 				5FA2CD1C1F5A7B8E00E870A5 /* nasalization-rg.ttf */,
 			);
 			path = SolarSystem;
+			sourceTree = "<group>";
+		};
+		5FBD07DB221693A40060A6C0 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5FBD07DC221693B30060A6C0 /* PlanetDataSource.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		5FDD81CC1F0DBB8C00F0B92D /* SolarSystemScene */ = {
@@ -363,8 +389,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FDE10942215B8DF00607C0A /* HUDView.xib in Resources */,
 				5FA91A751F02C76C00D8AFC1 /* Uranus.scn in Resources */,
 				5F27FD181F061C5200498524 /* Mars.scn in Resources */,
+				5F0E92072215D88B000D1EA9 /* PlanetCell.xib in Resources */,
 				5FA2CD1E1F5A7D5B00E870A5 /* nasalization-rg.ttf in Resources */,
 				5F3B3360220FEA5400F961C1 /* TutorialView.xib in Resources */,
 				5FBAF9701EE8B78400FAA54B /* art.scnassets in Resources */,
@@ -443,6 +471,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FBD07DD221693B30060A6C0 /* PlanetDataSource.swift in Sources */,
 				5F8B38C91F74CCEB00F0F7D1 /* VirtualObjectARView.swift in Sources */,
 				5F0662BB1F1D1F6600D66563 /* PlanetCollectionViewController.swift in Sources */,
 				5F3B336F2213E1A800F961C1 /* AboutView.swift in Sources */,
@@ -451,10 +480,13 @@
 				5FF9CEF11EE9C00D00A84513 /* SceneKitExtension.swift in Sources */,
 				5F30D4DF1F16CDB7006A45B1 /* PlanetoidGroupNode.swift in Sources */,
 				5FBAF9721EE8B78400FAA54B /* ViewController.swift in Sources */,
+				5FDE10982215B99C00607C0A /* HUDViewController.swift in Sources */,
 				5FBAF96E1EE8B78400FAA54B /* AppDelegate.swift in Sources */,
 				5F9126B61F2F8EAE00678A8F /* PinchController.swift in Sources */,
 				5F28BC341F3388AF003E013F /* ScaleReference.swift in Sources */,
 				5F3B33662213DD6D00F961C1 /* TutorialViewController.swift in Sources */,
+				5FDE10962215B92200607C0A /* HUDView.swift in Sources */,
+				5F0E92092215D895000D1EA9 /* PlanetCell.swift in Sources */,
 				5F8B38C71F74CAE900F0F7D1 /* FocusSquareSegment.swift in Sources */,
 				5FAD55E21F50852F0016B04E /* DatePickerViewController.swift in Sources */,
 				5F78D70E1F3D222A0059FDA1 /* AppRater.swift in Sources */,

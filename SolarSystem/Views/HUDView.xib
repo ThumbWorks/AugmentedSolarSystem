@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HUDView" customModule="SolAR" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="372" height="364"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PGq-Ym-ha7" userLabel="BackgroundView">
+                    <rect key="frame" x="10" y="216" width="352" height="148"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BV7-pR-ujV">
+                    <rect key="frame" x="20" y="226" width="332" height="128"/>
+                    <subviews>
+                        <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6Iq-rI-qJf">
+                            <rect key="frame" x="0.0" y="0.0" width="161" height="128"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9y-S9-orx">
+                                    <rect key="frame" x="0.0" y="0.0" width="161" height="32"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Axial" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmp-07-Y96">
+                                    <rect key="frame" x="0.0" y="32" width="161" height="32"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Radius" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agX-PC-hhH">
+                                    <rect key="frame" x="0.0" y="64" width="161" height="32"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HiL-Ob-Zmu">
+                                    <rect key="frame" x="0.0" y="96" width="161" height="32"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="YgI-yX-FIw" userLabel="PlanetCollectionView">
+                            <rect key="frame" x="171" y="0.0" width="161" height="128"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5dX-kn-cQL">
+                                <size key="itemSize" width="50" height="50"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="PGq-Ym-ha7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="7Se-Vh-dux"/>
+                <constraint firstItem="BV7-pR-ujV" firstAttribute="leading" secondItem="PGq-Ym-ha7" secondAttribute="leading" constant="10" id="PK8-yw-5IY"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="PGq-Ym-ha7" secondAttribute="trailing" constant="10" id="dbz-3H-CRN"/>
+                <constraint firstItem="PGq-Ym-ha7" firstAttribute="bottom" secondItem="BV7-pR-ujV" secondAttribute="bottom" constant="10" id="fW5-Hn-89o"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="PGq-Ym-ha7" secondAttribute="bottom" id="of1-Og-p9F"/>
+                <constraint firstItem="BV7-pR-ujV" firstAttribute="top" secondItem="PGq-Ym-ha7" secondAttribute="top" constant="10" id="oha-SP-2On"/>
+                <constraint firstItem="PGq-Ym-ha7" firstAttribute="trailing" secondItem="BV7-pR-ujV" secondAttribute="trailing" constant="10" id="rjF-TW-Qjd"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="axial" destination="gmp-07-Y96" id="a0z-14-V0u"/>
+                <outlet property="collectionView" destination="YgI-yX-FIw" id="8H2-li-dHb"/>
+                <outlet property="distance" destination="HiL-Ob-Zmu" id="mJ1-0a-73b"/>
+                <outlet property="radius" destination="agX-PC-hhH" id="cG4-yz-IhY"/>
+                <outlet property="title" destination="S9y-S9-orx" id="GCM-EI-Yrx"/>
+            </connections>
+            <point key="canvasLocation" x="136" y="17.091454272863569"/>
+        </view>
+    </objects>
+</document>
