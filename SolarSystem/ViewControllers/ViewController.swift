@@ -164,7 +164,7 @@ class ViewController: UIViewController {
 
         // reset hudBottomConstraint
         // start the hud out of view
-        toggleHUD(toShowingState: true, animated: false)
+        toggleHUD(toShowingState: false, animated: false)
 
         toggleDatePicker(toShowingState: false, animated: false)
         
@@ -253,10 +253,15 @@ class ViewController: UIViewController {
     }
 
     func toggleHUD(toShowingState: Bool, animated: Bool = true) {
-        let hudViewController = HUDViewController()
-        hudViewController.modalPresentationStyle = .custom
-        hudViewController.transitioningDelegate = self
-        present(hudViewController, animated: true)
+        if toShowingState {
+            let hudViewController = HUDViewController()
+            hudViewController.modalPresentationStyle = .custom
+            hudViewController.transitioningDelegate = self
+            present(hudViewController, animated: true)
+        } else if let hud = presentedViewController as? HUDViewController {
+            dismiss(animated: true)
+        }
+
     }
 }
 
@@ -707,7 +712,7 @@ extension ViewController: ARSCNViewDelegate {
     
     func updateUIAfterPlacingObjects(_ node: SCNNode, radius: Float) {
         // move the HUD so it's visible
-//        self.toggleHUD(toShowingState: true)
+        self.toggleHUD(toShowingState: true)
 
 //        self.collectionViewController?.hintScrollable()
 
