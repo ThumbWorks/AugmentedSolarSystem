@@ -32,19 +32,33 @@ class HUDViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-
         let reuse = PlanetCell.reuseIdentifier
         let nib = UINib(nibName: reuse,
                         bundle: nil)
         HUD.collectionView.register(nib,
                                     forCellWithReuseIdentifier: reuse)
         HUD.collectionView.dataSource = dataSource
+        HUD.collectionView.delegate = self
+
+        // set a default value
+        let viewModel = Planet.sun.hudViewModel()
+        HUD.updateWith(viewModel: viewModel)
     }
 
     override func viewDidLayoutSubviews() {
         if let layout = HUD.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            let dimension = HUD.collectionView.frame.size.height
-            layout.itemSize = CGSize(width: dimension, height: dimension)
+            layout.itemSize = HUD.collectionView.frame.size
         }
+    }
+}
+
+extension HUDViewController: UICollectionViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset
+        guard let indexPath = self.HUD.collectionView.indexPathForItem(at: offset) else {
+            return
+        }
+        let planet = dataSource.planets[indexPath.row]
+        HUD.updateWith(viewModel: planet.hudViewModel())
     }
 }
