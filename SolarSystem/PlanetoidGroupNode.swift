@@ -162,14 +162,6 @@ struct SolarSystemNodes {
         }
     }
     
-    func updateSpeed(_ value: Double) {
-        _ = planetoids.map { (planet, node) in
-            if let planetNode = node.planetNode {
-                node.beginRotation(planet: planet, node: planetNode, multiplier: value)
-            }
-        }
-    }
-    
     func updateLookat(selected planet: Planet, arrowNode: SCNNode) {
         for (solarSystemPlanet, planetoidGroup) in planetoids {
             if planet == solarSystemPlanet {

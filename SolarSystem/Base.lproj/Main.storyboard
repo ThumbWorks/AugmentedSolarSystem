@@ -31,22 +31,11 @@
                                 </connections>
                             </arscnView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KlY-l3-zEO">
-                                <rect key="frame" x="162.66666666666666" y="608" width="49.666666666666657" height="20"/>
+                                <rect key="frame" x="166.66666666666666" y="608" width="41.666666666666657" height="20"/>
                                 <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lYO-0m-ZgV" userLabel="Hide Collection">
-                                <rect key="frame" x="345" y="602" width="30" height="36"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="20"/>
-                                <state key="normal" title="▼">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="toggleHUD:" destination="BV1-FR-VrT" eventType="touchUpInside" id="17Z-yS-oer"/>
-                                </connections>
-                            </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zEO-LC-Gb3">
                                 <rect key="frame" x="0.0" y="638" width="375" height="174"/>
                                 <constraints>
@@ -54,9 +43,9 @@
                                 </constraints>
                             </containerView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vDu-Ri-qEF">
-                                <rect key="frame" x="0.0" y="0.0" width="68" height="279"/>
+                                <rect key="frame" x="0.0" y="0.0" width="68" height="278"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ivz-KO-xgr">
-                                    <rect key="frame" x="0.0" y="0.0" width="68" height="279"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="68" height="278"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <blurEffect style="light"/>
@@ -100,7 +89,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMR-IA-p4n">
-                                <rect key="frame" x="10.666666666666664" y="246" width="47" height="33"/>
+                                <rect key="frame" x="15" y="246" width="38" height="32"/>
                                 <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="17"/>
                                 <state key="normal" title="reset">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -149,7 +138,6 @@
                             <constraint firstAttribute="bottom" secondItem="zEO-LC-Gb3" secondAttribute="bottom" id="agn-eF-OC7"/>
                             <constraint firstItem="omW-cd-Viv" firstAttribute="top" secondItem="3Do-Nz-vPN" secondAttribute="bottom" id="amZ-Ig-BdL"/>
                             <constraint firstItem="GMR-IA-p4n" firstAttribute="bottom" secondItem="vDu-Ri-qEF" secondAttribute="bottom" id="cqZ-fq-HEV"/>
-                            <constraint firstItem="zEO-LC-Gb3" firstAttribute="top" secondItem="lYO-0m-ZgV" secondAttribute="bottom" id="dAF-rb-jT5"/>
                             <constraint firstItem="0Sn-fk-BUk" firstAttribute="trailing" secondItem="zEO-LC-Gb3" secondAttribute="trailing" id="kqR-qf-mnv"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="l9v-9V-kOQ"/>
                             <constraint firstItem="GMR-IA-p4n" firstAttribute="centerX" secondItem="yOl-4w-DAM" secondAttribute="centerX" id="lRz-Y2-kKp"/>
@@ -170,7 +158,6 @@
                         <outlet property="dateButton" destination="V0l-HH-Eoi" id="9VI-ko-7O6"/>
                         <outlet property="datePickerBottomConstraint" destination="MbN-KJ-ej8" id="O1d-G0-12m"/>
                         <outlet property="datePickerHeightConstraint" destination="Nr3-pW-0yW" id="eb7-nQ-Kn0"/>
-                        <outlet property="hideHUDButton" destination="lYO-0m-ZgV" id="a0J-93-PfN"/>
                         <outlet property="orbitScaleButton" destination="omW-cd-Viv" id="MI9-j8-g6n"/>
                         <outlet property="orbitShowButton" destination="3Do-Nz-vPN" id="zSU-de-6Bl"/>
                         <outlet property="planetScaleButton" destination="yOl-4w-DAM" id="f4p-2q-RFJ"/>
@@ -183,7 +170,6 @@
                         <outletCollection property="toggleViews" destination="V0l-HH-Eoi" collectionClass="NSMutableArray" id="6At-js-072"/>
                         <outletCollection property="toggleViews" destination="t8K-3O-Oc1" collectionClass="NSMutableArray" id="6JU-uh-Nxb"/>
                         <outletCollection property="toggleViews" destination="GMR-IA-p4n" collectionClass="NSMutableArray" id="T8p-TA-8FD"/>
-                        <outletCollection property="toggleViews" destination="lYO-0m-ZgV" collectionClass="NSMutableArray" id="BWe-aZ-8qL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>

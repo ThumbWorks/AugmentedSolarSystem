@@ -16,7 +16,6 @@ class ViewController: UIViewController {
     var startTime: TimeInterval = 0
     var startDate = Date()
     var displayedDate = Date()
-    var displaySpeed: Double = 1
 
     lazy var dateFormatter = { () -> DateFormatter in
         // TODO This should happen once. 
@@ -38,12 +37,8 @@ class ViewController: UIViewController {
     var done = false
     var scalingOrbitUp = false
     var scaleSizeUp = false
-
     @IBOutlet var toggleViews: [UIView]!
-    
-    @IBOutlet weak var hideHUDButton: UIButton!
     @IBOutlet weak var dateButton: UIButton!
-    @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var planetScaleButton: UIButton!
     @IBOutlet weak var orbitScaleButton: UIButton!
     @IBOutlet weak var orbitShowButton: UIButton!
@@ -185,11 +180,14 @@ class ViewController: UIViewController {
         resetToDetectedPlane()
         
         collectionViewController?.changeToPlanet(name: Planet.sun.name)
-
+        #if !targetEnvironment(simulator)
         let tutorial = TutorialViewController()
         tutorial.definesPresentationContext = true
         tutorial.modalPresentationStyle = .overCurrentContext
         present(tutorial, animated: true)
+        #else
+        toggleHUD(toShowingState: true)
+        #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -258,10 +256,9 @@ class ViewController: UIViewController {
             hudViewController.modalPresentationStyle = .custom
             hudViewController.transitioningDelegate = self
             present(hudViewController, animated: true)
-        } else if let hud = presentedViewController as? HUDViewController {
+        } else if presentedViewController as? HUDViewController == nil {
             dismiss(animated: true)
         }
-
     }
 }
 
@@ -295,7 +292,9 @@ class HUDPresentationController: UIPresentationController {
 }
 
 extension ViewController: UIViewControllerTransitioningDelegate {
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+    func presentationController(forPresented presented: UIViewController,
+                                presenting: UIViewController?,
+                                source: UIViewController) -> UIPresentationController? {
         return HUDPresentationController.init(presentedViewController: presented, presenting: presenting)
     }
 }
@@ -327,20 +326,6 @@ extension ViewController {
     @IBAction func toggleDateSelector(_ button: UIButton) {
         let isUp = datePickerBottomConstraint.constant == 0
         toggleDatePicker(toShowingState: !isUp)
-    }
- 
-    @IBAction func pausePressed(_ button: UIButton) {
-        displaySpeed = 0
-        solarSystemNodes.updateSpeed(displaySpeed)
-    }
-    
-    @IBAction func slowDown(_ sender: UIButton) {
-        displaySpeed = displaySpeed - 1
-        solarSystemNodes.updateSpeed(displaySpeed)
-    }
-    @IBAction func speedUp(_ sender: UIButton) {
-        displaySpeed = displaySpeed + 1
-        solarSystemNodes.updateSpeed(displaySpeed)
     }
     
     @IBAction func pinchedScreen(_ sender: UIPinchGestureRecognizer) {
