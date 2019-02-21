@@ -31,7 +31,8 @@ class ViewController: UIViewController {
     }
     
     var datePicker: DatePickerViewController?
-    
+    var hudViewController: HUDViewController?
+
     @IBOutlet var status: UILabel!
     @IBOutlet var sceneView: VirtualObjectARView!
     var done = false
@@ -249,12 +250,12 @@ class ViewController: UIViewController {
             datePicker?.datePicker.setDate(displayedDate, animated: false)
         }
     }
-
     func toggleHUD(toShowingState: Bool, animated: Bool = true) {
         if toShowingState {
             let hudViewController = HUDViewController()
             hudViewController.modalPresentationStyle = .custom
             hudViewController.transitioningDelegate = self
+            self.hudViewController = hudViewController
             present(hudViewController, animated: true)
         } else if presentedViewController as? HUDViewController == nil {
             dismiss(animated: true)
@@ -594,15 +595,7 @@ extension ViewController: ARSCNViewDelegate {
         DispatchQueue.main.async {
             self.updateFocusSquare()
             self.updateLabel()
-//            self.updateDateString(newDate)
-
-            if let planet = self.collectionViewController?.currentPlanet, let meters = distances[planet] {
-                var distanceString = ""
-                distanceString =  "\(meters.format(f: ".1")) real meters away"
-                self.collectionViewController?.updateDistance(distanceString)
-            }
-            //TODO come back to this
-//            self.collectionViewController?.updateReferenceSize(sizes)
+            self.hudViewController?.update(with: distances)
             let arrowNode = self.arrowNode
             if let constraints = arrowNode.constraints {
                 let lookats: [SCNLookAtConstraint] = constraints.filter({ (constraint) -> Bool in

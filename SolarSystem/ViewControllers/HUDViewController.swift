@@ -30,7 +30,15 @@ class HUDViewController: UIViewController {
     override func loadView() {
         view = HUD
     }
-    
+
+    func update(with distances: [Planet: Float]) {
+        if let focusPath = HUD.collectionView.indexPathsForVisibleItems.first {
+            let focusPlanet = dataSource.planets[focusPath.row]
+            let metersAway = distances[focusPlanet] ?? 0
+            HUD.distance.text = "\(metersAway.format(f: ".1")) real meters away"
+        }
+    }
+
     override func viewDidLoad() {
         let reuse = PlanetCell.reuseIdentifier
         let nib = UINib(nibName: reuse,
