@@ -19,9 +19,10 @@ class ViewController: UIViewController {
 
     var hiddenConstraint: NSLayoutConstraint?
     var showingConstraint: NSLayoutConstraint?
+    var hiddenMenuConstraint: NSLayoutConstraint?
+    var showingMenuConstraint: NSLayoutConstraint?
 
     lazy var dateFormatter = { () -> DateFormatter in
-        // TODO This should happen once. 
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
@@ -35,17 +36,13 @@ class ViewController: UIViewController {
     
     var datePicker: DatePickerViewController?
     let hudViewController = HUDViewController()
+    let menuViewController = MenuContainerViewController()
 
     @IBOutlet var status: UILabel!
     @IBOutlet var sceneView: VirtualObjectARView!
     var done = false
     var scalingOrbitUp = false
     var scaleSizeUp = false
-    @IBOutlet var toggleViews: [UIView]!
-    @IBOutlet weak var dateButton: UIButton!
-    @IBOutlet weak var planetScaleButton: UIButton!
-    @IBOutlet weak var orbitScaleButton: UIButton!
-    @IBOutlet weak var orbitShowButton: UIButton!
 
     var anchorWidth: Float?
     let cameraState: ARCamera.TrackingState = .normal
@@ -85,7 +82,7 @@ class ViewController: UIViewController {
         Mixpanel.sharedInstance()?.track("view did load")
         
         // hide the toggleviews
-        toggleViews.forEach { $0.isHidden = true }
+        toggleMenu(toShowingState: false)
 
         // Set the view's delegate
         sceneView.delegate = self
@@ -95,19 +92,32 @@ class ViewController: UIViewController {
         sceneView.scene.rootNode.addChildNode(focusSquare)
 
 //        updateDateString(displayedDate)
-
-        view.addSubview(hudViewController.view)
-        hiddenConstraint = hudViewController.view.topAnchor.constraint(equalTo: view.bottomAnchor)
-        showingConstraint = view.bottomAnchor.constraint(equalTo: hudViewController.view.bottomAnchor)
-        showingConstraint?.constant = 20
-        hiddenConstraint?.isActive = true
-        hudViewController.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        addSuplementalViews()
 
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
-    
+
+    private func addSuplementalViews() {
+        view.addSubview(hudViewController.view)
+        hiddenConstraint = hudViewController.view.topAnchor
+            .constraint(equalTo: view.bottomAnchor)
+        showingConstraint = view.bottomAnchor
+            .constraint(equalTo: hudViewController.view.bottomAnchor)
+        showingConstraint?.constant = 20
+        hiddenConstraint?.isActive = true
+        hudViewController.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+        view.addSubview(menuViewController.view)
+        menuViewController.view.leftAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
+        menuViewController.view.topAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        menuViewController.menuContainer.delegate = self
+    }
+
+
     @objc func willEnterForeground() {
         restartEverything()
     }
@@ -169,14 +179,14 @@ class ViewController: UIViewController {
 
         // reset hudBottomConstraint
         // start the hud out of view
-        toggleHUD(toShowingState: false, animated: false)
+//        toggleHUD(toShowingState: false, animated: false)
 
         toggleDatePicker(toShowingState: false, animated: false)
         
         done = false
 
         // hide the toggleViews
-        toggleViews.forEach { $0.isHidden = true }
+        toggleMenu(toShowingState: false)
 
         solarSystemNodes.removeAllNodesFromParent()
         
@@ -259,9 +269,20 @@ class ViewController: UIViewController {
         }
     }
 
+    func toggleMenu(toShowingState: Bool, animated: Bool = true) {
+        hiddenMenuConstraint?.isActive = !toShowingState
+        showingMenuConstraint?.isActive = toShowingState
+        UIView.animate(withDuration: animated ? 0.5 : 0.0,
+                       delay: 1,
+                       options: .curveEaseInOut,
+                       animations: {
+                        self.view.layoutIfNeeded()
+        })
+    }
+
     func toggleHUD(toShowingState: Bool, animated: Bool = true) {
-        self.hiddenConstraint?.isActive = !toShowingState
-        self.showingConstraint?.isActive = toShowingState
+        hiddenConstraint?.isActive = !toShowingState
+        showingConstraint?.isActive = toShowingState
         UIView.animate(withDuration: animated ? 0.5 : 0.0,
                        delay: 1,
                        options: .curveEaseInOut,
@@ -271,10 +292,8 @@ class ViewController: UIViewController {
     }
 }
 
-// IBActions
-extension ViewController {
-    
-    @IBAction func tappedInfo(_ button: UIButton) {
+extension ViewController: MenuContainerViewDelegate {
+    func container(_ view: MenuContainerView, didTapInfoButton button: UIButton) {
         let aboutView: AboutView
         do {
             aboutView = try SwiftMessages.viewFromNib(named: "AboutView")
@@ -296,10 +315,63 @@ extension ViewController {
         SwiftMessages.show(config: config, view: aboutView)
     }
 
-    @IBAction func toggleDateSelector(_ button: UIButton) {
+    func container(_ view: MenuContainerView, didTapDateButton button: UIButton) {
         let isUp = datePickerBottomConstraint.constant == 0
         toggleDatePicker(toShowingState: !isUp)
     }
+
+    private func resetToDetectedPlane() {
+        guard let anchorWidth = anchorWidth else {
+            print("Tapped reset without an anchorWidth")
+            return
+        }
+        let radius = anchorWidth / 2
+        scaleSizeUp = !scaleSizeUp
+
+        solarSystemNodes.scalePlanets(to: radius)
+
+        // show the orbits
+        solarSystemNodes.toggleOrbitPaths(hidden: false)
+    }
+
+    func container(_ view: MenuContainerView, didTapResetButton button: UIButton) {
+        Mixpanel.sharedInstance()?.track("tapped reset to detected plane")
+        resetToDetectedPlane()
+    }
+
+    func container(_ view: MenuContainerView, didTapTogglePathsButton button: UIButton) {
+        Mixpanel.sharedInstance()?.track("toggled paths")
+        let currentlyShowing = solarSystemNodes.showingPaths()
+        solarSystemNodes.toggleOrbitPaths(hidden: !currentlyShowing)
+        button.setImage(!currentlyShowing ? #imageLiteral(resourceName: "Hide Orbit Selected") : #imageLiteral(resourceName: "Hide Orbit"), for: .normal)
+    }
+
+    func container(_ view: MenuContainerView, didTapToggleOrbitScaleButton button: UIButton) {
+        Mixpanel.sharedInstance()?.track("change orbit scale")
+
+        // toggle the state
+        scalingOrbitUp = !scalingOrbitUp
+
+        button.setImage(scalingOrbitUp ? #imageLiteral(resourceName: "Scale Orbit Selected") : #imageLiteral(resourceName: "Scale Orbit"), for: .normal)
+
+        solarSystemNodes.scaleOrbit(scalingUp: scalingOrbitUp)
+    }
+
+    func container(_ view: MenuContainerView, didTapToggleSizeScaleButton button: UIButton) {
+        Mixpanel.sharedInstance()?.track("change size scale")
+
+        // toggle the state
+        scaleSizeUp = !scaleSizeUp
+
+        button.setImage(scaleSizeUp ? #imageLiteral(resourceName: "Scale Planets Selected") : #imageLiteral(resourceName: "Scale Planets"), for: .normal)
+
+        // do the scale
+        solarSystemNodes.scaleNodes(scaleUp: scaleSizeUp)
+    }
+}
+
+// IBActions
+extension ViewController {
     
     @IBAction func pinchedScreen(_ sender: UIPinchGestureRecognizer) {
         pincher?.pinch(with: sender)
@@ -380,58 +452,7 @@ extension ViewController {
             }
         }
     }
-    
-    // This is essentially reset
-    @IBAction func resetToDetectedPlane() {
-        Mixpanel.sharedInstance()?.track("tapped reset to detected plane")
-        guard let anchorWidth = anchorWidth else {
-            print("Tapped reset without an anchorWidth")
-            return
-        }
-        let radius = anchorWidth / 2
-        scaleSizeUp = !scaleSizeUp
-        
-        solarSystemNodes.scalePlanets(to: radius)
-        
-        orbitShowButton.setImage(#imageLiteral(resourceName: "Hide Orbit"), for: .normal)
-        orbitScaleButton.setImage(#imageLiteral(resourceName: "Scale Orbit"), for: .normal)
-        planetScaleButton.setImage(#imageLiteral(resourceName: "Scale Planets"), for: .normal)
-        
-        // show the orbits
-        solarSystemNodes.toggleOrbitPaths(hidden: false)
-        orbitShowButton.setImage(#imageLiteral(resourceName: "Hide Orbit"), for: .normal)
-    }
-    
-    @IBAction func togglePaths(_ button: UIButton) {
-        Mixpanel.sharedInstance()?.track("toggled paths")
-        let currentlyShowing = solarSystemNodes.showingPaths()
-        solarSystemNodes.toggleOrbitPaths(hidden: !currentlyShowing)
-        button.setImage(!currentlyShowing ? #imageLiteral(resourceName: "Hide Orbit Selected") : #imageLiteral(resourceName: "Hide Orbit"), for: .normal)
-    }
-    
-    @IBAction func changeOrbitScaleTapped(_ button: UIButton) {
-        Mixpanel.sharedInstance()?.track("change orbit scale")
-        
-        // toggle the state
-        scalingOrbitUp = !scalingOrbitUp
-        
-        button.setImage(scalingOrbitUp ? #imageLiteral(resourceName: "Scale Orbit Selected") : #imageLiteral(resourceName: "Scale Orbit"), for: .normal)
-        
-        solarSystemNodes.scaleOrbit(scalingUp: scalingOrbitUp)
-    }
-    
-    @IBAction func changeSizeScaleTapped(_ button: UIButton) {
-        Mixpanel.sharedInstance()?.track("change size scale")
-        
-        // toggle the state
-        scaleSizeUp = !scaleSizeUp
-        
-        button.setImage(scaleSizeUp ? #imageLiteral(resourceName: "Scale Planets Selected") : #imageLiteral(resourceName: "Scale Planets"), for: .normal)
-        
-        // do the scale
-        solarSystemNodes.scaleNodes(scaleUp: scaleSizeUp)
-    }
-    
+
     func updateLabel() {
         return
 
@@ -682,9 +703,8 @@ extension ViewController: ARSCNViewDelegate {
             let light = SCNNode.omniLight(lightVector)
             node.addChildNode(light)
         }
-        
-        // unhide the toggleViews
-        toggleViews.forEach { $0.isHidden = false }
+
+        toggleMenu(toShowingState: true)
 
         self.done = true
         self.solarSystemNodes.scalePlanets(to: radius / 2)

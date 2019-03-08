@@ -31,7 +31,7 @@
                                 </connections>
                             </arscnView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KlY-l3-zEO">
-                                <rect key="frame" x="166.66666666666666" y="608" width="41.666666666666657" height="20"/>
+                                <rect key="frame" x="163" y="608" width="49.333333333333343" height="20"/>
                                 <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -42,69 +42,6 @@
                                     <constraint firstAttribute="height" constant="174" id="vRk-96-Kbf"/>
                                 </constraints>
                             </containerView>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vDu-Ri-qEF">
-                                <rect key="frame" x="0.0" y="0.0" width="68" height="278"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ivz-KO-xgr">
-                                    <rect key="frame" x="0.0" y="0.0" width="68" height="278"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Do-Nz-vPN" userLabel="Hide Orbit">
-                                <rect key="frame" x="10" y="62" width="48" height="48"/>
-                                <color key="tintColor" red="0.30481991520000001" green="0.71632218299999995" blue="0.41153339500000002" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" image="Hide Orbit"/>
-                                <state key="selected" image="ScaleOrbit"/>
-                                <state key="highlighted" image="Hide Orbit Selected"/>
-                                <connections>
-                                    <action selector="togglePaths:" destination="BV1-FR-VrT" eventType="touchUpInside" id="hJ9-gB-faN"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="omW-cd-Viv" userLabel="Scale Orbit">
-                                <rect key="frame" x="10" y="110" width="48" height="48"/>
-                                <color key="tintColor" red="0.0" green="0.53333333329999999" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="Scale Orbit"/>
-                                <state key="highlighted" image="Scale Orbit Selected"/>
-                                <connections>
-                                    <action selector="changeOrbitScaleTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Lvv-5D-ecu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yOl-4w-DAM" userLabel="Scale Planets">
-                                <rect key="frame" x="10" y="158" width="48" height="48"/>
-                                <state key="normal" image="Scale Planets"/>
-                                <state key="highlighted" image="Scale Planets Selected"/>
-                                <connections>
-                                    <action selector="changeSizeScaleTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="0TY-Lm-fRB"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0l-HH-Eoi">
-                                <rect key="frame" x="14" y="206" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Bpa-h0-V3c"/>
-                                    <constraint firstAttribute="width" constant="40" id="P1i-qT-xh7"/>
-                                </constraints>
-                                <state key="normal" image="Clock"/>
-                                <connections>
-                                    <action selector="toggleDateSelector:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Ml9-gy-QZ0"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMR-IA-p4n">
-                                <rect key="frame" x="15" y="246" width="38" height="32"/>
-                                <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="17"/>
-                                <state key="normal" title="reset">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="resetToDetectedPlane" destination="BV1-FR-VrT" eventType="touchUpInside" id="cqN-ti-aJ5"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8K-3O-Oc1" userLabel="info">
-                                <rect key="frame" x="23" y="40" width="22" height="22"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="tappedInfo:" destination="BV1-FR-VrT" eventType="touchUpInside" id="qos-uy-d4B"/>
-                                </connections>
-                            </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyC-bJ-Kac">
                                 <rect key="frame" x="0.0" y="532" width="375" height="280"/>
                                 <constraints>
@@ -118,36 +55,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="0Sn-fk-BUk" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yOl-4w-DAM" secondAttribute="trailing" symbolic="YES" id="2vb-OU-kFN"/>
-                            <constraint firstItem="3Do-Nz-vPN" firstAttribute="top" secondItem="t8K-3O-Oc1" secondAttribute="bottom" id="5FT-A8-Hhs"/>
                             <constraint firstAttribute="trailing" secondItem="uyC-bJ-Kac" secondAttribute="trailing" id="7gk-f6-tuV"/>
                             <constraint firstItem="zEO-LC-Gb3" firstAttribute="top" secondItem="KlY-l3-zEO" secondAttribute="bottom" constant="10" id="7lh-cb-nX7"/>
-                            <constraint firstItem="vDu-Ri-qEF" firstAttribute="trailing" secondItem="3Do-Nz-vPN" secondAttribute="trailing" constant="10" id="93o-7p-OQL"/>
                             <constraint firstItem="zEO-LC-Gb3" firstAttribute="leading" secondItem="0Sn-fk-BUk" secondAttribute="leading" id="Be4-3y-LDa"/>
                             <constraint firstItem="uyC-bJ-Kac" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="DnX-SF-Rbg"/>
-                            <constraint firstItem="V0l-HH-Eoi" firstAttribute="centerX" secondItem="yOl-4w-DAM" secondAttribute="centerX" id="Iym-t5-96B"/>
                             <constraint firstAttribute="bottom" secondItem="uyC-bJ-Kac" secondAttribute="bottom" id="MbN-KJ-ej8"/>
-                            <constraint firstItem="t8K-3O-Oc1" firstAttribute="centerX" secondItem="3Do-Nz-vPN" secondAttribute="centerX" id="Mrb-0j-oqw"/>
-                            <constraint firstAttribute="top" secondItem="vDu-Ri-qEF" secondAttribute="top" id="NLK-5q-TqK"/>
                             <constraint firstItem="KlY-l3-zEO" firstAttribute="centerX" secondItem="Y8e-tj-9vj" secondAttribute="centerX" id="NR6-6d-oJe"/>
                             <constraint firstAttribute="bottom" secondItem="Y8e-tj-9vj" secondAttribute="bottom" id="P79-Rf-TpU"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="top" secondItem="Wef-8h-2Ru" secondAttribute="top" id="PcF-Nr-kPL"/>
-                            <constraint firstItem="3Do-Nz-vPN" firstAttribute="leading" secondItem="0Sn-fk-BUk" secondAttribute="leading" constant="10" id="Ptz-h0-1lJ"/>
                             <constraint firstAttribute="trailing" secondItem="Y8e-tj-9vj" secondAttribute="trailing" id="Rb7-i7-hlA"/>
-                            <constraint firstItem="vDu-Ri-qEF" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="adC-9b-O4o"/>
                             <constraint firstAttribute="bottom" secondItem="zEO-LC-Gb3" secondAttribute="bottom" id="agn-eF-OC7"/>
-                            <constraint firstItem="omW-cd-Viv" firstAttribute="top" secondItem="3Do-Nz-vPN" secondAttribute="bottom" id="amZ-Ig-BdL"/>
-                            <constraint firstItem="GMR-IA-p4n" firstAttribute="bottom" secondItem="vDu-Ri-qEF" secondAttribute="bottom" id="cqZ-fq-HEV"/>
                             <constraint firstItem="0Sn-fk-BUk" firstAttribute="trailing" secondItem="zEO-LC-Gb3" secondAttribute="trailing" id="kqR-qf-mnv"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="l9v-9V-kOQ"/>
-                            <constraint firstItem="GMR-IA-p4n" firstAttribute="centerX" secondItem="yOl-4w-DAM" secondAttribute="centerX" id="lRz-Y2-kKp"/>
-                            <constraint firstItem="yOl-4w-DAM" firstAttribute="top" secondItem="omW-cd-Viv" secondAttribute="bottom" id="nJ3-4N-YW3"/>
-                            <constraint firstItem="0Sn-fk-BUk" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="omW-cd-Viv" secondAttribute="trailing" symbolic="YES" id="o5Q-YV-lMG"/>
-                            <constraint firstItem="V0l-HH-Eoi" firstAttribute="top" secondItem="yOl-4w-DAM" secondAttribute="bottom" id="p09-hb-Mmj"/>
-                            <constraint firstItem="t8K-3O-Oc1" firstAttribute="top" secondItem="vDu-Ri-qEF" secondAttribute="top" constant="40" id="sTe-XU-UrR"/>
-                            <constraint firstItem="yOl-4w-DAM" firstAttribute="leading" secondItem="omW-cd-Viv" secondAttribute="leading" id="t3u-H2-aK5"/>
-                            <constraint firstItem="GMR-IA-p4n" firstAttribute="top" secondItem="V0l-HH-Eoi" secondAttribute="bottom" id="uXh-65-Jdh"/>
-                            <constraint firstItem="omW-cd-Viv" firstAttribute="leading" secondItem="3Do-Nz-vPN" secondAttribute="leading" id="vnc-SI-0ud"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0Sn-fk-BUk"/>
                         <connections>
@@ -155,21 +74,10 @@
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="dateButton" destination="V0l-HH-Eoi" id="9VI-ko-7O6"/>
                         <outlet property="datePickerBottomConstraint" destination="MbN-KJ-ej8" id="O1d-G0-12m"/>
                         <outlet property="datePickerHeightConstraint" destination="Nr3-pW-0yW" id="eb7-nQ-Kn0"/>
-                        <outlet property="orbitScaleButton" destination="omW-cd-Viv" id="MI9-j8-g6n"/>
-                        <outlet property="orbitShowButton" destination="3Do-Nz-vPN" id="zSU-de-6Bl"/>
-                        <outlet property="planetScaleButton" destination="yOl-4w-DAM" id="f4p-2q-RFJ"/>
                         <outlet property="sceneView" destination="Y8e-tj-9vj" id="zCK-fe-vs0"/>
                         <outlet property="status" destination="KlY-l3-zEO" id="F55-OO-f9p"/>
-                        <outletCollection property="toggleViews" destination="yOl-4w-DAM" collectionClass="NSMutableArray" id="QdQ-hv-MSP"/>
-                        <outletCollection property="toggleViews" destination="vDu-Ri-qEF" collectionClass="NSMutableArray" id="Nob-Ub-wZd"/>
-                        <outletCollection property="toggleViews" destination="3Do-Nz-vPN" collectionClass="NSMutableArray" id="r3l-Am-ELn"/>
-                        <outletCollection property="toggleViews" destination="omW-cd-Viv" collectionClass="NSMutableArray" id="kPk-h4-eCV"/>
-                        <outletCollection property="toggleViews" destination="V0l-HH-Eoi" collectionClass="NSMutableArray" id="6At-js-072"/>
-                        <outletCollection property="toggleViews" destination="t8K-3O-Oc1" collectionClass="NSMutableArray" id="6JU-uh-Nxb"/>
-                        <outletCollection property="toggleViews" destination="GMR-IA-p4n" collectionClass="NSMutableArray" id="T8p-TA-8FD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -233,14 +141,4 @@
             <point key="canvasLocation" x="926" y="-193"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Clock" width="48" height="48"/>
-        <image name="Hide Orbit" width="48" height="48"/>
-        <image name="Hide Orbit Selected" width="48" height="48"/>
-        <image name="Scale Orbit" width="48" height="48"/>
-        <image name="Scale Orbit Selected" width="48" height="48"/>
-        <image name="Scale Planets" width="48" height="48"/>
-        <image name="Scale Planets Selected" width="48" height="48"/>
-        <image name="ScaleOrbit" width="44" height="44"/>
-    </resources>
 </document>
