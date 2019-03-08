@@ -29,6 +29,7 @@ class HUDViewController: UIViewController {
 
     override func loadView() {
         view = HUD
+        view.translatesAutoresizingMaskIntoConstraints = false
     }
 
     func update(with distances: [Planet: Float]) {
@@ -47,7 +48,6 @@ class HUDViewController: UIViewController {
                                     forCellWithReuseIdentifier: reuse)
         HUD.collectionView.dataSource = dataSource
         HUD.collectionView.delegate = self
-
         // set a default value
         let viewModel = Planet.sun.hudViewModel()
         HUD.updateWith(viewModel: viewModel)

@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     var startDate = Date()
     var displayedDate = Date()
 
+    var hiddenConstraint: NSLayoutConstraint?
+    var showingConstraint: NSLayoutConstraint?
+
     lazy var dateFormatter = { () -> DateFormatter in
         // TODO This should happen once. 
         let formatter = DateFormatter()
@@ -31,7 +34,7 @@ class ViewController: UIViewController {
     }
     
     var datePicker: DatePickerViewController?
-    var hudViewController: HUDViewController?
+    let hudViewController = HUDViewController()
 
     @IBOutlet var status: UILabel!
     @IBOutlet var sceneView: VirtualObjectARView!
@@ -93,6 +96,13 @@ class ViewController: UIViewController {
 
 //        updateDateString(displayedDate)
 
+        view.addSubview(hudViewController.view)
+        hiddenConstraint = hudViewController.view.topAnchor.constraint(equalTo: view.bottomAnchor)
+        showingConstraint = view.bottomAnchor.constraint(equalTo: hudViewController.view.bottomAnchor)
+        showingConstraint?.constant = 20
+        hiddenConstraint?.isActive = true
+        hudViewController.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
@@ -123,7 +133,6 @@ class ViewController: UIViewController {
         let sessionConfig = ARWorldTrackingConfiguration()
         sceneView.session.run(sessionConfig, options:[])
     }
-    
     
     func updateFocusSquare() {
         
@@ -194,7 +203,6 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         toggleDatePicker(toShowingState: false)
-        toggleHUD(toShowingState: false, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -250,58 +258,22 @@ class ViewController: UIViewController {
             datePicker?.datePicker.setDate(displayedDate, animated: false)
         }
     }
+
     func toggleHUD(toShowingState: Bool, animated: Bool = true) {
-        if toShowingState {
-            let hudViewController = HUDViewController()
-            hudViewController.modalPresentationStyle = .custom
-            hudViewController.transitioningDelegate = self
-            self.hudViewController = hudViewController
-            present(hudViewController, animated: true)
-        } else if presentedViewController as? HUDViewController == nil {
-            dismiss(animated: true)
-        }
-    }
-}
-
-class HUDPresentationController: UIPresentationController {
-    override var frameOfPresentedViewInContainerView: CGRect {
-        guard let containerView = containerView,
-            let presentedView = presentedView else { return .zero }
-
-        let inset: CGFloat = 16
-
-        // Make sure to account for the safe area insets
-        let safeAreaFrame = containerView.bounds
-            .inset(by: containerView.safeAreaInsets)
-
-        let targetWidth = safeAreaFrame.width - 2 * inset
-        let fittingSize = CGSize(
-            width: targetWidth,
-            height: UIView.layoutFittingCompressedSize.height
-        )
-        let targetHeight = presentedView.systemLayoutSizeFitting(
-            fittingSize, withHorizontalFittingPriority: .required,
-            verticalFittingPriority: .defaultLow).height
-
-        var frame = safeAreaFrame
-        frame.origin.x += inset
-        frame.origin.y += frame.size.height - targetHeight - inset
-        frame.size.width = targetWidth
-        frame.size.height = targetHeight
-        return frame
-    }
-}
-
-extension ViewController: UIViewControllerTransitioningDelegate {
-    func presentationController(forPresented presented: UIViewController,
-                                presenting: UIViewController?,
-                                source: UIViewController) -> UIPresentationController? {
-        return HUDPresentationController.init(presentedViewController: presented, presenting: presenting)
+        self.hiddenConstraint?.isActive = !toShowingState
+        self.showingConstraint?.isActive = toShowingState
+        UIView.animate(withDuration: animated ? 0.5 : 0.0,
+                       delay: 1,
+                       options: .curveEaseInOut,
+                       animations: {
+            self.view.layoutIfNeeded()
+        })
     }
 }
 
 // IBActions
 extension ViewController {
+    
     @IBAction func tappedInfo(_ button: UIButton) {
         let aboutView: AboutView
         do {
@@ -595,7 +567,7 @@ extension ViewController: ARSCNViewDelegate {
         DispatchQueue.main.async {
             self.updateFocusSquare()
             self.updateLabel()
-            self.hudViewController?.update(with: distances)
+            self.hudViewController.update(with: distances)
             let arrowNode = self.arrowNode
             if let constraints = arrowNode.constraints {
                 let lookats: [SCNLookAtConstraint] = constraints.filter({ (constraint) -> Bool in
