@@ -101,17 +101,26 @@ class ViewController: UIViewController {
 
     private func addSuplementalViews() {
         view.addSubview(hudViewController.view)
-        hiddenConstraint = hudViewController.view.topAnchor
-            .constraint(equalTo: view.bottomAnchor)
+
         showingConstraint = view.bottomAnchor
             .constraint(equalTo: hudViewController.view.bottomAnchor)
         showingConstraint?.constant = 20
+
+        // hidden state
+        hiddenConstraint = hudViewController.view.topAnchor
+            .constraint(equalTo: view.bottomAnchor)
         hiddenConstraint?.isActive = true
         hudViewController.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
         view.addSubview(menuViewController.view)
-        menuViewController.view.leftAnchor
-            .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
+        showingMenuConstraint = menuViewController.view.leftAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor)
+
+        // hidden state
+        hiddenMenuConstraint = menuViewController.view.rightAnchor
+            .constraint(equalTo: view.leftAnchor)
+        hiddenMenuConstraint?.isActive = true
+
         menuViewController.view.topAnchor
             .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         menuViewController.menuContainer.delegate = self
