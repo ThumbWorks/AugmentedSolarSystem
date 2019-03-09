@@ -109,7 +109,7 @@ class ViewController: UIViewController {
         showingMenuConstraint = menuViewController.view.leftAnchor
             .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor)
         showingMenuConstraint?.constant = 20
-        
+
         // hidden state
         hiddenMenuConstraint = menuViewController.view.rightAnchor
             .constraint(equalTo: view.leftAnchor)
@@ -288,6 +288,20 @@ class ViewController: UIViewController {
             self.view.layoutIfNeeded()
         })
     }
+
+    private func resetToDetectedPlane() {
+        guard let anchorWidth = anchorWidth else {
+            print("Tapped reset without an anchorWidth")
+            return
+        }
+        let radius = anchorWidth / 2
+        scaleSizeUp = !scaleSizeUp
+
+        solarSystemNodes.scalePlanets(to: radius)
+
+        // show the orbits
+        solarSystemNodes.toggleOrbitPaths(hidden: false)
+    }
 }
 
 extension ViewController: MenuContainerViewDelegate {
@@ -316,20 +330,6 @@ extension ViewController: MenuContainerViewDelegate {
     func container(_ view: MenuContainerView, didTapDateButton button: UIButton) {
         let isUp = datePickerBottomConstraint.constant == 0
         toggleDatePicker(toShowingState: !isUp)
-    }
-
-    private func resetToDetectedPlane() {
-        guard let anchorWidth = anchorWidth else {
-            print("Tapped reset without an anchorWidth")
-            return
-        }
-        let radius = anchorWidth / 2
-        scaleSizeUp = !scaleSizeUp
-
-        solarSystemNodes.scalePlanets(to: radius)
-
-        // show the orbits
-        solarSystemNodes.toggleOrbitPaths(hidden: false)
     }
 
     func container(_ view: MenuContainerView, didTapResetButton button: UIButton) {
