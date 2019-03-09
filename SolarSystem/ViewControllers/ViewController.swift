@@ -17,8 +17,8 @@ class ViewController: UIViewController {
     var startDate = Date()
     var displayedDate = Date()
 
-    var hiddenConstraint: NSLayoutConstraint?
-    var showingConstraint: NSLayoutConstraint?
+    var hiddenHUDConstraint: NSLayoutConstraint?
+    var showingHUDConstraint: NSLayoutConstraint?
     var hiddenMenuConstraint: NSLayoutConstraint?
     var showingMenuConstraint: NSLayoutConstraint?
 
@@ -59,13 +59,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var datePickerBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var datePickerHeightConstraint: NSLayoutConstraint!
-    
-    #if DEBUG
-    // For debug purposes, count and color the discovered planes
-    var planeCount = 0
-    let colors: [UIColor] = [.red, .orange, .yellow, .green, .blue, .purple]
-    var debugPlaneAnchorNode: SCNNode?
-    #endif
 
 //    func updateDateString(_ date: Date) {
 //        let dateString = dateFormatter().string(from: date)
@@ -102,20 +95,21 @@ class ViewController: UIViewController {
     private func addSuplementalViews() {
         view.addSubview(hudViewController.view)
 
-        showingConstraint = view.bottomAnchor
+        showingHUDConstraint = view.bottomAnchor
             .constraint(equalTo: hudViewController.view.bottomAnchor)
-        showingConstraint?.constant = 20
+        showingHUDConstraint?.constant = 20
 
         // hidden state
-        hiddenConstraint = hudViewController.view.topAnchor
+        hiddenHUDConstraint = hudViewController.view.topAnchor
             .constraint(equalTo: view.bottomAnchor)
-        hiddenConstraint?.isActive = true
+        hiddenHUDConstraint?.isActive = true
         hudViewController.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
         view.addSubview(menuViewController.view)
         showingMenuConstraint = menuViewController.view.leftAnchor
             .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor)
-
+        showingMenuConstraint?.constant = 20
+        
         // hidden state
         hiddenMenuConstraint = menuViewController.view.rightAnchor
             .constraint(equalTo: view.leftAnchor)
@@ -179,16 +173,10 @@ class ViewController: UIViewController {
         restartPlaneDetection()
         
         arrowNode.isHidden = true
-        
-        #if DEBUG
-        // clear the debug plane
-        debugPlaneAnchorNode?.removeFromParentNode()
-        debugPlaneAnchorNode = nil
-        #endif
 
         // reset hudBottomConstraint
         // start the hud out of view
-//        toggleHUD(toShowingState: false, animated: false)
+        toggleHUD(toShowingState: false, animated: false)
 
         toggleDatePicker(toShowingState: false, animated: false)
         
@@ -216,6 +204,7 @@ class ViewController: UIViewController {
         present(tutorial, animated: true)
         #else
         toggleHUD(toShowingState: true)
+        toggleMenu(toShowingState: true)
         #endif
     }
     
@@ -290,8 +279,8 @@ class ViewController: UIViewController {
     }
 
     func toggleHUD(toShowingState: Bool, animated: Bool = true) {
-        hiddenConstraint?.isActive = !toShowingState
-        showingConstraint?.isActive = toShowingState
+        hiddenHUDConstraint?.isActive = !toShowingState
+        showingHUDConstraint?.isActive = toShowingState
         UIView.animate(withDuration: animated ? 0.5 : 0.0,
                        delay: 1,
                        options: .curveEaseInOut,
@@ -417,12 +406,6 @@ extension ViewController {
                 self.updateUIAfterPlacingObjects(root, radius: radius)
             }
             focusSquare.hide()
-//
-//            // Testing to see if this helps with performance at all. After 6 seconds, just change the session configuration to something less aggressive
-//            let deadlineTime = DispatchTime.now() + .seconds(6)
-//            DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
-//                self.restartSessionNoPlaneDetection()
-//            })
         }
     }
     
@@ -614,13 +597,6 @@ extension ViewController: ARSCNViewDelegate {
         }
     }
     
-    #if DEBUG
-    @objc func handleDoubleTap(_ recognizer: UITapGestureRecognizer) {
-        guard let anchor = self.debugPlaneAnchorNode else {return}
-        anchor.isHidden = !anchor.isHidden
-    }
-    #endif
-    
     /**
      Called when a new node has been mapped to the given anchor.
      
@@ -630,35 +606,24 @@ extension ViewController: ARSCNViewDelegate {
      */
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         print("did add node. we go to async after this")
-        DispatchQueue.main.async {
             print("did add node, pushed to main queue")
             
-            if let planeAnchor = anchor as? ARPlaneAnchor {
-                #if DEBUG || false
-                    // DEBUG: Display all of the ARPlaneAnchors that we see
-                    let pos = SCNVector3.positionFromTransform(planeAnchor.transform)
-                    print("NEW SURFACE DETECTED AT \(pos.friendlyString())")
-                    print("The box of the plane is before scaling is \(planeAnchor.extent)")
-                    
-                    // We get a plane, this should roughly match a tabletop or a floor
-                    let plane = BorderedPlane(width: planeAnchor.extent.x, height: planeAnchor.extent.z, color: .blue)
-                    self.debugPlaneAnchorNode = plane
-                    node.addChildNode(plane)
-                    
-                    let borderMaterial = SCNMaterial()
-                    borderMaterial.diffuse.contents = UIColor.blue
-                    plane.addBorder(materials: [borderMaterial])
-                    
-                    // once we are restarting a session, this needs to be checked
-                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleDoubleTap(_:)))
-                    tap.numberOfTapsRequired = 3
-                    self.view.addGestureRecognizer(tap)
-                #endif
-                
-                if self.done {
-                    return
-                }
-                Mixpanel.sharedInstance()?.track("Discovered an Anchor")
+        if let planeAnchor = anchor as? ARPlaneAnchor {
+            #if DEBUG || false
+            // We get a plane, this should roughly match a tabletop or a floor
+            let plane = BorderedPlane(width: planeAnchor.extent.x, height: planeAnchor.extent.z, color: .blue)
+            node.addChildNode(plane)
+
+            let borderMaterial = SCNMaterial()
+            borderMaterial.diffuse.contents = UIColor.blue
+            plane.addBorder(materials: [borderMaterial])
+            #endif
+
+            if self.done {
+                return
+            }
+            Mixpanel.sharedInstance()?.track("Discovered an Anchor")
+            DispatchQueue.main.async {
                 self.dismiss(animated: false)
             }
         }
