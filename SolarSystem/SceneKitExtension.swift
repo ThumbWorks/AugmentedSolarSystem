@@ -125,18 +125,6 @@ extension SCNAction {
 
 extension SCNNode {
     
-    class func arrow() -> SCNNode {
-        let arrowScene = SCNScene(named: "art.scnassets/arrow.dae")!
-        let arrow = arrowScene.rootNode.childNodes.first!
-        arrow.position = SCNVector3Make(0, 0, -0.1)
-        arrow.scale = SCNVector3Make(0.0001, 0.0001, 0.0001)
-        arrow.categoryBitMask = 4
-        for light in arrow.childNodes {
-            light.light?.categoryBitMask = 4
-        }
-        arrow.name = "Arrow"
-        return arrow
-    }
     class func omniLight(_ vector: SCNVector3) -> SCNNode {
         let omniLight = SCNLight()
         omniLight.type = .omni

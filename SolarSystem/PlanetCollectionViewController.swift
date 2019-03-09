@@ -20,7 +20,6 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var sizeReference: UILabel!
     
-    var planetSelectionChanged: ((Planet) -> ())?
     var currentPlanet: Planet?
     
     override func viewDidLoad() {
@@ -59,9 +58,6 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
         guard let currentPlanet = currentPlanet else {
             print("unknown state here, what is our current planet derived from the index path?")
             return
-        }
-        if let closure = planetSelectionChanged {
-            closure(currentPlanet)
         }
         
         name.text = currentPlanet.name.uppercased()

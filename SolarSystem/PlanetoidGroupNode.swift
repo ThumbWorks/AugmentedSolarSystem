@@ -162,18 +162,6 @@ struct SolarSystemNodes {
         }
     }
     
-    func updateLookat(selected planet: Planet, arrowNode: SCNNode) {
-        for (solarSystemPlanet, planetoidGroup) in planetoids {
-            if planet == solarSystemPlanet {
-                SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.5
-                let lookat = SCNLookAtConstraint(target: planetoidGroup.planetNode)
-                arrowNode.constraints = [lookat]
-                SCNTransaction.commit()
-            }
-        }        
-    }
-    
     func removeAllNodesFromParent() {
         for planetNode in planetoids {
             planetNode.value.removeFromParentNode()

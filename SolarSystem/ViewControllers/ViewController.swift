@@ -54,9 +54,7 @@ class ViewController: UIViewController {
     let solarSystemNodes = Planet.buildSolarSystem()
     
     var pincher: PinchController?
-    
-    var arrowNode = SCNNode.arrow()
-    
+
     @IBOutlet weak var datePickerBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var datePickerHeightConstraint: NSLayoutConstraint!
 
@@ -171,8 +169,6 @@ class ViewController: UIViewController {
     
     fileprivate func restartEverything() {
         restartPlaneDetection()
-        
-        arrowNode.isHidden = true
 
         // reset hudBottomConstraint
         // start the hud out of view
@@ -230,9 +226,6 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? PlanetCollectionViewController {
-            dest.planetSelectionChanged = { (newlySelectedPlanet) in
-                self.solarSystemNodes.updateLookat(selected: newlySelectedPlanet, arrowNode: self.arrowNode)
-            }
             collectionViewController = dest
         }
         
@@ -480,24 +473,7 @@ extension ViewController {
     }
 }
 
-
 extension ViewController: ARSessionObserver {
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        print("error \(error.localizedDescription)")
-    }
-    
-    /**
-     This is called when the camera's tracking state has changed.
-     
-     @param session The session being run.
-     @param camera The camera that changed tracking states.
-     */
-    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
-        DispatchQueue.main.async {
-            self.updateLabel()
-        }
-    }
-    
     /**
      This is called when a session is interrupted.
      
@@ -523,11 +499,7 @@ extension ViewController: ARSessionObserver {
      @param session The session that was interrupted.
      */
     func sessionInterruptionEnded(_ session: ARSession) {
-        print("Session interruption ended")
-        let sessionConfig = ARWorldTrackingConfiguration()
-        session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
         restartPlaneDetection()
-        status.text = "Resetting Session"
     }
 }
 
@@ -581,19 +553,6 @@ extension ViewController: ARSCNViewDelegate {
             self.updateFocusSquare()
             self.updateLabel()
             self.hudViewController.update(with: distances)
-            let arrowNode = self.arrowNode
-            if let constraints = arrowNode.constraints {
-                let lookats: [SCNLookAtConstraint] = constraints.filter({ (constraint) -> Bool in
-                    if let _ = constraint as? SCNLookAtConstraint {
-                        return true
-                    }
-                    return false
-                }) as! [SCNLookAtConstraint]
-
-                if let lookatTarget = lookats.first?.target {
-                    self.arrowNode.isHidden = self.sceneView.isNode(lookatTarget, insideFrustumOf: cameraNode) || !self.done
-                }
-            }
         }
     }
     
@@ -658,28 +617,7 @@ extension ViewController: ARSCNViewDelegate {
     func updateUIAfterPlacingObjects(_ node: SCNNode, radius: Float) {
         // move the HUD so it's visible
         self.toggleHUD(toShowingState: true)
-
-//        self.collectionViewController?.hintScrollable()
-
-        // Make the bottom HUD show, hint that it is scrollable
-        //                UIView.animate(withDuration: 0.3, delay: 2, options: .curveEaseInOut, animations: {
-        //                    self.view.layoutIfNeeded()
-        //                }, completion: { (completed) in
-        //                    self.collectionViewController?.hintScrollable()
-        //                })
-        
-        if let cameraNode = self.sceneView.pointOfView {
-            self.arrowNode.categoryBitMask = 4
-            cameraNode.addChildNode(self.arrowNode)
-            self.solarSystemNodes.updateLookat(selected: Planet.sun, arrowNode: self.arrowNode)
-            var lightVector = node.position
-            lightVector.y = 10
-            let light = SCNNode.omniLight(lightVector)
-            node.addChildNode(light)
-        }
-
         toggleMenu(toShowingState: true)
-
         self.done = true
         self.solarSystemNodes.scalePlanets(to: radius / 2)
         self.anchorWidth = radius
