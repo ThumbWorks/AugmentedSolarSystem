@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,6 +15,10 @@
             <rect key="frame" x="0.0" y="0.0" width="102" height="306"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sue-Oo-3WF" customClass="WhiteView" customModule="SolAR" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="102" height="306"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="yO1-Oh-vpW" customClass="StackViewContainerView">
                     <rect key="frame" x="10" y="20" width="82" height="266"/>
                     <subviews>
@@ -68,21 +72,19 @@
                     <viewLayoutGuide key="safeArea" id="OZa-jD-la9"/>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="Ygj-eW-sat" firstAttribute="leading" secondItem="Sue-Oo-3WF" secondAttribute="leading" id="GfB-ge-CHB"/>
                 <constraint firstItem="Ygj-eW-sat" firstAttribute="trailing" secondItem="yO1-Oh-vpW" secondAttribute="trailing" constant="10" id="KaW-EV-D6E"/>
                 <constraint firstItem="yO1-Oh-vpW" firstAttribute="top" secondItem="Ygj-eW-sat" secondAttribute="top" constant="20" id="XQK-Va-kXH"/>
+                <constraint firstItem="Sue-Oo-3WF" firstAttribute="top" secondItem="Ygj-eW-sat" secondAttribute="top" id="bkg-5H-EiD"/>
                 <constraint firstItem="Ygj-eW-sat" firstAttribute="bottom" secondItem="yO1-Oh-vpW" secondAttribute="bottom" constant="20" id="dNd-eE-kZu"/>
                 <constraint firstItem="yO1-Oh-vpW" firstAttribute="leading" secondItem="Ygj-eW-sat" secondAttribute="leading" constant="10" id="t4c-6i-BMa"/>
+                <constraint firstItem="Sue-Oo-3WF" firstAttribute="trailing" secondItem="Ygj-eW-sat" secondAttribute="trailing" id="wwz-C5-hOM"/>
+                <constraint firstItem="Ygj-eW-sat" firstAttribute="bottom" secondItem="Sue-Oo-3WF" secondAttribute="bottom" id="xPj-I4-6sz"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Ygj-eW-sat"/>
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
-                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                    <integer key="value" value="10"/>
-                </userDefinedRuntimeAttribute>
-            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="-768" y="604.49775112443785"/>
         </view>
     </objects>

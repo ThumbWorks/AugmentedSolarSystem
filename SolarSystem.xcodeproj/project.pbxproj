@@ -15,6 +15,7 @@
 		5F0E92092215D895000D1EA9 /* PlanetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0E92082215D895000D1EA9 /* PlanetCell.swift */; };
 		5F1950D822323D720072B627 /* MenuContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1950D722323D720072B627 /* MenuContainerView.swift */; };
 		5F1950DA22323D9D0072B627 /* MenuContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1950D922323D9D0072B627 /* MenuContainerViewController.swift */; };
+		5F1BD274225559D10089A524 /* WhiteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1BD273225559D10089A524 /* WhiteView.swift */; };
 		5F27FD181F061C5200498524 /* Mars.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5F27FD171F061C5200498524 /* Mars.scn */; };
 		5F28BC341F3388AF003E013F /* ScaleReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F28BC331F3388AF003E013F /* ScaleReference.swift */; };
 		5F30D4DC1F16CD68006A45B1 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F30D4DB1F16CD68006A45B1 /* Planet.swift */; };
@@ -34,7 +35,6 @@
 		5F8B38C91F74CCEB00F0F7D1 /* VirtualObjectARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B38C81F74CCE800F0F7D1 /* VirtualObjectARView.swift */; };
 		5F9126B61F2F8EAE00678A8F /* PinchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9126B51F2F8EAE00678A8F /* PinchController.swift */; };
 		5F9126B71F2F918100678A8F /* PinchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9126B51F2F8EAE00678A8F /* PinchController.swift */; };
-		5FA2CD1E1F5A7D5B00E870A5 /* nasalization-rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FA2CD1C1F5A7B8E00E870A5 /* nasalization-rg.ttf */; };
 		5FA91A731F02C5DC00D8AFC1 /* Saturn.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FA91A721F02C5DC00D8AFC1 /* Saturn.scn */; };
 		5FA91A751F02C76C00D8AFC1 /* Uranus.scn in Resources */ = {isa = PBXBuildFile; fileRef = 5FA91A741F02C76C00D8AFC1 /* Uranus.scn */; };
 		5FAD1FB62232052200011A29 /* MenuContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FAD1FB52232052200011A29 /* MenuContainerView.xib */; };
@@ -102,6 +102,7 @@
 		5F0E92082215D895000D1EA9 /* PlanetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetCell.swift; sourceTree = "<group>"; };
 		5F1950D722323D720072B627 /* MenuContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuContainerView.swift; sourceTree = "<group>"; };
 		5F1950D922323D9D0072B627 /* MenuContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuContainerViewController.swift; sourceTree = "<group>"; };
+		5F1BD273225559D10089A524 /* WhiteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteView.swift; sourceTree = "<group>"; };
 		5F255D8A1F2BA0A400E9F62E /* DocumentationScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = DocumentationScene.scn; path = art.scnassets/DocumentationScene.scn; sourceTree = "<group>"; };
 		5F27FD171F061C5200498524 /* Mars.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Mars.scn; path = art.scnassets/Mars.scn; sourceTree = "<group>"; };
 		5F28BC331F3388AF003E013F /* ScaleReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleReference.swift; sourceTree = "<group>"; };
@@ -119,7 +120,6 @@
 		5F8B38C51F74CAD200F0F7D1 /* FocusSquareSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquareSegment.swift; sourceTree = "<group>"; };
 		5F8B38C81F74CCE800F0F7D1 /* VirtualObjectARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectARView.swift; sourceTree = "<group>"; };
 		5F9126B51F2F8EAE00678A8F /* PinchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchController.swift; sourceTree = "<group>"; };
-		5FA2CD1C1F5A7B8E00E870A5 /* nasalization-rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "nasalization-rg.ttf"; sourceTree = "<group>"; };
 		5FA91A721F02C5DC00D8AFC1 /* Saturn.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Saturn.scn; path = art.scnassets/Saturn.scn; sourceTree = "<group>"; };
 		5FA91A741F02C76C00D8AFC1 /* Uranus.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Uranus.scn; path = art.scnassets/Uranus.scn; sourceTree = "<group>"; };
 		5FAD1FB52232052200011A29 /* MenuContainerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuContainerView.xib; sourceTree = "<group>"; };
@@ -214,6 +214,7 @@
 				5F0E92082215D895000D1EA9 /* PlanetCell.swift */,
 				5FAD1FB52232052200011A29 /* MenuContainerView.xib */,
 				5F1950D722323D720072B627 /* MenuContainerView.swift */,
+				5F1BD273225559D10089A524 /* WhiteView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -289,7 +290,6 @@
 				5F28BC331F3388AF003E013F /* ScaleReference.swift */,
 				5F78D70D1F3D222A0059FDA1 /* AppRater.swift */,
 				5FAD55E11F50852F0016B04E /* DatePickerViewController.swift */,
-				5FA2CD1C1F5A7B8E00E870A5 /* nasalization-rg.ttf */,
 			);
 			path = SolarSystem;
 			sourceTree = "<group>";
@@ -402,7 +402,6 @@
 				5FA91A751F02C76C00D8AFC1 /* Uranus.scn in Resources */,
 				5F27FD181F061C5200498524 /* Mars.scn in Resources */,
 				5F0E92072215D88B000D1EA9 /* PlanetCell.xib in Resources */,
-				5FA2CD1E1F5A7D5B00E870A5 /* nasalization-rg.ttf in Resources */,
 				5F3B3360220FEA5400F961C1 /* TutorialView.xib in Resources */,
 				5FBAF9701EE8B78400FAA54B /* art.scnassets in Resources */,
 				5FC65CDA1F01C98800D8C9CB /* Mercury.scn in Resources */,
@@ -495,6 +494,7 @@
 				5F1950D822323D720072B627 /* MenuContainerView.swift in Sources */,
 				5FBAF96E1EE8B78400FAA54B /* AppDelegate.swift in Sources */,
 				5F9126B61F2F8EAE00678A8F /* PinchController.swift in Sources */,
+				5F1BD274225559D10089A524 /* WhiteView.swift in Sources */,
 				5F28BC341F3388AF003E013F /* ScaleReference.swift in Sources */,
 				5F3B33662213DD6D00F961C1 /* TutorialViewController.swift in Sources */,
 				5FDE10962215B92200607C0A /* HUDView.swift in Sources */,

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,22 +29,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.6648052377" colorSpace="calibratedRGB"/>
                 </view>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmN-ae-wWQ">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oen-qr-sMg" userLabel="WhiteBackground" customClass="WhiteView" customModule="SolAR" customModuleProvider="target">
                     <rect key="frame" x="37.5" y="183.5" width="300" height="300"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cMl-b2-OlP">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </view>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <blurEffect style="light"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="10"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                </visualEffectView>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ga5-Xs-6Mv">
                     <rect key="frame" x="37.5" y="183.5" width="300" height="300"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -53,8 +41,8 @@
                         <constraint firstAttribute="width" constant="300" id="naH-6g-FPQ"/>
                     </constraints>
                 </sceneKitView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Move the device around a surface to anchor your Solar System" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2j9-hc-9cm">
-                    <rect key="frame" x="47.5" y="412.5" width="280" height="61"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Move the device around a surface to anchor your Solar System." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2j9-hc-9cm">
+                    <rect key="frame" x="47.5" y="423.5" width="280" height="40"/>
                     <fontDescription key="fontDescription" name="NasalizationRg-Regular" family="Nasalization" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -62,19 +50,19 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="hmN-ae-wWQ" firstAttribute="width" secondItem="ga5-Xs-6Mv" secondAttribute="width" id="05y-dm-sMB"/>
                 <constraint firstItem="ga5-Xs-6Mv" firstAttribute="centerY" secondItem="oBi-pn-35a" secondAttribute="centerY" id="2bz-ZD-3Af"/>
-                <constraint firstItem="ga5-Xs-6Mv" firstAttribute="bottom" secondItem="2j9-hc-9cm" secondAttribute="bottom" constant="10" id="762-R9-eR8"/>
+                <constraint firstItem="ga5-Xs-6Mv" firstAttribute="bottom" secondItem="2j9-hc-9cm" secondAttribute="bottom" constant="20" id="762-R9-eR8"/>
                 <constraint firstItem="2j9-hc-9cm" firstAttribute="leading" secondItem="ga5-Xs-6Mv" secondAttribute="leading" constant="10" id="85b-2P-dJV"/>
+                <constraint firstItem="Oen-qr-sMg" firstAttribute="top" secondItem="ga5-Xs-6Mv" secondAttribute="top" id="86q-Io-SMu"/>
                 <constraint firstItem="ga5-Xs-6Mv" firstAttribute="trailing" secondItem="2j9-hc-9cm" secondAttribute="trailing" constant="10" id="Aou-Sf-qep"/>
                 <constraint firstAttribute="trailing" secondItem="0XN-IY-zUY" secondAttribute="trailing" id="BOb-39-jRK"/>
-                <constraint firstItem="hmN-ae-wWQ" firstAttribute="centerY" secondItem="ga5-Xs-6Mv" secondAttribute="centerY" id="IDT-LN-XD3"/>
                 <constraint firstItem="ga5-Xs-6Mv" firstAttribute="centerX" secondItem="GMQ-de-zPz" secondAttribute="centerX" id="Iot-sZ-Mi2"/>
                 <constraint firstItem="0XN-IY-zUY" firstAttribute="top" secondItem="oBi-pn-35a" secondAttribute="top" id="LrA-TC-Aj4"/>
+                <constraint firstItem="Oen-qr-sMg" firstAttribute="leading" secondItem="ga5-Xs-6Mv" secondAttribute="leading" id="Na3-bP-9uh"/>
                 <constraint firstAttribute="bottom" secondItem="0XN-IY-zUY" secondAttribute="bottom" id="XDV-ht-b0P"/>
-                <constraint firstItem="hmN-ae-wWQ" firstAttribute="height" secondItem="ga5-Xs-6Mv" secondAttribute="height" id="bBB-pt-ZZk"/>
                 <constraint firstItem="0XN-IY-zUY" firstAttribute="leading" secondItem="oBi-pn-35a" secondAttribute="leading" id="hV9-B1-ZdR"/>
-                <constraint firstItem="hmN-ae-wWQ" firstAttribute="centerX" secondItem="ga5-Xs-6Mv" secondAttribute="centerX" id="mhj-fr-imu"/>
+                <constraint firstItem="Oen-qr-sMg" firstAttribute="trailing" secondItem="ga5-Xs-6Mv" secondAttribute="trailing" id="w3g-Ts-njl"/>
+                <constraint firstItem="Oen-qr-sMg" firstAttribute="bottom" secondItem="ga5-Xs-6Mv" secondAttribute="bottom" id="wE4-9T-rsO"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="GMQ-de-zPz"/>
         </view>

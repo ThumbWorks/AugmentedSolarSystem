@@ -21,7 +21,7 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var sizeReference: UILabel!
     
     var currentPlanet: Planet?
-    
+
     override func viewDidLoad() {
         distance.text = ""
     }
@@ -77,16 +77,6 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
     }
     override func viewDidAppear(_ animated: Bool) {
         changePlanetSelection()
-    }
-    
-    func hintScrollable() {
-        UIView.animate(withDuration: 0.5, delay: 3, options: [], animations: {
-            self.collectionView.contentOffset = CGPoint(x: self.collectionView.frame.size.width / 2, y: 0)
-        }) { (completed) in
-            UIView.animate(withDuration: 0.5, animations: {
-                self.collectionView.contentOffset = CGPoint(x: 0, y: 0)
-            })
-        }
     }
 }
 

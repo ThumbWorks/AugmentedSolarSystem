@@ -28,7 +28,8 @@ class ViewController: UIViewController {
         formatter.timeStyle = .short
         return formatter
     }
-    
+
+    let animationDuration = 0.3
     var screenCenter: CGPoint {
         let bounds = sceneView.bounds
         return CGPoint(x: bounds.midX, y: bounds.midY)
@@ -38,6 +39,7 @@ class ViewController: UIViewController {
     let hudViewController = HUDViewController()
     let menuViewController = MenuContainerViewController()
 
+    @IBOutlet weak var labelWrapper: UIView!
     @IBOutlet var status: UILabel!
     @IBOutlet var sceneView: VirtualObjectARView!
     var done = false
@@ -70,6 +72,7 @@ class ViewController: UIViewController {
         #endif
         pincher = PinchController(with: solarSystemNodes)
         status.text = ""
+        labelWrapper.isHidden = true
         Mixpanel.sharedInstance()?.track("view did load")
         
         // hide the toggleviews
@@ -206,7 +209,7 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        toggleDatePicker(toShowingState: false)
+        toggleDatePicker(toShowingState: false, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -231,14 +234,14 @@ class ViewController: UIViewController {
         
         if let dest = segue.destination as? DatePickerViewController {
             datePicker = dest
-            
+
             dest.dateSelection = { (date, done) in
                 self.displayedDate = date
                 self.startTime = 0
                 self.startDate = date
 //                self.updateDateString(date)
                 self.solarSystemNodes.updatePostions(to: date)
-                
+
                 if done {
                     self.toggleDatePicker(toShowingState: false)
                 }
@@ -246,16 +249,36 @@ class ViewController: UIViewController {
         }
     }
     
-    func toggleDatePicker(toShowingState: Bool, animated: Bool = true) {
-        datePickerBottomConstraint.constant = toShowingState ? 0 : -datePickerHeightConstraint.constant
-        
-        let duration = animated ? 0.3 : 0.0
-        
-        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseInOut, animations: {
-            self.view.layoutIfNeeded()
-        })
-        
-        if toShowingState == true {
+    func toggleDatePicker(toShowingState: Bool,
+                          animated: Bool = true) {
+
+        let toggleDatePickerBlock = {
+            let duration = animated ? self.animationDuration : 0.0
+            self.datePickerBottomConstraint.constant = toShowingState ? 0 : -(self.datePickerHeightConstraint.constant + 40)
+            UIView.animate(withDuration: duration, delay: 0, options: .curveEaseInOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: { success in
+                // only show the hud if we're not animating, this implies
+                // the view is appearing or disappearing and we likely don't want anything
+                // to be displayed
+                self.status.text = "Select a date to see the planet alignment"
+                self.labelWrapper.isHidden = !toShowingState
+                print("label wrapper hidden? \(!toShowingState)")
+                if !toShowingState && animated {
+                    self.toggleHUD(toShowingState: true)
+                }
+            })
+        }
+
+        if toShowingState {
+            toggleHUD(toShowingState: false,
+                      animated: true,
+                      completionBlock: toggleDatePickerBlock)
+        } else {
+            toggleDatePickerBlock()
+        }
+
+        if toShowingState {
             datePicker?.datePicker.setDate(displayedDate, animated: false)
         }
     }
@@ -263,22 +286,29 @@ class ViewController: UIViewController {
     func toggleMenu(toShowingState: Bool, animated: Bool = true) {
         hiddenMenuConstraint?.isActive = !toShowingState
         showingMenuConstraint?.isActive = toShowingState
-        UIView.animate(withDuration: animated ? 0.5 : 0.0,
+        UIView.animate(withDuration: animated ? animationDuration : 0.0,
                        delay: 1,
                        options: .curveEaseInOut,
                        animations: {
                         self.view.layoutIfNeeded()
         })
     }
+    func toggleLabel(toShowing: Bool, animated: Bool = true) {
 
-    func toggleHUD(toShowingState: Bool, animated: Bool = true) {
+    }
+
+    func toggleHUD(toShowingState: Bool,
+                   animated: Bool = true,
+                   completionBlock: (() -> Void)? = nil) {
         hiddenHUDConstraint?.isActive = !toShowingState
         showingHUDConstraint?.isActive = toShowingState
-        UIView.animate(withDuration: animated ? 0.5 : 0.0,
-                       delay: 1,
+        UIView.animate(withDuration: animated ? animationDuration : 0.0,
+                       delay: 0,
                        options: .curveEaseInOut,
                        animations: {
             self.view.layoutIfNeeded()
+        }, completion: { _ in
+            completionBlock?()
         })
     }
 
@@ -439,9 +469,6 @@ extension ViewController {
     }
 
     func updateLabel() {
-        return
-
-            //print("🐛 update label")
         switch cameraState {
         case .normal:
             if (!done) {
@@ -451,23 +478,29 @@ extension ViewController {
                     
                 case .featuresDetected(_, _):
                     status.text = "Searching for a surface"
+                    labelWrapper.isHidden = false
                     break
                     
                 case .planeDetected(_, _, _):
                     status.text = "Tap to set the Solar System"
+                    labelWrapper.isHidden = false
                 }
             } else if let planet = insidePlanet {
+                labelWrapper.isHidden = false
                 if planet == Planet.sun {
                     status.text = "You are inside the \(planet.name)"
                 } else {
                     status.text = "You are inside \(planet.name)"
                 }
             } else {
+                labelWrapper.isHidden = true
                 status.text = ""
             }
         case .notAvailable:
+            labelWrapper.isHidden = false
             status.text = "Tracking unavailable"
         case .limited(let reason):
+            labelWrapper.isHidden = false
             status.text = "Tracking Limited: \(reason)"
         }
     }
@@ -534,7 +567,6 @@ extension ViewController: ARSCNViewDelegate {
         for (planet, node) in solarSystemNodes.planetoids {
             
             guard let planetNode = node.planetNode else {
-                print("\(planet.name ) doesn't have a node, bail")
                 return
             }
             let distance = cameraNode.position.distance(receiver: planetNode.position)
@@ -596,12 +628,11 @@ extension ViewController: ARSCNViewDelegate {
      @param anchor The anchor that was updated.
      */
     func renderer(_ renderer: SCNSceneRenderer, willUpdate node: SCNNode, for anchor: ARAnchor) {
-//        print("will update node \(node) for anchor \(anchor.identifier)")
-        
         // Since we added our SCNPlane to the node as a child, we must find the first child
         // The anchor, of course, must be an ARPlaneAnchor
         // Update the SCNPlane geometry of this SCNNode to resemble our new understanding
-        if let thePlaneNode = node.childNodes.first, let planeAnchor = anchor as? ARPlaneAnchor {
+        if let thePlaneNode = node.childNodes.first,
+            let planeAnchor = anchor as? ARPlaneAnchor {
             for line in thePlaneNode.childNodes {
                 line.removeFromParentNode()
             }
