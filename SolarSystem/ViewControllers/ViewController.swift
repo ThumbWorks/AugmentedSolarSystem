@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     var startDate = Date()
     var displayedDate = Date()
 
+    var showingStatusConstraint: NSLayoutConstraint?
+    var hiddenStatusConstraint: NSLayoutConstraint?
     var hiddenHUDConstraint: NSLayoutConstraint?
     var showingHUDConstraint: NSLayoutConstraint?
     var hiddenMenuConstraint: NSLayoutConstraint?
@@ -38,10 +40,8 @@ class ViewController: UIViewController {
     var datePicker: DatePickerViewController?
     let hudViewController = HUDViewController()
     let menuViewController = MenuContainerViewController()
+    let statusLabelViewController = StatusLabelViewController()
 
-    @IBOutlet weak var labelWrapper: UIView!
-    @IBOutlet var status: UILabel!
-    @IBOutlet var sceneView: VirtualObjectARView!
     var done = false
     var scalingOrbitUp = false
     var scaleSizeUp = false
@@ -57,13 +57,9 @@ class ViewController: UIViewController {
     
     var pincher: PinchController?
 
+    @IBOutlet var sceneView: VirtualObjectARView!
     @IBOutlet weak var datePickerBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var datePickerHeightConstraint: NSLayoutConstraint!
-
-//    func updateDateString(_ date: Date) {
-//        let dateString = dateFormatter().string(from: date)
-//        dateButton.setTitle(dateString, for: .normal)
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,12 +67,10 @@ class ViewController: UIViewController {
         view.backgroundColor = .gray
         #endif
         pincher = PinchController(with: solarSystemNodes)
-        status.text = ""
-        labelWrapper.isHidden = true
         Mixpanel.sharedInstance()?.track("view did load")
         
         // hide the toggleviews
-        toggleMenu(toShowingState: false)
+        toggleMenu(toShowing: false)
 
         // Set the view's delegate
         sceneView.delegate = self
@@ -85,7 +79,6 @@ class ViewController: UIViewController {
         sceneView.scene = SCNScene()
         sceneView.scene.rootNode.addChildNode(focusSquare)
 
-//        updateDateString(displayedDate)
         addSuplementalViews()
 
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -93,27 +86,56 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
 
-    private func addSuplementalViews() {
-        view.addSubview(hudViewController.view)
+    private func addStatusView() {
+        view.addSubview(statusLabelViewController.view)
 
+        let statusView = statusLabelViewController.view
+
+        statusView?.leftAnchor.constraint(greaterThanOrEqualTo: view.leftAnchor,
+                                          constant: 20).isActive = true
+        statusView?.rightAnchor.constraint(greaterThanOrEqualTo: view.rightAnchor,
+                                           constant: 20).isActive = true
+
+        showingStatusConstraint =
+            statusView?.topAnchor.constraint(equalTo: view.topAnchor,
+                                             constant: 20)
+        statusView?.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        showingStatusConstraint?.priority = .defaultLow
+        showingStatusConstraint?.isActive = true
+
+        hiddenStatusConstraint = statusView?.bottomAnchor.constraint(equalTo: view.topAnchor)
+        hiddenStatusConstraint?.priority = .defaultHigh
+        hiddenStatusConstraint?.isActive = true
+    }
+
+    private func addHUDView() {
+        view.addSubview(hudViewController.view)
         showingHUDConstraint = view.bottomAnchor
             .constraint(equalTo: hudViewController.view.bottomAnchor)
         showingHUDConstraint?.constant = 20
+        showingHUDConstraint?.priority = .defaultLow
+        showingHUDConstraint?.isActive = true
 
         // hidden state
         hiddenHUDConstraint = hudViewController.view.topAnchor
             .constraint(equalTo: view.bottomAnchor)
+        hiddenHUDConstraint?.priority = .defaultHigh
         hiddenHUDConstraint?.isActive = true
         hudViewController.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
 
+    private func addMenuView() {
         view.addSubview(menuViewController.view)
         showingMenuConstraint = menuViewController.view.leftAnchor
             .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor)
-        showingMenuConstraint?.constant = 20
+        showingMenuConstraint?.constant = 10
+        showingMenuConstraint?.priority = .defaultLow
+        showingMenuConstraint?.isActive = true
 
         // hidden state
         hiddenMenuConstraint = menuViewController.view.rightAnchor
             .constraint(equalTo: view.leftAnchor)
+        hiddenMenuConstraint?.priority = .defaultHigh
         hiddenMenuConstraint?.isActive = true
 
         menuViewController.view.topAnchor
@@ -121,6 +143,11 @@ class ViewController: UIViewController {
         menuViewController.menuContainer.delegate = self
     }
 
+    private func addSuplementalViews() {
+        addHUDView()
+        addMenuView()
+        addStatusView()
+    }
 
     @objc func willEnterForeground() {
         restartEverything()
@@ -129,7 +156,6 @@ class ViewController: UIViewController {
     @objc func didEnterBackground() {
         // dismiss any view controller that is presented
         if let presented = self.presentedViewController {
-            print("presented view controller is \(presented)")
             self.dismiss(animated: false)
         }
     }
@@ -175,14 +201,14 @@ class ViewController: UIViewController {
 
         // reset hudBottomConstraint
         // start the hud out of view
-        toggleHUD(toShowingState: false, animated: false)
+        toggleHUD(toShowing: false, animated: false)
 
-        toggleDatePicker(toShowingState: false, animated: false)
+        toggleDatePicker(toShowing: false, animated: false)
         
         done = false
 
         // hide the toggleViews
-        toggleMenu(toShowingState: false)
+        toggleMenu(toShowing: false)
 
         solarSystemNodes.removeAllNodesFromParent()
         
@@ -202,14 +228,14 @@ class ViewController: UIViewController {
         tutorial.modalPresentationStyle = .overCurrentContext
         present(tutorial, animated: true)
         #else
-        toggleHUD(toShowingState: true)
-        toggleMenu(toShowingState: true)
+        toggleHUD(toShowing: true)
+        toggleMenu(toShowing: true)
         #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        toggleDatePicker(toShowingState: false, animated: false)
+        toggleDatePicker(toShowing: false, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -239,69 +265,98 @@ class ViewController: UIViewController {
                 self.displayedDate = date
                 self.startTime = 0
                 self.startDate = date
-//                self.updateDateString(date)
                 self.solarSystemNodes.updatePostions(to: date)
 
                 if done {
-                    self.toggleDatePicker(toShowingState: false)
+                    self.toggleDatePicker(toShowing: false)
+                    self.toggleMenu(toShowing: true)
                 }
             }
         }
     }
     
-    func toggleDatePicker(toShowingState: Bool,
+    func toggleDatePicker(toShowing: Bool,
                           animated: Bool = true) {
 
         let toggleDatePickerBlock = {
             let duration = animated ? self.animationDuration : 0.0
-            self.datePickerBottomConstraint.constant = toShowingState ? 0 : -(self.datePickerHeightConstraint.constant + 40)
+            self.datePickerBottomConstraint.constant = toShowing ? 0 : -(self.datePickerHeightConstraint.constant + 40)
             UIView.animate(withDuration: duration, delay: 0, options: .curveEaseInOut, animations: {
                 self.view.layoutIfNeeded()
             }, completion: { success in
                 // only show the hud if we're not animating, this implies
                 // the view is appearing or disappearing and we likely don't want anything
                 // to be displayed
-                self.status.text = "Select a date to see the planet alignment"
-                self.labelWrapper.isHidden = !toShowingState
-                print("label wrapper hidden? \(!toShowingState)")
-                if !toShowingState && animated {
-                    self.toggleHUD(toShowingState: true)
+                self.statusLabelViewController.update(with: .selectPlanet)
+
+                // only trigger shoiwng the status label at the end of the date picker animation
+                if toShowing {
+                    self.toggleStatusLabel(toShowing: true)
+                }
+
+                if !toShowing && animated {
+                    self.toggleHUD(toShowing: true)
                 }
             })
         }
 
-        if toShowingState {
-            toggleHUD(toShowingState: false,
+        if toShowing {
+            toggleHUD(toShowing: false,
                       animated: true,
                       completionBlock: toggleDatePickerBlock)
         } else {
+            // trigger hiding the status label immediately
+            self.toggleStatusLabel(toShowing: false)
             toggleDatePickerBlock()
         }
 
-        if toShowingState {
+        if toShowing {
             datePicker?.datePicker.setDate(displayedDate, animated: false)
         }
     }
 
-    func toggleMenu(toShowingState: Bool, animated: Bool = true) {
-        hiddenMenuConstraint?.isActive = !toShowingState
-        showingMenuConstraint?.isActive = toShowingState
+    func toggleMenu(toShowing: Bool, animated: Bool = true) {
+        if toShowing {
+            showingMenuConstraint?.priority = .defaultHigh
+            hiddenMenuConstraint?.priority = .defaultLow
+        } else {
+            showingMenuConstraint?.priority = .defaultLow
+            hiddenMenuConstraint?.priority = .defaultHigh
+        }
         UIView.animate(withDuration: animated ? animationDuration : 0.0,
-                       delay: 1,
+                       delay: 0,
                        options: .curveEaseInOut,
                        animations: {
                         self.view.layoutIfNeeded()
         })
     }
-    func toggleLabel(toShowing: Bool, animated: Bool = true) {
 
+    func toggleStatusLabel(toShowing: Bool, animated: Bool = true) {
+        if toShowing {
+            hiddenStatusConstraint?.priority = .defaultLow
+            showingStatusConstraint?.priority = .defaultHigh
+        } else {
+            hiddenStatusConstraint?.priority = .defaultHigh
+            showingStatusConstraint?.priority = .defaultLow
+        }
+        UIView.animate(withDuration: animated ? animationDuration : 0.0,
+                       delay: 0,
+                       options: .curveEaseInOut,
+                       animations: {
+                        self.view.layoutIfNeeded()
+        })
     }
 
-    func toggleHUD(toShowingState: Bool,
+    func toggleHUD(toShowing: Bool,
                    animated: Bool = true,
                    completionBlock: (() -> Void)? = nil) {
-        hiddenHUDConstraint?.isActive = !toShowingState
-        showingHUDConstraint?.isActive = toShowingState
+        if toShowing {
+            hiddenHUDConstraint?.priority = .defaultLow
+            showingHUDConstraint?.priority = .defaultHigh
+        } else {
+            hiddenHUDConstraint?.priority = .defaultHigh
+            showingHUDConstraint?.priority = .defaultLow
+        }
         UIView.animate(withDuration: animated ? animationDuration : 0.0,
                        delay: 0,
                        options: .curveEaseInOut,
@@ -351,8 +406,8 @@ extension ViewController: MenuContainerViewDelegate {
     }
 
     func container(_ view: MenuContainerView, didTapDateButton button: UIButton) {
-        let isUp = datePickerBottomConstraint.constant == 0
-        toggleDatePicker(toShowingState: !isUp)
+        toggleMenu(toShowing: false)
+        toggleDatePicker(toShowing: true)
     }
 
     func container(_ view: MenuContainerView, didTapResetButton button: UIButton) {
@@ -408,7 +463,6 @@ extension ViewController {
             
         case .planeDetected(let anchorPosition, let planeAnchor, _):
             updateLabel()
-            print("set the sun here \(anchorPosition)")
             Mixpanel.sharedInstance()?.track("Tapped to set solar system")
 
             let root = sceneView.scene.rootNode
@@ -454,7 +508,6 @@ extension ViewController {
                     return node == planets.value.planetNode
                 }) {
                     if let name = node.name {
-                        print("tapped \(name))")
                         Mixpanel.sharedInstance()?.track("tracked a planet", properties: ["name" : name])
 
                         // now scroll to this node. We've got a name
@@ -477,31 +530,30 @@ extension ViewController {
                     break
                     
                 case .featuresDetected(_, _):
-                    status.text = "Searching for a surface"
-                    labelWrapper.isHidden = false
+                    statusLabelViewController.update(with: .searchForSurface)
+                    toggleStatusLabel(toShowing: true)
                     break
                     
                 case .planeDetected(_, _, _):
-                    status.text = "Tap to set the Solar System"
-                    labelWrapper.isHidden = false
+                    statusLabelViewController.update(with: .tapToSetSolarSystem)
+                    toggleStatusLabel(toShowing: true)
                 }
             } else if let planet = insidePlanet {
-                labelWrapper.isHidden = false
+                toggleStatusLabel(toShowing: true)
                 if planet == Planet.sun {
-                    status.text = "You are inside the \(planet.name)"
+                    statusLabelViewController
+                        .update(with: StatusLabelViewModel.inside(celestialObject: "the \(planet.name)"))
                 } else {
-                    status.text = "You are inside \(planet.name)"
+                    statusLabelViewController
+                        .update(with: StatusLabelViewModel.inside(celestialObject: planet.name))
                 }
-            } else {
-                labelWrapper.isHidden = true
-                status.text = ""
             }
         case .notAvailable:
-            labelWrapper.isHidden = false
-            status.text = "Tracking unavailable"
+            toggleStatusLabel(toShowing: true)
+            statusLabelViewController.update(with: .trackingUnavailable)
         case .limited(let reason):
-            labelWrapper.isHidden = false
-            status.text = "Tracking Limited: \(reason)"
+            toggleStatusLabel(toShowing: true)
+            statusLabelViewController.update(with: .limitedTracking(reason: "\(reason)"))
         }
     }
 }
@@ -596,9 +648,6 @@ extension ViewController: ARSCNViewDelegate {
      @param anchor The added anchor.
      */
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        print("did add node. we go to async after this")
-            print("did add node, pushed to main queue")
-            
         if let planeAnchor = anchor as? ARPlaneAnchor {
             #if DEBUG || false
             // We get a plane, this should roughly match a tabletop or a floor
@@ -647,11 +696,12 @@ extension ViewController: ARSCNViewDelegate {
     
     func updateUIAfterPlacingObjects(_ node: SCNNode, radius: Float) {
         // move the HUD so it's visible
-        self.toggleHUD(toShowingState: true)
-        toggleMenu(toShowingState: true)
-        self.done = true
-        self.solarSystemNodes.scalePlanets(to: radius / 2)
-        self.anchorWidth = radius
+        toggleHUD(toShowing: true)
+        toggleMenu(toShowing: true)
+        toggleStatusLabel(toShowing: false)
+        done = true
+        solarSystemNodes.scalePlanets(to: radius / 2)
+        anchorWidth = radius
         
         // At this point the planets are visible. Set a timer for the rating mechanism.
         // The thinking here is that they've seen the planets and are playing with them for a minute.

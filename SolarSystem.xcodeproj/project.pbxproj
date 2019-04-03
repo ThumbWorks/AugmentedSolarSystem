@@ -29,6 +29,9 @@
 		5F3B336D2213E15100F961C1 /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F3B336C2213E15100F961C1 /* SwiftMessages.framework */; };
 		5F3B336F2213E1A800F961C1 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B336E2213E1A800F961C1 /* AboutView.swift */; };
 		5F78D70E1F3D222A0059FDA1 /* AppRater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F78D70D1F3D222A0059FDA1 /* AppRater.swift */; };
+		5F7AED05225561130090E27D /* StatusLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F7AED04225561130090E27D /* StatusLabelView.xib */; };
+		5F7AED07225561570090E27D /* StatusLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7AED06225561570090E27D /* StatusLabelViewController.swift */; };
+		5F7AED09225561810090E27D /* StatusLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7AED08225561810090E27D /* StatusLabelView.swift */; };
 		5F86ACB7220EA5370011A98B /* SwiftAA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F86ACB6220EA5370011A98B /* SwiftAA.framework */; };
 		5F8B38C61F74CAE600F0F7D1 /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B38C41F74CAD200F0F7D1 /* FocusSquare.swift */; };
 		5F8B38C71F74CAE900F0F7D1 /* FocusSquareSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B38C51F74CAD200F0F7D1 /* FocusSquareSegment.swift */; };
@@ -115,6 +118,9 @@
 		5F3B336C2213E15100F961C1 /* SwiftMessages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftMessages.framework; path = Carthage/Build/iOS/SwiftMessages.framework; sourceTree = "<group>"; };
 		5F3B336E2213E1A800F961C1 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		5F78D70D1F3D222A0059FDA1 /* AppRater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRater.swift; sourceTree = "<group>"; };
+		5F7AED04225561130090E27D /* StatusLabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusLabelView.xib; sourceTree = "<group>"; };
+		5F7AED06225561570090E27D /* StatusLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusLabelViewController.swift; sourceTree = "<group>"; };
+		5F7AED08225561810090E27D /* StatusLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusLabelView.swift; sourceTree = "<group>"; };
 		5F86ACB6220EA5370011A98B /* SwiftAA.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftAA.framework; path = Carthage/Build/iOS/SwiftAA.framework; sourceTree = "<group>"; };
 		5F8B38C41F74CAD200F0F7D1 /* FocusSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
 		5F8B38C51F74CAD200F0F7D1 /* FocusSquareSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquareSegment.swift; sourceTree = "<group>"; };
@@ -215,6 +221,8 @@
 				5FAD1FB52232052200011A29 /* MenuContainerView.xib */,
 				5F1950D722323D720072B627 /* MenuContainerView.swift */,
 				5F1BD273225559D10089A524 /* WhiteView.swift */,
+				5F7AED04225561130090E27D /* StatusLabelView.xib */,
+				5F7AED08225561810090E27D /* StatusLabelView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -226,6 +234,7 @@
 				5FBAF9711EE8B78400FAA54B /* ViewController.swift */,
 				5FDE10972215B99C00607C0A /* HUDViewController.swift */,
 				5F1950D922323D9D0072B627 /* MenuContainerViewController.swift */,
+				5F7AED06225561570090E27D /* StatusLabelViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -402,6 +411,7 @@
 				5FA91A751F02C76C00D8AFC1 /* Uranus.scn in Resources */,
 				5F27FD181F061C5200498524 /* Mars.scn in Resources */,
 				5F0E92072215D88B000D1EA9 /* PlanetCell.xib in Resources */,
+				5F7AED05225561130090E27D /* StatusLabelView.xib in Resources */,
 				5F3B3360220FEA5400F961C1 /* TutorialView.xib in Resources */,
 				5FBAF9701EE8B78400FAA54B /* art.scnassets in Resources */,
 				5FC65CDA1F01C98800D8C9CB /* Mercury.scn in Resources */,
@@ -493,8 +503,10 @@
 				5FDE10982215B99C00607C0A /* HUDViewController.swift in Sources */,
 				5F1950D822323D720072B627 /* MenuContainerView.swift in Sources */,
 				5FBAF96E1EE8B78400FAA54B /* AppDelegate.swift in Sources */,
+				5F7AED07225561570090E27D /* StatusLabelViewController.swift in Sources */,
 				5F9126B61F2F8EAE00678A8F /* PinchController.swift in Sources */,
 				5F1BD274225559D10089A524 /* WhiteView.swift in Sources */,
+				5F7AED09225561810090E27D /* StatusLabelView.swift in Sources */,
 				5F28BC341F3388AF003E013F /* ScaleReference.swift in Sources */,
 				5F3B33662213DD6D00F961C1 /* TutorialViewController.swift in Sources */,
 				5FDE10962215B92200607C0A /* HUDView.swift in Sources */,

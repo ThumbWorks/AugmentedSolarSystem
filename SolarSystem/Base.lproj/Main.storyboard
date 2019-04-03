@@ -25,24 +25,6 @@
                                     <outletCollection property="gestureRecognizers" destination="ts4-Yt-8tZ" appends="YES" id="4c9-ww-wCa"/>
                                 </connections>
                             </arscnView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3dc-i2-qYY" customClass="WhiteView" customModule="SolAR" customModuleProvider="target">
-                                <rect key="frame" x="143.66666666666666" y="64" width="88" height="64"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KlY-l3-zEO">
-                                        <rect key="frame" x="19.333333333333343" y="20" width="48" height="24"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="KlY-l3-zEO" firstAttribute="leading" secondItem="3dc-i2-qYY" secondAttribute="leading" constant="19.333333333333343" id="APw-in-5Dl"/>
-                                    <constraint firstAttribute="trailing" secondItem="KlY-l3-zEO" secondAttribute="trailing" constant="20.666666666666657" id="ke0-bc-lBV"/>
-                                    <constraint firstAttribute="bottom" secondItem="KlY-l3-zEO" secondAttribute="bottom" constant="20" id="oZN-s6-SDA"/>
-                                    <constraint firstItem="KlY-l3-zEO" firstAttribute="top" secondItem="3dc-i2-qYY" secondAttribute="top" constant="20" id="rdj-u0-yTN"/>
-                                </constraints>
-                            </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyC-bJ-Kac">
                                 <rect key="frame" x="0.0" y="498" width="375" height="280"/>
                                 <constraints>
@@ -56,9 +38,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="3dc-i2-qYY" firstAttribute="top" secondItem="0Sn-fk-BUk" secondAttribute="top" constant="20" id="1MB-Ei-LC8"/>
                             <constraint firstAttribute="trailing" secondItem="uyC-bJ-Kac" secondAttribute="trailing" id="7gk-f6-tuV"/>
-                            <constraint firstItem="3dc-i2-qYY" firstAttribute="centerX" secondItem="0Sn-fk-BUk" secondAttribute="centerX" id="9Jb-4v-hBW"/>
                             <constraint firstItem="uyC-bJ-Kac" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="DnX-SF-Rbg"/>
                             <constraint firstAttribute="bottom" secondItem="Y8e-tj-9vj" secondAttribute="bottom" id="P79-Rf-TpU"/>
                             <constraint firstItem="Y8e-tj-9vj" firstAttribute="top" secondItem="Wef-8h-2Ru" secondAttribute="top" id="PcF-Nr-kPL"/>
@@ -74,9 +54,7 @@
                     <connections>
                         <outlet property="datePickerBottomConstraint" destination="XIE-C5-gY2" id="QOT-2Y-1hw"/>
                         <outlet property="datePickerHeightConstraint" destination="Nr3-pW-0yW" id="eb7-nQ-Kn0"/>
-                        <outlet property="labelWrapper" destination="3dc-i2-qYY" id="lUw-9f-rpR"/>
                         <outlet property="sceneView" destination="Y8e-tj-9vj" id="zCK-fe-vs0"/>
-                        <outlet property="status" destination="KlY-l3-zEO" id="F55-OO-f9p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
