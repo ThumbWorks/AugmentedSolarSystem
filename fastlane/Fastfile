@@ -14,11 +14,65 @@
 # update_fastlane
 
 default_platform(:ios)
+desc "This will increment the build number based on what is in our .plist files. To override (like if someone else incremented in a different repo) you would pass in the build number you'd like:"
 
-platform :ios do
-  desc "Push a new release build to the App Store"
-  lane :release do
-    build_app(scheme: "SolarSystem")
-    upload_to_app_store
+desc "#### Options"
+desc " ***`build`**: The build to set in the *.plist files (`CFBundleVersion`)"
+desc "#### Example:"
+desc "```fastlane update_build build:69```"
+
+lane :update_build do |options|
+  increment_build_number(
+    build_number: options[:build],
+  )
+end
+
+desc "Sets the version of the project"
+desc "#### Options"
+desc " **`version`**: The version to set in the *.plist (`CFBundleShortVersionString`)"
+desc "#### Example:"
+desc "```fastlane update_version version:1.0.4```"
+
+lane :update_version do |options|
+  increment_version_number(
+    version_number: options[:version],
+  )
+end
+
+desc "update plists, tag, build, distribute to iTC"
+desc "#### Options"
+desc " **`version`**: The version to set in the *.plist (`CFBundleShortVersionString`)"
+desc " **`build`**: The build to set in the *.plist (`CFBundleVersion`)"
+desc "#### Example:"
+desc "```fastlane release build:68 version:1.0.4```"
+
+lane :release do |options|
+  # call our other lane to update the build
+  if !options[:version]
+    options[:version] = prompt(
+               text: "Enter version number (e.g. 1.0.6)"
+              )
   end
+
+  if !options[:build]
+    options[:build] = prompt(
+               text: "Enter Build number (e.g. 79)"
+              )
+  end
+
+  update_version(options)
+  update_build(options)
+
+  tagName = options[:version]+"b"+options[:build]
+
+  add_git_tag(
+    tag: tagName
+  )
+
+  push_git_tags(
+    tag: tagName
+  )
+
+  build_app(scheme: "Production")
+  upload_to_app_store                  # upload your app to App Store Connect
 end
