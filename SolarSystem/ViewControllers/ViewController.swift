@@ -557,10 +557,6 @@ extension ViewController: ARSCNViewDelegate {
             return
         }
         
-//        if !done {
-//            return
-//        }
-        
         if startTime == 0 {
             startTime = time
         }
