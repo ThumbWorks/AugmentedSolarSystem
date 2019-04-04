@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		17FC693338E5C451EEFBD6FA /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DFC5695AC98A1CFA61E623 /* AssetsLibrary.framework */; };
 		36B36DE405C67DDC5ADFD0AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A6E595CD2E4C2C0D91515B6 /* QuartzCore.framework */; };
-		5F0662BB1F1D1F6600D66563 /* PlanetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0662BA1F1D1F6600D66563 /* PlanetCollectionViewController.swift */; };
 		5F0CC2141F2814BD00E25474 /* Mixpanel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0CC2131F2814BD00E25474 /* Mixpanel.framework */; };
 		5F0E92072215D88B000D1EA9 /* PlanetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F0E92062215D88B000D1EA9 /* PlanetCell.xib */; };
 		5F0E92092215D895000D1EA9 /* PlanetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0E92082215D895000D1EA9 /* PlanetCell.swift */; };
@@ -99,7 +98,6 @@
 		39DFC5695AC98A1CFA61E623 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		3F19230B2264C6E45B5CA90A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		46267284C2EBEFD65B20CCA6 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		5F0662BA1F1D1F6600D66563 /* PlanetCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetCollectionViewController.swift; sourceTree = "<group>"; };
 		5F0CC2131F2814BD00E25474 /* Mixpanel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mixpanel.framework; path = Carthage/Build/iOS/Mixpanel.framework; sourceTree = "<group>"; };
 		5F0E92062215D88B000D1EA9 /* PlanetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlanetCell.xib; sourceTree = "<group>"; };
 		5F0E92082215D895000D1EA9 /* PlanetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetCell.swift; sourceTree = "<group>"; };
@@ -293,7 +291,6 @@
 				5FB0E6761F05D26E00B3000B /* Venus.scn */,
 				5F27FD171F061C5200498524 /* Mars.scn */,
 				5F30D4DB1F16CD68006A45B1 /* Planet.swift */,
-				5F0662BA1F1D1F6600D66563 /* PlanetCollectionViewController.swift */,
 				5F255D8A1F2BA0A400E9F62E /* DocumentationScene.scn */,
 				5F9126B51F2F8EAE00678A8F /* PinchController.swift */,
 				5F28BC331F3388AF003E013F /* ScaleReference.swift */,
@@ -493,7 +490,6 @@
 				5FBD07DD221693B30060A6C0 /* PlanetDataSource.swift in Sources */,
 				5F1950DA22323D9D0072B627 /* MenuContainerViewController.swift in Sources */,
 				5F8B38C91F74CCEB00F0F7D1 /* VirtualObjectARView.swift in Sources */,
-				5F0662BB1F1D1F6600D66563 /* PlanetCollectionViewController.swift in Sources */,
 				5F3B336F2213E1A800F961C1 /* AboutView.swift in Sources */,
 				5F8B38C61F74CAE600F0F7D1 /* FocusSquare.swift in Sources */,
 				5F39596E1EE9898200EDEBEE /* Utilities.swift in Sources */,

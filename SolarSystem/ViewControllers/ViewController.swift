@@ -221,7 +221,6 @@ class ViewController: UIViewController {
         updateLabel()
         resetToDetectedPlane()
         
-        collectionViewController?.changeToPlanet(name: Planet.sun.name)
         #if !targetEnvironment(simulator)
         let tutorial = TutorialViewController()
         tutorial.definesPresentationContext = true
@@ -245,19 +244,10 @@ class ViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        // Pause the view's session
-//        sceneView.session.pause()
         restartEverything()
     }
-    
-    var collectionViewController: PlanetCollectionViewController?
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dest = segue.destination as? PlanetCollectionViewController {
-            collectionViewController = dest
-        }
-        
         if let dest = segue.destination as? DatePickerViewController {
             datePicker = dest
 
@@ -487,37 +477,8 @@ extension ViewController {
     }
     
     @IBAction func tappedScreen(_ sender: UITapGestureRecognizer) {
-
         if !done {
             addSolarSystemToFocusSquareLocation()
-            return
-        }
-                
-        // determine if we've tapped a planet
-        if (sender.state == .ended) {
-            let location = sender.location(in: view)
-            let options: [SCNHitTestOption: Any] = [.searchMode: SCNHitTestSearchMode.all.rawValue]
-            let hittestResults = sceneView.hitTest(location, options: options)
-            let nodes = hittestResults.map({ (hitTest) -> SCNNode in
-                return hitTest.node
-            })
-            
-            for node in nodes {
-                // see if it has a planetNode
-                if self.solarSystemNodes.planetoids.contains(where: { (planets) -> Bool in
-                    return node == planets.value.planetNode
-                }) {
-                    if let name = node.name {
-                        Mixpanel.sharedInstance()?.track("tracked a planet", properties: ["name" : name])
-
-                        // now scroll to this node. We've got a name
-                        self.collectionViewController?.changeToPlanet(name: name)
-                        
-                        // We only want the first one, so return out of the method
-                        return
-                    }
-                }
-            }
         }
     }
 

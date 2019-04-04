@@ -70,3 +70,9 @@ extension HUDViewController: UICollectionViewDelegate {
         HUD.updateWith(viewModel: planet.hudViewModel())
     }
 }
+
+extension Float {
+    func format(f: String) -> String {
+        return String(format: "%\(f)f", self)
+    }
+}
