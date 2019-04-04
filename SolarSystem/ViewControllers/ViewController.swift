@@ -57,7 +57,13 @@ class ViewController: UIViewController {
     
     var pincher: PinchController?
 
-    @IBOutlet var sceneView: VirtualObjectARView!
+    var sceneView: VirtualObjectARView = {
+        let view = VirtualObjectARView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        return view
+    }()
+
     @IBOutlet weak var datePickerBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var datePickerHeightConstraint: NSLayoutConstraint!
     
@@ -71,10 +77,19 @@ class ViewController: UIViewController {
         
         // hide the toggleviews
         toggleMenu(toShowing: false)
+        view.insertSubview(sceneView, at: 0)
+
+        sceneView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        sceneView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        sceneView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        sceneView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+
+        let pinch = UIPinchGestureRecognizer(target: self, action: #selector(pinchedScreen(_:)))
+        sceneView.addGestureRecognizer(pinch)
 
         // Set the view's delegate
         sceneView.delegate = self
-        
+
         // Set the scene to the view
         sceneView.scene = SCNScene()
         sceneView.scene.rootNode.addChildNode(focusSquare)
@@ -439,7 +454,7 @@ extension ViewController: MenuContainerViewDelegate {
 // IBActions
 extension ViewController {
     
-    @IBAction func pinchedScreen(_ sender: UIPinchGestureRecognizer) {
+    @objc func pinchedScreen(_ sender: UIPinchGestureRecognizer) {
         pincher?.pinch(with: sender)
     }
     

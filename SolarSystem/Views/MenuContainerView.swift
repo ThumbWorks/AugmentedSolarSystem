@@ -26,7 +26,6 @@ class MenuContainerView: UIView {
     }
 
     @IBAction func toggleDateSelector(_ button: UIButton) {
-        print("toggle date")
         delegate?.container(self, didTapDateButton: button)
     }
 

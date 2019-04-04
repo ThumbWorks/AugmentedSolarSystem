@@ -17,14 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8e-tj-9vj" customClass="VirtualObjectARView" customModule="SolAR" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="ts4-Yt-8tZ" appends="YES" id="4c9-ww-wCa"/>
-                                </connections>
-                            </arscnView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyC-bJ-Kac">
                                 <rect key="frame" x="0.0" y="498" width="375" height="280"/>
                                 <constraints>
@@ -40,11 +32,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="uyC-bJ-Kac" secondAttribute="trailing" id="7gk-f6-tuV"/>
                             <constraint firstItem="uyC-bJ-Kac" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="DnX-SF-Rbg"/>
-                            <constraint firstAttribute="bottom" secondItem="Y8e-tj-9vj" secondAttribute="bottom" id="P79-Rf-TpU"/>
-                            <constraint firstItem="Y8e-tj-9vj" firstAttribute="top" secondItem="Wef-8h-2Ru" secondAttribute="top" id="PcF-Nr-kPL"/>
-                            <constraint firstAttribute="trailing" secondItem="Y8e-tj-9vj" secondAttribute="trailing" id="Rb7-i7-hlA"/>
                             <constraint firstItem="0Sn-fk-BUk" firstAttribute="bottom" secondItem="uyC-bJ-Kac" secondAttribute="bottom" id="XIE-C5-gY2"/>
-                            <constraint firstItem="Y8e-tj-9vj" firstAttribute="leading" secondItem="Wef-8h-2Ru" secondAttribute="leading" id="l9v-9V-kOQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0Sn-fk-BUk"/>
                         <connections>
@@ -54,7 +42,6 @@
                     <connections>
                         <outlet property="datePickerBottomConstraint" destination="XIE-C5-gY2" id="QOT-2Y-1hw"/>
                         <outlet property="datePickerHeightConstraint" destination="Nr3-pW-0yW" id="eb7-nQ-Kn0"/>
-                        <outlet property="sceneView" destination="Y8e-tj-9vj" id="zCK-fe-vs0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -63,11 +50,6 @@
                         <action selector="tappedScreen:" destination="BV1-FR-VrT" id="hlb-Ta-Q8j"/>
                     </connections>
                 </tapGestureRecognizer>
-                <pinchGestureRecognizer id="ts4-Yt-8tZ">
-                    <connections>
-                        <action selector="pinchedScreen:" destination="BV1-FR-VrT" id="adj-9T-Y4V"/>
-                    </connections>
-                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="144.80000000000001" y="129.98500749625188"/>
         </scene>
