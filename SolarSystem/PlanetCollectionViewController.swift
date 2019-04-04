@@ -43,7 +43,6 @@ class PlanetCollectionViewController: UIViewController, UIScrollViewDelegate {
     
     func changePlanetSelection() {
         return
-        print("change planet selection")
         // find the center of the frame wrt the content offset. 10 is
         let collectionViewSize = collectionView.frame.size
         let centerXFrame = collectionView.contentOffset.x + collectionViewSize.width/2
