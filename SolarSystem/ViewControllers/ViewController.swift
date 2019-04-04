@@ -570,7 +570,6 @@ extension ViewController: ARSCNViewDelegate {
         // b) determine if we are inside of a node
         var distances = [Planet:Float]()
         var sizes = [Planet:Float]()
-        insidePlanet = nil
 
         let delta = (time - startTime) * 60 * 60 * 24
 
@@ -597,9 +596,12 @@ extension ViewController: ARSCNViewDelegate {
         if let newInsidePlanet = newInsidePlanet {
             insidePlanet = newInsidePlanet
         } else {
-            insidePlanet = nil
-            DispatchQueue.main.async {
-                self.toggleStatusLabel(toShowing: false)
+            // if we used to have an insidePlanet, but now we do not, hide the status
+            if insidePlanet != nil {
+                insidePlanet = nil
+                DispatchQueue.main.async {
+                    self.toggleStatusLabel(toShowing: false)
+                }
             }
         }
 
