@@ -1,0 +1,8 @@
+app_identifier("io.thumbworks.AugmentedSolarSystem") # The bundle identifier of your app
+apple_id("roderic@thumbworks.io") # Your Apple email address
+
+itc_team_id("118119288") # App Store Connect Team ID
+team_id("F4WTN36U2F") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile

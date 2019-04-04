@@ -1,0 +1,5 @@
+This ARKit version of our Solar System provides a unique learning experience for those that are curious about our world and how it interacts with the Space around it. With a quick tap you can explore the Planets in a realistic scale which, we think you'll find, is very eye opening.
+
+With realistic sun lighting and city lighting (earth only for city lights....for now). You can scale the size of the planets to see just how insignificant we on earth are. You can also scale the orbit radius as well, so you can see how far from anything and alone we are.
+
+Get the best Augmented Reality Orrery right here.
