@@ -90,11 +90,11 @@ class ViewController: UIViewController {
         view.addSubview(statusLabelViewController.view)
 
         let statusView = statusLabelViewController.view
-
         statusView?.leftAnchor.constraint(greaterThanOrEqualTo: view.leftAnchor,
                                           constant: 20).isActive = true
-        statusView?.rightAnchor.constraint(greaterThanOrEqualTo: view.rightAnchor,
-                                           constant: 20).isActive = true
+        statusView?.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        statusView?.leftAnchor.constraint(greaterThanOrEqualTo: menuViewController.view.rightAnchor,
+                                          constant: 20).isActive = true
 
         showingStatusConstraint =
             statusView?.topAnchor.constraint(equalTo: view.topAnchor,
