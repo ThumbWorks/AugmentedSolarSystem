@@ -19,7 +19,7 @@ struct StatusLabelViewModel {
         return StatusLabelViewModel(text: "Tracking Limited: \(reason)")
     }
     static var trackingUnavailable = StatusLabelViewModel(text: "Tracking unavailable")
-    static var selectPlanet = StatusLabelViewModel(text: "Select a date to see the planet alignment at that point in time.")
+    static var selectPlanet = StatusLabelViewModel(text: "Select a date to see the planet alignment at that point in time")
 }
 
 
