@@ -616,6 +616,7 @@ extension ViewController: ARSCNViewDelegate {
         let newDate = startDate.addingTimeInterval(delta)
         displayedDate = newDate
         solarSystemNodes.updatePostions(to: newDate)
+        var newInsidePlanet: Planet?
         for (planet, node) in solarSystemNodes.planetoids {
             
             guard let planetNode = node.planetNode else {
@@ -628,8 +629,16 @@ extension ViewController: ARSCNViewDelegate {
             if let sphere = planetNode.geometry as? SCNSphere {
                 let radius = sphere.radius * CGFloat(planetNode.scale.x)
                 if CGFloat(distance) < radius {
-                    insidePlanet = planet
+                    newInsidePlanet = planet
                 }
+            }
+        }
+        if let newInsidePlanet = newInsidePlanet {
+            insidePlanet = newInsidePlanet
+        } else {
+            insidePlanet = nil
+            DispatchQueue.main.async {
+                self.toggleStatusLabel(toShowing: false)
             }
         }
 
